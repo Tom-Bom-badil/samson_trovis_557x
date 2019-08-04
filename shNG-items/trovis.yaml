@@ -1,0 +1,633 @@
+heizung:
+
+    regler:
+
+        modell:
+            desc: Modellbezeichnung
+            type: list
+            trovis557x_var: Geraetekennung
+            liste: []
+            visu_acl: r
+
+        seriennummer:
+            desc: Regler-ID
+            type: list
+            trovis557x_var: Regler-ID
+            liste: []
+            visu_acl: r
+
+        firmware:
+            desc: Firmwareversion
+            type: list
+            trovis557x_var: Firmware-Version
+            liste: []
+            visu_acl: r            
+
+        hardware:
+            desc: Hardwareversion
+            type: list
+            trovis557x_var: Hardware-Version
+            liste: []
+            visu_acl: r            
+
+        anlage:
+            desc: Hydraulikschema
+            type: list
+            trovis557x_var: Anlage
+            liste: []
+            visu_acl: r
+
+        sonderfunktionen:
+            desc: Sonderfunktionen
+            type: list
+            trovis557x_var: Sonderfunktionen
+            liste: []
+            visu_acl: r
+
+        sommerbetrieb:
+            desc: Regler hat auf Sommerbetrieb geschaltet
+            type: list
+            trovis557x_var: Sommerbetrieb
+            liste: []
+            visu_acl: r
+            
+            wert_sommerbetrieb:
+                desc: Der endgültige Wert
+                # eval: sh...conf['liste'][1]     # liefert den 'rohen' Buswert
+                eval: sh...conf['liste'][1]     # liefert den fertig aufbereiteten Wert
+                # eval: sh...conf['liste'][1]     # liefert die Einheit oder bei Listen den Text
+                eval_trigger: ..
+
+
+
+        #reglerzeit: 99-101
+        #    desc: Sonderfunktionen
+        #    type: list
+        #    trovis557x_var: Sonderfunktionen
+        #    liste: []
+        #    visu_acl: r            
+
+        #sommerzeit: 99-101
+        #    desc: Sonderfunktionen
+        #    type: list
+        #    trovis557x_var: Sonderfunktionen
+        #    liste: []
+        #    visu_acl: r
+
+
+    sensoren:
+    
+        af1:
+            desc: Außenfühler 1
+            type: list
+            trovis557x_var: AussentempAF1
+            liste: []
+            visu_acl: r
+
+        # af2:
+            # desc: Außenfühler 2
+            # type: list
+            # trovis557x_var: AussentempAF2
+            # liste: []
+            # visu_acl: r
+
+        vf1:
+            desc: Vorlauffühler 1 (Anlage 2.1 - sekundär, Heizkreis 1)
+            type: list
+            trovis557x_var: VorlauftempVF1
+            liste: []
+            visu_acl: r
+            
+        # vf2:
+            # desc: Vorlauffühler 2 (Anlage 2.1 -  unbenutzt)
+            # type: list
+            # trovis557x_var: VorlauftempVF2
+            # liste: []
+            # visu_acl: r
+
+        # vf3:
+            # desc: Vorlauffühler 3 (Anlage 2.1 -  unbenutzt)
+            # type: list
+            # trovis557x_var: VorlauftempVF3
+            # liste: []
+            # visu_acl: r
+
+        # vf4:
+            # desc: Vorlauffühler 4 (Anlage 2.1 -  unbenutzt)
+            # type: list
+            # trovis557x_var: VorlauftempVF4
+            # liste: []
+            # visu_acl: r
+            
+        sf1:
+            desc: Speicherfühler 1 (Warmwasserspeicher)
+            type: list
+            trovis557x_var: SpeichertempSF1
+            liste: []
+            visu_acl: r
+
+        # sf2:
+            # desc: Speicherfühler 2 (Anlage 2.1 -  unbenutzt)
+            # type: list
+            # trovis557x_var: SpeichertempSF2
+            # liste: []
+            # visu_acl: r
+
+        # sf3:
+            # desc: Speicherfühler 3 (Anlage 2.1 -  unbenutzt)
+            # type: list
+            # trovis557x_var: SpeichertempSF3
+            # liste: []
+            # visu_acl: r
+
+        ruef1:
+            desc: Rücklauffühler 1 (Anlage 2.1 -  Primärkreis)
+            type: list
+            trovis557x_var: RueckltempRueF1
+            liste: []
+            visu_acl: r
+
+        # ruef2:
+            # desc: Rücklauffühler 2 (Anlage 2.1 -  unbenutzt)
+            # type: list
+            # trovis557x_var: RueckltempRueF2
+            # liste: []
+            # visu_acl: r
+
+        # fg1:
+            # desc: Ferngeber 1 (Anlage 2.1 -  unbenutzt)
+            # type: list
+            # trovis557x_var: RueckltempRueF1
+            # liste: []
+            # visu_acl: r
+
+        # fg2:
+            # desc: Ferngeber 2 (Anlage 2.1 -  unbenutzt)
+            # type: list
+            # trovis557x_var: RueckltempRueF1
+            # liste: []
+            # visu_acl: r
+
+
+    #################  Regelkreis 1 (Heizkreis 1) ##########################
+    
+    rk1:
+    
+        heizkurve:
+        
+            niveau:
+                desc: Niveau Temperaturverschiebung
+                type: list
+                trovis557x_var: NivHeizKLRk1
+                liste: []
+                visu_acl: r
+
+            steigung:
+                desc: Steigung (Temperaturanstieg)
+                type: list
+                trovis557x_var: SteigHeizKLRk1
+                liste: []
+                visu_acl: r
+
+            tag_soll:
+                desc: Raumsollwert Tag
+                type: list
+                trovis557x_var: TagSollRk1
+                liste: []
+                visu_acl: r
+
+            nacht_soll:
+                desc: Raumsollwert Nacht
+                type: list
+                trovis557x_var: NachtSollRk1
+                liste: []
+                visu_acl: r
+
+            vorlauf_min:
+                desc: Minimaler Vorlaufwert
+                type: list
+                trovis557x_var: MinVorlRk1
+                liste: []
+                visu_acl: r
+
+            vorlauf_soll:
+                desc: Vorlauf Sollwert
+                type: list
+                trovis557x_var: VorlSollwRk1
+                liste: []
+                visu_acl: r
+
+            vorlauf_max:
+                desc: Maximaler Vorlaufwert
+                type: list
+                trovis557x_var: MaxVorlRk1
+                liste: []
+                visu_acl: r
+                
+            ruecklauf_fusspunkt:
+                desc: Fusspunkt Rücklaufkurve
+                type: list
+                trovis557x_var: FussRuecklRk1
+                liste: []
+                visu_acl: r
+
+            ruecklauf_niveau:
+                desc: Niveau Rücklaufkurve
+                type: list
+                trovis557x_var: NivRuecklKLRk1
+                liste: []
+                visu_acl: r
+
+            ruecklauf_steigung:
+                desc: Steigung Rücklaufkurve
+                type: list
+                trovis557x_var: StgRuecklKLRk1
+                liste: []
+                visu_acl: r
+
+            ruecklauf_max:
+                desc: Maximale Rücklauftemperatur
+                type: list
+                trovis557x_var: MaxRuecklRk1
+                liste: []
+                visu_acl: r
+
+        schalter:
+            desc: Schalter Oben
+            type: list
+            trovis557x_var: Schalteroben
+            liste: []
+            visu_acl: r
+
+        betriebsart:
+            desc: Betriebsart
+            type: list
+            trovis557x_var: BetriebsArtRk1
+            liste: []
+            visu_acl: r
+
+        betriebsart_ebene:
+            desc: Autark oder Leitsystem
+            type: list
+            trovis557x_var: EBNBetrArtRk1
+            liste: []
+            visu_acl: r
+
+        stellsignal:
+            desc: Stellsignal Ventil (0-100%)
+            type: list
+            trovis557x_var: StellsignalRk1
+            liste: []
+            visu_acl: r
+
+        stellsignal_ebene:
+            desc: Autark oder Leitsystem
+            type: list
+            trovis557x_var: EBNStellsigRk1
+            liste: []
+            visu_acl: r
+            
+        umwaelzpumpe:
+            desc: Umwälzpumpe UP1
+            type: list
+            trovis557x_var: BinaerausgBA1
+            liste: []
+            visu_acl: r
+
+        umwaelzpumpe_ebene:
+            desc: Autark oder Leitsystem
+            type: list
+            trovis557x_var: EBNBinaerBA1
+            liste: []
+            visu_acl: r
+
+        frostschutz:
+            desc: Frostschutzbetrieb
+            type: list
+            trovis557x_var: FrostschutzRk1
+            liste: []
+            visu_acl: r
+
+    #################  Regelkreis 2 (Heizkreis 2) ##########################
+
+    rk2:
+
+        heizkurve:
+        
+            niveau:
+                desc: Niveau Temperaturverschiebung
+                type: list
+                trovis557x_var: NivHeizKLRk2
+                liste: []
+                visu_acl: r
+
+            steigung:
+                desc: Steigung (Temperaturanstieg)
+                type: list
+                trovis557x_var: SteigHeizKLRk2
+                liste: []
+                visu_acl: r
+
+            tag_soll:
+                desc: Raumsollwert Tag
+                type: list
+                trovis557x_var: TagSollRk2
+                liste: []
+                visu_acl: r
+
+            nacht_soll:
+                desc: Raumsollwert Nacht
+                type: list
+                trovis557x_var: NachtSollRk2
+                liste: []
+                visu_acl: r
+
+            vorlauf_min:
+                desc: Minimaler Vorlaufwert
+                type: list
+                trovis557x_var: MinVorlRk2
+                liste: []
+                visu_acl: r
+
+            vorlauf_soll:
+                desc: Vorlauf Sollwert
+                type: list
+                trovis557x_var: VorlSollwRk2
+                liste: []
+                visu_acl: r
+
+            vorlauf_max:
+                desc: Maximaler Vorlaufwert
+                type: list
+                trovis557x_var: MaxVorlRk2
+                liste: []
+                visu_acl: r
+                
+            ruecklauf_fusspunkt:
+                desc: Fusspunkt Rücklaufkurve
+                type: list
+                trovis557x_var: FussRuecklRk2
+                liste: []
+                visu_acl: r
+
+            ruecklauf_niveau:
+                desc: Niveau Rücklaufkurve
+                type: list
+                trovis557x_var: NivRuecklKLRk2
+                liste: []
+                visu_acl: r
+
+            ruecklauf_steigung:
+                desc: Steigung Rücklaufkurve
+                type: list
+                trovis557x_var: StgRuecklKLRk2
+                liste: []
+                visu_acl: r
+
+            ruecklauf_max:
+                desc: Maximale Rücklauftemperatur
+                type: list
+                trovis557x_var: MaxRuecklRk2
+                liste: []
+                visu_acl: r
+
+        schalter:
+            desc: Schalter Mitte
+            type: list
+            trovis557x_var: Schaltermitte
+            liste: []
+            visu_acl: r
+
+        betriebsart:
+            desc: Betriebsart
+            type: list
+            trovis557x_var: BetriebsArtRk2
+            liste: []
+            visu_acl: r
+
+        betriebsart_ebene:
+            desc: Autark oder Leitsystem
+            type: list
+            trovis557x_var: EBNBetrArtRk2
+            liste: []
+            visu_acl: r
+
+        stellsignal:
+            desc: Stellsignal Ventil (0-100%)
+            type: list
+            trovis557x_var: StellsignalRk2
+            liste: []
+            visu_acl: r
+
+        stellsignal_ebene:
+            desc: Autark oder Leitsystem
+            type: list
+            trovis557x_var: EBNStellsigRk2
+            liste: []
+            visu_acl: r
+            
+        umwaelzpumpe:
+            desc: Umwälzpumpe UP2
+            type: list
+            trovis557x_var: BinaerausgBA2
+            liste: []
+            visu_acl: r
+
+        umwaelzpumpe_ebene:
+            desc: Autark oder Leitsystem
+            type: list
+            trovis557x_var: EBNBinaerBA2
+            liste: []
+            visu_acl: r
+
+        frostschutz:
+            desc: Frostschutzbetrieb
+            type: list
+            trovis557x_var: FrostschutzRk2
+            liste: []
+            visu_acl: r
+
+    #################  Regelkreis 1 (Warmwasser) ##########################
+    
+    rk3:
+    
+        schalter:
+            desc: Schalter Unten
+            type: list
+            trovis557x_var: Schalterunten
+            liste: []
+            visu_acl: r
+            
+        betriebsart:
+            desc: Betriebsart
+            type: list
+            trovis557x_var: BetriebsArtTW
+            liste: []
+            visu_acl: r
+
+        betriebsart_ebene:
+            desc: Autark oder Leitsystem
+            type: list
+            trovis557x_var: EBNBetrArtTW
+            liste: []
+            visu_acl: r
+
+        ladepumpe:
+            desc: Speicherladepumpe
+            type: list
+            trovis557x_var: BinaerausgBA4
+            liste: []
+            visu_acl: r
+
+        ladepumpe_ebene:
+            desc: Autark oder Leitsystem
+            type: list
+            trovis557x_var: EBNBinaerBA4
+            liste: []
+            visu_acl: r
+
+        zirkulationspumpe:
+            desc: Speicherladepumpe
+            type: list
+            trovis557x_var: BinaerausgBA5
+            liste: []
+            visu_acl: r
+
+        zirkulationspumpe_ebene:
+            desc: Autark oder Leitsystem
+            type: list
+            trovis557x_var: EBNBinaerBA5
+            liste: []
+            visu_acl: r
+            
+        minsoll:
+            desc: Minimale Solltemperatur Warmwasser
+            type: list
+            trovis557x_var: MinTWSollw
+            liste: []
+            werte: [20.0,25.0,30.0,35.0,40.0,45.0,50.0,55.0,60.0,65.0,70.0,75.0,80.0,85.0,90.0]
+            visu_acl: r
+
+        haltewert:
+            desc: Minimale temperatur Trinkwasser
+            type: list
+            trovis557x_var: TWHaltewert
+            liste: []
+            visu_acl: r
+
+        solltemperatur:
+            desc: Solltemperatur Warmwasser
+            type: list
+            trovis557x_var: TWSollw
+            liste: []
+            werte: [20.0,25.0,30.0,35.0,40.0,45.0,50.0,55.0,60.0,65.0,70.0,75.0,80.0,85.0,90.0]
+            visu_acl: r
+
+        maxsoll:
+            desc: Maximale Solltemperatur Warmwasser
+            type: list
+            trovis557x_var: MaxTWSollw
+            liste: []
+            werte: [20.0,25.0,30.0,35.0,40.0,45.0,50.0,55.0,60.0,65.0,70.0,75.0,80.0,85.0,90.0]
+            visu_acl: r
+
+        schaltdifferenz:
+            desc: Schaltdifferenz Trinkwasser (bzgl. Solltemperatur)
+            type: list
+            trovis557x_var: SchaltdiffTW
+            liste: []
+            visu_acl: r
+
+        ueberhoehung:
+            desc: Ladetemperaturüberhöhung Trinkwasser (bzgl. Solltemperatur)
+            type: list
+            trovis557x_var: LadTempdiffTW
+            liste: []
+            visu_acl: r
+            
+        maxtemp:
+            desc: Maximale Ladetemperatur Trinkwasser
+            type: list
+            trovis557x_var: MaxLadeTW
+            liste: []
+            visu_acl: r
+
+        desinfektion:
+            desc: Thermische Desinfektion
+            type: list
+            trovis557x_var: FB14ThermDes
+            liste: []
+            visu_acl: r
+
+        desinfektionstemperatur:
+            desc: Temperatur der thermischen Desinfektion
+            type: list
+            trovis557x_var: ThermDesSollw
+            liste: []
+            visu_acl: r
+
+        desinfektionstag:
+            desc: Wochentag der thermischen Desinfektion
+            type: list
+            trovis557x_var: ThermDesTag
+            liste: []
+            visu_acl: r
+
+        desinfektionsstart:
+            desc: Start der thermischen Desinfektion (Uhrzeit)
+            type: list
+            trovis557x_var: ThermDesStart
+            liste: []
+            visu_acl: r
+
+        desinfektionsende:
+            desc: Ende der thermischen Desinfektion (Uhrzeit)
+            type: list
+            trovis557x_var: ThermDesStop
+            liste: []
+            visu_acl: r
+
+        desinfektionsdauer:
+            desc: Haltezeit der thermischen Desinfektion
+            type: list
+            trovis557x_var: ThermDesHalte
+            liste: []
+            visu_acl: r
+
+        frostschutz:
+            desc: Frostschutzbetrieb
+            type: list
+            trovis557x_var: FrostschutzTW
+            liste: []
+            visu_acl: r
+
+    #################  Diverse Statusinformationen  ##########################
+
+    status:
+    
+        fehlerstatus:
+            desc: Fehlerstatus
+            type: list
+            trovis557x_var: FehlerstatusReg
+            liste: []
+            visu_acl: r
+
+        sammelstoerung:
+            desc: Regler meldet Störung
+            type: list
+            trovis557x_var: Sammelstoerung
+            liste: []
+            visu_acl: r
+
+            
+    #################  Nur zum Testen  ##########################
+
+    # provozierter_fehler:
+    
+        # fehlerhaft1:
+            # desc: Vraiblenname nicht in den Dicts ===> Fehler im Log
+            # type: list
+            # trovis557x_var: xyzzyx
+            # visu_acl: r
+    
+    
