@@ -11,8 +11,8 @@ plugin:
 #    tester:                        # Who tests this plugin?
     state: develop                  # change to ready when done with development
     keywords: samson trovis 5576 iot
-    documentation: https://github.com/Tom-Bom-badil/samson_trovis_557x/wiki/SAMSON-TROVIS-557x-Startseite
-    support: https://knx-user-forum.de/forum/supportforen/smarthome-py
+    documentation: https://github.com/Tom-Bom-badil/samson_trovis_557x/wiki
+    support: https://knx-user-forum.de/forum/supportforen/smarthome-py/1390281-trovis-557x-heizungsregler-plugin
     version: 0.1.a
     sh_minversion: 1.5
 #    sh_maxversion:                 # maximum shNG version to use this plugin (leave empty if latest)
