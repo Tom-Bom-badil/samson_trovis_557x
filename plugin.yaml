@@ -1,4 +1,6 @@
 # Metadata for the Smart-Plugin
+
+
 plugin:
 
     type: interface
@@ -18,14 +20,44 @@ plugin:
     restartable: unknown
     classname: trovis557x
 
+
 item_attributes:
+
+    type:
+        type: str
+        mandatory: True
+        description:
+            de: 'Den Typ aller verwendeten Items vorerst auf list setzen (wird noch geändert)'
+            en: 'Set all items in use to type list (will be changed lateron)'
+
+    desc:
+        type: str
+        mandatory: False
+        description:
+            de: 'Beschreibung des Items'
+            en: 'Description of the item'
 
     trovis557x_var:
         type: str
-        # den Typ des Items auf 'list' setzen / set item type to 'list'
+        mandatory: True
         description:
             de: 'Kennzeichnet das Item zur Benutzung durch das Plugin (Kurznamen des gewünschten Wertes/Bits hier zuweisen)'
             en: 'Marks the item for use by the plugin (the short name of the requested register/coil must be assigned here)'
+
+    liste:
+        type: list
+        mandatory: False
+        description:
+            de: 'Enthält alle Item-Informationen (Buswert, umgerechneter Wert, Einheit oder Listentext)'
+            en: 'Contains the full item information (bus value, real value, unit or list text)'
+            
+    visu_acl:
+        type: str
+        mandatory: False
+        description:
+            de: 'Alle Items sollten für die Visu auf nur lesen gesetzt werden'
+            en: 'You shopuld set all items for the visu to read only'
+
 
 parameters:
 
@@ -99,6 +131,7 @@ parameters:
         description:
             de: 'Debug-Meldungen von pymodbus'
             en: 'Debug messages from pymodbus'
+
 
 plugin_functions: NONE
 item_structs: NONE
