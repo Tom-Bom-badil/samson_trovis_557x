@@ -166,7 +166,7 @@ class trovis557x(SmartPlugin):
     def init_vars(self):
         
         self._model = self.get_parameter_value('model')
-        self._revision = self.get_parameter_value('model')
+        self._revision = self.get_parameter_value('revision')
         
         self._modbus_mode = self.get_parameter_value('modbus_mode')
         self._modbus_port = self.get_parameter_value('modbus_port')
@@ -277,7 +277,9 @@ class trovis557x(SmartPlugin):
                 wert = '{0:.2f}'.format(buswert/100) + '.'
 
             elif typ == 'Uhrzeit':
-                if int(buswert) < 60:
+                if int(buswert) == 0:
+                    wert = '00:00'
+                elif int(buswert) < 60:
                     wert = '00:' + str(buswert)[-2:]
                 elif int(buswert) < 960:
                     wert = str(buswert)[:1] + ':' + str(buswert)[-2:]
@@ -293,7 +295,7 @@ class trovis557x(SmartPlugin):
             if kurzname in self._trovis_itemlist.keys():
                 self._trovis_itemlist[kurzname]([buswert, wert, einheit])
                 self._trovis_itemlist[kurzname].conf['liste'] = ([buswert, wert, einheit])
-                self.logger.debug('    ~~> %s ---> %s ---> %s ---> %s' % (id, kurzname, itemwert + einheit, self._trovis_itemlist[kurzname]))
+                self.logger.debug('    ~~> %s ---> %s ---> %s ---> %s' % (id, kurzname, str(wert) + einheit, self._trovis_itemlist[kurzname]))
 
             # Vorsicht - große Datenmengen in kurzer Zeit!!!
             # Kommentar entfernen, um alle gelesenen Register/Coils im Debug-Log zu sehen:
