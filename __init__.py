@@ -274,7 +274,10 @@ class trovis557x(SmartPlugin):
                     wert = float(str('{0:.'+str(digits)+'f}').format((buswert*faktor)))
 
             elif typ == 'Datum':
-                wert = '{0:.2f}'.format(buswert/100) + '.'
+                if len(str(buswert)) == 3:
+                    wert = '0' + '{0:.2f}'.format(buswert/100) + '.'
+                else:
+                    wert = '{0:.2f}'.format(buswert/100) + '.'
 
             elif typ == 'Uhrzeit':
                 if int(buswert) == 0:
