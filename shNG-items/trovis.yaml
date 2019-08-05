@@ -74,6 +74,87 @@ heizung:
         #    liste: []
         #    visu_acl: r
 
+    zeit:
+    
+        jahr:
+            desc: Aktuelles Jahr
+            type: list
+            trovis557x_var: Jahr
+            liste: []
+            visu_acl: r
+    
+        datum:
+            desc: Aktuelles Datum
+            type: list
+            trovis557x_var: Datum
+            liste: []
+            visu_acl: r
+
+        uhrzeit:
+            desc: Aktuelle Uhrzeit
+            type: list
+            trovis557x_var: Uhrzeit
+            liste: []
+            visu_acl: r
+
+        sommer_ein:
+            desc: Sommerbetrieb ein
+            type: list
+            trovis557x_var: SommerDatAnf
+            liste: []
+            visu_acl: r
+
+        sommer_ein_tage:
+            desc: Anzahl Tage für Sommerbetrieb
+            type: list
+            trovis557x_var: SommerTagzein
+            liste: []
+            visu_acl: r
+
+        sommer_aus:
+            desc: Sommerbetrieb aus
+            type: list
+            trovis557x_var: SommerDatEnd
+            liste: []
+            visu_acl: r
+
+        sommer_aus_tage:
+            desc: Anzahl Tage für Winterbetrieb
+            type: list
+            trovis557x_var: SommerTagzaus
+            liste: []
+            visu_acl: r
+
+        desinfektionstag:
+            desc: Wochentag der thermischen Desinfektion
+            type: list
+            trovis557x_var: ThermDesTag
+            liste: []
+            visu_acl: r
+
+        desinfektionsstart:
+            desc: Start der thermischen Desinfektion (Uhrzeit)
+            type: list
+            trovis557x_var: ThermDesStart
+            liste: []
+            visu_acl: r
+
+        desinfektionsende:
+            desc: Ende der thermischen Desinfektion (Uhrzeit)
+            type: list
+            trovis557x_var: ThermDesStop
+            liste: []
+            visu_acl: r
+
+        desinfektionsdauer:
+            desc: Haltezeit der thermischen Desinfektion
+            type: list
+            trovis557x_var: ThermDesHalte
+            liste: []
+            visu_acl: r
+
+
+
 
     sensoren:
     
@@ -566,34 +647,6 @@ heizung:
             liste: []
             visu_acl: r
 
-        desinfektionstag:
-            desc: Wochentag der thermischen Desinfektion
-            type: list
-            trovis557x_var: ThermDesTag
-            liste: []
-            visu_acl: r
-
-        desinfektionsstart:
-            desc: Start der thermischen Desinfektion (Uhrzeit)
-            type: list
-            trovis557x_var: ThermDesStart
-            liste: []
-            visu_acl: r
-
-        desinfektionsende:
-            desc: Ende der thermischen Desinfektion (Uhrzeit)
-            type: list
-            trovis557x_var: ThermDesStop
-            liste: []
-            visu_acl: r
-
-        desinfektionsdauer:
-            desc: Haltezeit der thermischen Desinfektion
-            type: list
-            trovis557x_var: ThermDesHalte
-            liste: []
-            visu_acl: r
-
         frostschutz:
             desc: Frostschutzbetrieb
             type: list
@@ -629,5 +682,4 @@ heizung:
             # type: list
             # trovis557x_var: xyzzyx
             # visu_acl: r
-    
-    
+            
