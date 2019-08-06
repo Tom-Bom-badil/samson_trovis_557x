@@ -1,5 +1,17 @@
-A smartHomeNG Plugin and smartVISU Widget to read out SAMSON TROVIS Automation Controllers for heating / cooling.
+Ein smartHomeNG Plugin zum Auslesen von SAMSON TROVIS 557x Automationssystemen (Heizungsregler).
 
-Some parts can also be used to connect Trovis-View with the PC.
+Unterstützt werden alle Modelle mit Modbus (5571, 5573, 5576, 5578, 5579).
 
-Further details can be found in the Wiki at github.com/Tom-Bom-badil/samson_trovis_557x/wiki (German).
+Einige Teile des Projektes können auch für die Anbindung des Reglers an Trovis View verwendet werden.
+
+Weitere details sind im [Wiki](github.com/Tom-Bom-badil/samson_trovis_557x/wiki) zu finden..
+
+------------
+
+A smartHomeNG Plugin and smartVISU Widget to read out SAMSON TROVIS 557x Automation Controllers for heating / cooling.
+
+The plugin supports all Modbus models (5571, 5573, 5576, 5578, 5579).
+
+Some parts of the project can also be used to connect the controller to Trovis View.
+
+Further details can be found in the [Wiki](github.com/Tom-Bom-badil/samson_trovis_557x/wiki) (German).
