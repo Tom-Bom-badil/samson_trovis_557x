@@ -296,7 +296,8 @@ class trovis557x(SmartPlugin):
             # itemwert = [str(buswert), str(wert), str(einheit)]
             
             if kurzname in self._trovis_itemlist.keys():
-                self._trovis_itemlist[kurzname]([buswert, wert, einheit])
+                # alt - wurde als Liste geschrieben: self._trovis_itemlist[kurzname]([buswert, wert, einheit])
+                self._trovis_itemlist[kurzname](wert)
                 self._trovis_itemlist[kurzname].conf['liste'] = ([buswert, wert, einheit])
                 self.logger.debug('    ~~> %s ---> %s ---> %s ---> %s' % (id, kurzname, str(wert) + einheit, self._trovis_itemlist[kurzname]))
 
