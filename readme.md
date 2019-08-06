@@ -4,11 +4,11 @@ Unterstützt werden alle Modelle mit Modbus (5571, 5573, 5576, 5578, 5579).
 
 Einige Teile des Projektes können auch für die Anbindung des Reglers an Trovis View verwendet werden.
 
-Weitere details sind im [Wiki](github.com/Tom-Bom-badil/samson_trovis_557x/wiki) zu finden.
+Weitere Details sind im [Wiki](github.com/Tom-Bom-badil/samson_trovis_557x/wiki) zu finden.
 
 ------------
 
-A smartHomeNG Plugin and smartVISU Widget to read out SAMSON TROVIS 557x Automation Controllers for heating / cooling.
+A smartHomeNG plugin and smartVISU widget to read out SAMSON TROVIS 557x Automation Controllers for heating / cooling.
 
 The plugin supports all Modbus models (5571, 5573, 5576, 5578, 5579).
 
