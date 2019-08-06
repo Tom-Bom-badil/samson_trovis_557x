@@ -4,7 +4,7 @@ Unterstützt werden alle Modelle mit Modbus (5571, 5573, 5576, 5578, 5579).
 
 Einige Teile des Projektes können auch für die Anbindung des Reglers an Trovis View verwendet werden.
 
-Weitere details sind im [Wiki](github.com/Tom-Bom-badil/samson_trovis_557x/wiki) zu finden..
+Weitere details sind im [Wiki](github.com/Tom-Bom-badil/samson_trovis_557x/wiki) zu finden.
 
 ------------
 
