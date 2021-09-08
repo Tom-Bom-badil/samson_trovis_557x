@@ -59,7 +59,7 @@ class trovis557x(SmartPlugin):
             kurzname = str(item.conf['trovis557x_var'])
             if kurzname in self._register_tabelle.keys() or kurzname in self._coil_tabelle.keys():
                 self._trovis_itemlist[kurzname] = item
-                self.logger.debug('Parse_item: ' + kurzname + ' ---> ' + str(item))
+                self.logger.debug('Parse_item: Verbinde Var ' + kurzname + ' ---> Item ' + str(item))
             else:
                 self.logger.warning('! Parse_item: Unbekannter Wert "' + kurzname + '" von ' + str(item) + ' angefordert')
 
@@ -92,8 +92,8 @@ class trovis557x(SmartPlugin):
                 self.verarbeiteWerte(ids_mit_werten, 'coils')
 
         endzeit = datetime.now()
-        dauer = endzeit - startzeit
-        self.logger.debug('===========  Durchlauf beendet, Gesamtdauer: ' + str(dauer))
+        dauer = (endzeit - startzeit).total_seconds()
+        self.logger.debug('===========  Durchlauf beendet, Gesamtdauer: %.1f s' % dauer)
 
 
     # Beim Beenden 'saubermachen'
@@ -209,12 +209,14 @@ class trovis557x(SmartPlugin):
             werte = []
             id_aktuell = _bereich[0]
             if _datentyp == 'register': # register lesen
+                self.logger.debug('Lese Registerbereich ' + str(_bereich[0]) + ' - ' + str(_bereich[1]))
                 werte = self._modbus.read_holding_registers(_bereich[0], _bereich[1]-_bereich[0]+1, unit=self._modbus_trovis_address)
                 for wert in werte.registers:
                     if self.getKeyFromID(id_aktuell, 'register') != -1:
                         _ids_mit_werten.append([id_aktuell, wert])
                     id_aktuell += 1
             else: # coils lesen
+                self.logger.debug('Lese Coilsbereich ' + str(_bereich[0]) + ' - ' + str(_bereich[1]))
                 werte = self._modbus.read_coils(_bereich[0], _bereich[1]-_bereich[0]+1, unit=self._modbus_trovis_address)
                 for wert in werte.bits:
                     if self.getKeyFromID(id_aktuell, 'coil') != -1:
@@ -226,7 +228,8 @@ class trovis557x(SmartPlugin):
                     if id_aktuell > _bereich[1]:
                         break
         except Exception as e:
-            _ids_mit_werten = e
+            _ids_mit_werten = []
+            self.logger.debug('Im Bereich ' + str(_bereich) + ' liefert dieser Regler keine lesbaren Register/Coils!')
         return _ids_mit_werten
 
 
@@ -305,10 +308,13 @@ class trovis557x(SmartPlugin):
                 # alt - wurde als Liste geschrieben: self._trovis_itemlist[kurzname]([buswert, wert, einheit])
                 self._trovis_itemlist[kurzname](wert)
                 self._trovis_itemlist[kurzname].conf['liste'] = ([buswert, wert, einheit])
-                self.logger.debug('    ~~> %s ---> %s ---> %s ---> %s' % (id, kurzname, str(wert) + einheit, self._trovis_itemlist[kurzname]))
+                if typ[:6] == 'Liste_':
+                    self.logger.debug('    ~~> ID %s = %s ---> Var %s = %s ---> Item %s' % (id, buswert, kurzname, einheit, self._trovis_itemlist[kurzname]))
+                else:
+                    self.logger.debug('    ~~> ID %s = %s ---> Var %s = %s ---> Item %s' % (id, buswert, kurzname, str(wert) + ' ' + einheit, self._trovis_itemlist[kurzname]))
 
             # Vorsicht - große Datenmengen in kurzer Zeit!!!
-            # Kommentar entfernen, um alle gelesenen Register/Coils im Debug-Log zu sehen:
+            # Kommentar entfernen, um alle gelesenen Register/Coils einzeln im Debug-Log zu sehen:
             #
             # self.logger.debug('%4u ---> %s ---> %s' % (id, kurzname, itemwert))
                 
