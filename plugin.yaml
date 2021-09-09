@@ -49,12 +49,12 @@ item_attributes:
             de: 'Enthält alle Item-Informationen (Buswert, umgerechneter Wert, Einheit oder Listentext)'
             en: 'Contains the full item information (bus value, real value, unit or list text)'
             
-    visu_acl:
-        type: str
-        mandatory: False
-        description:
-            de: 'Alle Items sollten für die Visu auf nur lesen gesetzt werden'
-            en: 'You shopuld set all items for the visu to read only'
+#    visu_acl:
+#        type: str
+#        mandatory: False
+#        description:
+#            de: 'Alle Items sollten für die Visu auf nur lesen gesetzt werden'
+#            en: 'You shopuld set all items for the visu to read only'
 
 
 parameters:
