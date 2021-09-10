@@ -38,7 +38,7 @@ class trovis557x(SmartPlugin):
 
 
     ALLOW_MULTIINSTANCE = False
-    PLUGIN_VERSION = '1.0'
+    PLUGIN_VERSION = '1.0.1'
 
 
     # Starten
