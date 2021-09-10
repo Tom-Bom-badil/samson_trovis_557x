@@ -1,33 +1,9 @@
 # Item file für smartHomeNG (Trovis-Plugin)
 
-# Hinweis 1:
-############
-# Das hier unter das jeweilige Item kopieren, falls einmal alle seine Einzelwerte gebraucht werden.
-# Danach stehen dann die zusätzlichen Items item.buswert, item.wert und item.einheit zu Verfügung.
-# Es wird dafür das vom Plugin befüllte Attribut 'liste' des Hauptitems ausgewertet (siehe Admin-IF).
-# Die Abfrage 'len(...)' verhindert eine Fehlermeldung beim Starten von shNG (Abfangen von init/None).
-#
-# on_change:                  # Hier werden Buswert, Wert und Einheit geschrieben
-#     - .buswert = sh..self.conf['liste'][0] if len(sh..self.conf['liste'])==3 else None
-#     - .wert    = sh..self.conf['liste'][1] if len(sh..self.conf['liste'])==3 else None
-#     - .einheit = sh..self.conf['liste'][2] if len(sh..self.conf['liste'])==3 else None
-# buswert:                    # Rohwert; meist 0..65535 oder -32767..32767.
-#     type: num               # z.B. 215
-# wert:                       # Der umgerechnete (fertige) Wert; entspricht Value.
-#     type: num               # z.B. 21.5 (215 * Faktor 0.1, 1 Nachkommastelle)
-# einheit:                    # Die Einheit (für Register) oder der Listentext (für Register+Coils).
-#     type: str               # z.B. '°C' oder 'an'/'aus'. Die ausgelesene 215 wird so 21.5 °C.
-#
-#
-# Hinweis 2:
-############
-# Zur Aufzeichnung von Werten an den gewünschten Items das Attribut 'database: True' hinzufügen.
-# Dies erfordert natürlich, dass das Database-Plugin bereits funktionierend in shNG eingebunden ist.
-
-
 heizung:
 
-    #################  Grundsätzliche Angaben ##########################
+    #################  Verschiedenes ###################################
+
     unbekannt:
 
         AA10_10V:
@@ -74,6 +50,7 @@ heizung:
 
 
     #################  Grundsätzliche Angaben ##########################
+
     regler:
 
         modell:
@@ -147,7 +124,7 @@ heizung:
             visu_acl: ro
 
 
-    #################  Alle zeitbezogenen Werte ##########################
+    #################  Datum und Uhrzeit ##########################
 
     zeit:
     
@@ -967,47 +944,82 @@ heizung:
             visu_acl: ro
 
 
+
+#################################  Hinweise  ##########################################
+
+
+# Hinweis 1:
+############
+# Das Plugin schreibt in jedes Item den aufbereiteten Wert im "Klartext".
+# Weiterhin erhält jedes Item ein zusätzliches Attribut "liste", in dem sowohl der "raw" Buswert,
+# der aufbereitete Wert im Klartext (Kommastellen usw) als auch die Einheit stehen.
+#
+# Dies kann ggf. benutzt werden, um eigene Erweiterungen und Auswertungen zu erstellen.
+#
+# Folgender Code kann unter das jeweilige Item kopiert werden, falls das Attribut "liste" ausgewertet werden soll.
+#
+# Danach stehen dann die zusätzlichen Items item.buswert, item.wert und item.einheit zu Verfügung.
+#
+# Die Abfrage 'len(...)' verhindert eine Fehlermeldung beim Starten von shNG (Abfangen von init/None).
+#
+# on_change:                  # Hier werden Buswert, Wert und Einheit geschrieben
+#     - .buswert = sh..self.conf['liste'][0] if len(sh..self.conf['liste'])==3 else None
+#     - .wert    = sh..self.conf['liste'][1] if len(sh..self.conf['liste'])==3 else None
+#     - .einheit = sh..self.conf['liste'][2] if len(sh..self.conf['liste'])==3 else None
+# buswert:                    # Rohwert; meist 0..65535 oder -32767..32767.
+#     type: num               # z.B. 215
+# wert:                       # Der umgerechnete (fertige) Wert; entspricht Value.
+#     type: num               # z.B. 21.5 (215 * Faktor 0.1, 1 Nachkommastelle)
+# einheit:                    # Die Einheit (für Register) oder der Listentext (für Register+Coils).
+#     type: str               # z.B. '°C' oder 'an'/'aus'. Die ausgelesene 215 wird so 21.5 °C.
+
+
+# Hinweis 2:
+############
+# Zur Aufzeichnung von Werten an den gewünschten Items das Attribut 'database: Init' hinzufügen.
+# Dies erfordert natürlich, dass das Database-Plugin bereits funktionierend in shNG eingebunden ist.
+
+
             
-    #################  Ab hier nur für interne Tests beim Entwickeln  ##########################
+###############  Merk-Sektion - ab hier nur für interne Tests beim Entwickeln  #######################
 
 
+#################################
+# Test von parse_item
 
-    #################################
-    # Test von parse_item
-
-    # Provozierter_fehler:
+# Provozierter_fehler:
     
-        # fehlerhaft1:
-            # desc: Variablenname nicht in den Dicts ===> Fehler im Log
-            # type: num
-            # trovis557x_var: xyzzyx
-            # visu_acl: ro
+    # fehlerhaft1:
+        # desc: Variablenname nicht in den Dicts ===> Fehler im Log
+        # type: num
+        # trovis557x_var: xyzzyx
+        # visu_acl: ro
     
 
-    #################################
-    # Alternative zum on_update (weiter ausprobieren, welche Variante besser ist):
-    
-    # enforce_updates: True
+#################################
+# Alternative zum on_update (weiter ausprobieren, welche Variante besser ist):
+   
+# enforce_updates: True
         
-    # buswert:                    # Rohwert; meist 0..65535 oder -32767..32767.
-        # type: num               # z.B. 215
-        # eval: sh...conf['liste'][0] if len(sh...conf['liste'])==3 else None
-        # eval_trigger: ..
+# buswert:                    # Rohwert; meist 0..65535 oder -32767..32767.
+    # type: num               # z.B. 215
+    # eval: sh...conf['liste'][0] if len(sh...conf['liste'])==3 else None
+    # eval_trigger: ..
 
-    # wert:                       # Der umgerechnete (fertige) Wert.
-        # type: num               # z.B. 21.5 (215 * Faktor 0.1, 1 Nachkommastelle)
-        # eval: sh...conf['liste'][1] if len(sh...conf['liste'])==3 else None
-        # eval_trigger: ..
+# wert:                       # Der umgerechnete (fertige) Wert.
+    # type: num               # z.B. 21.5 (215 * Faktor 0.1, 1 Nachkommastelle)
+    # eval: sh...conf['liste'][1] if len(sh...conf['liste'])==3 else None
+    # eval_trigger: ..
         
-    # einheit:                    # Die Einheit (Register) oder der Listentext (Register, Coils).
-        # type: str               # z.B. '°C'. Die ausgelesene 215 wird so 21.5 °C.            
-        # eval: sh...conf['liste'][2] if len(sh...conf['liste'])==3 else None
-        # eval_trigger: ..
+# einheit:                    # Die Einheit (Register) oder der Listentext (Register, Coils).
+    # type: str               # z.B. '°C'. Die ausgelesene 215 wird so 21.5 °C.            
+    # eval: sh...conf['liste'][2] if len(sh...conf['liste'])==3 else None
+    # eval_trigger: ..
 
 
-    #################################
-    # Kompakte Alternative zu den eval's (auf dem Parent-Item setzen)
-          # on_change:                  # Hier werden Buswert, Wert und Einheit geschrieben
-              # - .buswert = sh..self.conf['liste'][0] if len(sh..self.conf['liste'])==3 else None
-              # - .wert    = sh..self.conf['liste'][1] if len(sh..self.conf['liste'])==3 else None
-              # - .einheit = sh..self.conf['liste'][2] if len(sh..self.conf['liste'])==3 else None
+#################################
+# Kompakte Alternative zu den eval's (auf dem Parent-Item setzen)
+      # on_change:                  # Hier werden Buswert, Wert und Einheit geschrieben
+          # - .buswert = sh..self.conf['liste'][0] if len(sh..self.conf['liste'])==3 else None
+          # - .wert    = sh..self.conf['liste'][1] if len(sh..self.conf['liste'])==3 else None
+          # - .einheit = sh..self.conf['liste'][2] if len(sh..self.conf['liste'])==3 else None
