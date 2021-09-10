@@ -1,6 +1,6 @@
 Settings file (xslx):
 
-Thanks to user ClearY /ClearEyetem) from the Haustechnikdialog forum for providing this:
+Thanks to user ClearY / ClearEyetem) from the Haustechnikdialog forum for providing this:
 https://www.haustechnikdialog.de/Forum/t/226142/Neue-Fernwaermeanlage-How-to-start
 The file helps you to note all settings of your Trovis. 
 
@@ -19,8 +19,8 @@ The following points need to be validated / changed in case of need:
 - Interface: Default in code is /dev/ttytrovis, may need to be changed to /dev/trovis or such
 - Unit no.: Default in code is 247, may need to be changed as set in trovis menu
 
-A 'block' the sniffers shall check for readable registers/coils should not exceed 120
-(recommended: 100 to keep it easy and to be on safe side).
+A 'block' the sniffers checks for readable registers/coils should not exceed 120
+(recommended: 100 in order to keep it easy and to be on safe side).
 
 Pretty much on top of the code, you can add search blocks by adding new lines as follows
 (add as many lines/search blocks as you like):
@@ -30,7 +30,7 @@ suchbereiche.append([765,798])       # Check third block of 100 registers (765-7
 
 Usage:
 - check/validate above points
-- amend registers as needed to source code
+- amend registers as needed in source code
 - run a shell:
 > cd /usr/local/smarthome/plugins/trovis_557x/tools  # or wherever shNG resides
 > python3 register_sniffer.py
