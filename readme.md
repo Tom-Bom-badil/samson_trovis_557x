@@ -20,18 +20,11 @@ Further details can be found on the [Wiki](https://github.com/Tom-Bom-badil/sams
 <br/><br/><br/><br/>
 Changelog Version 2 (yet to come, please ignore for now):
 
-2.0.0
-
-Added ModbusTCP support (for adapters with built-in TCP/RTU gateway like USR-TCP-K7)
-
-Added support for Python 3.8+ (auto-switch between pymodbus2.2+/3.0+)
-
-Updated register/coils tables, added new information, revised existing information
-
-Updated items - important: formerly wrongly addressed Rk3 is now Rk4
-
-Updated plugin.yaml: Rev 2 in format x.x.x, status 'ready', added 'werte' attribute to prevent errors in log
-
-Removed unnecessary development files (templates, tools, assets) from official shNG Plugins repo
-
+2.0.0<br/>
+Added ModbusTCP support (for adapters with built-in TCP/RTU gateway like USR-TCP-K7)<br/>
+Added support for Python 3.8+ (auto-switch between pymodbus2.2+/3.0+)<br/>
+Updated register/coils tables, added new information, revised existing information<br/>
+Updated items - important: formerly wrongly addressed Rk3 is now Rk4<br/>
+Updated plugin.yaml: Rev 2 in format x.x.x, status 'ready', added 'werte' attribute to prevent errors in log<br/>
+Removed unnecessary development files (templates, tools, assets) from official shNG Plugins repo<br/>
 Updated Wiki, included A LOT of useful background information: github.com/Tom-Bom-badil/samson_trovis_557x/wiki
