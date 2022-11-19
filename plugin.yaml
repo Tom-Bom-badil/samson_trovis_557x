@@ -61,7 +61,6 @@ item_attributes:
  
 parameters:
 
-
     # Wichtige Parameter
     # Important parameters
 
@@ -69,18 +68,18 @@ parameters:
         type: str
         default: 'rtu' # rtu (serial) or tcp (LAN)
         description:
-            de: 'Wie die Modbus-Kommunikation duchgeführt wird (zur Zeit auf rtu belassen)'
-            en: 'How modbus communication is done (leave to rtu, tcp not yet supported)'
+            de: 'Wie die Modbus-Kommunikation duchgeführt wird (rtu oder tcp)'
+            en: 'How modbus communication is done (rtu or tcp)'
 
     modbus_port:
         type: str
-        default: '/dev/trovis'
+        default: '/dev/ttytrovis'
         # rtu: z.B./eg. /dev/ttyUSB0, /dev/ttyUSB1, /dev/ttyAMA0, /dev/ttytrovis, /dev/trovis
         # rtu remark: chmod 777 /dev/<yourport> wird empfohlen / is recommended
         # tcp: xxx.xxx.xxx.xxx:Port, e.g. '192.168.178.59:502'. You MUST specify the port at the end!
         description:
-            de: 'Modbus-Device bzw Port, über den der Trovis Adapter verbunden ist'
-            en: 'Modbus device or port to connect to Trovis adapter'
+            de: 'Modbus Verbindung, z.B. /dev/ttyUSB0 (rtu mit socat/mbusd) oder 192.168.178.52:502 (tcp)'
+            en: 'Modbus connection, e.g. /dev/ttyUSB0 (rtu with socat/mbusd) or 192.168.178.52:502 (tcp)'
 
     modbus_speed:
         type: int
@@ -95,8 +94,8 @@ parameters:
         # You MUST set the right station address in the Trovis!
         default: 247  # !!! Factory default Trovis: 255; Modbus spec says <=247 !!!
         description:
-            de: 'Modbus-Adresse der Trovis (Trovis: PA6 - Modbus, ST.-NR)'
-            en: 'Modbus address of the Trovis (Trovis: PA6 - Modbus, ST.-NR)'
+            de: 'Stationsadresse der Trovis (Trovis: PA6 - Modbus, ST.-NR <=247!)'
+            en: 'Station address of the Trovis (Trovis: PA6 - Modbus, ST.-NR <=247!)'
 
     # Optionale Parameter
     # Optional parameters
@@ -107,21 +106,6 @@ parameters:
         description:
             de: 'Ausleseintervall'
             en: 'Reading interval'
-
-    model:
-        type: int
-        default: 5576
-        description:
-            de: 'Modell des Heizungsreglers (5573, 5576, 5578, 5579)'
-            en: 'Model of the heting controller (5573, 5576, 5578, 5579)'
-            
-    revision:
-        type: int
-        default: 003
-        description:
-            # Steht auf dem Aufkleber auf der Seite des Reglers
-            de: 'Baureihe des Heizungsreglers (001, 002, 003 usw)'
-            en: 'Revision of the heating controller (001, 002, 003 usw)'
 
     # Diese Parameter sollten so belassen werden:
     # You should leave these parameters as they are:
@@ -140,6 +124,24 @@ parameters:
             de: 'Debug-Meldungen von pymodbus'
             en: 'Debug messages from pymodbus'
 
+
+    # Entfallene Parameter
+    # Deprecated parameters
+    
+    #model:
+    #    type: int
+    #    default: 5576
+    #    description:
+    #        de: 'Modell des Heizungsreglers (5573, 5576, 5578, 5579)'
+    #        en: 'Model of the heating controller (5573, 5576, 5578, 5579)'
+            
+    #revision:
+    #    type: int
+    #    default: 003
+    #    description:
+    #        # Steht auf dem Aufkleber auf der Seite des Reglers
+    #        de: 'Baureihe des Heizungsreglers (001, 002, 003 usw)'
+    #        en: 'Revision of the heating controller (001, 002, 003 usw)'
 
 plugin_functions: NONE
 item_structs: NONE
