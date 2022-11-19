@@ -6,7 +6,6 @@ coil_bereiche = (
     [55999, 56006], [65534, 65534] 
 )
 
-
 coil_tabelle = {
     'Sammelstoerung':    { 'ID':     0, 'Lesen': 0, 'Art': 'ro', 'Typ': 'Liste_NJ', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Sammelstoerung, Fehlerstatusregister HR40150 > 0' },
     'Dateneingaktiv':    { 'ID':     1, 'Lesen': 0, 'Art': 'ro', 'Typ': 'Liste_NJ', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Dateneingabe aktiv' },
@@ -50,15 +49,15 @@ coil_tabelle = {
     'BinaereingBE17':    { 'ID':    39, 'Lesen': 0, 'Art': 'ro', 'Typ': 'Liste_AE', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Status Binaereingang BE17' },
     'BinaerausgBA1':     { 'ID':    56, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_AE', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Umwaelzpumpe Rk1 (UP1 Netzseite, CL96)' },
     'BinaerausgBA2':     { 'ID':    57, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_AE', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Umwaelzpumpe Rk2 (UP2, Netzseite, CL97)' },
-    'Unbekannt-58':      { 'ID':    58, 'Lesen': 0, 'Art': 'ro', 'Typ': '???', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Unbekannt' },
+    'BinaerausgBA3':     { 'ID':    58, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_AE', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Umwaelzpumpe Rk3 (UP3, Netzseite, CL98)' },
     'BinaerausgBA4':     { 'ID':    59, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_AE', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Speicherladepumpe TW (SLP, CL99)' },
     'BinaerausgBA5':     { 'ID':    60, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_AE', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Zirkulationspumpe (ZP, CL100)' },
     'BinaerausgBA6':     { 'ID':    61, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_HZ', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Rk13-Pkt Zu-Signal (Vorgabe in HR40107)' },
     'BinaerausgBA7':     { 'ID':    62, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_HA', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Rk13-Pkt Auf-Signal (HR40107), 2-Pkt (CL102)' },
     'BinaerausgBA8':     { 'ID':    63, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_HZ', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Rk23-Pkt Zu-Signal (Vorgabe in HR40109)' },
     'BinaerausgBA9':     { 'ID':    64, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_HA', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Rk23-Pkt Auf-Signal (HR40109), 2-Pkt (CL104)' },
-    'Unbekannt-65':      { 'ID':    65, 'Lesen': 0, 'Art': 'ro', 'Typ': '???', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Unbekannt' },
-    'Unbekannt-66':      { 'ID':    66, 'Lesen': 0, 'Art': 'ro', 'Typ': '???', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Unbekannt' },
+    'BinaerausgBA10':    { 'ID':    65, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_AE', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Tauscherladepumpe (TLP)' },
+    'BinaerausgBA11':    { 'ID':    66, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_AE', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': '??? (CP)' },
     'BinaerausgBA12':    { 'ID':    67, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_AE', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Pumpenmanagement UP1Ein/Aus (CL107)' },
     'BinaerausgBA13':    { 'ID':    68, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_AE', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Pumpenmanagement Drehzahl UP1(CL108)' },
     'EBNAussentemAF1':   { 'ID':    87, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_FA', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Ebene Aussentemperatur AF1 (HR40010)' },
