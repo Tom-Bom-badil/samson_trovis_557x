@@ -23,22 +23,35 @@
 #
 #########################################################################
 
+
+
 import serial
 import array
 from   lib.module import Modules
 from   lib.model.smartplugin import *
 from   datetime import datetime
-from   pymodbus.client.sync import ModbusSerialClient as ModbusClient
 from . import _coils
 from . import _listen
 from . import _register
+from   pymodbus import version as pymodbusversion
+
+try:   # rtu/serial, for pymodbus3+ or pymodbus2.x
+    from pymodbus.client import ModbusSerialClient
+except:
+    from pymodbus.client.sync import ModbusSerialClient
+
+try:   # rtu/serial, for pymodbus3+ or pymodbus2.x
+    from pymodbus.client.tcp import ModbusTcpClient
+except:
+    from pymodbus.client.sync import ModbusTcpClient
+
 
 
 class trovis557x(SmartPlugin):
 
 
     ALLOW_MULTIINSTANCE = False
-    PLUGIN_VERSION = '1.0.1'
+    PLUGIN_VERSION = '2.0.0'
 
 
     # Starten
@@ -48,8 +61,9 @@ class trovis557x(SmartPlugin):
         self.sh = sh
         self.logger.debug('__init__ aufgerufen')
         self.init_vars()
-        self._modbus = self.init_trovis()
+        self._modbus = self.connect_trovis()
         if self._connected and self.init_webinterface():
+            self._modbus.close()
             self._init_complete = True
 
     # Nach dem Starten 1x für jedes Item durchlaufen
@@ -75,6 +89,8 @@ class trovis557x(SmartPlugin):
     def poll_device(self):
         self.logger.debug('poll_device aufgerufen')
         startzeit = datetime.now()
+        
+        self._modbus = self.connect_trovis()
 
         self.logger.debug('Registerbereiche lesen: ' + str(self._register_bereiche))
         for bereich in self._register_bereiche:
@@ -91,6 +107,8 @@ class trovis557x(SmartPlugin):
                 self.logger.debug(str(ids_mit_werten))
                 self.verarbeiteWerte(ids_mit_werten, 'coils')
 
+        self._modbus.close()
+        
         endzeit = datetime.now()
         dauer = (endzeit - startzeit).total_seconds()
         self.logger.debug('===========  Durchlauf beendet, Gesamtdauer: %.1f s' % dauer)
@@ -172,8 +190,11 @@ class trovis557x(SmartPlugin):
         self._modbus_port = self.get_parameter_value('modbus_port')
         self._modbus_speed = self.get_parameter_value('modbus_speed')
         self._modbus_timeout = self.get_parameter_value('modbus_timeout')
-        self._modbus_trovis_address =  self.get_parameter_value('modbus_trovis_address')
+        self._modbus_trovis_address = self.get_parameter_value('modbus_trovis_address')
         self._modbus_debug = self.get_parameter_value('modbus_debug')
+        
+        self._modbus_trovis_ip = self.get_parameter_value('modbus_port').split(':')[0]
+        self._modbus_trovis_ip_port = self.get_parameter_value('modbus_port').split(':')[1]
         
         self._cycle = self.get_parameter_value('cycle')
 
@@ -184,16 +205,22 @@ class trovis557x(SmartPlugin):
         self._listen_tabelle = _listen.listen_tabelle    
 
         self._trovis_itemlist = {}
+        
+        self._pymodbus_major = pymodbusversion.version.short()[0]
 
 
-    # Schnittstelle initialisieren (wird von __init__ gerufen)
-    def init_trovis(self):
+    # Schnittstelle initialisieren (wird von __init__ und bei jedem Poll aufgerufen)
+    def connect_trovis(self):
         try:
             # self._modbus_debug = False  #ToDo
-            connection = ModbusClient(method=self._modbus_mode, port=self._modbus_port, timeout=self._modbus_timeout, baudrate=self._modbus_speed)
+            if self._modbus_mode == 'rtu':
+                connection = ModbusSerialClient(method=self._modbus_mode, port=self._modbus_port, timeout=self._modbus_timeout, baudrate=self._modbus_speed)
+            else:
+                connection = ModbusTcpClient(host=self._modbus_trovis_ip, port=self._modbus_trovis_ip_port)
+                # Aus anderem Plugin: self.client = ModbusTcpClient(ip, port=port)
             if connection.connect():
                 self._connected = True
-                self.logger.debug('Verbindung zur Trovis hergestellt: ' + str(connection))
+                self.logger.info('Verbindung zur Trovis hergestellt: ' + str(connection))
             else:
                 self._connected = False
                 self.logger.debug('Verbindung zur Trovis fehlgeschlagen: ' + str(connection))
@@ -204,20 +231,29 @@ class trovis557x(SmartPlugin):
         
     # Trovis auslesen
     def leseTrovis(self, _bereich, _datentyp):
+        
+        # self.logger.info('Version: ' + self._pymodbus_major)
+        
         try:
             _ids_mit_werten = []
             werte = []
             id_aktuell = _bereich[0]
             if _datentyp == 'register': # register lesen
                 self.logger.debug('Lese Registerbereich ' + str(_bereich[0]) + ' - ' + str(_bereich[1]))
-                werte = self._modbus.read_holding_registers(_bereich[0], _bereich[1]-_bereich[0]+1, unit=self._modbus_trovis_address)
+                if self._pymodbus_major == '2':
+                    werte = self._modbus.read_holding_registers(_bereich[0], _bereich[1]-_bereich[0]+1, unit = self._modbus_trovis_address)
+                else:
+                    werte = self._modbus.read_holding_registers(_bereich[0], _bereich[1]-_bereich[0]+1, slave = self._modbus_trovis_address)
                 for wert in werte.registers:
                     if self.getKeyFromID(id_aktuell, 'register') != -1:
                         _ids_mit_werten.append([id_aktuell, wert])
                     id_aktuell += 1
             else: # coils lesen
                 self.logger.debug('Lese Coilsbereich ' + str(_bereich[0]) + ' - ' + str(_bereich[1]))
-                werte = self._modbus.read_coils(_bereich[0], _bereich[1]-_bereich[0]+1, unit=self._modbus_trovis_address)
+                if self._pymodbus_major == '2':
+                    werte = self._modbus.read_coils(_bereich[0], _bereich[1]-_bereich[0]+1, unit = self._modbus_trovis_address)
+                else:
+                    werte = self._modbus.read_coils(_bereich[0], _bereich[1]-_bereich[0]+1, slave = self._modbus_trovis_address)
                 for wert in werte.bits:
                     if self.getKeyFromID(id_aktuell, 'coil') != -1:
                         _ids_mit_werten.append([id_aktuell, int(wert)])
@@ -229,7 +265,7 @@ class trovis557x(SmartPlugin):
                         break
         except Exception as e:
             _ids_mit_werten = []
-            self.logger.debug('Im Bereich ' + str(_bereich) + ' liefert dieser Regler keine lesbaren Register/Coils!')
+            self.logger.debug('Im Bereich ' + str(_bereich) + ' liefert dieser Regler oder die Reglerkonfiguration keine lesbaren Register/Coils!')
         return _ids_mit_werten
 
 
