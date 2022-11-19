@@ -1,10 +1,8 @@
 # Item file für smartHomeNG (Trovis-Plugin)
-# Needs to be copied into <shNG>/items directory
 
 heizung:
 
     #################  Grundsätzliche Angaben ##########################
-
     regler:
 
         modell:
@@ -78,7 +76,7 @@ heizung:
             visu_acl: ro
 
 
-    #################  Datum und Uhrzeit ##########################
+    #################  Alle zeitbezogenen Werte ##########################
 
     zeit:
     
@@ -882,6 +880,7 @@ heizung:
             trovis557x_var: BinaerausgBA5
             liste: []
             visu_acl: ro
+            database: 'init'
 
         zirkulationspumpe_ebene:
             desc: Autark oder Leitsystem
@@ -896,130 +895,3 @@ heizung:
             trovis557x_var: FB14ThermDes
             liste: []
             visu_acl: ro
-
-
-    #################  Verschiedenes ###################################
-
-    unbekannt:
-
-        AA10_10V:
-            desc: AA10-10V
-            type: num
-            trovis557x_var: AA10-10V
-            liste: []
-            visu_acl: ro
-
-        AA20_10V:
-            desc: AA20-10V
-            type: num
-            trovis557x_var: AA20-10V
-            liste: []
-            visu_acl: ro
-
-        Unbekannt_41:
-            desc: Unbekannt-41
-            type: num
-            trovis557x_var: Unbekannt-41
-            liste: []
-            visu_acl: ro
-
-        Unbekannt_42:
-            desc: Unbekannt-42
-            type: num
-            trovis557x_var: Unbekannt-42
-            liste: []
-            visu_acl: ro
-
-        FB21FrgRk1Empf:
-            desc: FB21FrgRk1Empf
-            type: num
-            trovis557x_var: FB21FrgRk1Empf
-            liste: []
-            visu_acl: ro
-
-        FB22FRgRk2Empf:
-            desc: FB22FRgRk2Empf
-            type: num
-            trovis557x_var: FB22FRgRk2Empf
-            liste: []
-            visu_acl: ro
-
-
-#################################  Hinweise  ##########################################
-
-
-# Hinweis 1:
-############
-# Das Plugin schreibt in jedes Item den aufbereiteten Wert im "Klartext".
-# Weiterhin erhält jedes Item ein zusätzliches Attribut "liste", in dem sowohl der "raw" Buswert,
-# der aufbereitete Wert im Klartext (Kommastellen usw) als auch die Einheit stehen.
-#
-# Dies kann ggf. benutzt werden, um eigene Erweiterungen und Auswertungen zu erstellen.
-#
-# Folgender Code kann unter das jeweilige Item kopiert werden, falls das Attribut "liste" ausgewertet werden soll.
-#
-# Danach stehen dann die zusätzlichen Items item.buswert, item.wert und item.einheit zu Verfügung.
-#
-# Die Abfrage 'len(...)' verhindert eine Fehlermeldung beim Starten von shNG (Abfangen von init/None).
-#
-# on_change:                  # Hier werden Buswert, Wert und Einheit geschrieben
-#     - .buswert = sh..self.conf['liste'][0] if len(sh..self.conf['liste'])==3 else None
-#     - .wert    = sh..self.conf['liste'][1] if len(sh..self.conf['liste'])==3 else None
-#     - .einheit = sh..self.conf['liste'][2] if len(sh..self.conf['liste'])==3 else None
-# buswert:                    # Rohwert; meist 0..65535 oder -32767..32767.
-#     type: num               # z.B. 215
-# wert:                       # Der umgerechnete (fertige) Wert; entspricht Value.
-#     type: num               # z.B. 21.5 (215 * Faktor 0.1, 1 Nachkommastelle)
-# einheit:                    # Die Einheit (für Register) oder der Listentext (für Register+Coils).
-#     type: str               # z.B. '°C' oder 'an'/'aus'. Die ausgelesene 215 wird so 21.5 °C.
-
-
-# Hinweis 2:
-############
-# Zur Aufzeichnung von Werten an den gewünschten Items das Attribut 'database: Init' hinzufügen.
-# Dies erfordert natürlich, dass das Database-Plugin bereits funktionierend in shNG eingebunden ist.
-
-
-            
-###############  Merk-Sektion - ab hier nur für interne Tests beim Entwickeln  #######################
-
-
-#################################
-# Test von parse_item
-
-# Provozierter_fehler:
-    
-    # fehlerhaft1:
-        # desc: Variablenname nicht in den Dicts ===> Fehler im Log
-        # type: num
-        # trovis557x_var: xyzzyx
-        # visu_acl: ro
-    
-
-#################################
-# Alternative zum on_update (weiter ausprobieren, welche Variante besser ist):
-   
-# enforce_updates: True
-        
-# buswert:                    # Rohwert; meist 0..65535 oder -32767..32767.
-    # type: num               # z.B. 215
-    # eval: sh...conf['liste'][0] if len(sh...conf['liste'])==3 else None
-    # eval_trigger: ..
-
-# wert:                       # Der umgerechnete (fertige) Wert.
-    # type: num               # z.B. 21.5 (215 * Faktor 0.1, 1 Nachkommastelle)
-    # eval: sh...conf['liste'][1] if len(sh...conf['liste'])==3 else None
-    # eval_trigger: ..
-        
-# einheit:                    # Die Einheit (Register) oder der Listentext (Register, Coils).
-    # type: str               # z.B. '°C'. Die ausgelesene 215 wird so 21.5 °C.            
-    # eval: sh...conf['liste'][2] if len(sh...conf['liste'])==3 else None
-    # eval_trigger: ..
-
-
-#################################
-# Kompakte Alternative zu den eval's (auf dem Parent-Item setzen)
-      # on_change:                  # Hier werden Buswert, Wert und Einheit geschrieben
-          # - .buswert = sh..self.conf['liste'][0] if len(sh..self.conf['liste'])==3 else None
-          # - .wert    = sh..self.conf['liste'][1] if len(sh..self.conf['liste'])==3 else None
-          # - .einheit = sh..self.conf['liste'][2] if len(sh..self.conf['liste'])==3 else None
