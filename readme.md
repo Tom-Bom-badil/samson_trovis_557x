@@ -28,7 +28,7 @@ Updated register/coil tables, added new information, revised existing informatio
 New optional function to change response of "32767 °C" (=switched off/unavailable) to "0 °C"<br/>
 Updated items --- Important: Formerly wrongly addressed Rk3 (Water heating) is now Rk4 (=CO4/PA4)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NOTE: This requires to rename the corresponding database item names from Rk3 to RK4 by hand!<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You should do this *BEFORE* applying the update!
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You should do this *BEFORE* applying the update!<br/>
 Updated plugin.yaml: Rev 2 in format x.x.x, status 'ready', added 'werte' attribute to prevent errors in log<br/>
 Removed unnecessary development files (templates, tools, assets) from official shNG-Plugins repo<br/>
 Updated Wiki, included A LOT of useful background information: github.com/Tom-Bom-badil/samson_trovis_557x/wiki
