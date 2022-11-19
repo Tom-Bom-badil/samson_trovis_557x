@@ -25,9 +25,10 @@ Added ModbusTCP support (for adapters with built-in TCP/RTU gateway like USR-TCP
 Added support for Python 3.8+ and pyModbus3 (auto-switch between pymodbus2.2+/3.0+)<br/>
 Changed connection behaviour - added connect() and disconnect() to regular polls (formerly only at startup)<br/>
 Updated register/coil tables, added new information, revised existing information<br/>
-New optional function to change response of "32767 °C" (=switched off/unavailable) to "0 °C"
+New optional function to change response of "32767 °C" (=switched off/unavailable) to "0 °C"<br/>
 Updated items --- Important: Formerly wrongly addressed Rk3 (Water heating) is now Rk4 (=CO4/PA4)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NOTE: This requires to rename the corresponding database item names from Rk3 to RK4 by hand!<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You should do this *BEFORE* applying the update!
 Updated plugin.yaml: Rev 2 in format x.x.x, status 'ready', added 'werte' attribute to prevent errors in log<br/>
 Removed unnecessary development files (templates, tools, assets) from official shNG-Plugins repo<br/>
 Updated Wiki, included A LOT of useful background information: github.com/Tom-Bom-badil/samson_trovis_557x/wiki
