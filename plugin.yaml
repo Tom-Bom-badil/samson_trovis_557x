@@ -8,14 +8,16 @@ plugin:
         de: 'Plugin zum Auslesen von SAMSON TROVIS 557x Heizungsreglern'
         en: 'Plugin to read out SAMSON TROVIS 557x heating controllers'
     maintainer: Tom-Bom-badil
-    state: ready
-    keywords: samson trovis 5576 iot
+#   tester:                       # Who tests this plugin?
+    state: ready                  # change to ready when done with development
+    keywords: iot samson trovis 5573 5576 5578 5579
     documentation: https://github.com/Tom-Bom-badil/samson_trovis_557x/wiki
     support: https://knx-user-forum.de/forum/supportforen/smarthome-py/1390281-trovis-557x-heizungsregler-plugin
-    version: 1.0.1
+    version: 2.0.0
     sh_minversion: 1.5
+#   sh_maxversion:                # maximum shNG version to use this plugin (leave empty if latest)
     multi_instance: False
-    restartable: False
+    restartable: unknown
     classname: trovis557x
 
 
@@ -49,15 +51,55 @@ item_attributes:
             de: 'Enthält alle Item-Informationen (Buswert, umgerechneter Wert, Einheit oder Listentext)'
             en: 'Contains the full item information (bus value, real value, unit or list text)'
             
-#    visu_acl:
-#        type: str
-#        mandatory: False
-#        description:
-#            de: 'Alle Items sollten für die Visu auf nur lesen gesetzt werden'
-#            en: 'You shopuld set all items for the visu to read only'
-
-
+    werte:
+        type: list
+        mandatory: False
+        description:
+            de: 'Für Register, die stufenweise mit Werten belegt sind'
+            en: 'For registers that contain step values'
+            
+ 
 parameters:
+
+
+    # Wichtige Parameter
+    # Important parameters
+
+    modbus_mode:
+        type: str
+        default: 'rtu' # rtu (serial) or tcp (LAN)
+        description:
+            de: 'Wie die Modbus-Kommunikation duchgeführt wird (zur Zeit auf rtu belassen)'
+            en: 'How modbus communication is done (leave to rtu, tcp not yet supported)'
+
+    modbus_port:
+        type: str
+        default: '/dev/trovis'
+        # rtu: z.B./eg. /dev/ttyUSB0, /dev/ttyUSB1, /dev/ttyAMA0, /dev/ttytrovis, /dev/trovis
+        # rtu remark: chmod 777 /dev/<yourport> wird empfohlen / is recommended
+        # tcp: xxx.xxx.xxx.xxx:Port, e.g. '192.168.178.59:502'. You MUST specify the port at the end!
+        description:
+            de: 'Modbus-Device bzw Port, über den der Trovis Adapter verbunden ist'
+            en: 'Modbus device or port to connect to Trovis adapter'
+
+    modbus_speed:
+        type: int
+        default: 19200
+        description:
+            de: 'Modbus-Geschwindigkeit (Trovis: PA6 - Modbus, Baudrate)'
+            en: 'Modbus speed (Trovis: PA6 - Modbus, Baudrate)'
+
+    modbus_trovis_address:
+        type: int
+        # Unbedingt richtige Stationsadresse in der Trovis einstellen!
+        # You MUST set the right station address in the Trovis!
+        default: 247  # !!! Factory default Trovis: 255; Modbus spec says <=247 !!!
+        description:
+            de: 'Modbus-Adresse der Trovis (Trovis: PA6 - Modbus, ST.-NR)'
+            en: 'Modbus address of the Trovis (Trovis: PA6 - Modbus, ST.-NR)'
+
+    # Optionale Parameter
+    # Optional parameters
 
     cycle:
         type: int
@@ -81,41 +123,9 @@ parameters:
             de: 'Baureihe des Heizungsreglers (001, 002, 003 usw)'
             en: 'Revision of the heating controller (001, 002, 003 usw)'
 
-    modbus_speed:
-        type: int
-        default: 19200
-        description:
-            de: 'Modbus-Geschwindigkeit (Trovis: PA6 - Modbus, Baudrate)'
-            en: 'Modbus speed (Trovis: PA6 - Modbus, Baudrate)'
-
-    modbus_port:
-        type: str
-        default: '/dev/ttytrovis'
-        # USB: z.B./eg. /dev/ttyUSB0, /dev/ttyUSB1, /dev/ttyAMA0
-        # chmod 777 /dev/<yourport> wird empfohlen / is recommended
-        description:
-            de: 'Modbus-Port, über den die Trovis verbunden ist'
-            en: 'Modbus Port the Trovis is connected through'
-
-    modbus_trovis_address:
-        type: int
-        # Unbedingt richtige Adresse in der Trovis einstellen!
-        # You MUST set the right address in the Trovis!
-        default: 247  # !!! Standard: 255; Modbus-Spec: <=247 !!!
-        description:
-            de: 'Modbus-Adresse der Trovis (Trovis: PA6 - Modbus, ST.-NR)'
-            en: 'Modbus address of the Trovis (Trovis: PA6 - Modbus, ST.-NR)'
-
     # Diese Parameter sollten so belassen werden:
     # You should leave these parameters as they are:
     
-    modbus_mode:
-        type: str
-        default: 'rtu'
-        description:
-            de: 'Wie die Modbus-Kommunikation duchgeführt wird (zur Zeit auf rtu belassen)'
-            en: 'How modbus communication is done (leave to rtu, tcp not yet supported)'
-
     modbus_timeout:
         type: num
         default: 0.5
@@ -125,7 +135,7 @@ parameters:
             
     modbus_debug:
         type: bool
-        default: False  # ToDo / Einschalten des Debug-Modus noch herausfinden
+        default: False  # ToDo / Einschalten des Debug-Modus in pymodbus noch herausfinden
         description:
             de: 'Debug-Meldungen von pymodbus'
             en: 'Debug messages from pymodbus'
