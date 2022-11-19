@@ -26,7 +26,7 @@ Added support for Python 3.8+ and pyModbus3 (auto-switch between pymodbus2.2+/3.
 Changed connection behaviour - added connect() and disconnect() to regular polls (formerly only at startup)<br/>
 Updated register/coil tables, added new information, revised existing information<br/>
 Updated items --- Important: Formerly wrongly addressed Rk3 (Water heating) is now Rk4 (=CO4/PA4)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NOTE: This may require to rename the corresponding database items from Rk3 to RK4 by hand!<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NOTE: This requires to rename the corresponding database item names from Rk3 to RK4 by hand!<br/>
 Updated plugin.yaml: Rev 2 in format x.x.x, status 'ready', added 'werte' attribute to prevent errors in log<br/>
 Removed unnecessary development files (templates, tools, assets) from official shNG-Plugins repo<br/>
 Updated Wiki, included A LOT of useful background information: github.com/Tom-Bom-badil/samson_trovis_557x/wiki
