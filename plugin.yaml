@@ -58,7 +58,13 @@ item_attributes:
             de: 'Für Register, die stufenweise mit Werten belegt sind'
             en: 'For registers that contain step values'
             
- 
+    invalid_to_zero:
+        type: bool
+        mandatory: False
+        description:
+            de: 'Setzt 32767 (=NaN, nicht verfügbar) auf 0 fuer ausgeschaltete oder nicht verfuegbare Register'
+            en: 'Sets 32767 (=NaN, unavailable) to 0 for switched-off or unavailable registers'
+
 parameters:
 
     # Wichtige Parameter
