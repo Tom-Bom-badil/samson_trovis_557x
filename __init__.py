@@ -35,12 +35,12 @@ from . import _listen
 from . import _register
 from   pymodbus import version as pymodbusversion
 
-try:   # rtu/serial, for pymodbus3+ or pymodbus2.x
+try:   # Modbus rtu/serial, for pymodbus3+ or pymodbus2.x
     from pymodbus.client import ModbusSerialClient
 except:
     from pymodbus.client.sync import ModbusSerialClient
 
-try:   # rtu/serial, for pymodbus3+ or pymodbus2.x
+try:   # Modbus tcp, for pymodbus3+ or pymodbus2.x
     from pymodbus.client.tcp import ModbusTcpClient
 except:
     from pymodbus.client.sync import ModbusTcpClient
@@ -313,6 +313,12 @@ class trovis557x(SmartPlugin):
                     signed_int = buswert - 65536
                 else:
                     signed_int = buswert
+
+                if kurzname in self._trovis_itemlist.keys() and self.has_iattr(self._trovis_itemlist[kurzname].conf, 'invalid_to_zero'):
+                    if buswert == 32767 and self.get_iattr_value(self._trovis_itemlist[kurzname].conf, 'invalid_to_zero') == True:
+                        self.logger.debug('    ~~> Setze 32767 auf 0: ----> ' + kurzname)
+                        signed_int = 0
+
                 if digits == 0:
                     wert = int(str('{0:.'+str(digits)+'f}').format((signed_int*faktor)))
                 else:
@@ -389,3 +395,10 @@ class WebInterface(SmartPluginWebIf):
         tmpl = self.tplenv.get_template('index.html')
         # add values to be passed to the Jinja2 template eg: tmpl.render(p=self.plugin, interface=interface, ...)
         return tmpl.render(p=self.plugin)
+
+
+
+
+####### Developer notes
+# from   pymodbus.client.sync import ModbusSerialClient as ModbusClient
+# from   pymodbus.client import ModbusSerialClient as ModbusClient    # neue version, funktionierend
