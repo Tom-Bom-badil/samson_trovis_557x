@@ -13,6 +13,7 @@ coil_tabelle = {
     'SammelEbenenbit':   { 'ID':     3, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_FA', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Sammel-Ebenenbit CL88-CL121' },
     'StatusHandbRk1':    { 'ID':     4, 'Lesen': 0, 'Art': 'ro', 'Typ': 'Liste_NJ', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Status Handbetrieb Heizkreis RK1' },
     'StatusHandbRk2':    { 'ID':     5, 'Lesen': 0, 'Art': 'ro', 'Typ': 'Liste_NJ', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Status Handbetrieb Heizkreis RK2' },
+    'StatusHandbRk3':    { 'ID':     6, 'Lesen': 0, 'Art': 'ro', 'Typ': 'Liste_NJ', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Status Handbetrieb Heizkreis RK3' },
     'StatusHandbTW':     { 'ID':     7, 'Lesen': 0, 'Art': 'ro', 'Typ': 'Liste_NJ', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Status Handbetrieb TW' },
     'Sommerbetrieb':     { 'ID':     8, 'Lesen': 0, 'Art': 'ro', 'Typ': 'Liste_NJ', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Sommerbetrieb aktiv (CO5, Fb04)' },
     'WMZKomStoer#1':     { 'ID':     9, 'Lesen': 0, 'Art': 'ro', 'Typ': 'Liste_NJ', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'Kommunikationsstoerung Zaehlerbus WMZ #1 (CO6, Fb10)' },
@@ -272,5 +273,5 @@ coil_tabelle = {
     'FB18BA12TWAnf':     { 'ID':  1841, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_IA', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'FB18: BA12 waehrend Trinkwasseranforderung ein' },
     'FB19ZPSFumsch':     { 'ID':  1842, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_IA', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'FB19: Zeitprogrammgest. Speicherfuehlerumschaltung' },
     'FB20Durchgngreg':   { 'ID':  1843, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_IA', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'FB20: TW-Kreis nachgeregelt mit Durchgangsventil' },
-    'FB21DrehzLadep':    { 'ID':  1844, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_IA', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'FB21: Drehzahlregelung der Ladepumpe' },
+    'FB21DrehzLadep':    { 'ID':  1844, 'Lesen': 0, 'Art': 'rw', 'Typ': 'Liste_IA', 'Buswert': 0, 'Wert': 0, 'Einheit': '', 'Name': 'FB21: Drehzahlregelung der Ladepumpe' }
 }
