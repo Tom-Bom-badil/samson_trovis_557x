@@ -1,0 +1,8 @@
+modbus:
+  - name: trovis
+    type: tcp
+    host: 192.168.178.59
+    port: 502
+    sensors: !include_dir_merge_list trovis557x/sensors/
+    binary_sensors: !include_dir_merge_list trovis557x/binary_sensors/
+    switches: !include_dir_merge_list trovis557x/switches/
