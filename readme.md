@@ -6,7 +6,7 @@ Bei Fragen bitte eine neue [Discussion](https://github.com/Tom-Bom-badil/samson_
 
 ------------
 
-Information on the Samson Trovis 557x gheating controller series and how to connect it to modbus.
+Information on the Samson Trovis 557x heating controller series and how to connect it to modbus.
 
 The [Wiki](https://github.com/Tom-Bom-badil/samson_trovis_557x/wiki) (German only) is a good starting point.
 
