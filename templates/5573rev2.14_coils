@@ -1,0 +1,201 @@
+REM CLNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   Text0                Text1               MaskCSV
+
+1;      "5573"____________;  "ALG-BTR";      "Sammelstörung"___;  "Sammelstörung, Fehlerstatusregister HR40150 > 0"___;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  42
+2;      "5573"____________;  "ALG-BTR";      "Dateneing_aktiv"_;  "Dateneingabe aktiv"________________________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+3;      "5573"____________;  "ALG-BTR";      "Dateneing_stattg";  "Dateneingabe stattgefunden"________________________;  0;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+4;      "5573"____________;  "ALG-BTR";      "Sammel_Ebenenbit";  "Sammel-Ebenenbit CL88-CL121"_______________________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+5;      "5573"____________;  "ALG-BTR";      "Status_Hand"_____;  "Status Handbetrieb"________________________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+9;      "5573"____________;  "ALG-BTR";      "Sommerbetrieb"___;  "Sommerbetrieb aktiv (CO5, Fb04)"___________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+
+REM CLNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   Text0                Text1               MaskCSV
+
+10;     "5573"____________;  "ALG-WMZ";      "WMZ_KomStör_#1"__;  "Kommunikationsstörung Zählerbus WMZ #1 (CO6, Fb10)";  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+11;     "5573"____________;  "ALG-WMZ";      "WMZ_KomStör_#2"__;  "Kommunikationsstörung Zählerbus WMZ #2 (CO6, Fb10)";  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+12;     "5573"____________;  "ALG-WMZ";      "WMZ_KomStör_#3"__;  "Kommunikationsstörung Zählerbus WMZ #3 (CO6, Fb10)";  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+13;     "5573"____________;  "ALG-WMZ";      "WMZ_FehlerWMZ_#1";  "Fehler WMZ #1 (CO6, Fb10)"_________________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+14;     "5573"____________;  "ALG-WMZ";      "WMZ_FehlerWMZ_#2";  "Fehler WMZ #2 (CO6, Fb10)"_________________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+15;     "5573"____________;  "ALG-WMZ";      "WMZ_FehlerWMZ_#3";  "Fehler WMZ #3 (CO6, Fb10)"_________________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+16;     "5573"____________;  "ALG-WMZ";      "#1WMZ-Auslesung"_;  "1 = 1xAuslesung WMZ #1 veranlassen"________________;  0;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+17;     "5573"____________;  "ALG-WMZ";      "#2WMZ-Auslesung"_;  "1 = 1xAuslesung WMZ #2 veranlassen"________________;  0;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+18;     "5573"____________;  "ALG-WMZ";      "#3WMZ-Auslesung"_;  "1 = 1xAuslesung WMZ #3 veranlassen"________________;  0;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+22;     "5573"____________;  "ALG-WMZ";      "WMZ_Dfluß_Beg_#1";  "Durchflußbegrenzung #1 aktiv (CO6,Fb11)"___________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+23;     "5573"____________;  "ALG-WMZ";      "WMZ_Leist_Beg_#1";  "Leistungsbegrenzung #1 aktiv (CO6,Fb12)"___________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+
+
+REM CLNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   Text0                Text1               MaskCSV
+
+33;     "5573"____________;  "BEA-BE"_;      "BE1"_____________;  "Status Binäreingang BE1"___________________________;  1;  "AUS-(0)"_________;  "EIN-(1)"_________;  10
+34;     "5573"____________;  "BEA-BE"_;      "BE2"_____________;  "Status Binäreingang BE2"___________________________;  1;  "AUS-(0)"_________;  "EIN-(1)"_________;  10
+
+REM CLNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   Text0                Text1               MaskCSV
+
+57;     "5573"____________;  "BEA-BA"_;      "BA_UP1"__________;  "Umwälzpumpe UP1 (CL96)"____________________________;  0;  "AUS-(0)"_________;  "EIN-(1)"_________;  10
+58;     "5573"____________;  "BEA-BA"_;      "BA_UP2"__________;  "Umwälzpumpe UP2 (CL97)"____________________________;  0;  "AUS-(0)"_________;  "EIN-(1)"_________;  10
+60;     "5573"____________;  "BEA-BA"_;      "BA_SLP"__________;  "Speicherladepumpe SLP (CL99)"______________________;  0;  "AUS-(0)"_________;  "EIN-(1)"_________;  10
+61;     "5573"____________;  "BEA-BA"_;      "BA_ZP"___________;  "Zirkulationspumpe ZP (CL100)"______________________;  0;  "AUS-(0)"_________;  "EIN-(1)"_________;  10
+62;     "5573"____________;  "BEA-BA"_;      "BA_Rk1_Zu"_______;  "Rk1_3-Pkt Zu-Signal (Vorgabe in HR40107)"__________;  0;  "HALT-(0)"________;  "ZU-(1)"__________;  10
+63;     "5573"____________;  "BEA-BA"_;      "BA_Rk1_Auf"______;  "Rk1_3-Pkt Auf-Signal(HR40107),2-Pkt(CL102)"________;  0;  "HALT-(0)"________;  "AUF-(1)"_________;  10
+64;     "5573"____________;  "BEA-BA"_;      "BA_Rk2_Zu"_______;  "Rk2_3-Pkt Zu-Signal (Vorgabe in HR40109)"__________;  0;  "HALT-(0)"________;  "ZU-(1)"__________;  10
+65;     "5573"____________;  "BEA-BA"_;      "BA_Rk2_Auf"______;  "Rk2_3-Pkt Auf-Signal(HR40109),2-Pkt(CL104)"________;  0;  "HALT-(0)"________;  "AUF-(1)"_________;  10
+66;     "5573"____________;  "BEA-BA"_;      "BA_TLP"__________;  "Tauscherladepumpe TLP (CL105)"_____________________;  0;  "AUS-(0)"_________;  "EIN-(1)"_________;  10
+67;     "5573"____________;  "BEA-BA"_;      "BA_CP"___________;  "Kollektorpumpe CP (CL106)"_________________________;  0;  "AUS-(0)"_________;  "EIN-(1)"_________;  10
+88;     "5573"____________;  "EBN-AT"_;      "EBN_Außentem_AF1";  "Ebene Außentemperatur AF1 (HR40010)"_______________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+89;     "5573"____________;  "EBN-BTR";      "EBN_BetrArt_Rk1"_;  "Ebene Betriebsart Rk1 (HR40106)"___________________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+90;     "5573"____________;  "EBN-BTR";      "EBN_Stellsig_Rk1";  "Ebene Stellsignal Rk1 (HR40107)"___________________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+91;     "5573"____________;  "EBN-BTR";      "EBN_BetrArt_Rk2"_;  "Ebene Betriebsart Rk2 (HR40108)"___________________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+92;     "5573"____________;  "EBN-BTR";      "EBN_Stellsig_Rk2";  "Ebene Stellsignal Rk2 (HR40109)"___________________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+95;     "5573"____________;  "EBN-BTR";      "EBN_BetrArt_TW"__;  "Ebene Betriebsart TW (HR40112)"____________________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+96;     "5573"____________;  "EBN-BA"_;      "EBN_UP1"_________;  "Ebene Umwälzpumpe UP1 (CL57)"______________________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+97;     "5573"____________;  "EBN-BA"_;      "EBN_UP2"_________;  "Ebene Umwälzpumpe UP2 (CL58)"______________________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+99;     "5573"____________;  "EBN-BA"_;      "EBN_SLP"_________;  "Ebene Speicherladepumpe SLP (CL60)"________________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+100;    "5573"____________;  "EBN-BA"_;      "EBN_ZP"__________;  "Ebene Zirkulationspumpe ZP (CL61)"_________________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+101;    "5573"____________;  "EBN-BA"_;      "EBN_Klemme_26"___;  "Ebene Klemme 26"___________________________________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+102;    "5573"____________;  "EBN-BA"_;      "EBN_Rk1_2-Pkt"___;  "Ebene Rk1_2-Pkt-Signal (CL63)"_____________________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+103;    "5573"____________;  "EBN-BA"_;      "EBN_Klemme_29"___;  "Ebene Klemme 29"___________________________________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+104;    "5573"____________;  "EBN-BA"_;      "EBN_Rk2_2-Pkt"___;  "Ebene Rk2_2-Pkt-Signal (CL65)"_____________________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+105;    "5573"____________;  "EBN-BA"_;      "EBN_TLP"_________;  "Ebene Tauscherladepumpe TLP (CL66)"________________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+106;    "5573"____________;  "EBN-BA"_;      "EBN_CP"__________;  "Ebene Kollektorpumpe CP (CL67)"____________________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+112;    "5573"____________;  "EBN-VL"_;      "EBN_Son_TW_Sollw";  "Ebene Sonder-Trinkwassersollwert (HR41809)"________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+
+REM CLNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   Text0                Text1               MaskCSV
+
+116;    "5573"____________;  "EBN-VL"_;      "EBN_VorlSoll_Rk1";  "Ebene Vorlaufsollwert Rk1 (HR41000)"_______________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+117;    "5573"____________;  "EBN-RL"_;      "EBN_RückSoll_Rk1";  "Ebene Rücklaufsollwert Rk1 (HR41033)"______________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+118;    "5573"____________;  "EBN-VL"_;      "EBN_VorlSoll_Rk2";  "Ebene Vorlaufsollwert Rk2 (HR41200)"_______________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+119;    "5573"____________;  "EBN-RL"_;      "EBN_RückSoll_Rk2";  "Ebene Rücklaufsollwert Rk2 (HR41233)"______________;  0;  "GLT-(0)"_________;  "AUTARK-(1)"______;  10
+133;    "5573"____________;  "CON-SON";      "FB04_Sommerbtr"__;  "FB04: Sommerbetrieb"_______________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+134;    "5573"____________;  "CON-SON";      "FB05_Verz_AT_Anp";  "FB05: Verzögerte Außentemperaturanpassung fallend"_;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+135;    "5573"____________;  "CON-SON";      "FB06_Verz_AT_Anp";  "FB06: Verzögerte Außentemperaturanpassung steigend";  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+137;    "5573"____________;  "CON-SON";      "FB08_AutSommZeit";  "FB08: Automatische Sommer-/Winterzeitumschaltung"__;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+138;    "5573"____________;  "CON-SON";      "FB09_Frostschutz";  "FB09: Frostschutzprogramm (I=>FB09=0, II=>FB09=1)"_;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+
+REM CLNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   Text0                Text1               MaskCSV
+
+141;    "5573"____________;  "CON-SON";      "FB12_Schleichmng";  "FB12: Schleichmengenunterdrückung per BE13"________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+143;    "5573"____________;  "CON-SON";      "FB14_Betr_UP1"___;  "FB14: Betrieb UP1 bei Eigenbedarf"_________________;  0;  "AUS-(0)"_________;  "EIN-(1)"_________;  10
+144;    "5573"____________;  "CON-SON";      "FB15_FrgReg_BE1"_;  "FB15: Freigabe Regler an BE1 (Stdby-Betr. bE/1,0)"_;  0;  "AUS-(0)"_________;  "EIN-(1)"_________;  10
+145;    "5573"____________;  "CON-SON";      "FB16_Rücklbegr_p";  "FB16: P-Verhalten bei Rücklauftemperaturbegrenzung";  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+148;    "5573"____________;  "CON-SON";      "FB19_Tempüberw"__;  "FB19: Temperaturüberwachung"_______________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+150;    "5573"____________;  "CON-SON";      "FB21_SperrHand"__;  "FB21: Sperrung der Handebenen"_____________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+151;    "5573"____________;  "CON-SON";      "FB22_SperrDreh"__;  "FB22: Sperrung der Drehschalter"___________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+152;    "5573"____________;  "CON-SON";      "FB23_Testmodus"__;  "FB23: Testmodus (Nur für interne Zwecke!)"_________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+153;    "5573"____________;  "CON-MOD";      "FB01_Modbus"_____;  "FB01: Modbusbetrieb"_______________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+154;    "5573"____________;  "CON-MOD";      "FB02_16bit"______;  "FB02: Modbus 16-bit-Adressierung"__________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+155;    "5573"____________;  "CON-MOD";      "FB03_Modem"______;  "FB03: Modemfunktion"_______________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+156;    "5573"____________;  "CON-MOD";      "FB04_Auto_Modem"_;  "FB04: Automatische Modemkonfiguration"_____________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+157;    "5573"____________;  "CON-MOD";      "FB05_Sperr_Modem";  "FB05: Sperrung der GLT-Anwahl"_____________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+158;    "5573"____________;  "CON-MOD";      "FB06_Anw_gehend"_;  "FB06: GLT-Anwahl auch bei gehenden Störungen"______;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+159;    "5573"____________;  "CON-MOD";      "FB07_Timeout_GLT";  "FB07: Leitsystemüberwachung"_______________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+160;    "5573"____________;  "CON-MOD";      "FB08_SMS"________;  "FB08: SMS-Betrieb"_________________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+162;    "5573"____________;  "CON-VOL";      "FB10_Zählerbus"__;  "FB10: Zählerbus-Betrieb"___________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+163;    "5573"____________;  "CON-VOL";      "FB11_Dfluß_Beg"__;  "FB11: Durchflußbegrenzung in Rk1 mittels Zählerbus";  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+164;    "5573"____________;  "CON-VOL";      "FB12_Leist_Beg"__;  "FB12: Leistungsbegrenzung in Rk1 mittels Zählerbus";  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+
+
+REM CLNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   Text0                Text1               MaskCSV
+
+246;    "5573"____________;  "ALG-WMZ";      "WMZ_KomStör_#4"__;  "Kommunikationsstörung Zählerbus WMZ #4 (CO6, Fb10)";  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+247;    "5573"____________;  "ALG-WMZ";      "WMZ_KomStör_#5"__;  "Kommunikationsstörung Zählerbus WMZ #5 (CO6, Fb10)";  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+248;    "5573"____________;  "ALG-WMZ";      "WMZ_KomStör_#6"__;  "Kommunikationsstörung Zählerbus WMZ #6 (CO6, Fb10)";  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+249;    "5573"____________;  "ALG-WMZ";      "WMZ_FehlerWMZ_#4";  "Fehler WMZ #4 (CO6, Fb10)"_________________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+250;    "5573"____________;  "ALG-WMZ";      "WMZ_FehlerWMZ_#5";  "Fehler WMZ #5 (CO6, Fb10)"_________________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+251;    "5573"____________;  "ALG-WMZ";      "WMZ_FehlerWMZ_#6";  "Fehler WMZ #6 (CO6, Fb10)"_________________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+252;    "5573"____________;  "ALG-WMZ";      "#4WMZ-Auslesung"_;  "1 = 1xAuslesung WMZ #4 veranlassen"________________;  0;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+253;    "5573"____________;  "ALG-WMZ";      "#5WMZ-Auslesung"_;  "1 = 1xAuslesung WMZ #5 veranlassen"________________;  0;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+254;    "5573"____________;  "ALG-WMZ";      "#6WMZ-Auslesung"_;  "1 = 1xAuslesung WMZ #6 veranlassen"________________;  0;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+255;    "5573"____________;  "ALG-WMZ";      "summarische_Begr";  "1 = P und V' aller WMZ_Adr!=0 werden addiert f. B.";  0;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+
+REM CLNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   Text0                Text1               MaskCSV
+
+301;    "5573"____________;  "CON-SON";      "CO9_FB05"________;  "Externe Vorlaufsoll-Korrektur (Techem/Adapterm)"___;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+303;    "5573"____________;  "CON-SON";      "Zykl_Relaisinit"_;  "Zyklische Relaisinitialisierung"___________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+307;    "5573"____________;  "CON-SON";      "Schleichm_bin"___;  "Schleichmenge mittels Binäreingang"________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;
+308;    "5573"____________;  "CON-SON";      "CO9_FB08"________;  "RK1 als Zubringerkreis"____________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+309;    "5573"____________;  "CON-SON";      "CO9_FB09"________;  "Modbus-Schreibfreigabe"____________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+
+REM CLNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   Text0                Text1               MaskCSV
+
+998;    "5573"____________;  "ALG-BTR";      "Btr_nicht_Auto"__;  "mind. 1 Rk ungleich Auto"__________________________;  1;  "NEIN-(0)"________;  "Ja-(1)"__________;  10
+999;    "5573"____________;  "ALG-BTR";      "BtrS_nicht_Auto"_;  "mind. 1 Rk ungleich Auto mittels Betriebsschalter"_;  1;  "NEIN-(0)"________;  "Ja-(1)"__________;  10
+1000;   "5573"____________;  "ALG-BTR";      "Auto_Rk1"________;  "Zeitabhängiger Betrieb Rk1"________________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1001;   "5573"____________;  "ALG-BTR";      "Tagbetrieb_Rk1"__;  "Tagbetrieb Rk1 "___________________________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1002;   "5573"____________;  "ALG-BTR";      "Nachtbetrieb_Rk1";  "Nachtbetrieb Rk1 "_________________________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1003;   "5573"____________;  "ALG-BTR";      "Haltebtr_Rk1"____;  "Haltebetrieb Rk1 (mit CO1, Fb07=1)"________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1004;   "5573"____________;  "ALG-BTR";      "Stützbtr_Rk1"____;  "Stützbetrieb Rk1 (mit CO1, Fb07=1)"________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1005;   "5573"____________;  "ALG-BTR";      "Aufheizbtr_Rk1"__;  "Aufheizbetrieb Rk1 (mit CO1, Fb07=1)"______________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+
+REM CLNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   Text0                Text1               MaskCSV
+
+1006;   "5573"____________;  "ALG-BTR";      "Rücklbeg_Rk1"____;  "Rücklauftemperaturbegrenzung Rk1 aktiv"____________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1007;   "5573"____________;  "ALG-BTR";      "Heizaus_Rk1"_____;  "AT-abhängige Heizungsabschaltung Rk1 aktiv"________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1008;   "5573"____________;  "ALG-BTR";      "Standby_Rk1"_____;  "Standby-Betrieb Rk1 "______________________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1009;   "5573"____________;  "ALG-BTR";      "Frostschutz_Rk1"_;  "Frostschutzbetrieb Rk1"____________________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1025;   "5573"____________;  "CON-RT"_;      "FB01_RF1"________;  "FB01: Raumfühler RF1"______________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1026;   "5573"____________;  "CON-AT"_;      "FB02_AF1"________;  "FB02: Außenfühler AF1"_____________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1027;   "5573"____________;  "CON-RL"_;      "FB03_RüF1_Rk1"___;  "FB03: Rücklauffühler RüF1 Rk1"_____________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1029;   "5573"____________;  "CON-SON";      "FB05_FBH_Rk1"____;  "FB05: Fußbodenheizung Rk1"_________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1031;   "5573"____________;  "CON-BTR";      "FB07_OptimierRk1";  "FB07: Optimierung Rk1"_____________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1032;   "5573"____________;  "CON-BTR";      "FB08_Adapt_Rk1"__;  "FB08: Adaption Rk1"________________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1033;   "5573"____________;  "CON-BTR";      "FB09_KurzztAdRk1";  "FB09: Kurzzeitadaption Rk1"________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1035;   "5573"____________;  "CON-BTR";      "FB11_4P_HKL_Rk1"_;  "FB11: 4-Punkte-Kennlinie Rk1"______________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1036;   "5573"____________;  "CON-BTR";      "FB12_3Pkt_RegRk1";  "FB12: Regelungsart 3-Pkt (Rk1) / 0...10V (Y1)"_____;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1037;   "5573"____________;  "CON-BTR";      "FB13_Beg_xd_Rk1"_;  "FB13: Begrenzung d. Regelabweichung AUF-Signal Rk1";  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1038;   "5573"____________;  "CON-BTR";      "FB14_Freig_Rk1"__;  "FB14: Freigabe Rk1 an Eingang BE1"_________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1039;   "5573"____________;  "CON-BTR";      "FB15_Bedarf"_____;  "FB15: Bedarfsverarbeitung in Rk1"__________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1040;   "5573"____________;  "CON-BTR";      "FB16_10V_Bedarf"_;  "FB16: Bedarfsverarbeitung 0-10V in Rk1 (Kl. 11/12)";  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1041;   "5573"____________;  "CON-BTR";      "FB17_bin_Bedarf"_;  "FB17: Bedarfsverarbeitung binär in Rk1 (Kl. 03/12)";  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1042;   "5573"____________;  "CON-BTR";      "FB18_maxVL-Soll"_;  "FB18: Max. Vorlaufsollwert mittels 0-10V anfordern";  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1044;   "5573"____________;  "CON-SON";      "FB20_ExtWärmean"_;  "FB20: Externe Wärmeanforderung bei Unterversorgung";  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1200;   "5573"____________;  "ALG-BTR";      "Auto_Rk2"________;  "Zeitabhängiger Betrieb Rk2"________________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1201;   "5573"____________;  "ALG-BTR";      "Tagbetrieb_Rk2"__;  "Tagbetrieb Rk2"____________________________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1202;   "5573"____________;  "ALG-BTR";      "Nachtbetrieb_Rk2";  "Nachtbetrieb Rk2 "_________________________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1203;   "5573"____________;  "ALG-BTR";      "Haltebtr_Rk2"____;  "Haltebetrieb Rk2 (mit CO2, Fb07=1)"________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1204;   "5573"____________;  "ALG-BTR";      "Stützbtr_Rk2"____;  "Stützbetrieb Rk2 (mit CO2, Fb07=1)"________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1205;   "5573"____________;  "ALG-BTR";      "Aufheizbtr_Rk2"__;  "Aufheizbetrieb Rk2 (mit CO2, Fb07=1)"______________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1206;   "5573"____________;  "ALG-BTR";      "Rücklbeg_Rk2"____;  "Rücklauftemperaturbegrenzung Rk2 aktiv"____________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1207;   "5573"____________;  "ALG-BTR";      "Heizaus_Rk2"_____;  "AT-abhängige Heizungsabschaltung Rk2 aktiv"________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1208;   "5573"____________;  "ALG-BTR";      "Standby_Rk2"_____;  "Standby-Betrieb Rk2 "______________________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1209;   "5573"____________;  "ALG-BTR";      "Frostschutz_Rk2"_;  "Frostschutzbetrieb Rk2"____________________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1212;   "5573"____________;  "ALG-WMZ";      "WMZ_Dfluß_Beg_#2";  "Durchflußbegrenzung #2 aktiv (CO6,Fb13)"___________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1213;   "5573"____________;  "ALG-WMZ";      "WMZ_Leist_Beg_#2";  "Leistungsbegrenzung #2 aktiv (CO6,Fb14)"___________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1225;   "5573"____________;  "CON-RT"_;      "FB01_RF2"________;  "FB01: Raumfühler RF2"______________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1227;   "5573"____________;  "CON-RL"_;      "FB03_RüF2_Rk2"___;  "FB03: Rücklauffühler RüF2 Rk2"_____________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+
+REM CLNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   Text0                Text1               MaskCSV
+
+1229;   "5573"____________;  "CON-SON";      "FB05_FBH_Rk2"____;  "FB05: Fußbodenheizung Rk2"_________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1231;   "5573"____________;  "CON-BTR";      "FB07_OptimierRk2";  "FB07: Optimierung Rk2"_____________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1232;   "5573"____________;  "CON-BTR";      "FB08_Adapt_Rk2"__;  "FB08: Adaption Rk2"________________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1233;   "5573"____________;  "CON-BTR";      "FB09_KurzztAdRk2";  "FB09: Kurzzeitadaption Rk2"________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1235;   "5573"____________;  "CON-BTR";      "FB11_4P_HKL_Rk2"_;  "FB11: 4-Punkte-Kennlinie Rk2"______________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1236;   "5573"____________;  "CON-BTR";      "FB12_3Pkt_RegRk2";  "FB12: Regelungsart 3-Pkt (Rk2) / 0...10V (Y2)"_____;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1237;   "5573"____________;  "CON-BTR";      "FB13_Beg_xd_Rk2"_;  "FB13: Begrenzung d. Regelabweichung AUF-Signal Rk2";  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1238;   "5573"____________;  "CON-BTR";      "FB14_Freig_Rk2"__;  "FB14: Freigabe Rk2 an Eingang BE2"_________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1800;   "5573"____________;  "ALG-BTR";      "Auto_TW"_________;  "Zeitabhängiger Betrieb Trinkwasser"________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1801;   "5573"____________;  "ALG-BTR";      "Therm_Des_TW"____;  "Thermische Desinfektion Trinkwasserkreis aktiv"____;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1802;   "5573"____________;  "ALG-BTR";      "Vorrang_TW"______;  "Vorrangbetrieb Trinkwasserkreis aktiv"_____________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1803;   "5573"____________;  "ALG-BTR";      "MaxLadetempbg_TW";  "Maximale Ladetemperaturbegrenzung aktiv"___________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1804;   "5573"____________;  "ALG-BTR";      "Rücklbeg_TW"_____;  "Rücklauftemperaturbegr. Trinkwasserkreis aktiv"____;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1805;   "5573"____________;  "ALG-BTR";      "Standby_TW"______;  "Standby-Betrieb Trinkwasser "______________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1806;   "5573"____________;  "ALG-BTR";      "Frostschutz_TW"__;  "Frostschutzbetrieb Trinkwasser"____________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1807;   "5573"____________;  "ALG-BTR";      "Zwangslad_TW"____;  "Zwangsladung Trinkwasserspeicher"__________________;  0;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1808;   "5573"____________;  "ALG-BTR";      "Solar_UP_TW"_____;  "Solarkreis-Umwälzpumpe aktiv"______________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
+1809;   "5573"____________;  "ALG-BTR";      "SF2_anstatt_SF1"_;  "Zwangsladung durch Umschaltung von SF1 auf SF2"____;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1825;   "5573"____________;  "CON-WW"_;      "FB01_SF1"________;  "FB01: Speicherfühler SF1"__________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1826;   "5573"____________;  "CON-WW"_;      "FB02_SF2"________;  "FB02: Speicherfühler SF2"__________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1827;   "5573"____________;  "CON-WW"_;      "FB03_RüF2"_______;  "FB03: Rücklauffühler RüF2"_________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1829;   "5573"____________;  "CON-WW"_;      "FB05_VF4"________;  "FB05: Vorlauffühler VF4"___________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1830;   "5573"____________;  "CON-WW"_;      "FB06_Parallel_TW";  "FB06: Pumpenparallellauf"__________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1831;   "5573"____________;  "CON-WW"_;      "FB07_Zwischenhzg";  "FB07: Zwischenheizbetrieb"_________________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1832;   "5573"____________;  "CON-WW"_;      "FB08_Vorrang_Inv";  "FB08: Vorrang durch Inversbetrieb"_________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1833;   "5573"____________;  "CON-WW"_;      "FB09_Vorrang_Abs";  "FB09: Vorrang durch Absenkbetrieb"_________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1834;   "5573"____________;  "CON-WW"_;      "FB10_ZP_in_WT"___;  "FB10: ZP in Wärmetauscher eingebunden"_____________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1835;   "5573"____________;  "CON-WW"_;      "FB11_ZPbeimLaden";  "FB11: Betrieb der ZP bei Speicherladung"___________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1836;   "5573"____________;  "CON-WW"_;      "FB12_3Pkt_Reg_TW";  "FB12: Regelungsart 3-Pkt (Rk2) / 0...10V (Y2) TW"__;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1837;   "5573"____________;  "CON-WW"_;      "FB13_Beg_Regdiff";  "FB13: Begrenzung der Regelabweichung AUF-Signal TW";  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1838;   "5573"____________;  "CON-WW"_;      "FB14_ThermDes"___;  "FB14: Thermische Desinfektion"_____________________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1839;   "5573"____________;  "CON-WW"_;      "FB15_SLP_abh_RüF";  "FB15: SLP ein in Abhängigkeit der Rücklauftemp"____;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1840;   "5573"____________;  "CON-WW"_;      "FB16_Bed_Prio"___;  "FB16: Externer Bedarf hat Priorität"_______________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1843;   "5573"____________;  "CON-WW"_;      "FB19_SF_Umschalt";  "FB19: Zeitprogrammgest. Speicherfühlerumschaltung"_;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1844;   "5573"____________;  "CON-WW"_;      "FB20_Durchgngreg";  "FB20: TW-Kreis nachgeregelt mit Durchgangsventil"__;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
+1845;   "5573"____________;  "CON-WW"_;      "FB21_Drehz_Ladep";  "FB21: Drehzahlregelung der Ladepumpe"______________;  0;  "INAKTIV-(0)"_____;  "AKTIV-(1)"_______;  10
