@@ -2,7 +2,7 @@
 
 Hinweis: Der Hauptteil der Konfiguration befindet sich im Verzeichnis trovis557x/. Leider habe ich es bis jetzt nocht nicht herausgefunden, wie man sensors, binary_sensors und switches in einer einzigen Datei zusammenfassen kann, also z.B. 
 
-trovis557x/1_regler.yaml
+_trovis557x/1_regler.yaml_
 ```
 sensors:
   [...]
@@ -12,7 +12,7 @@ switches:
   [...]
 ```
 
-trovis557x/2_messwerte.yaml
+_trovis557x/2_messwerte.yaml_
 ```
 sensors:
   [...]
