@@ -24,12 +24,6 @@
   scale: 0.01
   precision: 2
   scan_interval: 900
-  ## test
-  # attributes:
-  #  _test: >
-  #    'hallo'
-  #  _version: >
-  #      {{states.sensors.trovis_r_modell}}
 
 - name: "Trovis Regler Seriennummer"
   unique_id: trovis_r_seriennummer
@@ -62,6 +56,13 @@
   slave: !secret trovis_id
   address: 101
   scan_interval: 60
+  ## test
+  # attributes:
+  #  _test: >
+  #    'hallo'
+  #  _version: >
+  #      {{states.sensors.trovis_r_modell}}
+
 
 
 # unbenutzte Attribute / bitte ignorieren:
