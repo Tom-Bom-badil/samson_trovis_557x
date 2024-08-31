@@ -1,1 +1,221 @@
+# Maximalausbau - Anordnung nach elektrischem Schaltplan der 5579 (Port 1-17).
+#
+# Es können alle Sensoren bestückt werden, auch wenn die aktuell eingestellte
+# Anlage diese nicht auswertet. Messwerte werden in jedem Fall geliefert.
+# Trotzdem nochmal gegenprüfen, ob irgendwelche Reglereinstellungen Bezug auf
+# einen nachinstallierten Sensor nehmen!!!
+#
+# Sensoranschluss: 2-Draht, links Port, rechts Massesteg Mitte (Polung egal).
+# !!! Richtige Seite des Massestegs nutzen - andere Seite ist N von 230V. !!!
+# Sensortyp beachten (PT100, PT1000, NTC5K usw - CO5-F01..03, meist PT1000).
 
+
+# Port / Anschluss 1
+- name: "Trovis Fühler Außen 1 (AF1)"
+  unique_id: trovis_f_AF1
+  slave: !secret trovis_id
+  address: 9
+  scan_interval: 60
+  scale: 0.1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+# Port / Anschluss 2
+- name: "Trovis Fühler Außen 2 (AF2)"
+  unique_id: trovis_f_AF2
+  slave: !secret trovis_id
+  address: 10
+  scan_interval: 60
+  scale: 0.1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+# Port / Anschluss 3
+- name: "Trovis Fühler Speicher 1 (SF1)"
+  unique_id: trovis_f_SF1
+  slave: !secret trovis_id
+  address: 22
+  scan_interval: 60
+  scale: 0.1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+# Port / Anschluss 4
+- name: "Trovis Fühler Speicher 2 (SF2)"
+  unique_id: trovis_f_SF2
+  slave: !secret trovis_id
+  address: 23
+  scan_interval: 60
+  scale: 0.1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+# Port / Anschluss 5
+- name: "Trovis Fühler Raum 1 (RF1)"
+  unique_id: trovis_f_RF1
+  slave: !secret trovis_id
+  address: 19
+  scan_interval: 60
+  scale: 0.1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+# Port / Anschluss 6
+- name: "Trovis Fühler Raum 2 (RF2)"
+  unique_id: trovis_f_RF2
+  slave: !secret trovis_id
+  address: 20
+  scan_interval: 60
+  scale: 0.1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+# Port / Anschluss 7
+- name: "Trovis Fühler Raum 3 (RF3)"
+  unique_id: trovis_f_RF3
+  slave: !secret trovis_id
+  address: 21
+  scan_interval: 60
+  scale: 0.1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+# Port / Anschluss 8
+- name: "Trovis Fühler Vorlauf 1 (VF1)"
+  unique_id: trovis_f_VF1
+  slave: !secret trovis_id
+  address: 12
+  scan_interval: 60
+  scale: 0.1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+  # Port / Anschluss 9
+- name: "Trovis Fühler Vorlauf 2 (VF2)"
+  unique_id: trovis_f_VF2
+  slave: !secret trovis_id
+  address: 13
+  scan_interval: 60
+  scale: 0.1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+# Port / Anschluss 10
+- name: "Trovis Fühler Vorlauf 3 (VF3)"
+  unique_id: trovis_f_VF3
+  slave: !secret trovis_id
+  address: 14
+  scan_interval: 60
+  scale: 0.1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+# Port / Anschluss 11
+- name: "Trovis Fühler Vorlauf 4 (VF4)"
+  unique_id: trovis_f_VF4
+  slave: !secret trovis_id
+  address: 15
+  scan_interval: 60
+  scale: 0.1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+# Port / Anschluss 12
+- name: "Trovis Fühler Rücklauf 1 (RüF1)"
+  unique_id: trovis_f_RueF1
+  slave: !secret trovis_id
+  address: 16
+  scan_interval: 60
+  scale: 0.1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+# Port / Anschluss 13
+- name: "Trovis Fühler Rücklauf 2 (RüF2)"
+  unique_id: trovis_f_RueF2
+  slave: !secret trovis_id
+  address: 17
+  scan_interval: 60
+  scale: 0.1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+# Port / Anschluss 14
+- name: "Trovis Fühler Rücklauf 3 (RüF3)"
+  unique_id: trovis_f_RueF3
+  slave: !secret trovis_id
+  address: 18
+  scan_interval: 60
+  scale: 0.1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+# Port / Anschluss 15
+- name: "Trovis Fühler Ferngeber 1 (FG1)"
+  unique_id: trovis_f_FG1
+  slave: !secret trovis_id
+  address: 25
+  scan_interval: 60
+  scale: 0.1
+  unit_of_measurement: "K"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+# Port / Anschluss 16
+- name: "Trovis Fühler Ferngeber 2 (FG2)"
+  unique_id: trovis_f_FG2
+  slave: !secret trovis_id
+  address: 26
+  scan_interval: 60
+  scale: 0.1
+  unit_of_measurement: "K"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+# Port / Anschluss 17
+- name: "Trovis Fühler Speicher/Ferngeber 3 (SF3/FG3)"
+  unique_id: trovis_f_SF3_FG3
+  slave: !secret trovis_id
+  address: 24
+  scan_interval: 60
+  scale: 0.1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+
+# unbenutzte Attribute / bitte ignorieren:
+  #icon: mdi:home-thermometer-outline
+  #state_topic: "shellies/shellyht-XXXXXX/sensor/temperature"
+  #json_attributes_topic: "shellies/shellyht-XXXXXX/announce"
