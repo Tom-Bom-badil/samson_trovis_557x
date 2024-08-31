@@ -1,1 +1,40 @@
+# Annahme: Verwendung einer 3-Punkt-Regelung.
+# Bei einer eigenen 4-Punkte-Kennlinie sind die Register 1012-1027 auszuwerten.
 
+- name: "Trovis Hk1 Vorlaufsoll"
+  unique_id: trovis_hk1_vlsoll
+  slave: !secret trovis_id
+  address: 999
+  scan_interval: 60
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk1 Steigung"
+  unique_id: trovis_hk1_steigung
+  slave: !secret trovis_id
+  address: 1005
+  scan_interval: 60
+  scale: 0.1
+  precision: 1
+  min_value: 0.2
+  max_value: 3.2
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk1 Niveau"
+  unique_id: trovis_hk1_niveau
+  slave: !secret trovis_id
+  address: 1006
+  scan_interval: 60
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  # min_value: -30
+  max_value: 30
+  nan_value: 32767
