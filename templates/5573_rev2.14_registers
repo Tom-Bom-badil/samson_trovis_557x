@@ -1,4 +1,4 @@
-Achtung! 40000er Register! Je nach verwendeten Tools ggf. vom Wert 40.001 abziehen!
+Achtung! 40000er Register! Je nach verwendeten Tools ggf. vom Wert 40.001 abziehen (Start mit Register Nr. 0 statt 40.001)!
 
 REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
 
