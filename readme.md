@@ -4,7 +4,7 @@ Unterstützt werden alle Modelle mit Modbus (5571, 5573, 5576, 5578, 5579).
 
 Einige Teile des Projektes können auch für die Anbindung des Reglers an TrovisView verwendet werden.
 
-Weitere Details sind im [Wiki](https://github.com/Tom-Bom-badil/samson_trovis_557x/wiki) zu finden.
+Weitere Details sind im [Wiki](https://github.com/Tom-Bom-badil/samson_trovis_557x/wiki) zu finden. Bei Fragen bitte eine neue [Discussion](https://github.com/Tom-Bom-badil/samson_trovis_557x/discussions) starten.
 
 ------------
 
@@ -14,4 +14,4 @@ The plugin supports all Modbus models (5571, 5573, 5576, 5578, 5579).
 
 Some parts of the project can also be used to connect the controller to TrovisView.
 
-Further details can be found on the [Wiki](https://github.com/Tom-Bom-badil/samson_trovis_557x/wiki) (German).
+Further details can be found on the [Wiki](https://github.com/Tom-Bom-badil/samson_trovis_557x/wiki) (German). In case of questions, please use the [Discussions](https://github.com/Tom-Bom-badil/samson_trovis_557x/discussions) section.
