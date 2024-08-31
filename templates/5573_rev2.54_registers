@@ -1,3 +1,5 @@
+Achtung! 40000er Register! Je nach verwendeten Tools ggf. vom Wert 40.001 abziehen!
+
 REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
 
 40001;  "5573"____________;  "ALG-ID"_;      "Erzeugnisnummer"_;  "Erzeugnisnummer, Gerätekennung"____________________;  1;   5000,000;            6000,000;            5000,000;            6000,000;             0;   " "_______________;  10
