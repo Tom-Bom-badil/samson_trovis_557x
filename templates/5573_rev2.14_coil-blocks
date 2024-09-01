@@ -1,5 +1,4 @@
-REM Gerätekennung    BlockAnfang  BlockEnde  Klasse
-
+#Gerätekennung       BlockAnfang  BlockEnde  Klasse
 "5573"____________;  1;           9;         1
 "5573"____________;  10;          18;        1
 "5573"____________;  22;          23;        1
