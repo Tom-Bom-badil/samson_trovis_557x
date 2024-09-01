@@ -34,4 +34,4 @@ modbus:
     switches: !include_dir_merge_list trovis557x/switches/
 ```
 
-Ziel ist aber definitiv eine Zusammenfassung, so dass am Ende nur 9 Dateien im Hauptverzeichnis statt wie jetzt 3x9 Dateien in 3 Unterverzeichnissen übrig sind. Falls jemand einen Tip hat, wie man das bewerkstelligen kann und was dafür wie in der configuration.yaml einzustellen ist - vielen Dank im Voraus! :)
+Ziel ist aber definitiv eine Zusammenfassung, so dass am Ende nur 9 Dateien im Hauptverzeichnis statt wie jetzt 3x9 Dateien in 3 Unterverzeichnissen übrig sind. Falls jemand einen Tip hat, wie man das bewerkstelligen kann und wie die configuration.yaml dafür auszusehen hat - vielen Dank im Voraus! :)
