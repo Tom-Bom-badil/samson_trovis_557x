@@ -1,7 +1,5 @@
-Achtung! 40000er Register! Je nach verwendeten Tools ggf. vom Wert 40.001 abziehen (Start mit Register Nr. 0 statt 40.001)!
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
+#Achtung - 40.000er Register! Je nach verwendeten Tools ggf. vom Wert 40.001 abziehen (Start mit Register Nr. 0 statt 40.001)!
+#HRNr   Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
 40001;  "5573"____________;  "ALG-ID"_;      "Erzeugnisnummer"_;  "Erzeugnisnummer, Gerätekennung"____________________;  1;   5000,000;            6000,000;            5000,000;            6000,000;             0;   " "_______________;  10
 40002;  "5573"____________;  "ALG-ID"_;      "Anlage"__________;  "Anlagenkennziffer"_________________________________;  1;   10,000;              500,000;             1,000;               50,000;               1;   " "_______________;  10
 40003;  "5573"____________;  "ALG-ID"_;      "Firmware-Version";  "Firmwareversion"___________________________________;  1;   0,000;               1000,000;            0,000;               10,000;               2;   " "_______________;  10
@@ -27,9 +25,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 40101;  "5573"____________;  "ALG-DAT";      "Datum"___________;  "Datum"_____________________________________________;  0;   101,000;             3112,000;            1,010;               31,120;               2;   " "_______________;  10
 40102;  "5573"____________;  "ALG-DAT";      "Jahr"____________;  "Jahr"______________________________________________;  0;   2000,000;            2098,000;            2000,000;            2098,000;             0;   " "_______________;  10
 40103;  "5573"____________;  "ALG-BTR";      "Schalterposition";  "0=PA, 2=Hand, 4=Info, 5=Betriebsart"_______________;  1;   0,000;               10,000;              0,000;               10,000;               0;   " "_______________;  10
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 40106;  "5573"____________;  "ALG-BTR";      "BetriebsArt_Rk1"_;  "2=Stdby, 4=Sonne, 5=Mond (CL89)"___________________;  0;   2,000;               5,000;               2,000;               5,000;                0;   " "_______________;  10
 40107;  "5573"____________;  "ALG-BTR";      "Stellsignal_Rk1"_;  "Stellsignal Rk1 [0...100%] (CL90)"_________________;  0;   0,000;               100,000;             0,000;               100,000;              0;   "%"_______________;  10
 40108;  "5573"____________;  "ALG-BTR";      "BetriebsArt_Rk2"_;  "2=Stdby, 4=Sonne, 5=Mond (CL91)"___________________;  0;   2,000;               5,000;               2,000;               5,000;                0;   " "_______________;  10
@@ -62,9 +57,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 40149;  "5573"____________;  "ALG-MOD";      "Timeout_Modem"___;  "Modem-Timeout"_____________________________________;  0;   1,000;               255,000;             1,000;               255,000;              0;   "min"_____________;  10
 40150;  "5573"____________;  "ALG-ERO";      "FehlerstatusReg"_;  "Fehlerstatusregister (CL1)"________________________;  1;   0,000;               65535,000;           0,000;               65535,000;            0;   " "_______________;  42
 40152;  "5573"____________;  "ALG-ERO";      "FehlerstatArchiv";  "Fehlerstatusarchiv"________________________________;  0;   0,000;               65535,000;           0,000;               65535,000;            0;   " "_______________;  10
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 40154;  "5573"____________;  "ALG-ERO";      "FehlerzählerReg"_;  "Fehlerzählerregister"______________________________;  0;   0,000;               65535,000;           0,000;               65535,000;            0;   " "_______________;  10
 40155;  "5573"____________;  "ALG-ERO";      "FehlerStöranwahl";  "Störanwahl und Displayanzeige Error (Bits des FSR)";  0;   0,000;               65535,000;           0,000;               65535,000;            0;   " "_______________;  10
 40160;  "5573"____________;  "ALG-VOL";      "Max_m3-h_WMZ#2"__;  "Maximalgrenzwert ([m3/h], CO6->Fb13) WMZ#2"________;  0;   1,000;               65000,000;           0,010;               650,000;              2;   "m3/h"____________;  10
@@ -103,10 +95,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 41010;  "5573"____________;  "KNL-RL"_;      "Niv_RücklKL_Rk1"_;  "Niveau Rücklaufkennlinie Rk1 (KL nach Steigung)"___;  0;   -300,000;            300,000;             -30,000;             30,000;               1;   "K"_______________;  10
 41011;  "5573"____________;  "SOL-RL"_;      "MaxRückl_Rk1"____;  "Maximale Rücklauftemperatur Rk1"___________________;  0;   50,000;              900,000;             5,000;               90,000;               1;   "°C"______________;  10
 41012;  "5573"____________;  "SOL-RL"_;      "FußRückl_Rk1"____;  "Fußpunkt Rücklauftemperatur Rk1"___________________;  0;   50,000;              900,000;             5,000;               90,000;               1;   "°C"______________;  10
-
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 41013;  "5573"____________;  "KNL-AT"_;      "AT1_HeizKL_Rk1"__;  "Außentemperatur 1.Punkt Rk1 (KL nach 4 Punkten)"___;  0;   -400,000;            500,000;             -40,000;             50,000;               1;   "°C"______________;  10
 41014;  "5573"____________;  "KNL-AT"_;      "AT2_HeizKL_Rk1"__;  "Außentemperatur 2.Punkt Rk1 (KL nach 4 Punkten)"___;  0;   -400,000;            500,000;             -40,000;             50,000;               1;   "°C"______________;  10
 41015;  "5573"____________;  "KNL-AT"_;      "AT3_HeizKL_Rk1"__;  "Außentemperatur 3.Punkt Rk1 (KL nach 4 Punkten)"___;  0;   -400,000;            500,000;             -40,000;             50,000;               1;   "°C"______________;  10
@@ -153,9 +141,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 41090;  "5573"____________;  "ALG-HR"_;      "AktuelMittelw_Y1";  "Aktueller Mittelwert, Y1 bei aktiver Regelung"_____;  0;   0,000;               65535,000;           0,000;               65535,000;            0;   " "_______________;  10
 41091;  "5573"____________;  "ALG-HR"_;      "LMonatMittelw_Y1";  "Mittelwert letzter Monat, Y1 bei aktiver Regelung"_;  0;   0,000;               65535,000;           0,000;               65535,000;            0;   " "_______________;  10
 41092;  "5573"____________;  "ALG-HR"_;      "VMonatMittelw_Y1";  "Mittelwert vorletzter Monat, Y1 bei aktiv. Regel."_;  0;   0,000;               65535,000;           0,000;               65535,000;            0;   " "_______________;  10
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 41200;  "5573"____________;  "SOL-VL"_;      "VorlSollw_Rk2"___;  "Vorlaufsollwert Rk2 (CL118)"_______________________;  0;   50,000;              1300,000;            5,000;               130,000;              1;   "°C"______________;  10
 41201;  "5573"____________;  "SOL-VL"_;      "MaxVorl_Rk2"_____;  "Maximale Vorlauftemperatur Rk2"____________________;  0;   50,000;              1300,000;            5,000;               130,000;              1;   "°C"______________;  10
 41202;  "5573"____________;  "SOL-VL"_;      "MinVorl_Rk2"_____;  "Minimale Vorlauftemperatur Rk2"____________________;  0;   50,000;              1300,000;            5,000;               130,000;              1;   "°C"______________;  10
@@ -197,9 +182,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 41260;  "5573"____________;  "RPA-SON";      "MaxTemp_Rk2"_____;  "CO2, Fb05: Maximaltemperatur Rk2"__________________;  0;   250,000;             600,000;             25,000;              60,000;               1;   "°C"______________;  10
 41261;  "5573"____________;  "RPA-SON";      "HalteMaxTemp_Rk2";  "CO2, Fb05: Haltezeit Maximaltemperatur Rk2"________;  0;   1,000;               10,000;              1,000;               10,000;               0;   "Tage"____________;  10
 41262;  "5573"____________;  "RPA-SON";      "TempAbsenkng_Rk2";  "CO2, Fb05: Temperaturabsenkung Rk2"________________;  0;   0,000;               100,000;             0,000;               10,000;               1;   "°C/h"____________;  10
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 41263;  "5573"____________;  "RPA-SON";      "RegdiffVorl_Rk2"_;  "Regeldifferenz Vorlauf Rk2"________________________;  1;   -1000,000;           1000,000;            -100,000;            100,000;              1;   "°C"______________;  10
 41264;  "5573"____________;  "RPA-SON";      "Beg_Regdiff_Rk2"_;  "Maximale Regelabweichung Rk2 (CO2, Fb13)"__________;  0;   20,000;              100,000;             2,000;               10,000;               1;   "K"_______________;  10
 41265;  "5573"____________;  "RPA-KP"_;      "Kp_Rk2___"_______;  "Proportionalverstärkung Rk2"_______________________;  0;   1,000;               500,000;             0,100;               50,000;               1;   " "_______________;  10
@@ -223,9 +205,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 41811;  "5573"____________;  "SOL-SON";      "Solar_UP_AUS"____;  "Solarkreispumpe AUS"_______________________________;  0;   10,000;              400,000;             1,000;               40,000;               1;   "°C"______________;  10
 41812;  "5573"____________;  "SOL-SON";      "Solar_max_Speich";  "Maximale Speichertemperatur"_______________________;  0;   200,000;             900,000;             20,000;              90,000;               1;   "°C"______________;  10
 41813;  "5573"____________;  "SOL-SON";      "Solarbetr_h"_____;  "Solarkreisbetriebsstunden (Reset durch „0“)"_______;  0;   0,000;               65535,000;           0,000;               65535,000;            0;   "h"_______________;  10
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 41828;  "5573"____________;  "SOL-RL"_;      "RücklSollw_TW"___;  "Maximale Rücklauftemperatur TW"____________________;  0;   50,000;              900,000;             5,000;               90,000;               1;   "°C"______________;  10
 41829;  "5573"____________;  "SOL-RL"_;      "Beg_Rückl_TW"____;  "Begrenzungsfaktor Rücklauf TW (CO4, Fb03)"_________;  0;   1,000;               100,000;             0,100;               10,000;               1;   " "_______________;  10
 41830;  "5573"____________;  "SOL-WW"_;      "ThermDes_Sollw"__;  "Desinfektionstemperatur"___________________________;  0;   600,000;             900,000;             60,000;              90,000;               1;   "°C"______________;  10
@@ -248,9 +227,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 41869;  "5573"____________;  "RPA-2P"_;      "Schaltdiff_TW_2P";  "Schaltdifferenz TW-Kreis (bei 2-Punkt)"____________;  0;   10,000;              300,000;             1,000;               30,000;               1;   "K"_______________;  10
 41870;  "5573"____________;  "RPA-2P"_;      "MinEin_TW"_______;  "Minimale Einschaltzeit TW-Kreis (bei 2-Punkt)"_____;  0;   0,000;               10,000;              0,000;               10,000;               0;   "min"_____________;  10
 41871;  "5573"____________;  "RPA-2P"_;      "MinAus_TW"_______;  "Minimale Ausschaltzeit TW-Kreis (bei 2-Punkt)"_____;  0;   0,000;               10,000;              0,000;               10,000;               0;   "min"_____________;  10
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 46470;  "5573"____________;  "WMZ-SON";      "#1WMZ_Adresse"___;  "Zählerbusadresse WMZ1"_____________________________;  0;   0,000;               255,000;             0,000;               255,000;              0;   " "_______________;  10
 46471;  "5573"____________;  "WMZ-SON";      "#1WMZ_Typ"_______;  "Typenschlüssel (2=1434, 3=CAL3, 4=APAtO, 5=SLS)"___;  0;   0,000;               5,000;               0,000;               5,000;                0;   " "_______________;  10
 46472;  "5573"____________;  "WMZ-SON";      "#1WMZ_Ausl"______;  "Auslesemodus 0=24h, 1=Cont, 2=Coil(CL16), 129=TarE";  0;   0,000;               3,000;               0,000;               3,000;                0;   " "_______________;  10
@@ -288,9 +264,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 46505;  "5573"____________;  "WMZ-SON";      "#1tBtre0"________;  "WMZ1 Betriebszeit x 10^0"__________________________;  1;   0,000;               65535,000;           0,000;               65535,000;            0;   " "_______________;  10
 46506;  "5573"____________;  "WMZ-Q"__;      "#1Qe4"___________;  "WMZ1 Durchfluß (10^4)"_____________________________;  1;   0,000;               9999,000;            0,000;               99990000,000;         0;   " "_______________;  74
 46507;  "5573"____________;  "WMZ-Q"__;      "#1Qe0"___________;  "WMZ1 Durchfluß (10^0)"_____________________________;  1;   0,000;               9999,000;            0,000;               9999,000;             0;   " "_______________;  74
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 46508;  "5573"____________;  "WMZ-Q"__;      "#1Qe-3"__________;  "WMZ1 Durchfluß (10^-3)"____________________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  74
 46509;  "5573"____________;  "WMZ-Q"__;      "#1QEinh"_________;  "WMZ1 Einheit Durchfluß, 0=m³/h, 1=l/h"_____________;  1;   0.000;               1.000;               0.000;               1.000;                0;   " "_______________;  10
 46510;  "5573"____________;  "WMZ-V"__;      "#1Ve4"___________;  "WMZ1 Volumen (10^4)"_______________________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  74
@@ -323,9 +296,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 46540;  "5573"____________;  "WMZ-W"__;      "#1WSTag1e-3"_____;  "WMZ1 Arbeit Stichtag1 (10^-3)"_____________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 46541;  "5573"____________;  "WMZ-W"__;      "#1WSTag1Einh"____;  "WMZ1 Einheit Arbeit Stichtag 1,0=MWh,1=kWh,2=GJ"___;  1;   0.000;               2.000;               0.000;               2.000;                0;   " "_______________;  2
 46542;  "5573"____________;  "WMZ-SON";      "#1STag1Jahr"_____;  "WMZ1 Jahr Stichtag 1"______________________________;  1;   1990.000;            2099.000;            1990.000;            2099.000;             0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 46543;  "5573"____________;  "WMZ-SON";      "#1STag1Datum"____;  "WMZ1 Datum Stichtag 1"_____________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  2
 46544;  "5573"____________;  "WMZ-V"__;      "#1VSTag1e4"______;  "WMZ1 Volumen Stichtag1 (10^4)"_____________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
 46545;  "5573"____________;  "WMZ-V"__;      "#1VSTag1e0"______;  "WMZ1 Volumen Stichtag1 (10^0)"_____________________;  1;   0.000;               9999.000;            0.000;               9999.000;             0;   " "_______________;  2
@@ -361,9 +331,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 46575;  "5573"____________;  "WMZ-W"__;      "#1WTa1e0"________;  "WMZ1 Arbeit Tarif1 (10^0)"_________________________;  1;   0.000;               9999.000;            0.000;               9999.000;             0;   " "_______________;  2
 46576;  "5573"____________;  "WMZ-W"__;      "#1WTa1e-3"_______;  "WMZ1 Arbeit Tarif1 (10^-3)"________________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 46577;  "5573"____________;  "WMZ-W"__;      "#1WTa1Einh"______;  "WMZ1 Einheit Arbeit Tarif1,0=MWh,1=kWh,2=GJ"_______;  1;   0.000;               2.000;               0.000;               2.000;                0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 46578;  "5573"____________;  "WMZ-V"__;      "#1VTa1e4"________;  "WMZ1 Volumen Tarif1 (10^4)"________________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
 46579;  "5573"____________;  "WMZ-V"__;      "#1VTa1e0"________;  "WMZ1 Volumen Tarif1 (10^0)"________________________;  1;   0.000;               9999.000;            0.000;               9999.000;             0;   " "_______________;  2
 46580;  "5573"____________;  "WMZ-V"__;      "#1VTa1e-3"_______;  "WMZ1 Volumen Tarif1 (10^-3)"_______________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
@@ -399,9 +366,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 46610;  "5573"____________;  "WMZ-P"__;      "#1PDev1Nr1e-3"___;  "WMZ1 Pmax für Dev1StorNr1 (10^-3)"_________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 46611;  "5573"____________;  "WMZ-P"__;      "#1PDev1Nr1Einh"__;  "WMZ1 Einheit PmaxDev1StorNr1, 0=kW, 1=MW"__________;  1;   0.000;               1.000;               0.000;               1.000;                0;   " "_______________;  2
 46612;  "5573"____________;  "WMZ-SON";      "#1Dev1Nr1Jahr"___;  "WMZ1 Jahr für Dev1maxStorNr1"______________________;  1;   1990.000;            2099.000;            1990.000;            2099.000;             0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 46613;  "5573"____________;  "WMZ-SON";      "#1Dev1Nr1Datum"__;  "WMZ1 Datum für Dev1maxStorNr1"_____________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  2
 46614;  "5573"____________;  "WMZ-SON";      "#1Dev1Nr1Zeit"___;  "WMZ1 Uhrzeit für Dev1maxStorNr1"___________________;  1;   0.000;               2359.000;            0.000;               23.590;               2;   "Uhr"_____________;  2
 46615;  "5573"____________;  "WMZ-P"__;      "#1Pmaxe4"________;  "WMZ1 Leistung max (10^4)"__________________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
@@ -446,9 +410,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 46656;  "5573"____________;  "WMZ-W"__;      "#1WSTag3Einh"____;  "WMZ1 Einheit Arbeit Stichtag 3, 0=MWh,1=kWh,2=GJ"__;  1;   0.000;               32.000;              0.000;               32.000;               0;   " "_______________;  2
 46657;  "5573"____________;  "WMZ-SON";      "#1STag3Jahr"_____;  "WMZ1 Jahr Stichtag3"_______________________________;  1;   1990.000;            2099.000;            1990.000;            2099.000;             0;   " "_______________;  2
 46658;  "5573"____________;  "WMZ-SON";      "#1STag3Datum"____;  "WMZ1 Datum Stichtag3"______________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 46750;  "5573"____________;  "WMZ-ERO";      "EZ1_SysWMZFLAG"__;  "EZ1 Betriebszustand"_______________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  74
 46751;  "5573"____________;  "WMZ-ERO";      "EZ1_SysFSR"______;  "EZ1 Fehlerstatus-Register"_________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  74
 46752;  "5573"____________;  "WMZ-SON";      "EZ1_VDatum"______;  "EZ1 Lesedatum Energie"_____________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  10
@@ -599,9 +560,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 46906;  "5573"____________;  "WMZ-W"__;      "EZ1_WSTag3Einh"__;  "EZ1 Einheit Arbeit Stichtag 3, 0=MWh,1=kWh,30=GWh"_;  1;   0.000;               32.000;              0.000;               32.000;               0;   " "_______________;  2
 46907;  "5573"____________;  "WMZ-SON";      "EZ1_STag3Jahr"___;  "EZ1 Jahr Stichtag 3"_______________________________;  1;   1990.000;            2099.000;            1990.000;            2099.000;             0;   " "_______________;  2
 46908;  "5573"____________;  "WMZ-SON";      "EZ1_STag3Datum"__;  "EZ1 Datum Stichtag 3"______________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 47000;  "5573"____________;  "WMZ-ERO";      "#2SysWMZFLAG"____;  "WMZ2 Betriebszustand"______________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  138
 47001;  "5573"____________;  "WMZ-ERO";      "#2SysFSR"________;  "WMZ2 Fehlerstatus-Register"________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  138
 47002;  "5573"____________;  "WMZ-SON";      "#2VDatum"________;  "WMZ2 Lesedatum Volumen"____________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  10
@@ -635,9 +593,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 47030;  "5573"____________;  "WMZ-SON";      "#2SysANSWER-OK"__;  "WMZ2 Testregister für den internen Gebrauch"_______;  0;   0.000;               65535.000;           0.000;               65535.000;            0;   " "_______________;  2
 47031;  "5573"____________;  "WMZ-SON";      "#2SysAnsFail"____;  "WMZ2 Testregister für den internen Gebrauch"_______;  0;   0.000;               65535.000;           0.000;               65535.000;            0;   " "_______________;  2
 47032;  "5573"____________;  "WMZ-SON";      "#2SysZeroBack"___;  "WMZ2 Testregister für den internen Gebrauch"_______;  0;   0.000;               65535.000;           0.000;               65535.000;            0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 47036;  "5573"____________;  "WMZ-SON";      "#2STagDatum"_____;  "WMZ2 Lesedatum Stichtag"___________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  2
 47037;  "5573"____________;  "WMZ-SON";      "#2STagZeit"______;  "WMZ2 Leseuhrzeit Stichtag"_________________________;  1;   0.000;               2359.000;            0.000;               23.590;               2;   "Uhr"_____________;  2
 47038;  "5573"____________;  "WMZ-W"__;      "#2WSTag1e4"______;  "WMZ2 Arbeit Stichtag1 (10^4)"______________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
@@ -672,9 +627,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 47067;  "5573"____________;  "WMZ-W"__;      "#2WDev2e0"_______;  "WMZ2 Arbeit Device2 (10^0)"________________________;  1;   0.000;               9999.000;            0.000;               9999.000;             0;   " "_______________;  2
 47068;  "5573"____________;  "WMZ-W"__;      "#2WDev2e-3"______;  "WMZ2 Arbeit Device2 (10^-3)"_______________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 47069;  "5573"____________;  "WMZ-W"__;      "#2WDev2Einh"_____;  "WMZ2 Einheit Arbeit Device2,0=MWh,1=kWh,2=GJ"______;  1;   0.000;               2.000;               0.000;               2.000;                0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 47070;  "5573"____________;  "WMZ-V"__;      "#2VDev2e4"_______;  "WMZ2 Volumen Device2 (10^4)"_______________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
 47071;  "5573"____________;  "WMZ-V"__;      "#2VDev2e0"_______;  "WMZ2 Volumen Device2 (10^0)"_______________________;  1;   0.000;               9999.000;            0.000;               9999.000;             0;   " "_______________;  2
 47072;  "5573"____________;  "WMZ-V"__;      "#2VDev2e-3"______;  "WMZ2 Volumen Device2 (10^-3)"______________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
@@ -710,9 +662,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 47102;  "5573"____________;  "WMZ-Q"__;      "#2QDev1Nr5e0"____;  "WMZ2 Qmax Dev1 Speichernr5 10^0"___________________;  1;   0.000;               9999.000;            0.000;               9999.000;             0;   " "_______________;  2
 47103;  "5573"____________;  "WMZ-Q"__;      "#2QDev1Nr5e-3"___;  "WMZ2 Qmax Dev1 Speichernr5 10^-3"__________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 47104;  "5573"____________;  "WMZ-Q"__;      "#2QDev1Nr5Einh"__;  "WMZ2 Einheit Q_maxDev1Spnr5,0=m³/h,1=l/h"__________;  1;   0.000;               1.000;               0.000;               1.000;                0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 47105;  "5573"____________;  "WMZ-SON";      "#2Dev1Nr5Jahr"___;  "WMZ2 Jahr für Dev1maxStorNr5"______________________;  1;   1990.000;            2099.000;            1990.000;            2099.000;             0;   " "_______________;  2
 47106;  "5573"____________;  "WMZ-SON";      "#2Dev1Nr5Datum"__;  "WMZ2 Datum für Dev1maxStorNr5"_____________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  2
 47107;  "5573"____________;  "WMZ-SON";      "#2Dev1Nr5Zeit"___;  "WMZ2 Uhrzeit für Dev1maxStorNr5"___________________;  1;   0.000;               2359.000;            0.000;               23.590;               2;   "Uhr"_____________;  2
@@ -746,9 +695,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 47137;  "5573"____________;  "WMZ-V"__;      "#2VTa3Einh"______;  "WMZ2 Einheit Volumen Tarif3, 0=m³, 1=l"____________;  1;   0.000;               1.000;               0.000;               1.000;                0;   " "_______________;  2
 47138;  "5573"____________;  "WMZ-P"__;      "#2PTa1Nr24e4"____;  "WMZ2 P Tarif1StorNr24 (10^4)"______________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
 47139;  "5573"____________;  "WMZ-P"__;      "#2PTa1Nr24e0"____;  "WMZ2 P Tarif1StorNr24 (10^0)"______________________;  1;   0.000;               9999.000;            0.000;               9999.000;             0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 47140;  "5573"____________;  "WMZ-P"__;      "#2PTa1Nr24e-3"___;  "WMZ2 P Tarif1StorNr24 (10^-3)"_____________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 47141;  "5573"____________;  "WMZ-P"__;      "#2PTa1Nr24Einh"__;  "WMZ2 Einheit PTarif1StorNr24, 0=kW, 1=MW"__________;  1;   0.000;               1.000;               0.000;               1.000;                0;   " "_______________;  2
 47142;  "5573"____________;  "WMZ-Q"__;      "#2QTa1Nr24e4"____;  "WMZ2 Q Tarif1StorNr24 (10^4)"______________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
@@ -768,9 +714,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 47156;  "5573"____________;  "WMZ-W"__;      "#2WSTag3Einh"____;  "WMZ2 Einheit Arbeit Stichtag 3, 0=MWh,1=kWh,2=GJ"__;  1;   0.000;               32.000;              0.000;               32.000;               0;   " "_______________;  2
 47157;  "5573"____________;  "WMZ-SON";      "#2STag3Jahr"_____;  "WMZ2 Jahr Stichtag3"_______________________________;  1;   1990.000;            2099.000;            1990.000;            2099.000;             0;   " "_______________;  2
 47158;  "5573"____________;  "WMZ-SON";      "#2STag3Datum"____;  "WMZ2 Datum Stichtag3"______________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 47250;  "5573"____________;  "WMZ-ERO";      "EZ2_SysWMZFLAG"__;  "EZ2 Betriebszustand"_______________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  74
 47251;  "5573"____________;  "WMZ-ERO";      "EZ2_SysFSR"______;  "EZ2 Fehlerstatus-Register"_________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  74
 47252;  "5573"____________;  "WMZ-SON";      "EZ2_VDatum"______;  "EZ2 Lesedatum Energie"_____________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  10
@@ -921,9 +864,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 47406;  "5573"____________;  "WMZ-W"__;      "EZ2_WSTag3Einh"__;  "EZ2 Einheit Arbeit Stichtag 3, 0=MWh,1=kWh,30=GWh"_;  1;   0.000;               32.000;              0.000;               32.000;               0;   " "_______________;  2
 47407;  "5573"____________;  "WMZ-SON";      "EZ2_STag3Jahr"___;  "EZ2 Jahr Stichtag 3"_______________________________;  1;   1990.000;            2099.000;            1990.000;            2099.000;             0;   " "_______________;  2
 47408;  "5573"____________;  "WMZ-SON";      "EZ2_STag3Datum"__;  "EZ2 Datum Stichtag 3"______________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 47500;  "5573"____________;  "WMZ-ERO";      "#3SysWMZFLAG"____;  "WMZ3 Betriebszustand"______________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  266
 47501;  "5573"____________;  "WMZ-ERO";      "#3SysFSR"________;  "WMZ3 Fehlerstatus-Register"________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  266
 47502;  "5573"____________;  "WMZ-SON";      "#3VDatum"________;  "WMZ3 Lesedatum Volumen"____________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  10
@@ -950,9 +890,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 47523;  "5573"____________;  "WMZ-VL"_;      "#3VLe0"__________;  "WMZ3 Vorlauftemperatur (10^0)"_____________________;  1;   0.000;               200.000;             0.000;               200.000;              0;   " "_______________;  266
 47524;  "5573"____________;  "WMZ-VL"_;      "#3VLe-3"_________;  "WMZ3 Vorlauftemperatur (10^-3)"____________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  266
 47525;  "5573"____________;  "WMZ-VL"_;      "#3VLEinh"________;  "WMZ3 Einheit Vorlauftemperatur, 0=°C"______________;  1;   0.000;               1.000;               0.000;               1.000;                0;   " "_______________;  10
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 47526;  "5573"____________;  "WMZ-SON";      "#3_WMZ-Firmware"_;  "WMZ3 Firmware-Version Zähler"______________________;  1;   0.000;               65000.000;           0.000;               650.000;              2;   " "_______________;  10
 47527;  "5573"____________;  "WMZ-RL"_;      "#3RLe0"__________;  "WMZ3 Rücklauftemperatur (10^0)"____________________;  1;   0.000;               200.000;             0.000;               200.000;              0;   " "_______________;  266
 47528;  "5573"____________;  "WMZ-RL"_;      "#3RLe-3"_________;  "WMZ3 Rücklauftemperatur (10^-3)"___________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  266
@@ -986,9 +923,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 47559;  "5573"____________;  "WMZ-W"__;      "#3WDev1e0"_______;  "WMZ3 Arbeit Device1 (10^0)"________________________;  1;   0.000;               9999.000;            0.000;               9999.000;             0;   " "_______________;  2
 47560;  "5573"____________;  "WMZ-W"__;      "#3WDev1e-3"______;  "WMZ3 Arbeit Device1 (10^-3)"_______________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 47561;  "5573"____________;  "WMZ-W"__;      "#3WDev1Einh"_____;  "WMZ3 Device1-Arbeit Einheit,0=MWh,1=kWh,2=GJ"______;  1;   0.000;               2.000;               0.000;               2.000;                0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 47562;  "5573"____________;  "WMZ-V"__;      "#3VDev1e4"_______;  "WMZ3 Volumen Device1 (10^4)"_______________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
 47563;  "5573"____________;  "WMZ-V"__;      "#3VDev1e0"_______;  "WMZ3 Volumen Device1 (10^0)"_______________________;  1;   0.000;               9999.000;            0.000;               9999.000;             0;   " "_______________;  2
 47564;  "5573"____________;  "WMZ-V"__;      "#3VDev1e-3"______;  "WMZ3 Volumen Device1 (10^-3)"______________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
@@ -1024,9 +958,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 47594;  "5573"____________;  "WMZ-SON";      "#3Dev1HCAe0"_____;  "WMZ3 Device 1 Zählen ohne Einheit (10^0)"__________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 47595;  "5573"____________;  "WMZ-SON";      "#3Dev2HCAe7"_____;  "WMZ3 Device 2 Zählen ohne Einheit (10^7)"__________;  1;   0.000;               9999.000;            0.000;               99990000000.000;      0;   " "_______________;  2
 47596;  "5573"____________;  "WMZ-SON";      "#3Dev2HCAe4"_____;  "WMZ3 Device 2 Zählen ohne Einheit (10^4)"__________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 47597;  "5573"____________;  "WMZ-SON";      "#3Dev2HCAe0"_____;  "WMZ3 Device 2 Zählen ohne Einheit (10^0)"__________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 47598;  "5573"____________;  "WMZ-SON";      "#3Dev3HCAe7"_____;  "WMZ3 Device 3 Zählen ohne Einheit (10^7)"__________;  1;   0.000;               9999.000;            0.000;               99990000000.000;      0;   " "_______________;  2
 47599;  "5573"____________;  "WMZ-SON";      "#3Dev3HCAe4"_____;  "WMZ3 Device 3 Zählen ohne Einheit (10^4)"__________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
@@ -1060,9 +991,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 47629;  "5573"____________;  "WMZ-RL"_;      "#3RLmaxe-3"______;  "WMZ3 Rücklauftemperatur max (10^-3)"_______________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 47630;  "5573"____________;  "WMZ-RL"_;      "#3RLmaxEinh"_____;  "WMZ3 Einheit Rücklauftemperatur max, 0=°C"_________;  1;   0.000;               1.000;               0.000;               1.000;                0;   " "_______________;  2
 47631;  "5573"____________;  "WMZ-SON";      "#3SysSlaveadr"___;  "WMZ3 echte WMZ-Adresse nach Zählerantwort"_________;  1;   0.000;               255.000;             0.000;               255.000;              0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 47632;  "5573"____________;  "WMZ-SON";      "#3DeltaTe0"______;  "WMZ3 Differenz (Vorlauf-Rücklauf) (10^0)"__________;  1;   0.000;               200.000;             0.000;               200.000;              0;   " "_______________;  2
 47633;  "5573"____________;  "WMZ-SON";      "#3DeltaTe-3"_____;  "WMZ3 Differenz (Vorlauf-Rücklauf) (10^-3)"_________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 47634;  "5573"____________;  "WMZ-V"__;      "#3VTa3e4"________;  "WMZ3 Volumen Tarif3 (10^4)"________________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
@@ -1090,9 +1018,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 47656;  "5573"____________;  "WMZ-W"__;      "#3WSTag3Einh"____;  "WMZ3 Einheit Arbeit Stichtag 3, 0=MWh,1=kWh,2=GJ"__;  1;   0.000;               32.000;              0.000;               32.000;               0;   " "_______________;  2
 47657;  "5573"____________;  "WMZ-SON";      "#3STag3Jahr"_____;  "WMZ3 Jahr Stichtag3"_______________________________;  1;   1990.000;            2099.000;            1990.000;            2099.000;             0;   " "_______________;  2
 47658;  "5573"____________;  "WMZ-SON";      "#3STag3Datum"____;  "WMZ3 Datum Stichtag3"______________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 47750;  "5573"____________;  "WMZ-ERO";      "EZ3_SysWMZFLAG"__;  "EZ3 Betriebszustand"_______________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  74
 47751;  "5573"____________;  "WMZ-ERO";      "EZ3_SysFSR"______;  "EZ3 Fehlerstatus-Register"_________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  74
 47752;  "5573"____________;  "WMZ-SON";      "EZ3_VDatum"______;  "EZ3 Lesedatum Energie"_____________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  10
@@ -1243,9 +1168,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 47906;  "5573"____________;  "WMZ-W"__;      "EZ3_WSTag3Einh"__;  "EZ3 Einheit Arbeit Stichtag 3, 0=MWh,1=kWh,30=GWh"_;  1;   0.000;               32.000;              0.000;               32.000;               0;   " "_______________;  2
 47907;  "5573"____________;  "WMZ-SON";      "EZ3_STag3Jahr"___;  "EZ3 Jahr Stichtag 3"_______________________________;  1;   1990.000;            2099.000;            1990.000;            2099.000;             0;   " "_______________;  2
 47908;  "5573"____________;  "WMZ-SON";      "EZ3_STag3Datum"__;  "EZ3 Datum Stichtag 3"______________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 48000;  "5573"____________;  "WMZ-ERO";      "#4SysWMZFLAG"____;  "WMZ4 Betriebszustand"______________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  1034
 48001;  "5573"____________;  "WMZ-ERO";      "#4SysFSR"________;  "WMZ4 Fehlerstatus-Register"________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  1034
 48002;  "5573"____________;  "WMZ-SON";      "#4VDatum"________;  "WMZ4 Lesedatum Volumen"____________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  10
@@ -1279,9 +1201,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 48030;  "5573"____________;  "WMZ-SON";      "#4SysANSWER-OK"__;  "WMZ4 Testregister für den internen Gebrauch"_______;  0;   0.000;               65535.000;           0.000;               65535.000;            0;   " "_______________;  2
 48031;  "5573"____________;  "WMZ-SON";      "#4SysAnsFail"____;  "WMZ4 Testregister für den internen Gebrauch"_______;  0;   0.000;               65535.000;           0.000;               65535.000;            0;   " "_______________;  2
 48032;  "5573"____________;  "WMZ-SON";      "#4SysZeroBack"___;  "WMZ4 Testregister für den internen Gebrauch"_______;  0;   0.000;               65535.000;           0.000;               65535.000;            0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 48036;  "5573"____________;  "WMZ-SON";      "#4STagDatum"_____;  "WMZ4 Lesedatum Stichtag"___________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  2
 48037;  "5573"____________;  "WMZ-SON";      "#4STagZeit"______;  "WMZ4 Leseuhrzeit Stichtag"_________________________;  1;   0.000;               2359.000;            0.000;               23.590;               2;   "Uhr"_____________;  2
 48038;  "5573"____________;  "WMZ-W"__;      "#4WSTag1e4"______;  "WMZ4 Arbeit Stichtag1 (10^4)"______________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
@@ -1316,9 +1235,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 48067;  "5573"____________;  "WMZ-W"__;      "#4WDev2e0"_______;  "WMZ4 Arbeit Device2 (10^0)"________________________;  1;   0.000;               9999.000;            0.000;               9999.000;             0;   " "_______________;  2
 48068;  "5573"____________;  "WMZ-W"__;      "#4WDev2e-3"______;  "WMZ4 Arbeit Device2 (10^-3)"_______________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 48069;  "5573"____________;  "WMZ-W"__;      "#4WDev2Einh"_____;  "WMZ4 Einheit Arbeit Device2,0=MWh,1=kWh,2=GJ"______;  1;   0.000;               2.000;               0.000;               2.000;                0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 48070;  "5573"____________;  "WMZ-V"__;      "#4VDev2e4"_______;  "WMZ4 Volumen Device2 (10^4)"_______________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
 48071;  "5573"____________;  "WMZ-V"__;      "#4VDev2e0"_______;  "WMZ4 Volumen Device2 (10^0)"_______________________;  1;   0.000;               9999.000;            0.000;               9999.000;             0;   " "_______________;  2
 48072;  "5573"____________;  "WMZ-V"__;      "#4VDev2e-3"______;  "WMZ4 Volumen Device2 (10^-3)"______________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
@@ -1354,9 +1270,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 48102;  "5573"____________;  "WMZ-Q"__;      "#4QDev1Nr5e0"____;  "WMZ4 Qmax Dev1 Speichernr5 10^0"___________________;  1;   0.000;               9999.000;            0.000;               9999.000;             0;   " "_______________;  2
 48103;  "5573"____________;  "WMZ-Q"__;      "#4QDev1Nr5e-3"___;  "WMZ4 Qmax Dev1 Speichernr5 10^-3"__________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 48104;  "5573"____________;  "WMZ-Q"__;      "#4QDev1Nr5Einh"__;  "WMZ4 Einheit Q_maxDev1Spnr5,0=m³/h,1=l/h"__________;  1;   0.000;               1.000;               0.000;               1.000;                0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 48105;  "5573"____________;  "WMZ-SON";      "#4Dev1Nr5Jahr"___;  "WMZ4 Jahr für Dev1maxStorNr5"______________________;  1;   1990.000;            2099.000;            1990.000;            2099.000;             0;   " "_______________;  2
 48106;  "5573"____________;  "WMZ-SON";      "#4Dev1Nr5Datum"__;  "WMZ4 Datum für Dev1maxStorNr5"_____________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  2
 48107;  "5573"____________;  "WMZ-SON";      "#4Dev1Nr5Zeit"___;  "WMZ4 Uhrzeit für Dev1maxStorNr5"___________________;  1;   0.000;               2359.000;            0.000;               23.590;               2;   "Uhr"_____________;  2
@@ -1390,9 +1303,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 48137;  "5573"____________;  "WMZ-V"__;      "#4VTa3Einh"______;  "WMZ4 Einheit Volumen Tarif3, 0=m³, 1=l"____________;  1;   0.000;               1.000;               0.000;               1.000;                0;   " "_______________;  2
 48138;  "5573"____________;  "WMZ-P"__;      "#4PTa1Nr24e4"____;  "WMZ4 P Tarif1StorNr24 (10^4)"______________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
 48139;  "5573"____________;  "WMZ-P"__;      "#4PTa1Nr24e0"____;  "WMZ4 P Tarif1StorNr24 (10^0)"______________________;  1;   0.000;               9999.000;            0.000;               9999.000;             0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 48140;  "5573"____________;  "WMZ-P"__;      "#4PTa1Nr24e-3"___;  "WMZ4 P Tarif1StorNr24 (10^-3)"_____________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 48141;  "5573"____________;  "WMZ-P"__;      "#4PTa1Nr24Einh"__;  "WMZ4 Einheit PTarif1StorNr24, 0=kW, 1=MW"__________;  1;   0.000;               1.000;               0.000;               1.000;                0;   " "_______________;  2
 48142;  "5573"____________;  "WMZ-Q"__;      "#4QTa1Nr24e4"____;  "WMZ4 Q Tarif1StorNr24 (10^4)"______________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
@@ -1412,9 +1322,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 48156;  "5573"____________;  "WMZ-W"__;      "#4WSTag3Einh"____;  "WMZ4 Einheit Arbeit Stichtag 3, 0=MWh,1=kWh,2=GJ"__;  1;   0.000;               32.000;              0.000;               32.000;               0;   " "_______________;  2
 48157;  "5573"____________;  "WMZ-SON";      "#4STag3Jahr"_____;  "WMZ4 Jahr Stichtag3"_______________________________;  1;   1990.000;            2099.000;            1990.000;            2099.000;             0;   " "_______________;  2
 48158;  "5573"____________;  "WMZ-SON";      "#4STag3Datum"____;  "WMZ4 Datum Stichtag3"______________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 48250;  "5573"____________;  "WMZ-ERO";      "EZ4_SysWMZFLAG"__;  "EZ4 Betriebszustand"_______________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  74
 48251;  "5573"____________;  "WMZ-ERO";      "EZ4_SysFSR"______;  "EZ4 Fehlerstatus-Register"_________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  74
 48252;  "5573"____________;  "WMZ-SON";      "EZ4_VDatum"______;  "EZ4 Lesedatum Energie"_____________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  10
@@ -1565,9 +1472,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 48406;  "5573"____________;  "WMZ-W"__;      "EZ4_WSTag3Einh"__;  "EZ4 Einheit Arbeit Stichtag 3, 0=MWh,1=kWh,2=GJ"___;  1;   0.000;               32.000;              0.000;               32.000;               0;   " "_______________;  2
 48407;  "5573"____________;  "WMZ-SON";      "EZ4_STag3Jahr"___;  "EZ4 Jahr Stichtag 3"_______________________________;  1;   1990.000;            2099.000;            1990.000;            2099.000;             0;   " "_______________;  2
 48408;  "5573"____________;  "WMZ-SON";      "EZ4_STag3Datum"__;  "EZ4 Datum Stichtag 3"______________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 48500;  "5573"____________;  "WMZ-ERO";      "#5SysWMZFLAG"____;  "WMZ5 Betriebszustand"______________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  2058
 48501;  "5573"____________;  "WMZ-ERO";      "#5SysFSR"________;  "WMZ5 Fehlerstatus-Register"________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  2058
 48502;  "5573"____________;  "WMZ-SON";      "#5VDatum"________;  "WMZ5 Lesedatum Volumen"____________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  10
@@ -1594,9 +1498,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 48523;  "5573"____________;  "WMZ-VL"_;      "#5VLe0"__________;  "WMZ5 Vorlauftemperatur (10^0)"_____________________;  1;   0.000;               200.000;             0.000;               200.000;              0;   " "_______________;  2058
 48524;  "5573"____________;  "WMZ-VL"_;      "#5VLe-3"_________;  "WMZ5 Vorlauftemperatur (10^-3)"____________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2058
 48525;  "5573"____________;  "WMZ-VL"_;      "#5VLEinh"________;  "WMZ5 Einheit Vorlauftemperatur, 0=°C"______________;  1;   0.000;               1.000;               0.000;               1.000;                0;   " "_______________;  10
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 48526;  "5573"____________;  "WMZ-SON";      "#5_WMZ-Firmware"_;  "WMZ5 Firmware-Version Zähler"______________________;  1;   0.000;               65000.000;           0.000;               650.000;              2;   " "_______________;  10
 48527;  "5573"____________;  "WMZ-RL"_;      "#5RLe0"__________;  "WMZ5 Rücklauftemperatur (10^0)"____________________;  1;   0.000;               200.000;             0.000;               200.000;              0;   " "_______________;  2058
 48528;  "5573"____________;  "WMZ-RL"_;      "#5RLe-3"_________;  "WMZ5 Rücklauftemperatur (10^-3)"___________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2058
@@ -1630,9 +1531,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 48559;  "5573"____________;  "WMZ-W"__;      "#5WDev1e0"_______;  "WMZ5 Arbeit Device1 (10^0)"________________________;  1;   0.000;               9999.000;            0.000;               9999.000;             0;   " "_______________;  2
 48560;  "5573"____________;  "WMZ-W"__;      "#5WDev1e-3"______;  "WMZ5 Arbeit Device1 (10^-3)"_______________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 48561;  "5573"____________;  "WMZ-W"__;      "#5WDev1Einh"_____;  "WMZ5 Device1-Arbeit Einheit,0=MWh,1=kWh,2=GJ"______;  1;   0.000;               2.000;               0.000;               2.000;                0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 48562;  "5573"____________;  "WMZ-V"__;      "#5VDev1e4"_______;  "WMZ5 Volumen Device1 (10^4)"_______________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
 48563;  "5573"____________;  "WMZ-V"__;      "#5VDev1e0"_______;  "WMZ5 Volumen Device1 (10^0)"_______________________;  1;   0.000;               9999.000;            0.000;               9999.000;             0;   " "_______________;  2
 48564;  "5573"____________;  "WMZ-V"__;      "#5VDev1e-3"______;  "WMZ5 Volumen Device1 (10^-3)"______________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
@@ -1668,9 +1566,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 48594;  "5573"____________;  "WMZ-SON";      "#5Dev1HCAe0"_____;  "WMZ5 Device 1 Zählen ohne Einheit (10^0)"__________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 48595;  "5573"____________;  "WMZ-SON";      "#5Dev2HCAe7"_____;  "WMZ5 Device 2 Zählen ohne Einheit (10^7)"__________;  1;   0.000;               9999.000;            0.000;               99990000000.000;      0;   " "_______________;  2
 48596;  "5573"____________;  "WMZ-SON";      "#5Dev2HCAe4"_____;  "WMZ5 Device 2 Zählen ohne Einheit (10^4)"__________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 48597;  "5573"____________;  "WMZ-SON";      "#5Dev2HCAe0"_____;  "WMZ5 Device 2 Zählen ohne Einheit (10^0)"__________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 48598;  "5573"____________;  "WMZ-SON";      "#5Dev3HCAe7"_____;  "WMZ5 Device 3 Zählen ohne Einheit (10^7)"__________;  1;   0.000;               9999.000;            0.000;               99990000000.000;      0;   " "_______________;  2
 48599;  "5573"____________;  "WMZ-SON";      "#5Dev3HCAe4"_____;  "WMZ5 Device 3 Zählen ohne Einheit (10^4)"__________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
@@ -1704,9 +1599,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 48629;  "5573"____________;  "WMZ-RL"_;      "#5RLmaxe-3"______;  "WMZ5 Rücklauftemperatur max (10^-3)"_______________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 48630;  "5573"____________;  "WMZ-RL"_;      "#5RLmaxEinh"_____;  "WMZ5 Einheit Rücklauftemperatur max, 0=°C"_________;  1;   0.000;               1.000;               0.000;               1.000;                0;   " "_______________;  2
 48631;  "5573"____________;  "WMZ-SON";      "#5SysSlaveadr"___;  "WMZ5 echte WMZ-Adresse nach Zählerantwort"_________;  1;   0.000;               255.000;             0.000;               255.000;              0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 48632;  "5573"____________;  "WMZ-SON";      "#5DeltaTe0"______;  "WMZ5 Differenz (Vorlauf-Rücklauf) (10^0)"__________;  1;   0.000;               200.000;             0.000;               200.000;              0;   " "_______________;  2
 48633;  "5573"____________;  "WMZ-SON";      "#5DeltaTe-3"_____;  "WMZ5 Differenz (Vorlauf-Rücklauf) (10^-3)"_________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 48634;  "5573"____________;  "WMZ-V"__;      "#5VTa3e4"________;  "WMZ5 Volumen Tarif3 (10^4)"________________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
@@ -1734,9 +1626,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 48656;  "5573"____________;  "WMZ-W"__;      "#5WSTag3Einh"____;  "WMZ5 Einheit Arbeit Stichtag 3, 0=MWh,1=kWh,2=GJ"__;  1;   0.000;               32.000;              0.000;               32.000;               0;   " "_______________;  2
 48657;  "5573"____________;  "WMZ-SON";      "#5STag3Jahr"_____;  "WMZ5 Jahr Stichtag3"_______________________________;  1;   1990.000;            2099.000;            1990.000;            2099.000;             0;   " "_______________;  2
 48658;  "5573"____________;  "WMZ-SON";      "#5STag3Datum"____;  "WMZ5 Datum Stichtag3"______________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 48750;  "5573"____________;  "WMZ-ERO";      "EZ5_SysWMZFLAG"__;  "EZ5 Betriebszustand"_______________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  74
 48751;  "5573"____________;  "WMZ-ERO";      "EZ5_SysFSR"______;  "EZ5 Fehlerstatus-Register"_________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  74
 48752;  "5573"____________;  "WMZ-SON";      "EZ5_VDatum"______;  "EZ5 Lesedatum Energie"_____________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  10
@@ -1887,9 +1776,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 48906;  "5573"____________;  "WMZ-W"__;      "EZ5_WSTag3Einh"__;  "EZ5 Einheit Arbeit Stichtag 3, 0=MWh,1=kWh,30=GWh"_;  1;   0.000;               32.000;              0.000;               32.000;               0;   " "_______________;  2
 48907;  "5573"____________;  "WMZ-SON";      "EZ5_STag3Jahr"___;  "EZ5 Jahr Stichtag 3"_______________________________;  1;   1990.000;            2099.000;            1990.000;            2099.000;             0;   " "_______________;  2
 48908;  "5573"____________;  "WMZ-SON";      "EZ5_STag3Datum"__;  "EZ5 Datum Stichtag 3"______________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 49000;  "5573"____________;  "WMZ-ERO";      "#6SysWMZFLAG"____;  "WMZ6 Betriebszustand"______________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  5006
 49001;  "5573"____________;  "WMZ-ERO";      "#6SysFSR"________;  "WMZ6 Fehlerstatus-Register"________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  5006
 49002;  "5573"____________;  "WMZ-SON";      "#6VDatum"________;  "WMZ6 Lesedatum Volumen"____________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  10
@@ -1923,9 +1809,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 49030;  "5573"____________;  "WMZ-SON";      "#6SysANSWER-OK"__;  "WMZ6 Testregister für den internen Gebrauch"_______;  0;   0.000;               65535.000;           0.000;               65535.000;            0;   " "_______________;  2
 49031;  "5573"____________;  "WMZ-SON";      "#6SysAnsFail"____;  "WMZ6 Testregister für den internen Gebrauch"_______;  0;   0.000;               65535.000;           0.000;               65535.000;            0;   " "_______________;  2
 49032;  "5573"____________;  "WMZ-SON";      "#6SysZeroBack"___;  "WMZ6 Testregister für den internen Gebrauch"_______;  0;   0.000;               65535.000;           0.000;               65535.000;            0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 49036;  "5573"____________;  "WMZ-SON";      "#6STagDatum"_____;  "WMZ6 Lesedatum Stichtag"___________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  2
 49037;  "5573"____________;  "WMZ-SON";      "#6STagZeit"______;  "WMZ6 Leseuhrzeit Stichtag"_________________________;  1;   0.000;               2359.000;            0.000;               23.590;               2;   "Uhr"_____________;  2
 49038;  "5573"____________;  "WMZ-W"__;      "#6WSTag1e4"______;  "WMZ6 Arbeit Stichtag1 (10^4)"______________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
@@ -1960,9 +1843,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 49067;  "5573"____________;  "WMZ-W"__;      "#6WDev2e0"_______;  "WMZ6 Arbeit Device2 (10^0)"________________________;  1;   0.000;               9999.000;            0.000;               9999.000;             0;   " "_______________;  2
 49068;  "5573"____________;  "WMZ-W"__;      "#6WDev2e-3"______;  "WMZ6 Arbeit Device2 (10^-3)"_______________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 49069;  "5573"____________;  "WMZ-W"__;      "#6WDev2Einh"_____;  "WMZ6 Einheit Arbeit Device2,0=MWh,1=kWh,2=GJ"______;  1;   0.000;               2.000;               0.000;               2.000;                0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 49070;  "5573"____________;  "WMZ-V"__;      "#6VDev2e4"_______;  "WMZ6 Volumen Device2 (10^4)"_______________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
 49071;  "5573"____________;  "WMZ-V"__;      "#6VDev2e0"_______;  "WMZ6 Volumen Device2 (10^0)"_______________________;  1;   0.000;               9999.000;            0.000;               9999.000;             0;   " "_______________;  2
 49072;  "5573"____________;  "WMZ-V"__;      "#6VDev2e-3"______;  "WMZ6 Volumen Device2 (10^-3)"______________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
@@ -1998,9 +1878,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 49102;  "5573"____________;  "WMZ-Q"__;      "#6QDev1Nr5e0"____;  "WMZ6 Qmax Dev1 Speichernr5 10^0"___________________;  1;   0.000;               9999.000;            0.000;               9999.000;             0;   " "_______________;  2
 49103;  "5573"____________;  "WMZ-Q"__;      "#6QDev1Nr5e-3"___;  "WMZ6 Qmax Dev1 Speichernr5 10^-3"__________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 49104;  "5573"____________;  "WMZ-Q"__;      "#6QDev1Nr5Einh"__;  "WMZ6 Einheit Q_maxDev1Spnr5,0=m³/h,1=l/h"__________;  1;   0.000;               1.000;               0.000;               1.000;                0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 49105;  "5573"____________;  "WMZ-SON";      "#6Dev1Nr5Jahr"___;  "WMZ6 Jahr für Dev1maxStorNr5"______________________;  1;   1990.000;            2099.000;            1990.000;            2099.000;             0;   " "_______________;  2
 49106;  "5573"____________;  "WMZ-SON";      "#6Dev1Nr5Datum"__;  "WMZ6 Datum für Dev1maxStorNr5"_____________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  2
 49107;  "5573"____________;  "WMZ-SON";      "#6Dev1Nr5Zeit"___;  "WMZ6 Uhrzeit für Dev1maxStorNr5"___________________;  1;   0.000;               2359.000;            0.000;               23.590;               2;   "Uhr"_____________;  2
@@ -2034,9 +1911,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 49137;  "5573"____________;  "WMZ-V"__;      "#6VTa3Einh"______;  "WMZ6 Einheit Volumen Tarif3, 0=m³, 1=l"____________;  1;   0.000;               1.000;               0.000;               1.000;                0;   " "_______________;  2
 49138;  "5573"____________;  "WMZ-P"__;      "#6PTa1Nr24e4"____;  "WMZ6 P Tarif1StorNr24 (10^4)"______________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
 49139;  "5573"____________;  "WMZ-P"__;      "#6PTa1Nr24e0"____;  "WMZ6 P Tarif1StorNr24 (10^0)"______________________;  1;   0.000;               9999.000;            0.000;               9999.000;             0;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 49140;  "5573"____________;  "WMZ-P"__;      "#6PTa1Nr24e-3"___;  "WMZ6 P Tarif1StorNr24 (10^-3)"_____________________;  1;   0.000;               999.000;             0.000;               0.999;                3;   " "_______________;  2
 49141;  "5573"____________;  "WMZ-P"__;      "#6PTa1Nr24Einh"__;  "WMZ6 Einheit PTarif1StorNr24, 0=kW, 1=MW"__________;  1;   0.000;               1.000;               0.000;               1.000;                0;   " "_______________;  2
 49142;  "5573"____________;  "WMZ-Q"__;      "#6QTa1Nr24e4"____;  "WMZ6 Q Tarif1StorNr24 (10^4)"______________________;  1;   0.000;               9999.000;            0.000;               99990000.000;         0;   " "_______________;  2
@@ -2056,9 +1930,6 @@ REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar   
 49156;  "5573"____________;  "WMZ-W"__;      "#6WSTag3Einh"____;  "WMZ6 Einheit Arbeit Stichtag 3, 0=MWh,1=kWh,2=GJ"__;  1;   0.000;               32.000;              0.000;               32.000;               0;   " "_______________;  2
 49157;  "5573"____________;  "WMZ-SON";      "#6STag3Jahr"_____;  "WMZ6 Jahr Stichtag3"_______________________________;  1;   1990.000;            2099.000;            1990.000;            2099.000;             0;   " "_______________;  2
 49158;  "5573"____________;  "WMZ-SON";      "#6STag3Datum"____;  "WMZ6 Datum Stichtag3"______________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  2
-
-REM HRNr Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   ÜBerAnfang           ÜBerEnde             ABerAnfang           ABerEnde              NkS   Einheit             MaskCSV
-
 49250;  "5573"____________;  "WMZ-ERO";      "EZ6_SysWMZFLAG"__;  "EZ6 Betriebszustand"_______________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  74
 49251;  "5573"____________;  "WMZ-ERO";      "EZ6_SysFSR"______;  "EZ6 Fehlerstatus-Register"_________________________;  1;   0.000;               32767.000;           0.000;               32767.000;            0;   " "_______________;  74
 49252;  "5573"____________;  "WMZ-SON";      "EZ6_VDatum"______;  "EZ6 Lesedatum Energie"_____________________________;  1;   101.000;             3112.000;            1.010;               31.120;               2;   " "_______________;  10
