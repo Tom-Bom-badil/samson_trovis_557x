@@ -1,6 +1,8 @@
 -work in progress-
 
-Hinweis: Der Hauptteil der Konfiguration befindet sich nach Funktion geordnet im Verzeichnis trovis557x/. Grund dafür ist, späteren Neulingen die Einarbeitung in die verschiedenen Reglermodelle mit den verschiedenen Funktionen, Sensoren und Anzahl Heizkreise zu vereinfachen.
+Hinweis: Die Dateistruktur entspricht der von Home Assistant, beginnend mit dem HA-Rootverzeichnis. Der Hauptteil der Konfiguration befindet sich nach Funktion geordnet im Verzeichnis trovis557x/. Grund dafür ist, späteren Einsteigern die Einarbeitung in die verschiedenen Reglermodelle mit ihren verschiedenen Funktionen, Sensoren und der Anzahl der Heizkreise zu vereinfachen.
+
+------------
 
 Leider habe ich bis jetzt trotz stundenlangen Herumprobierens noch nicht herausgefunden, wie man sensors, binary_sensors und switches in einer einzigen Datei zusammenfassen und dann per !include_dir_merge_list einbinden kann, also z.B. 
 
@@ -34,4 +36,5 @@ modbus:
     switches: !include_dir_merge_list trovis557x/switches/
 ```
 
-Ziel ist aber definitiv eine Zusammenfassung, so dass am Ende nur 9 Dateien im Hauptverzeichnis statt wie jetzt 3x9 Dateien in 3 Unterverzeichnissen übrig sind. Falls jemand einen Tip hat, wie man das bewerkstelligen kann und wie die configuration.yaml dafür auszusehen hat - vielen Dank im Voraus! :)
+Ziel ist aber definitiv eine Zusammenfassung, so dass am Ende nur 9 Dateien im Hauptverzeichnis statt wie jetzt 3x9 Dateien in 3 Unterverzeichnissen übrig sind.
+__Falls jemand einen Tip hat, wie man das bewerkstelligen kann und wie die configuration.yaml dafür auszusehen hat - vielen Dank für einen Hinweis im Voraus! :)__
