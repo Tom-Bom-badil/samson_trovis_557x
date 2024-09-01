@@ -1,7 +1,6 @@
-Achtung! 40000er Register! Je nach verwendeten Tools ggf. vom Wert 40.001 abziehen (Start mit Register Nr. 0 statt 40.001)!
+# Achtung - 40.000er Register! Je nach verwendeten Tools ggf. vom Wert 40.001 abziehen (Start mit Register Nr. 0 statt 40.001)!
 
 REM Gerätekennung    BlockAnfang  BlockEnde  Klasse
-
 "5573"____________;  40001;       40006;     3
 "5573"____________;  40010;       40031;     1
 "5573"____________;  40099;       40125;     3
