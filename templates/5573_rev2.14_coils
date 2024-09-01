@@ -1,5 +1,4 @@
-CLNr    Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   Text0                Text1               MaskCSV
-
+# CLNr  Gerätekennung        AnzKategorie    Bezeichnung          Kommentar                                             RO   Text0                Text1               MaskCSV
 1;      "5573"____________;  "ALG-BTR";      "Sammelstörung"___;  "Sammelstörung, Fehlerstatusregister HR40150 > 0"___;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  42
 2;      "5573"____________;  "ALG-BTR";      "Dateneing_aktiv"_;  "Dateneingabe aktiv"________________________________;  1;  "NEIN-(0)"________;  "JA-(1)"__________;  10
 3;      "5573"____________;  "ALG-BTR";      "Dateneing_stattg";  "Dateneingabe stattgefunden"________________________;  0;  "NEIN-(0)"________;  "JA-(1)"__________;  10
