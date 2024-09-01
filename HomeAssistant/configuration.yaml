@@ -1,3 +1,4 @@
+# add this to your configuration.yaml (HA root directory)
 modbus:
   - name: trovis
     # modbus tcp to rtu converter (e.g. USR-TCP232-E2)
