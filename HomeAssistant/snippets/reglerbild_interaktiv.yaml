@@ -1,0 +1,125 @@
+          - type: custom:button-card
+            title: Trovis Regler
+            aspect_ratio: 8/4.5
+            entity: none
+            variables:
+              dummy_placeholder_entity_for_later_use: weather.forecast_zu_hause
+            styles:
+              card:
+                - background-color: lightgray
+                - border-radius: 0
+                - border: 6px gray inset
+                - padding: 1%
+                - transform: scale(0.8);
+                - top: '-12%'
+              card_mod:
+                style: |
+                  ha-card { 
+                    --ha-card-border-radius: 0px; 
+                    --ha-card-border-color: #990000;
+                    --ha-card-border-width: 0px; 
+                    --card-mod-icon-color: white;
+                  }                       
+              grid:
+                - grid-template-areas: |
+                    "samson anlage modell"
+                    "button1 display display"
+                    "button1 display display"
+                    "button2 display display"
+                    "button2 chart chart"
+                    "button3 chart chart"
+                    "button3 chart chart"
+                - grid-template-rows: 0.1fr 1fr min-content min-content min-content 1fr
+                - grid-template-columns: 1fr 2fr 1fr
+                - gap: .5rem
+              custom_fields:
+                samson:
+                  - justify-self: start
+                  - align-self: end
+                  - margin-top: 0px
+                  - font-size: 1.5em
+                  - background-color: transparent
+                anlage:
+                  - justify-self: start
+                  - align-self: end
+                  - margin-top: 0px
+                  - font-size: 8px
+                  - background-color: transparent
+                modell:
+                  - justify-self: end
+                  - align-self: end
+                  - margin-top: 0px
+                  - font-size: 1.5em
+                  - background-color: transparent
+                button1:
+                  - justify-self: start
+                  - align-self: start
+                  - margin-right: 5px
+                  - '--ha-card-background': transparent
+                  - '--ha-card-border-radius': 0px
+                button2:
+                  - justify-self: start
+                  - align-self: mid
+                  - margin-right: 5px
+                  - '--ha-card-background': transparent
+                  - '--ha-card-border-radius': 0px
+                button3:
+                  - justify-self: start
+                  - align-self: end
+                  - margin-right: 5px
+                  - '--ha-card-background': transparent
+                  - '--ha-card-border-radius': 0px
+                display:
+                  - justify-self: start
+                  - align-self: start
+                  - background-color: '#a6a9a0'
+                  - '--ha-card-border-radius': 0px
+                  - height: 100% !important
+                  - width: 100%
+                  - padding: 0
+                  - margin: 0
+                  - border: 2px inset
+                chart:
+                  - '--ha-card-background': transparent
+                  - '--ha-card-border-radius': 0px
+                  - height: 100%
+            custom_fields:
+              samson:
+                card:
+                  type: custom:button-card
+                  name: |
+                    [[[ return 'Samson' ]]]
+                  styles:
+                    card:
+                      - color: black
+                      - background: transparent
+                      - font-size: 1em
+                      - font-weight: bold
+              anlage:
+                card:
+                  type: custom:button-card
+                  name: |
+                    [[[
+                      var version = states['sensor.trovis_regler_firmwareversion'].state;
+                      var anlage = states['sensor.trovis_regler_hydraulik_anlage'].state
+                      return '<small>Anlage ' + anlage + ', Firmware ' + version + '</small>'
+                    ]]]
+                  styles:
+                    card:
+                      - color: black
+                      - background: transparent
+              modell:
+                card:
+                  type: custom:button-card
+                  name: |
+                    [[[
+                      var modell = states['sensor.trovis_regler_modell'].state;
+                      return 'Trovis ' + modell
+                    ]]]
+                  styles:
+                    card:
+                      - color: black
+                      - background: transparent
+                      - font-size: 1em
+                      - font-weight: bold
+[...]
