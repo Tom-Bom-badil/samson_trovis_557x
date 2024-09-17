@@ -1,1 +1,169 @@
-
+type: vertical-stack
+cards:
+  - type: horizontal-stack
+    square: false
+    columns: 9
+    cards:
+      - name: 'Menübutton'
+        type: custom:button-card
+        show_name: true
+        show_icon: false
+        show_state: true
+        aspect_ratio: 2/1
+        tap_action:
+          action: toggle
+        entity: sensor.trovis_fuhler_vorlauf_1_vf1
+      - name: >-
+          [[[ return `${states['sensor.trovis_fuhler_vorlauf_1_vf1'].state} °C`
+          ]]]
+        show_name: true
+        show_state: false
+        show_icon: false
+        type: custom:button-card
+        aspect_ratio: 2/1
+        tap_action:
+          action: toggle
+        entity: sensor.trovis_fuhler_vorlauf_1_vf1
+      - name: ←⌂ Außen
+        show_name: true
+        show_icon: false
+        show_state: true
+        type: custom:button-card
+        aspect_ratio: 2/1
+        tap_action:
+          action: toggle
+        entity: sensor.trovis_fuhler_vorlauf_1_vf1
+      - name: →⌂ Innen
+        show_name: true
+        show_icon: false
+        show_state: true
+        type: custom:button-card
+        aspect_ratio: 2/1
+        tap_action:
+          action: toggle
+        entity: sensor.trovis_fuhler_vorlauf_1_vf1
+      - name: ≈ Warmwasser
+        show_name: true
+        show_icon: false
+        show_state: true
+        type: custom:button-card
+        aspect_ratio: 2/1
+        tap_action:
+          action: toggle
+        entity: sensor.trovis_fuhler_vorlauf_1_vf1
+      - name: _ Heizung Vorlauf
+        show_name: true
+        show_icon: false
+        show_state: true
+        type: custom:button-card
+        aspect_ratio: 2/1
+        tap_action:
+          action: toggle
+        entity: sensor.trovis_fuhler_vorlauf_1_vf1
+      - name: KWL Zuluft
+        show_name: true
+        show_icon: false
+        show_state: true
+        type: custom:button-card
+        aspect_ratio: 2/1
+        tap_action:
+          action: toggle
+        entity: sensor.trovis_fuhler_vorlauf_1_vf1
+      - name: KWL Fortluft
+        show_name: true
+        show_icon: false
+        show_state: true
+        type: custom:button-card
+        aspect_ratio: 2/1
+        tap_action:
+          action: toggle
+        entity: sensor.trovis_fuhler_vorlauf_1_vf1
+      - name: Lüftungsstufe
+        show_name: true
+        show_icon: false
+        show_state: true
+        type: custom:button-card
+        aspect_ratio: 2/1
+        tap_action:
+          action: toggle
+        entity: sensor.trovis_fuhler_vorlauf_1_vf1
+  - type: horizontal-stack
+    name: dashboard_komplett
+    cards:
+      - name: ~~ links ~~
+        type: vertical-stack
+        card_mod:
+          style: |
+            ha-card { 
+              background: transparent;
+              padding: 5%;
+            }   
+        cards:
+          - name: L1
+            type: custom:button-card
+            card_mod:
+              style: |
+                ha-card { 
+                  --ha-card-border-radius: 0px; 
+                  --ha-card-border-color: #990000;
+                  --ha-card-border-width: 1px; 
+                  --card-mod-icon-color: white;
+                  padding: 0;
+                  height: 41vh;
+                  background: transparent;
+                }   
+          - name: L2
+            type: custom:button-card
+            card_mod:
+              style: |
+                ha-card { 
+                  --ha-card-border-radius: 0px; 
+                  --ha-card-border-color: #990000;
+                  --ha-card-border-width: 1px; 
+                  --card-mod-icon-color: white;
+                  padding: 0;
+                  height: 41vh;
+                  background: transparent;
+                }  
+      - name: ~~ rechts ~~
+        type: vertical-stack
+        cards:
+          - name: R1
+            type: custom:button-card
+            card_mod:
+              style: |
+                ha-card { 
+                  --ha-card-border-radius: 0px; 
+                  --ha-card-border-color: #990000;
+                  --ha-card-border-width: 1px; 
+                  --card-mod-icon-color: white;
+                  padding: 0;
+                  height: 27vh;
+                  background: transparent;
+                }  
+          - name: R2
+            type: custom:button-card
+            card_mod:
+              style: |
+                ha-card { 
+                  --ha-card-border-radius: 0px; 
+                  --ha-card-border-color: #990000;
+                  --ha-card-border-width: 1px; 
+                  --card-mod-icon-color: white;
+                  padding: 0;
+                  height: 27vh;
+                  background: transparent;
+                }  
+          - name: R3
+            type: custom:button-card
+            card_mod:
+              style: |
+                ha-card { 
+                  --ha-card-border-radius: 0px; 
+                  --ha-card-border-color: #990000;
+                  --ha-card-border-width: 1px; 
+                  --card-mod-icon-color: white;
+                  padding: 0;
+                  height: 27vh;
+                  background: transparent;
+                }  
