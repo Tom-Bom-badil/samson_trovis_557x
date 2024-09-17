@@ -28,10 +28,11 @@ Darstellung einer 5575/5576/5579 mit interaktiven Elementen und der tatsächlich
 ![reglerbild_interaktiv](https://github.com/user-attachments/assets/d9cff9b5-2bd7-4564-8b1c-4be8c340e9a5)
 
 # **Datei plotly.yaml**
-Einbindung eines Graphen per plotly. Die Plotly-Bibliothek ist extrem gut dokumentiert und meiner Meinung nach nicht so buggy und deutlich flexibler / mächtiger als die üblicherweise verwendenten Lösungen wie HistoryGraphCard oder ApexCharts. Doku hier: https://plotly.com/javascript. ACHTUNG! Das Beispiel enthält einen Datensimulator, der für 48h Livedaten aufbaut (in Winterzeit; daher sieht man zur Sommerzeit eine Stunde Versatz bzw. rechts einen 1h freien Bereich). Für die Visualisierung von Echtdaten muss die entsprechende entity: statt der fn: angebunden werden. Für einen Plot sollte die Entity historische Werte aus einer Datenbank liefern.
+Einbindung eines Graphen per plotly. Die Plotly-Bibliothek ist extrem gut dokumentiert und meiner Meinung nach nicht so buggy und deutlich flexibler / mächtiger als die üblicherweise verwendenten Lösungen wie HistoryGraphCard oder ApexCharts. Doku [hier](https://plotly.com/javascript). ACHTUNG! Die Beispieldatei enthält einen Datensimulator, der für 48h Daten generiert (zur Winterzeit --> daher sieht man zur Sommerzeit eine Stunde Versatz bzw. rechts einen 1h freien Bereich). Für die Visualisierung von Echtdaten muss die entsprechende entity: statt der fn: angebunden werden. Für einen Plot sollte die Entity bereits historische Werte aus einer Datenbank liefern.
 
 Bereich R1 (rechts oben):
 ![plotly_1](https://github.com/user-attachments/assets/4e264bbf-5d39-43ae-a783-4ce92bb04e4d)
 
 Heizkurve auf dem Regler:
+
 ![plotly_2](https://github.com/user-attachments/assets/5bc4732e-2dc4-48da-b3d8-2964ac58fbba)
