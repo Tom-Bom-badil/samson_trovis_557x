@@ -1,1 +1,43 @@
+# Annahme: Verwendung einer 3-Punkt-Regelung.
+# Bei einer eigenen 4-Punkte-Kennlinie sind die Register 1012-1027 auszuwerten.
 
+# Hk3 ist nur bei den 'großen' Modellen vorhanden (5578, 5579).
+# Warmwasser ist Hk4!
+
+- name: "Trovis Hk3 Vorlaufsoll"
+  unique_id: trovis_hk3_vlsoll
+  slave: !secret trovis_modbus_address
+  address: 1399
+  scan_interval: 60
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk3 Steigung"
+  unique_id: trovis_hk3_steigung
+  slave: !secret trovis_modbus_address
+  address: 1405
+  scan_interval: 60
+  scale: 0.1
+  precision: 1
+  min_value: 0.2
+  max_value: 3.2
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk3 Niveau"
+  unique_id: trovis_hk3_niveau
+  slave: !secret trovis_modbus_address
+  address: 1406
+  scan_interval: 60
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  # min_value: -30
+  max_value: 30
+  nan_value: 32767
