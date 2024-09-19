@@ -13,8 +13,8 @@
   data_type: int16
   nan_value: 32767
 
-- name: "Trovis Hk1 Steigung"
-  unique_id: trovis_hk1_steigung
+- name: "Trovis Hk2 Steigung"
+  unique_id: trovis_hk2_steigung
   slave: !secret trovis_modbus_address
   address: 1205
   scan_interval: 60
@@ -25,8 +25,8 @@
   data_type: int16
   nan_value: 32767
 
-- name: "Trovis Hk1 Niveau"
-  unique_id: trovis_hk1_niveau
+- name: "Trovis Hk2 Niveau"
+  unique_id: trovis_hk2_niveau
   slave: !secret trovis_modbus_address
   address: 1206
   scan_interval: 60
