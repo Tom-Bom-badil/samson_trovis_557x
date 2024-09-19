@@ -3,7 +3,7 @@
 
 - name: "Trovis Hk1 Vorlaufsoll"
   unique_id: trovis_hk1_vlsoll
-  slave: !secret trovis_id
+  slave: !secret trovis_modbus_address
   address: 999
   scan_interval: 60
   scale: 0.1
@@ -15,7 +15,7 @@
 
 - name: "Trovis Hk1 Steigung"
   unique_id: trovis_hk1_steigung
-  slave: !secret trovis_id
+  slave: !secret trovis_modbus_address
   address: 1005
   scan_interval: 60
   scale: 0.1
@@ -27,7 +27,7 @@
 
 - name: "Trovis Hk1 Niveau"
   unique_id: trovis_hk1_niveau
-  slave: !secret trovis_id
+  slave: !secret trovis_modbus_address
   address: 1006
   scan_interval: 60
   scale: 0.1
