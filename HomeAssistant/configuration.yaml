@@ -1,11 +1,23 @@
-# add this to your configuration.yaml (HA root directory)
+# Add this to your configuration.yaml (HA root directory)
+
+# Caution - it is expected that you have split up your files like this already.
+# If you have NOT done so, add sensors etc directly here in configuration.yaml!
+automation:   !include automations.yaml
+script:       !include scripts.yaml
+scene:        !include scenes.yaml
+sensor:       !include sensors.yaml
+rest:         !include rests.yaml
+template:     !include templates.yaml
+media_player: !include media_players.yaml
+
+# Here comes the most important entry for enabling Modbus.
 modbus:
   - name: trovis
     # modbus tcp to rtu converter (e.g. USR-TCP232-E2)
     type: tcp
     host: 192.168.178.59
     port: 502
-    # put readings in separate files for easier handling
+    # get readings from separate files for easier handling
     sensors: !include_dir_merge_list trovis557x/sensors/
     binary_sensors: !include_dir_merge_list trovis557x/binary_sensors/
     switches: !include_dir_merge_list trovis557x/switches/
