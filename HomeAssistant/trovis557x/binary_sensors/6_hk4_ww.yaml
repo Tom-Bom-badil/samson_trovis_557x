@@ -1,1 +1,13 @@
+# Binaerausgang BA4
+- name: "Speicherladepumpe"
+  unique_id: trovis_hk4_slp
+  slave: !secret trovis_modbus_address
+  address: 59
+  scan_interval: 60
 
+# Binaerausgang BA5
+- name: "Zirkulationspumpe"
+  unique_id: trovis_hk4_zp
+  slave: !secret trovis_modbus_address
+  address: 60
+  scan_interval: 60
