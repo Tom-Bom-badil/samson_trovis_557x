@@ -1,4 +1,4 @@
-  # Leave indentations intact, or it WILL throw errors.
+  # Leave indentations (2 spaces) intact, or it WILL throw errors.
   - platform: template
 
     sensors:
