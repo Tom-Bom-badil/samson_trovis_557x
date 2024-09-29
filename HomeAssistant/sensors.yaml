@@ -1,0 +1,16 @@
+  # Leave indentations intact, or it WILL throw errors.
+  - platform: template
+
+    sensors:
+
+      # Status Heizung für Umschaltung der Bilder in der Visu
+      trovis_gesamtstatus:
+        friendly_name: "Trovis Gesamtstatus"
+        value_template: >-
+          {% set hk1 = is_state('binary_sensor.umwaelzpumpe_1', 'on') %}
+          {% set ww = is_state('binary_sensor.speicherladepumpe', 'on') %}
+          {% if hk1 and not ww %} 1
+          {% elif ww and not hk1 %} 2
+          {% elif hk1 and ww %} 3
+          {% else %} 0
+          {% endif %}
