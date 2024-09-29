@@ -3,8 +3,9 @@
 
     sensors:
 
-      # Status Heizung für Umschaltung der Bilder in der Visu
+      # Trovis - overall status
       trovis_gesamtstatus:
+        unique_id: trovis_r_gesamtstatus
         friendly_name: "Trovis Gesamtstatus"
         value_template: >-
           {% set hk1 = is_state('binary_sensor.umwaelzpumpe_1', 'on') %}
@@ -13,4 +14,26 @@
           {% elif ww and not hk1 %} 2
           {% elif hk1 and ww %} 3
           {% else %} 0
+          {% endif %}
+
+      # Trovis - formatted date
+      trovis_regler_datum_formatiert:
+        unique_id: trovis_r_datum_formatiert
+        friendly_name: "Trovis Datum formatiert"
+        value_template: >-
+          {% if states('sensor.trovis_regler_uhrzeit')|float < 1000 %}
+            {{ '0' + states('sensor.trovis_regler_uhrzeit')[:1] + ':' + states('sensor.trovis_regler_uhrzeit')[-2:] }}
+          {% else %}
+            {{ states('sensor.trovis_regler_uhrzeit')[:2] + ':' + states('sensor.trovis_regler_uhrzeit')[-2:] }}
+          {% endif %}
+
+      # Trovis - formatted time
+      trovis_regler_zeit_formatiert:
+        unique_id: trovis_r_zeit_formatiert
+        friendly_name: "Trovis Zeit formatiert"
+        value_template: >-
+          {% if states('sensor.trovis_regler_datum')|float < 1000 %}
+            {{ '0' + states('sensor.trovis_regler_datum')[:1] + '.' + states('sensor.trovis_regler_datum')[-2:] + '.' + states('sensor.trovis_regler_jahr') }}
+          {% else %}
+            {{ states('sensor.trovis_regler_datum')[:2] + '.' + states('sensor.trovis_regler_datum')[-2:] + '.' + states('sensor.trovis_regler_jahr') }}
           {% endif %}
