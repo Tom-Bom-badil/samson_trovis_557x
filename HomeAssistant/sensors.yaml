@@ -28,8 +28,8 @@
           {% endif %}
 
       # Trovis - formatted time
-      trovis_regler_zeit_formatiert:
-        unique_id: trovis_r_zeit_formatiert
+      trovis_regler_uhrzeit_formatiert:
+        unique_id: trovis_r_uhrzeit_formatiert
         friendly_name: "Trovis Zeit formatiert"
         value_template: >-
           {% if states('sensor.trovis_regler_uhrzeit')|float < 1000 %}
