@@ -1,3 +1,71 @@
+#################  Heizkreis 4, Warmwasser (Regelkreis 4 - CO4/PA4) ##############
+
+- name: "Trovis Hk4 Handbetrieb"
+  unique_id: trovis_hk4_handbetrieb
+  slave: !secret trovis_modbus_address
+  address: 7
+  scan_interval: 60
+
+- name: "Trovis Hk4 Automatikbetrieb"
+  unique_id: trovis_hk4_automatikbetrieb
+  slave: !secret trovis_modbus_address
+  address: 1799
+  scan_interval: 60
+
+- name: "Trovis Hk4 Desinfektion aktiv"
+  unique_id: trovis_hk4_desinfektion
+  slave: !secret trovis_modbus_address
+  address: 1800
+  scan_interval: 60
+
+- name: "Trovis Hk4 TW Vorrang"
+  unique_id: trovis_hk4_twvorrang
+  slave: !secret trovis_modbus_address
+  address: 1801
+  scan_interval: 60
+
+- name: "Trovis Hk4 Maximale Ladetemperatur"
+  unique_id: trovis_hk4_maxladetemp
+  slave: !secret trovis_modbus_address
+  address: 1802
+  scan_interval: 60
+
+- name: "Trovis Hk4 Ruecklauftemperaturbegrenzung"
+  unique_id: trovis_hk4_rlbegrenzung
+  slave: !secret trovis_modbus_address
+  address: 1803
+  scan_interval: 60
+
+- name: "Trovis Hk4 Standby"
+  unique_id: trovis_hk4_standby
+  slave: !secret trovis_modbus_address
+  address: 1804
+  scan_interval: 60
+
+- name: "Trovis Hk4 Frostschutz"
+  unique_id: trovis_hk4_frostschutz
+  slave: !secret trovis_modbus_address
+  address: 1805
+  scan_interval: 60
+
+- name: "Trovis Hk4 Zwangsladung"
+  unique_id: trovis_hk4_zwangsladung
+  slave: !secret trovis_modbus_address
+  address: 1806
+  scan_interval: 60
+
+- name: "Trovis Hk4 Solar UP1"
+  unique_id: trovis_hk4_solar_up1
+  slave: !secret trovis_modbus_address
+  address: 1807
+  scan_interval: 60
+
+- name: "Trovis Hk4 SF2 Zwangsladung"
+  unique_id: trovis_hk4_sf2zwangsladung
+  slave: !secret trovis_modbus_address
+  address: 1808
+  scan_interval: 60
+
 # Binaerausgang BA4
 - name: "Speicherladepumpe"
   unique_id: trovis_hk4_slp
