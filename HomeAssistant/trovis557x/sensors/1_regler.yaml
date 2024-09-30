@@ -1,3 +1,5 @@
+##################################  Regler #######################################
+
 - name: "Trovis Regler Modell"
   unique_id: trovis_r_modell
   slave: !secret trovis_modbus_address
@@ -55,4 +57,10 @@
   unique_id: trovis_r_jahr
   slave: !secret trovis_modbus_address
   address: 101
+  scan_interval: 60
+
+- name: "Trovis Regler Fehlerstatus"
+  unique_id: trovis_r_fehlerstatus
+  slave: !secret trovis_modbus_address
+  address: 149
   scan_interval: 60
