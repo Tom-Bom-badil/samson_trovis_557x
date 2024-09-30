@@ -1,3 +1,5 @@
+#################  Heizkreis 1 (Regelkreis 1 - CO1/PA1) ##########################
+#
 # Annahme: Verwendung einer 3-Punkt-Regelung.
 # Bei einer eigenen 4-Punkte-Kennlinie sind die Register 1012-1027 auszuwerten.
 
