@@ -6,6 +6,6 @@
   slave: !secret trovis_modbus_address
   address: 111
   scan_interval: 60
-  device_class: enum
-  attributes:
-    options: "{{ ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] }}"
+  #device_class: enum
+  #attributes:
+  #  options: "{{ ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] }}"
