@@ -1,23 +1,70 @@
-- name: "Trovis Zeit Sommerbetrieb ein"
-  unique_id: trovis_z_sommer_ein
+############################### Datum und Zeit ###################################
+
+- name: "Trovis Datum"
+  unique_id: trovis_z_datum
+  slave: !secret trovis_modbus_address
+  address: 100
+  scan_interval: 60
+
+- name: "Trovis Jahr"
+  unique_id: trovis_z_jahr
+  slave: !secret trovis_modbus_address
+  address: 101
+  scan_interval: 60
+
+- name: "Trovis Uhrzeit"
+  unique_id: trovis_z_uhrzeit
+  slave: !secret trovis_modbus_address
+  address: 99
+  scan_interval: 60
+
+- name: "Trovis Hk123 Sommerbetrieb ein"
+  unique_id: trovis_z_hk123_sommer_ein
   slave: !secret trovis_modbus_address
   address: 112
   scan_interval: 900
 
-- name: "Trovis Zeit Sommerbetrieb aus"
-  unique_id: trovis_z_sommer_aus
+- name: "Trovis Hk123 Sommerbetrieb aus"
+  unique_id: trovis_z_hk123_sommer_aus
   slave: !secret trovis_modbus_address
   address: 113
   scan_interval: 900
 
-- name: "Trovis Zeit Sommerbetrieb ein Tage"
-  unique_id: trovis_z_sommer_ein_tage
+- name: "Trovis Hk123 Sommerbetrieb ein Tage"
+  unique_id: trovis_z_hk123_sommer_ein_tage
   slave: !secret trovis_modbus_address
   address: 114
   scan_interval: 900
 
-- name: "Trovis Zeit Sommerbetrieb aus Tage"
-  unique_id: trovis_z_sommer_aus_tage
+- name: "Trovis Hk123 Sommerbetrieb aus Tage"
+  unique_id: trovis_z_hk123_sommer_aus_tage
   slave: !secret trovis_modbus_address
   address: 115
   scan_interval: 900
+
+- name: "Trovis Hk4 Desinfektionstag"
+  unique_id: trovis_z_hk4_desinfektionstag
+  slave: !secret trovis_modbus_address
+  address: 1830
+  scan_interval: 900
+  device_class: enum
+  attributes:
+	options: "{{ ['aus', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'] }}"
+
+- name: "Trovis Hk4 Desinfektionsstart"
+  unique_id: trovis_z_hk4_desinfektionsstart
+  slave: !secret trovis_modbus_address
+  address: 1831
+  scan_interval: 900
+
+- name: "Trovis Hk4 Desinfektionsende"
+  unique_id: trovis_z_hk4_desinfektionsende
+  slave: !secret trovis_modbus_address
+  address: 1832
+  scan_interval: 900
+
+- name: "Trovis Hk4 Desinfektionsdauer"
+  unique_id: trovis_z_hk4_desinfektionsdauer
+  slave: !secret trovis_modbus_address
+  address: 1838
+  scan_interval: 60
