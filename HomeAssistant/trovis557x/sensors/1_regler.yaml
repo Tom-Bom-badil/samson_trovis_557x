@@ -75,7 +75,7 @@
     options: "{{ ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] }}"
 
 - name: "Trovis Regler AT Grenzwert"
-  unique_id: trovis_r_sommer_atmin
+  unique_id: trovis_r_sommer_at_min
   slave: !secret trovis_modbus_address
   address: 116
   scan_interval: 900
@@ -88,7 +88,7 @@
   max_value: 30
   nan_value: 32767
 
-- name: "Trovis Regler Verzoegerung AT"
+- name: "Trovis Regler AT Verzoegerung"
   unique_id: trovis_r_at_verzoegerung
   slave: !secret trovis_modbus_address
   address: 117
