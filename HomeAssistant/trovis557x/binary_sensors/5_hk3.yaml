@@ -1,4 +1,6 @@
 #################  Heizkreis 3 (Regelkreis 3 - CO3/PA3) ##########################
+#
+# Hk3 ist nur bei den 'großen' Modellen vorhanden (5578, 5579). Warmwasser ist Hk4!
 
 - name: "Trovis Hk3 Handbetrieb"
   unique_id: trovis_hk1_handbetrieb
