@@ -1,1 +1,31 @@
+##################################  Regler #######################################
 
+- name: "Trovis Regler Sammelstoerung"
+  unique_id: trovis_r_sammelstoerung
+  slave: !secret trovis_modbus_address
+  address: 0
+  scan_interval: 60
+
+- name: "Trovis Regler Sperrung Handbetrieb"
+  unique_id: trovis_r_handbetriebsperrung
+  slave: !secret trovis_modbus_address
+  address: 149
+  scan_interval: 60
+
+- name: "Trovis Regler Sperrung Drehschalter"
+  unique_id: trovis_r_drehschaltersperrung
+  slave: !secret trovis_modbus_address
+  address: 150
+  scan_interval: 60
+
+- name: "Trovis Regler Auto Sommerzeit"
+  unique_id: trovis_r_autosommerzeit
+  slave: !secret trovis_modbus_address
+  address: 136
+  scan_interval: 60
+
+- name: "Trovis Regler Sommerbetrieb"
+  unique_id: trovis_r_sommerbetrieb
+  slave: !secret trovis_modbus_address
+  address: 8
+  scan_interval: 60
