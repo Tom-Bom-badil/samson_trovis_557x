@@ -69,7 +69,7 @@
   scan_interval: 60
 
 # Binaerausgang BA3
-- name: "Umwaelzpumpe 3"
+- name: "Trovis Umwaelzpumpe 3"
   unique_id: trovis_hk3_up3
   slave: !secret trovis_modbus_address
   address: 58
