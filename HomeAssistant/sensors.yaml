@@ -17,23 +17,23 @@
           {% endif %}
 
       # Trovis - formatted date
-      trovis_regler_datum_formatiert:
-        unique_id: trovis_r_datum_formatiert
+      trovis_datum_formatiert:
+        unique_id: trovis_z_datum_formatiert
         friendly_name: "Trovis Datum formatiert"
         value_template: >-
-          {% if states('sensor.trovis_regler_datum')|float < 1000 %}
-            {{ '0' + states('sensor.trovis_regler_datum')[:1] + '.' + states('sensor.trovis_regler_datum')[-2:] + '.' + states('sensor.trovis_regler_jahr') }}
+          {% if states('sensor.trovis_datum')|float < 1000 %}
+            {{ '0' + states('sensor.trovis_datum')[:1] + '.' + states('sensor.trovis_datum')[-2:] + '.' + states('sensor.trovis_jahr') }}
           {% else %}
-            {{ states('sensor.trovis_regler_datum')[:2] + '.' + states('sensor.trovis_regler_datum')[-2:] + '.' + states('sensor.trovis_regler_jahr') }}
+            {{ states('sensor.trovis_datum')[:2] + '.' + states('sensor.trovis_datum')[-2:] + '.' + states('sensor.trovis_jahr') }}
           {% endif %}
 
       # Trovis - formatted time
-      trovis_regler_uhrzeit_formatiert:
-        unique_id: trovis_r_uhrzeit_formatiert
+      trovis_uhrzeit_formatiert:
+        unique_id: trovis_z_uhrzeit_formatiert
         friendly_name: "Trovis Zeit formatiert"
         value_template: >-
-          {% if states('sensor.trovis_regler_uhrzeit')|float < 1000 %}
-            {{ '0' + states('sensor.trovis_regler_uhrzeit')[:1] + ':' + states('sensor.trovis_regler_uhrzeit')[-2:] }}
+          {% if states('sensor.trovis_uhrzeit')|float < 1000 %}
+            {{ '0' + states('sensor.trovis_uhrzeit')[:1] + ':' + states('sensor.trovis_uhrzeit')[-2:] }}
           {% else %}
-            {{ states('sensor.trovis_regler_uhrzeit')[:2] + ':' + states('sensor.trovis_regler_uhrzeit')[-2:] }}
+            {{ states('sensor.trovis_uhrzeit')[:2] + ':' + states('sensor.trovis_uhrzeit')[-2:] }}
           {% endif %}
