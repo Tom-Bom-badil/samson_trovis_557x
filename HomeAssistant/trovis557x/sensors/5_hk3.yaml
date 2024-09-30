@@ -1,8 +1,6 @@
-# Annahme: Verwendung einer 3-Punkt-Regelung.
-# Bei einer eigenen 4-Punkte-Kennlinie sind die Register 1012-1027 auszuwerten.
-
-# Hk3 ist nur bei den 'großen' Modellen vorhanden (5578, 5579).
-# Warmwasser ist Hk4!
+#################  Heizkreis 3 (Regelkreis 3 - CO3/PA3) ##########################
+#
+# Hk3 ist nur bei den 'großen' Modellen vorhanden (5578, 5579). Warmwasser ist Hk4!
 
 - name: "Trovis Hk3 Vorlaufsoll"
   unique_id: trovis_hk3_vlsoll
