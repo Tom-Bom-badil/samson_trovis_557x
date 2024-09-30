@@ -46,9 +46,9 @@
   slave: !secret trovis_modbus_address
   address: 105
   scan_interval: 60
-  device_class: enum
-  attributes:
-    options: "{{ ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] }}"
+  #device_class: enum
+  #attributes:
+  #  options: "{{ ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] }}"
 
 - name: "Trovis Hk1 3Pkt Stellsignal"
   unique_id: trovis_hk1_stellsignal
