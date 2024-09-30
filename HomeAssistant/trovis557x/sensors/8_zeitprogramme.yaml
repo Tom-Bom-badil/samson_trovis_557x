@@ -1,1 +1,23 @@
+- name: "Trovis Zeit Sommerbetrieb ein"
+  unique_id: trovis_z_sommer_ein
+  slave: !secret trovis_modbus_address
+  address: 112
+  scan_interval: 900
 
+- name: "Trovis Zeit Sommerbetrieb aus"
+  unique_id: trovis_z_sommer_aus
+  slave: !secret trovis_modbus_address
+  address: 113
+  scan_interval: 900
+
+- name: "Trovis Zeit Sommerbetrieb ein Tage"
+  unique_id: trovis_z_sommer_ein_tage
+  slave: !secret trovis_modbus_address
+  address: 114
+  scan_interval: 900
+
+- name: "Trovis Zeit Sommerbetrieb aus Tage"
+  unique_id: trovis_z_sommer_aus_tage
+  slave: !secret trovis_modbus_address
+  address: 115
+  scan_interval: 900
