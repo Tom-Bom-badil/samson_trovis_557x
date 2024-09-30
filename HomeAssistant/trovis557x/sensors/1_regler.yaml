@@ -46,3 +46,55 @@
   slave: !secret trovis_modbus_address
   address: 149
   scan_interval: 60
+
+- name: "Trovis Regler Schalter oben"
+  unique_id: trovis_r_schalteroben
+  slave: !secret trovis_modbus_address
+  address: 102
+  scan_interval: 60
+  device_class: enum
+  attributes:
+    options: "{{ ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] }}"
+
+- name: "Trovis Regler Schalter mitte"
+  unique_id: trovis_r_schaltermitte
+  slave: !secret trovis_modbus_address
+  address: 103
+  scan_interval: 60
+  device_class: enum
+  attributes:
+    options: "{{ ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] }}"
+
+- name: "Trovis Regler Schalter unten"
+  unique_id: trovis_r_schalterunten
+  slave: !secret trovis_modbus_address
+  address: 104
+  scan_interval: 60
+  device_class: enum
+  attributes:
+    options: "{{ ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] }}"
+
+- name: "Trovis Regler AT Grenzwert"
+  unique_id: trovis_r_sommer_atmin
+  slave: !secret trovis_modbus_address
+  address: 116
+  scan_interval: 900
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  min_value: 0
+  max_value: 30
+  nan_value: 32767
+
+- name: "Trovis Regler Verzoegerung AT"
+  unique_id: trovis_r_at_verzoegerung
+  slave: !secret trovis_modbus_address
+  address: 117
+  scan_interval: 900
+  unit_of_measurement: "K"
+  device_class: temperature
+  data_type: int16
+  min_value: 1
+  max_value: 6
