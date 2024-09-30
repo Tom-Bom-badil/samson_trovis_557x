@@ -1,4 +1,6 @@
 #################  Heizkreis 2 (Regelkreis 2 - CO2/PA2) ##########################
+#
+# Annahme: Verwendung einer 3-Punkt-Regelung.
 
 - name: "Trovis Hk2 Vorlaufsoll"
   unique_id: trovis_hk2_vlsoll
