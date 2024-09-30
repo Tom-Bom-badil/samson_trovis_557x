@@ -47,9 +47,9 @@
   slave: !secret trovis_modbus_address
   address: 1830
   scan_interval: 900
-  device_class: enum
-  attributes:
-	options: "{{ ['aus', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'] }}"
+  #device_class: enum
+  #attributes:
+  #  options: "{{ ['aus', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'] }}"
 
 - name: "Trovis Hk4 Desinfektionsstart"
   unique_id: trovis_z_hk4_desinfektionsstart
@@ -68,3 +68,4 @@
   slave: !secret trovis_modbus_address
   address: 1838
   scan_interval: 60
+  
