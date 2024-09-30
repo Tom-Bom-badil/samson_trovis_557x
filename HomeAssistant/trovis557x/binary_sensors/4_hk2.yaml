@@ -1,7 +1,74 @@
+#################  Heizkreis 2 (Regelkreis 2 - CO2/PA2) ##########################
+
+- name: "Trovis Hk2 Handbetrieb"
+  unique_id: trovis_hk2_handbetrieb
+  slave: !secret trovis_modbus_address
+  address: 5
+  scan_interval: 60
+
+- name: "Trovis Hk2 Automatikbetrieb"
+  unique_id: trovis_hk2_automatikbetrieb
+  slave: !secret trovis_modbus_address
+  address: 1199
+  scan_interval: 60
+
+- name: "Trovis Hk2 Tagbetrieb"
+  unique_id: trovis_hk2_tagbetrieb
+  slave: !secret trovis_modbus_address
+  address: 1200
+  scan_interval: 60
+
+- name: "Trovis Hk2 Nachtbetrieb"
+  unique_id: trovis_hk2_nachtbetrieb
+  slave: !secret trovis_modbus_address
+  address: 1201
+  scan_interval: 60
+
+- name: "Trovis Hk2 Haltebetrieb"
+  unique_id: trovis_hk2_haltebetrieb
+  slave: !secret trovis_modbus_address
+  address: 1202
+  scan_interval: 60
+
+- name: "Trovis Hk2 Stuetzbetrieb"
+  unique_id: trovis_hk2_stuetzbetrieb
+  slave: !secret trovis_modbus_address
+  address: 1203
+  scan_interval: 60
+
+- name: "Trovis Hk2 Aufheizbetrieb"
+  unique_id: trovis_hk2_aufheizbetrieb
+  slave: !secret trovis_modbus_address
+  address: 1204
+  scan_interval: 60
+
+- name: "Trovis Hk2 Ruecklauftemperaturbegrenzung"
+  unique_id: trovis_hk2_rlbegrenzung
+  slave: !secret trovis_modbus_address
+  address: 1205
+  scan_interval: 60
+
+- name: "Trovis Hk2 AT Abschaltung"
+  unique_id: trovis_hk2_atabschaltung
+  slave: !secret trovis_modbus_address
+  address: 1206
+  scan_interval: 60
+
+- name: "Trovis Hk2 Standby"
+  unique_id: trovis_hk2_standby
+  slave: !secret trovis_modbus_address
+  address: 1207
+  scan_interval: 60
+
+- name: "Trovis Hk2 Frostschutz"
+  unique_id: trovis_hk2_frostschutz
+  slave: !secret trovis_modbus_address
+  address: 1208
+  scan_interval: 60
+
 # Binaerausgang BA2
 - name: "Umwaelzpumpe 2"
   unique_id: trovis_hk2_up2
   slave: !secret trovis_modbus_address
   address: 57
   scan_interval: 60
-  
