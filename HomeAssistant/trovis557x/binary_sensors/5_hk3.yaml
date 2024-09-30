@@ -3,7 +3,7 @@
 # Hk3 ist nur bei den 'großen' Modellen vorhanden (5578, 5579). Warmwasser ist Hk4!
 
 - name: "Trovis Hk3 Handbetrieb"
-  unique_id: trovis_hk1_handbetrieb
+  unique_id: trovis_hk3_handbetrieb
   slave: !secret trovis_modbus_address
   address: 6
   scan_interval: 60
