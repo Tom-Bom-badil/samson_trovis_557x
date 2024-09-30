@@ -1,3 +1,11 @@
 #################  Heizkreis 4, Warmwasser (Regelkreis 4 - CO4/PA4) ##############
 
 
+- name: "Trovis Hk4 Betriebsart"
+  unique_id: trovis_hk4_betriebsart
+  slave: !secret trovis_modbus_address
+  address: 111
+  scan_interval: 60
+  device_class: enum
+  attributes:
+    options: "{{ ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] }}"
