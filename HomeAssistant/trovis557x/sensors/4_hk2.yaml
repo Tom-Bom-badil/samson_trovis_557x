@@ -45,9 +45,6 @@
   slave: !secret trovis_modbus_address
   address: 107
   scan_interval: 60
-  #device_class: enum
-  #attributes:
-  #  options: "{{ ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] }}"
 
 - name: "Trovis Hk2 3Pkt Stellsignal"
   unique_id: trovis_hk2_stellsignal
@@ -55,7 +52,5 @@
   address: 108
   scan_interval: 60
   # precision: 0
-  unit_of_measurement: "%"
-  # device_class: power_factor
   data_type: int16
   nan_value: 32767
