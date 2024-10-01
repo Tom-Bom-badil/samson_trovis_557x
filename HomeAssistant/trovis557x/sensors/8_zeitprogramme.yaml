@@ -1,18 +1,18 @@
 ############################### Datum und Zeit ###################################
 
-- name: "Trovis Datum"
+- name: "Trovis Regler Datum"
   unique_id: trovis_z_datum
   slave: !secret trovis_modbus_address
   address: 100
   scan_interval: 60
 
-- name: "Trovis Jahr"
+- name: "Trovis Regler Jahr"
   unique_id: trovis_z_jahr
   slave: !secret trovis_modbus_address
   address: 101
   scan_interval: 60
 
-- name: "Trovis Uhrzeit"
+- name: "Trovis Regler Uhrzeit"
   unique_id: trovis_z_uhrzeit
   slave: !secret trovis_modbus_address
   address: 99
