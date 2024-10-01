@@ -34,7 +34,7 @@
         friendly_name: "Trovis Sommerbetrieb ein (formatiert)"
         value_template: >-
           {% if states('sensor.trovis_hk123_sommerbetrieb_ein')|float < 1000 %}
-            {{ '0' + states('trovis_hk123_sommerbetrieb_ein')[:1] + '.' + states('sensor.trovis_hk123_sommerbetrieb_ein')[-2:] + '.' }}
+            {{ '0' + states('sensor.trovis_hk123_sommerbetrieb_ein')[:1] + '.' + states('sensor.trovis_hk123_sommerbetrieb_ein')[-2:] + '.' }}
           {% else %}
             {{ states('sensor.trovis_hk123_sommerbetrieb_ein')[:2] + '.' + states('sensor.trovis_hk123_sommerbetrieb_ein')[-2:] + '.' }}
           {% endif %}
