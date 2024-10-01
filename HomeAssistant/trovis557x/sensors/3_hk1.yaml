@@ -1,4 +1,4 @@
-#################  Heizkreis 1 (Regelkreis 1 - CO1/PA1) ##########################
+#################  Heizkreis 1 (Regelkreis 1 - CO1/PA1) ########################
 #
 # Annahme: Verwendung einer 3-Punkt-Regelung.
 # Bei einer eigenen 4-Punkte-Kennlinie sind die Register 1012-1027 auszuwerten.
@@ -46,9 +46,6 @@
   slave: !secret trovis_modbus_address
   address: 105
   scan_interval: 60
-  #device_class: enum
-  #attributes:
-  #  options: "{{ ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] }}"
 
 - name: "Trovis Hk1 3Pkt Stellsignal"
   unique_id: trovis_hk1_stellsignal
@@ -56,7 +53,5 @@
   address: 106
   scan_interval: 60
   # precision: 0
-  unit_of_measurement: "%"
-  # device_class: power_factor
   data_type: int16
   nan_value: 32767
