@@ -65,14 +65,14 @@
             {{ states('sensor.trovis_regler_uhrzeit')[:2] + ':' + states('sensor.trovis_regler_uhrzeit')[-2:] }}
           {% endif %}
 
-#      # Trovis - disinfection weekday
-#      trovis_hk4_desinfektionstag_formatiert:
-#        unique_id: trovis_z_hk4_desinfektionstag_formatiert
-#        friendly_name: "Trovis Hk4 Desinfektionstag (formatiert)"
-#        value_template: {{ states('sensor.trovis_hk4_desinfektionstag') }}
-#        device_class: enum
-#          attributes:
-#          options: "{{ ['aus', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'] }}"
+      # Trovis - disinfection weekday
+      trovis_hk4_desinfektionstag_formatiert:
+        unique_id: trovis_z_hk4_desinfektionstag_formatiert
+        friendly_name: "Trovis Hk4 Desinfektionstag (formatiert)"
+        value_template: >
+          {% set weekdays = ['aus', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'] %}
+          {% set disinf_day = states('sensor.trovis_hk4_desinfektionstag') | int %}
+          {{ weekdays[disinf_day] }}
 
       # Trovis - disinfection start time
       trovis_hk4_desinfektionsstart_formatiert:
