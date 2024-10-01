@@ -1,4 +1,4 @@
-#################  Heizkreis 4, Warmwasser (Regelkreis 4 - CO4/PA4) ##############
+#################  Heizkreis 4, Warmwasser (Regelkreis 4 - CO4/PA4) ############
 
 - name: "Trovis Hk4 Handbetrieb"
   unique_id: trovis_hk4_handbetrieb
