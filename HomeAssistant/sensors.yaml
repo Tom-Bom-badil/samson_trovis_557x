@@ -1,12 +1,13 @@
   # Leave indentations (2 spaces) intact, or it WILL throw errors.
+  
   - platform: template
   
     sensors:
 
-      # Trovis - overall status
-      trovis_gesamtstatus:
+      # Trovis - overall state
+      trovis_regler_gesamtstatus:
         unique_id: trovis_r_gesamtstatus
-        friendly_name: "Trovis Gesamtstatus"
+        friendly_name: "Trovis Regler Gesamtstatus"
         value_template: >-
           {% set hk1 = is_state('binary_sensor.trovis_hk1_umwaelzpumpe', 'on') %}
           {% set ww  = is_state('binary_sensor.trovis_hk4_speicherladepumpe', 'on') %}
@@ -18,8 +19,8 @@
 
       # Trovis - formatted date
       trovis_regler_datum_formatiert:
-        unique_id: trovis_r_datum_formatiert
-        friendly_name: "Trovis Datum formatiert"
+        unique_id: trovis_z_datum_formatiert
+        friendly_name: "Trovis Regler Datum (formatiert)"
         value_template: >-
           {% if states('sensor.trovis_regler_datum')|float < 1000 %}
             {{ '0' + states('sensor.trovis_regler_datum')[:1] + '.' + states('sensor.trovis_regler_datum')[-2:] + '.' + states('sensor.trovis_regler_jahr') }}
@@ -27,13 +28,93 @@
             {{ states('sensor.trovis_regler_datum')[:2] + '.' + states('sensor.trovis_regler_datum')[-2:] + '.' + states('sensor.trovis_regler_jahr') }}
           {% endif %}
 
-      # Trovis - formatted time
-      trovis_regler_zeit_formatiert:
-        unique_id: trovis_r_uhrzeit_formatiert
-        friendly_name: "Trovis Uhrzeit formatiert"
+      # Trovis - summer mode on
+      trovis_hk123_sommerbetrieb_ein_formatiert:
+        unique_id: trovis_z_sommerbetrieb_ein_formatiert
+        friendly_name: "Trovis Sommerbetrieb ein (formatiert)"
         value_template: >-
-          {% if states('sensor.trovis_regler_uhrzeit')|float < 1000 %}
+          {% if states('sensor.trovis_hk123_sommerbetrieb_ein')|float < 1000 %}
+            {{ '0' + states('trovis_hk123_sommerbetrieb_ein')[:1] + '.' + states('sensor.trovis_hk123_sommerbetrieb_ein')[-2:] + '.' }}
+          {% else %}
+            {{ states('sensor.trovis_hk123_sommerbetrieb_ein')[:2] + '.' + states('sensor.trovis_hk123_sommerbetrieb_ein')[-2:] + '.' }}
+          {% endif %}
+
+      # Trovis - summer mode off
+      trovis_hk123_sommerbetrieb_aus_formatiert:
+        unique_id: trovis_z_sommerbetrieb_aus_formatiert
+        friendly_name: "Trovis Sommerbetrieb aus (formatiert)"
+        value_template: >-
+          {% if states('sensor.trovis_hk123_sommerbetrieb_aus')|float < 1000 %}
+            {{ '0' + states('trovis_hk123_sommerbetrieb_aus')[:1] + '.' + states('sensor.trovis_hk123_sommerbetrieb_aus')[-2:] + '.' }}
+          {% else %}
+            {{ states('sensor.trovis_hk123_sommerbetrieb_aus')[:2] + '.' + states('sensor.trovis_hk123_sommerbetrieb_aus')[-2:] + '.' }}
+          {% endif %}
+
+      # Trovis - formatted time
+      trovis_regler_uhrzeit_formatiert:
+        unique_id: trovis_z_uhrzeit_formatiert
+        friendly_name: "Trovis Regler Uhrzeit (formatiert)"
+        value_template: >-
+          {% if states('sensor.trovis_regler_uhrzeit')|float < 10 %}
+            {{ '00:0' + states('sensor.trovis_regler_uhrzeit') }}
+          {% elif states('sensor.trovis_regler_uhrzeit')|float < 60 %}
+            {{ '00:' + states('sensor.trovis_regler_uhrzeit') }}
+          {% elif states('sensor.trovis_regler_uhrzeit')|float < 1000 %}
             {{ '0' + states('sensor.trovis_regler_uhrzeit')[:1] + ':' + states('sensor.trovis_regler_uhrzeit')[-2:] }}
           {% else %}
             {{ states('sensor.trovis_regler_uhrzeit')[:2] + ':' + states('sensor.trovis_regler_uhrzeit')[-2:] }}
+          {% endif %}
+
+      # Trovis - disinfection weekday
+      trovis_hk4_desinfektionstag_formatiert:
+        unique_id: trovis_z_hk4_desinfektionstag_formatiert
+        friendly_name: "Trovis Hk4 Desinfektionstag (formatiert)"
+        value_template: {{ states('sensor.trovis_hk4_desinfektionstag') }}
+        device_class: enum
+          attributes:
+          options: "{{ ['aus', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'] }}"
+
+      # Trovis - disinfection start time
+      trovis_hk4_desinfektionsstart_formatiert:
+        unique_id: trovis_z_hk4_desinfektionsstart_formatiert
+        friendly_name: "Trovis HK4 Desinfektionsstart (formatiert)"
+        value_template: >-
+          {% if states('sensor.trovis_hk4_desinfektionsstart')|float < 10 %}
+            {{ '00:0' + states('sensor.trovis_hk4_desinfektionsstart') }}
+          {% elif states('sensor.trovis_hk4_desinfektionsstart')|float < 60 %}
+            {{ '00:' + states('sensor.trovis_hk4_desinfektionsstart') }}
+          {% elif states('sensor.trovis_hk4_desinfektionsstart')|float < 1000 %}
+            {{ '0' + states('sensor.trovis_hk4_desinfektionsstart')[:1] + ':' + states('sensor.trovis_hk4_desinfektionsstart')[-2:] }}
+          {% else %}
+            {{ states('sensor.trovis_hk4_desinfektionsstart')[:2] + ':' + states('sensor.trovis_hk4_desinfektionsstart')[-2:] }}
+          {% endif %}
+
+      # Trovis - disinfection end time
+      trovis_hk4_desinfektionsende_formatiert:
+        unique_id: trovis_z_hk4_desinfektionsende_formatiert
+        friendly_name: "Trovis HK4 Desinfektionsende (formatiert)"
+        value_template: >-
+          {% if states('sensor.trovis_hk4_desinfektionsende')|float < 10 %}
+            {{ '00:0' + states('sensor.trovis_hk4_desinfektionsende') }}
+          {% elif states('sensor.trovis_hk4_desinfektionsende')|float < 60 %}
+            {{ '00:' + states('sensor.trovis_hk4_desinfektionsende') }}
+          {% elif states('sensor.trovis_hk4_desinfektionsende')|float < 1000 %}
+            {{ '0' + states('sensor.trovis_hk4_desinfektionsende')[:1] + ':' + states('sensor.trovis_hk4_desinfektionsende')[-2:] }}
+          {% else %}
+            {{ states('sensor.trovis_hk4_desinfektionsende')[:2] + ':' + states('sensor.trovis_hk4_desinfektionsende')[-2:] }}
+          {% endif %}
+
+      # Trovis - disinfection duration
+      trovis_hk4_desinfektionsdauer_formatiert:
+        unique_id: trovis_z_hk4_desinfektionsdauer_formatiert
+        friendly_name: "Trovis HK4 Desinfektionsdauer (formatiert)"
+        value_template: >-
+          {% if states('sensor.trovis_hk4_desinfektionsdauer')|float < 10 %}
+            {{ '00:0' + states('sensor.trovis_hk4_desinfektionsdauer') }}
+          {% elif states('sensor.trovis_hk4_desinfektionsdauer')|float < 60 %}
+            {{ '00:' + states('sensor.trovis_hk4_desinfektionsdauer') }}
+          {% elif states('sensor.trovis_hk4_desinfektionsdauer')|float < 1000 %}
+            {{ '0' + states('sensor.trovis_hk4_desinfektionsdauer')[:1] + ':' + states('sensor.trovis_hk4_desinfektionsdauer')[-2:] }}
+          {% else %}
+            {{ states('sensor.trovis_hk4_desinfektionsdauer')[:2] + ':' + states('sensor.trovis_hk4_desinfektionsdauer')[-2:] }}
           {% endif %}
