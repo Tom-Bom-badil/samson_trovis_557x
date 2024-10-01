@@ -71,8 +71,8 @@
         friendly_name: "Trovis Hk4 Desinfektionstag (formatiert)"
         value_template: >
           {% set weekdays = ['aus', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'] %}
-          {% set disinf_day = states('sensor.trovis_hk4_desinfektionstag') | int %}
-          {{ weekdays[disinf_day] }}
+          {% set disinfection_day = states('sensor.trovis_hk4_desinfektionstag') | int %}
+          {{ weekdays[disinfection_day] }}
 
       # Trovis - disinfection start time
       trovis_hk4_desinfektionsstart_formatiert:
@@ -118,3 +118,66 @@
           {% else %}
             {{ states('sensor.trovis_hk4_desinfektionsdauer')[:2] + ':' + states('sensor.trovis_hk4_desinfektionsdauer')[-2:] }}
           {% endif %}
+
+      # Trovis - top switch position
+      trovis_regler_schalter_oben_formatiert:
+        unique_id: trovis_r_schalter_oben_formatiert
+        friendly_name: "Trovis Schalter oben (formatiert)"
+        value_template: >
+          {% set positions = ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] %}
+          {% set current_position = states('sensor.trovis_regler_schalter_oben') | int %}
+          {{ positions[current_position] }}
+
+      # Trovis - middle switch position
+      trovis_regler_schalter_mitte_formatiert:
+        unique_id: trovis_r_schalter_mitte_formatiert
+        friendly_name: "Trovis Schalter mitte (formatiert)"
+        value_template: >
+          {% set positions = ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] %}
+          {% set current_position = states('sensor.trovis_regler_schalter_mitte') | int %}
+          {{ positions[current_position] }}
+
+      # Trovis - bottom switch position
+      trovis_regler_schalter_unten_formatiert:
+        unique_id: trovis_r_schalter_unten_formatiert
+        friendly_name: "Trovis Schalter unten (formatiert)"
+        value_template: >
+          {% set positions = ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] %}
+          {% set current_position = states('sensor.trovis_regler_schalter_unten') | int %}
+          {{ positions[current_position] }}
+
+      # Trovis - Hk1 operating mode
+      trovis_regler_hk1_betriebsart_formatiert:
+        unique_id: trovis_hk1_betriebsart_formatiert
+        friendly_name: "Trovis Hk1 Betriebsart (formatiert)"
+        value_template: >
+          {% set modes = ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] %}
+          {% set current_mode = states('sensor.trovis_hk1_betriebsart') | int %}
+          {{ modes[current_mode] }}
+
+      # Trovis - Hk2 operating mode
+      trovis_regler_hk2_betriebsart_formatiert:
+        unique_id: trovis_hk2_betriebsart_formatiert
+        friendly_name: "Trovis Hk2 Betriebsart (formatiert)"
+        value_template: >
+          {% set modes = ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] %}
+          {% set current_mode = states('sensor.trovis_hk2_betriebsart') | int %}
+          {{ modes[current_mode] }}
+
+      # Trovis - Hk3 operating mode
+      trovis_regler_hk3_betriebsart_formatiert:
+        unique_id: trovis_hk3_betriebsart_formatiert
+        friendly_name: "Trovis Hk3 Betriebsart (formatiert)"
+        value_template: >
+          {% set modes = ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] %}
+          {% set current_mode = states('sensor.trovis_hk3_betriebsart') | int %}
+          {{ modes[current_mode] }}
+
+      # Trovis - Hk4 WW operating mode
+      trovis_regler_hk4_betriebsart_formatiert:
+        unique_id: trovis_hk4_betriebsart_formatiert
+        friendly_name: "Trovis Hk4 Betriebsart (formatiert)"
+        value_template: >
+          {% set modes = ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] %}
+          {% set current_mode = states('sensor.trovis_hk4_betriebsart') | int %}
+          {{ modes[current_mode] }}
