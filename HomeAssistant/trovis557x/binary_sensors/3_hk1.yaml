@@ -1,4 +1,4 @@
-#################  Heizkreis 1 (Regelkreis 1 - CO1/PA1) ##########################
+#################  Heizkreis 1 (Regelkreis 1 - CO1/PA1) ########################
 
 - name: "Trovis Hk1 Handbetrieb"
   unique_id: trovis_hk1_handbetrieb
