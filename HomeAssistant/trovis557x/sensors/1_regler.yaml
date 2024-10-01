@@ -1,4 +1,4 @@
-##################################  Regler #######################################
+##################################  Regler #####################################
 
 - name: "Trovis Regler Modell"
   unique_id: trovis_r_modell
@@ -52,27 +52,18 @@
   slave: !secret trovis_modbus_address
   address: 102
   scan_interval: 60
-  #device_class: enum
-  #attributes:
-  #  options: "{{ ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] }}"
 
 - name: "Trovis Regler Schalter mitte"
   unique_id: trovis_r_schaltermitte
   slave: !secret trovis_modbus_address
   address: 103
   scan_interval: 60
-  #device_class: enum
-  #attributes:
-  #  options: "{{ ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] }}"
 
 - name: "Trovis Regler Schalter unten"
   unique_id: trovis_r_schalterunten
   slave: !secret trovis_modbus_address
   address: 104
   scan_interval: 60
-  #device_class: enum
-  #attributes:
-  #  options: "{{ ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] }}"
 
 - name: "Trovis Regler AT Grenzwert"
   unique_id: trovis_r_sommer_at_min
