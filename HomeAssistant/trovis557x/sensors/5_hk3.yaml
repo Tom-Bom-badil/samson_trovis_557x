@@ -3,7 +3,22 @@
 # Annahme: Verwendung einer 3-Punkt-Regelung.
 # Hk3 ist nur bei den 'großen' Modellen vorhanden (5578, 5579). Warmwasser ist Hk4!
 
-- name: "Trovis Hk3 Vorlaufsoll"
+- name: "Trovis Hk3 Betriebsart"
+  unique_id: trovis_hk3_betriebsart
+  slave: !secret trovis_modbus_address
+  address: 109
+  scan_interval: 60
+
+- name: "Trovis Hk3 3Pkt Stellsignal"
+  unique_id: trovis_hk3_stellsignal
+  slave: !secret trovis_modbus_address
+  address: 110
+  scan_interval: 60
+  # precision: 0
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk3 VL Soll"
   unique_id: trovis_hk3_vlsoll
   slave: !secret trovis_modbus_address
   address: 1399
@@ -15,7 +30,55 @@
   data_type: int16
   nan_value: 32767
 
-- name: "Trovis Hk3 Steigung"
+- name: "Trovis Hk3 Raumsoll Tag"
+  unique_id: trovis_hk3_raumsoll_tag
+  slave: !secret trovis_modbus_address
+  address: 1402
+  scan_interval: 900
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk3 Raumsoll Nacht"
+  unique_id: trovis_hk3_raumsoll_nacht
+  slave: !secret trovis_modbus_address
+  address: 1403
+  scan_interval: 900
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk3 VL min"
+  unique_id: trovis_hk3_vl_min
+  slave: !secret trovis_modbus_address
+  address: 1401
+  scan_interval: 900
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk3 VL max"
+  unique_id: trovis_hk3_vl_max
+  slave: !secret trovis_modbus_address
+  address: 1400
+  scan_interval: 900
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk3 VL Steigung"
   unique_id: trovis_hk3_steigung
   slave: !secret trovis_modbus_address
   address: 1405
@@ -27,7 +90,7 @@
   data_type: int16
   nan_value: 32767
 
-- name: "Trovis Hk3 Niveau"
+- name: "Trovis Hk3 VL Niveau"
   unique_id: trovis_hk3_niveau
   slave: !secret trovis_modbus_address
   address: 1406
@@ -41,17 +104,50 @@
   max_value: 30
   nan_value: 32767
 
-- name: "Trovis Hk3 Betriebsart"
-  unique_id: trovis_hk3_betriebsart
+- name: "Trovis Hk3 RL Fusspunkt"
+  unique_id: trovis_hk3_rl_fusspunkt
   slave: !secret trovis_modbus_address
-  address: 109
-  scan_interval: 60
+  address: 1411
+  scan_interval: 900
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
 
-- name: "Trovis Hk3 3Pkt Stellsignal"
-  unique_id: trovis_hk3_stellsignal
+- name: "Trovis Hk3 RL Niveau"
+  unique_id: trovis_hk3_rl_niveau
   slave: !secret trovis_modbus_address
-  address: 110
-  scan_interval: 60
-  # precision: 0
+  address: 1409
+  scan_interval: 900
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk3 RL Steigung"
+  unique_id: trovis_hk3_rl_steigung
+  slave: !secret trovis_modbus_address
+  address: 1408
+  scan_interval: 900
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk3 RL max"
+  unique_id: trovis_hk3_rl_max
+  slave: !secret trovis_modbus_address
+  address: 1410
+  scan_interval: 900
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
   data_type: int16
   nan_value: 32767
