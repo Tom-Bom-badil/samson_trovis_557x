@@ -5,3 +5,99 @@
   slave: !secret trovis_modbus_address
   address: 111
   scan_interval: 60
+
+- name: "Trovis Hk4 minSOLL TW"
+  unique_id: trovis_hk4_minsoll
+  slave: !secret trovis_modbus_address
+  address: 1801
+  scan_interval: 300
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk4 SOLL TW"
+  unique_id: trovis_hk4_soll
+  slave: !secret trovis_modbus_address
+  address: 1799
+  scan_interval: 300
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk4 maxSOLL TW"
+  unique_id: trovis_hk4_maxsoll
+  slave: !secret trovis_modbus_address
+  address: 1800
+  scan_interval: 300
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk4 Haltewert TW"
+  unique_id: trovis_hk4_haltewert
+  slave: !secret trovis_modbus_address
+  address: 1806
+  scan_interval: 300
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk4 Schaltdifferenz TW"
+  unique_id: trovis_hk4_schaltdifferenz
+  slave: !secret trovis_modbus_address
+  address: 1802
+  scan_interval: 300
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk4 Ueberhoehung TW"
+  unique_id: trovis_hk4_ueberhoehung
+  slave: !secret trovis_modbus_address
+  address: 1803
+  scan_interval: 300
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk4 maxLadetemperatur TW"
+  unique_id: trovis_hk4_max_ladetemp
+  slave: !secret trovis_modbus_address
+  address: 1805
+  scan_interval: 300
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk4 Desinfektionstemperatur TW"
+  unique_id: trovis_hk4_desinfektionstemp
+  slave: !secret trovis_modbus_address
+  address: 1829
+  scan_interval: 300
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
