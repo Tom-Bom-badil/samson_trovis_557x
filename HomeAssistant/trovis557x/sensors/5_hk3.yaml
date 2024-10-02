@@ -1,7 +1,7 @@
 #################  Heizkreis 3 (Regelkreis 3 - CO3/PA3) ##########################
 #
-# Annahme: Verwendung einer 3-Punkt-Regelung.
-# Hk3 ist nur bei den 'großen' Modellen vorhanden (5578, 5579). Warmwasser ist Hk4!
+# Annahme: Verwendung einer 3-Punkt-Regelung. Warmwasser ist Hk4!
+# Hk3 ist nur bei den 'großen' Modellen vorhanden (5578, 5579).
 
 - name: "Trovis Hk3 Betriebsart"
   unique_id: trovis_hk3_betriebsart
