@@ -1,6 +1,6 @@
 # Add this to your configuration.yaml (HA root directory)
 
-sensor trovis: !include trovis557x/sensor_templates.yaml
+sensor trovis: !include trovis557x/template_sensor.yaml
 modbus:
   - name: trovis
     type: !secret trovis_connection_type
