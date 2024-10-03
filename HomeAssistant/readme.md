@@ -1,40 +1,9 @@
--work in progress-
+!!! Achtung - work in progress !!!
+Einbindung einer Trovis 557x in Home Assistant:
+
+- Schritt 1: Inhalt der configuration.yaml kopieren (Datei liegt im Root-Verzeichnis von HA)
+- Schritt 2: Inhalt der secrets.yaml kopieren und ggf. anpassen (Datei liegt im Root-Verzeichnis von HA)
+- Schritt 3: Im Root-Verzeichnis von HA ein Verzeichnis trovis557x erstellen und Inhalte von trovis557x hineinkopieren.
+- Schritt 4: Neustart von HA, danach home-assistant.log auf mögliche Fehler prüfen.
 
 Hinweis: Die Dateistruktur entspricht der von Home Assistant, beginnend mit dem HA-Rootverzeichnis. Der Hauptteil der Konfiguration befindet sich nach Funktion geordnet im Verzeichnis trovis557x/. Grund dafür ist, späteren Einsteigern die Einarbeitung in die verschiedenen Reglermodelle mit ihren verschiedenen Funktionen, Sensoren und der Anzahl der Heizkreise zu vereinfachen.
-
-------------
-
-Leider habe ich bis jetzt trotz stundenlangen Herumprobierens noch nicht herausgefunden, wie man sensors, binary_sensors und switches in einer einzigen Datei zusammenfassen und dann per !include_dir_merge_list einbinden kann, also z.B. 
-
-_trovis557x/1_regler.yaml_
-```
-sensors:
-  [...]
-binary sensors:
-  [...]
-switches:
-  [...]
-```
-
-_trovis557x/2_messwerte.yaml_
-```
-sensors:
-  [...]
-binary sensors:
-  [...]
-switches:
-  [...]
-```
-
-Daher liegen die Dateien bis jetzt in separaten Unterverzeichnissen und werden in der configuration.yaml wie folgt eingebunden:
-```
-modbus:
-  - trovis:
-    [...]
-    sensors: !include_dir_merge_list trovis557x/sensors/
-    binary_sensors: !include_dir_merge_list trovis557x/binary_sensors/
-    switches: !include_dir_merge_list trovis557x/switches/
-```
-
-Ziel ist aber definitiv eine Zusammenfassung, so dass am Ende nur 9 Dateien im Hauptverzeichnis statt wie jetzt 3x9 Dateien in 3 Unterverzeichnissen übrig sind.
-__Falls jemand einen Tip hat, wie man das bewerkstelligen kann und wie die configuration.yaml dafür auszusehen hat - vielen Dank für einen Hinweis im Voraus! :)__
