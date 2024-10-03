@@ -1,0 +1,19 @@
+@font-face {
+    font-family: "mydsdigir";
+    src: url(/local/trovis557x/fonts/ds-digi.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: "mydsdigib";
+    src: url(/local/trovis557x/fonts/ds-digib.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: "mydsdigii";
+    src: url(/local/trovis557x/fonts/ds-digii.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: "mydsdigit";
+    src: url(/local/trovis557x/fonts/ds-digit.woff2) format('woff2');
+}
