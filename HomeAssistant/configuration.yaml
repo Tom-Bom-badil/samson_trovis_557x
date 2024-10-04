@@ -1,6 +1,5 @@
 # Add this to your configuration.yaml (HA root directory)
 
-sensor trovis: !include trovis557x/template_sensors.yaml
 modbus:
   - name: trovis
     type: !secret trovis_connection_type
@@ -10,3 +9,6 @@ modbus:
     binary_sensors: !include_dir_merge_list trovis557x/binary_sensors/
     switches:       !include_dir_merge_list trovis557x/switches/
     climates:       !include_dir_merge_list trovis557x/climates/
+
+sensor trovis:      !include trovis557x/template_sensors.yaml
+sensor trovis_stat: !include trovis557x/statistics.yaml
