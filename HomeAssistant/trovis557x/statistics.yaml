@@ -1,0 +1,133 @@
+######################### Tages- und Wochenstatistiken #########################
+
+  # AF1
+  - platform: statistics
+    name: "Trovis Stat AF1 24h min"
+    entity_id: sensor.trovis_fuhler_aussen_1_af1
+    state_characteristic: value_min
+    precision: 1
+    max_age:
+      hours: 24
+
+  - platform: statistics
+    name: "Trovis Stat AF1 24h max"
+    entity_id: sensor.trovis_fuhler_aussen_1_af1
+    state_characteristic: value_max
+    precision: 1
+    max_age:
+      hours: 24
+
+  - platform: statistics
+    name: "Trovis Stat AF1 7d min"
+    entity_id: sensor.trovis_fuhler_aussen_1_af1
+    state_characteristic: value_min
+    precision: 1
+    max_age:
+      hours: 168
+
+  - platform: statistics
+    name: "Trovis Stat AF1 7d max"
+    entity_id: sensor.trovis_fuhler_aussen_1_af1
+    state_characteristic: value_max
+    precision: 1
+    max_age:
+      hours: 168
+
+  # VF1
+  - platform: statistics
+    name: "Trovis Stat VF1 24h min"
+    entity_id: sensor.trovis_fuhler_vorlauf_1_vf1
+    state_characteristic: value_min
+    precision: 1
+    max_age:
+      hours: 24
+
+  - platform: statistics
+    name: "Trovis Stat VF1 24h max"
+    entity_id: sensor.trovis_fuhler_vorlauf_1_vf1
+    state_characteristic: value_max
+    precision: 1
+    max_age:
+      hours: 24
+
+  - platform: statistics
+    name: "Trovis Stat VF1 7d min"
+    entity_id: sensor.trovis_fuhler_vorlauf_1_vf1
+    state_characteristic: value_min
+    precision: 1
+    max_age:
+      hours: 168
+
+  - platform: statistics
+    name: "Trovis Stat VF1 7d max"
+    entity_id: sensor.trovis_fuhler_vorlauf_1_vf1
+    state_characteristic: value_max
+    precision: 1
+    max_age:
+      hours: 168
+
+  # RueF1
+  - platform: statistics
+    name: "Trovis Stat Ruef1 24h min"
+    entity_id: sensor.trovis_fuhler_rucklauf_1_ruf1
+    state_characteristic: value_min
+    precision: 1
+    max_age:
+      hours: 24
+
+  - platform: statistics
+    name: "Trovis Stat Ruef1 24h max"
+    entity_id: sensor.trovis_fuhler_rucklauf_1_ruf1
+    state_characteristic: value_max
+    precision: 1
+    max_age:
+      hours: 24
+
+  - platform: statistics
+    name: "Trovis Stat Ruef1 7d min"
+    entity_id: sensor.trovis_fuhler_rucklauf_1_ruf1
+    state_characteristic: value_min
+    precision: 1
+    max_age:
+      hours: 168
+
+  - platform: statistics
+    name: "Trovis Stat Ruef1 7d max"
+    entity_id: sensor.trovis_fuhler_rucklauf_1_ruf1
+    state_characteristic: value_max
+    precision: 1
+    max_age:
+      hours: 168
+
+  # FF1
+  - platform: statistics
+    name: "Trovis Stat SF1 24h min"
+    entity_id: sensor.trovis_fuhler_speicher_1_sf1
+    state_characteristic: value_min
+    precision: 1
+    max_age:
+      hours: 24
+
+  - platform: statistics
+    name: "Trovis Stat SF1 24h max"
+    entity_id: sensor.trovis_fuhler_speicher_1_sf1
+    state_characteristic: value_max
+    precision: 1
+    max_age:
+      hours: 24
+
+  - platform: statistics
+    name: "Trovis Stat SF1 7d min"
+    entity_id: sensor.trovis_fuhler_speicher_1_sf1
+    state_characteristic: value_min
+    precision: 1
+    max_age:
+      hours: 168
+
+  - platform: statistics
+    name: "Trovis Stat SF1 7d max"
+    entity_id: sensor.trovis_fuhler_speicher_1_sf1
+    state_characteristic: value_max
+    precision: 1
+    max_age:
+      hours: 168
