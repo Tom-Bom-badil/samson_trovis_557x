@@ -6,6 +6,18 @@ Diese komplett interaktive Ansicht habe ich ca. 2014 begonnen - seit 2019 ist si
 Hier ein Screenshot aus der Heizperiode:
 ![__Vorlage - smartVISU im Einsatz__](https://github.com/user-attachments/assets/dd0faec7-c7be-47ee-b9c6-371eeabb3a05)
 
+# Datei ha-visu_aktuell.yaml
+
+Enthält den aktuellen Stand meiner Visu-Entwicklung für HA. Derzeit funktional:
+
+> Hinweis: Bitte nicht über die Temperaturen in meinen Screenshots wundern - meine Bastel-Trovis ist nicht an eine wirkliche Heizung angeschlossen, alle Sensoren messen nur Raumteperaturen.
+
+- Links oben: Bild des aktuellen Heizungsschemas wird bei Statusänderungen umgeschaltet, die angezeigten Sensorwerte sind _live_. Zur Anpassung nach Bedarf den Template Sensor [trovis_regler_gesamtstatus](https://github.com/Tom-Bom-badil/samson_trovis_557x/blob/fb5b95a82fc74c09eb616c466df82a3f73f5a9c4/HomeAssistant/trovis557x/template_sensors.yaml#L8C7-L8C34) anpassen und unter [www/trovis557x/images/status*.svg](https://github.com/Tom-Bom-badil/samson_trovis_557x/tree/master/HomeAssistant/www/trovis557x/images) eigene Bilder einfügen.
+- Links unten: Alle angezeigten Werte inkl Position der Reglerknöpfe, Heizkurve mit Umschaltung Tag-/Nachtsoll, Temperaturen und deren Historie, Reglertyp + Firmware usw sind _live_ und kommen direkt aus dem Regler. Es gibt aber noch etliche Punkte, die ich hier noch implementieren will.
+- Rechts: Die Plots sind zwar in der Rohfassung bereits fertig, werden allerdings erst später nachgereicht.
+![image](https://github.com/user-attachments/assets/d4780e64-453a-46e3-bb8b-e1134d6926eb)
+![image](https://github.com/user-attachments/assets/14e4dc7b-dc75-4589-ae4d-8b718566ab95)
+
 # **Datei seitenaufteilung.yaml**
 
 Ziel: Eine Konzept für die Aufteilung der Reglervisualisierung mit automatischer Anpassung an verschiedene Auflösungen (Heizungsschema interaktiv links oben, Reglerbild interaktiv links unten, rechts 3 Graphen mit Export-Funktionen etc).
