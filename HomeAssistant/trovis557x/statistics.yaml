@@ -99,7 +99,7 @@
     max_age:
       hours: 168
 
-  # FF1
+  # SF1
   - platform: statistics
     name: "Trovis Stat SF1 24h min"
     entity_id: sensor.trovis_fuhler_speicher_1_sf1
