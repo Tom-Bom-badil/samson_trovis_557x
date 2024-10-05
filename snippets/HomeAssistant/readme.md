@@ -16,7 +16,7 @@ Enthält den aktuellen Stand meiner Visu-Entwicklung für HA. Derzeit funktional
 - Links unten: Alle angezeigten Werte inkl Position der Reglerknöpfe, Heizkurve mit Umschaltung Tag-/Nachtsoll, Temperaturen und deren Historie, Reglertyp + Firmware usw sind _live_ und kommen direkt aus dem Regler. Es gibt aber noch etliche Punkte, die ich hier noch implementieren will.
 - Rechts: Die Plots sind zwar in der Rohfassung bereits fertig, werden allerdings erst später nachgereicht.
 
-![image](https://github.com/user-attachments/assets/d4780e64-453a-46e3-bb8b-e1134d6926eb)
+![image](https://github.com/user-attachments/assets/534518c6-ca7d-4575-a9d6-43975fd17a32)
 
 ![image](https://github.com/user-attachments/assets/14e4dc7b-dc75-4589-ae4d-8b718566ab95)
 
