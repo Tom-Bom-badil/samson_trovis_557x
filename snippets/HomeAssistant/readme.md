@@ -15,6 +15,7 @@ Enthält den aktuellen Stand meiner Visu-Entwicklung für HA. Derzeit funktional
 - Links oben: Bild des aktuellen Heizungsschemas wird bei Statusänderungen umgeschaltet, die angezeigten Sensorwerte sind _live_. Zur Anpassung nach Bedarf den Template Sensor [trovis_regler_gesamtstatus](https://github.com/Tom-Bom-badil/samson_trovis_557x/blob/fb5b95a82fc74c09eb616c466df82a3f73f5a9c4/HomeAssistant/trovis557x/template_sensors.yaml#L8C7-L8C34) anpassen und unter [www/trovis557x/images/status*.svg](https://github.com/Tom-Bom-badil/samson_trovis_557x/tree/master/HomeAssistant/www/trovis557x/images) eigene Bilder einfügen.
 - Links unten: Alle angezeigten Werte inkl Position der Reglerknöpfe, Heizkurve mit Umschaltung Tag-/Nachtsoll, Temperaturen und deren Historie, Reglertyp + Firmware usw sind _live_ und kommen direkt aus dem Regler. Es gibt aber noch etliche Punkte, die ich hier noch implementieren will.
 - Rechts: Die Plots sind zwar in der Rohfassung bereits fertig, werden allerdings erst später nachgereicht.
+
 ![image](https://github.com/user-attachments/assets/d4780e64-453a-46e3-bb8b-e1134d6926eb)
 ![image](https://github.com/user-attachments/assets/14e4dc7b-dc75-4589-ae4d-8b718566ab95)
 
