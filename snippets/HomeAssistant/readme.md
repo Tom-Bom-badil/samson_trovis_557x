@@ -17,6 +17,7 @@ Enthält den aktuellen Stand meiner Visu-Entwicklung für HA. Derzeit funktional
 - Rechts: Die Plots sind zwar in der Rohfassung bereits fertig, werden allerdings erst später nachgereicht.
 
 ![image](https://github.com/user-attachments/assets/d4780e64-453a-46e3-bb8b-e1134d6926eb)
+
 ![image](https://github.com/user-attachments/assets/14e4dc7b-dc75-4589-ae4d-8b718566ab95)
 
 # **Datei seitenaufteilung.yaml**
