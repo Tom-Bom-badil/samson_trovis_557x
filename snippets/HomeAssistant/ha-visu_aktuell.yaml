@@ -1,0 +1,598 @@
+  # Komplette HA-Seite - erfordert card-mod und button-card (--> HACS im linken Button-Bereich)
+  # rechts oben in Raw-Konfigurationseditor gehen, Code am Ende einfügen bzw. bestehendes ersetzen
+  # diesen Kommentar beim Kopieren weglassen; Einrückungen beibehalten!
+  - title: Heizung
+    path: Heizung
+    type: panel
+    cards:
+      - type: horizontal-stack
+        name: dashboard_komplett
+        cards:
+          - name: ~~ links ~~
+            type: vertical-stack
+            style:
+              margin_left: 2vh
+            card_mod:
+              style: |
+                ha-card { 
+                  background: transparent;
+                  padding: 5%;
+                }   
+            cards:
+              - name: linksoben
+                type: picture-elements
+                show_state: false
+                show_name: false
+                image: /local/trovis557x/images/highres_transparent.png
+                card_mod:
+                  style: |
+                    ha-card { 
+                      --ha-card-border-radius: 0px; 
+                      /** --ha-card-border-color: #990000; **/
+                      --ha-card-border-width: 0px;
+                      --card-mod-icon-color: white;
+                      margin-left: 2vh;
+                      margin-top: 2vh;
+                      width: 47vw !important;
+                      height: 44vh !important;
+                      background: transparent;
+                    }
+                tap_action:
+                  action: navigate
+                  navigation_path: /lovelace/zehn
+                elements:
+                  - type: image
+                    entity: sensor.trovis_regler_gesamtstatus
+                    state_image:
+                      '0': /local/trovis557x/images/aus.svg
+                      '1': /local/trovis557x/images/heizbetrieb.svg
+                      '2': /local/trovis557x/images/warmwasser.svg
+                    style:
+                      top: 0%
+                      left: 0%
+                      transform: translate(0%,0%)
+                      pointer-events: none
+                  - type: state-label
+                    title: AT
+                    entity: sensor.trovis_fuhler_aussen_1_af1
+                    style:
+                      color: white
+                      left: 4%
+                      top: 2%
+                    tap_action:
+                      action: more-info
+                  - type: state-label
+                    title: SF1
+                    entity: sensor.trovis_fuhler_speicher_1_sf1
+                    style:
+                      color: white
+                      left: 51%
+                      top: 5%
+                    tap_action:
+                      action: more-info
+                  - type: state-label
+                    title: RueF1
+                    entity: sensor.trovis_fuhler_rucklauf_1_ruf1
+                    style:
+                      color: white
+                      left: 35%
+                      top: 39%
+                    tap_action:
+                      action: more-info
+                  - type: state-label
+                    title: RK1_%
+                    entity: sensor.trovis_hk1_3pkt_stellsignal
+                    suffix: '%'
+                    style:
+                      color: white
+                      left: 40%
+                      top: 55%
+                    tap_action:
+                      action: more-info
+                  - type: state-label
+                    title: RueF1
+                    entity: sensor.trovis_fuhler_vorlauf_1_vf1
+                    style:
+                      color: white
+                      left: 72%
+                      top: 57%
+                    tap_action:
+                      action: more-info
+              - name: links_unten
+                show_name: false
+                title: Trovis Regler
+                type: custom:button-card
+                card_mod:
+                  style: |
+                    ha-card { 
+                    /*  --ha-card-border-radius: 0px; 
+                      --ha-card-border-color: #990000;
+                      --ha-card-border-width: 1px; */
+                      --card-mod-icon-color: white;
+                      margin-left: 2vh;
+                      width: 47vw !important;
+                      height: 46vh !important;
+                      background: transparent;
+                    }
+                aspect_ratio: 8/4.5
+                entity: none
+                variables:
+                  var_weather_entity: weather.forecast_zu_hause
+                styles:
+                  card:
+                    - background-color: lightgray
+                    - border-radius: 0
+                    - border: 6px gray inset
+                    - padding: 1%
+                  grid:
+                    - grid-template-areas: |
+                        "samson anlage modell"
+                        "button1 display display"
+                        "button1 display display"
+                        "button2 display display"
+                        "button2 chart chart"
+                        "button3 chart chart"
+                        "button3 chart chart"
+                    - grid-template-rows: 0.1fr 1fr min-content min-content min-content 1fr
+                    - grid-template-columns: 1fr 2fr 1fr
+                    - gap: 0.5 rem
+                  custom_fields:
+                    samson:
+                      - justify-self: start
+                      - align-self: end
+                      - margin-top: 0px
+                      - font-size: 1.5em
+                      - background-color: transparent
+                    anlage:
+                      - justify-self: start
+                      - align-self: end
+                      - margin-top: 0px
+                      - font-size: 8px
+                      - background-color: transparent
+                    modell:
+                      - justify-self: end
+                      - align-self: end
+                      - margin-top: 0px
+                      - font-size: 1.5em
+                      - background-color: transparent
+                    button1:
+                      - justify-self: start
+                      - align-self: start
+                      - margin-right: 5px
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - width: 75%
+                    button2:
+                      - justify-self: start
+                      - align-self: mid
+                      - margin-right: 5px
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - width: 75%
+                    button3:
+                      - justify-self: start
+                      - align-self: end
+                      - margin-right: 5px
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - width: 75%
+                    display:
+                      - justify-self: start
+                      - align-self: start
+                      - background-color: '#a6a9a0'
+                      - '--ha-card-border-radius': 0px
+                      - height: 100% !important
+                      - width: 100% !important
+                      - padding: 0
+                      - margin: 0
+                      - border: 2px inset
+                    chart:
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - height: 100%
+                custom_fields:
+                  samson:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[ return 'Samson' ]]]
+                      styles:
+                        card:
+                          - color: black
+                          - background: transparent
+                          - font-size: 1em
+                          - font-weight: bold
+                  anlage:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var version = states['sensor.trovis_regler_firmwareversion'].state;
+                          var anlage = states['sensor.trovis_regler_hydraulik_anlage'].state
+                          return '<small>Anlage ' + anlage + ', Firmware ' + version + '</small>'
+                        ]]]
+                      styles:
+                        card:
+                          - color: black
+                          - background: transparent
+                  modell:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var modell = states['sensor.trovis_regler_modell'].state;
+                          return 'Trovis ' + modell
+                        ]]]
+                      styles:
+                        card:
+                          - color: black
+                          - background: transparent
+                          - font-size: 1em
+                          - font-weight: bold
+                  button1:
+                    card:
+                      type: picture
+                      image: |
+                        [[[
+                          var stat = states['sensor.trovis_hk1_betriebsart'].state;
+                          return '/local/trovis557x/images/drehschalter-heizung-' + stat + '.png'
+                        ]]]
+                      tap_action:
+                        action: more-info
+                  button2:
+                    card:
+                      type: picture
+                      image: |
+                        [[[
+                          var stat = states['sensor.trovis_hk2_betriebsart'].state;
+                          return '/local/trovis557x/images/drehschalter-heizung-' + stat + '.png'
+                        ]]]
+                  button3:
+                    card:
+                      type: picture
+                      image: |
+                        [[[
+                          var stat = states['sensor.trovis_hk4_betriebsart'].state;
+                          return '/local/trovis557x/images/drehschalter-wasser-' + stat + '.png'
+                        ]]]
+                  display:
+                    card:
+                      type: custom:button-card
+                      aspect_ratio: 8/2.5
+                      name: |
+                        [[[
+                          var AF1=states['sensor.trovis_fuhler_aussen_1_af1'].state;
+                          var AF1_24_min=states['sensor.trovis_stat_af1_24h_min'].state;
+                          var AF1_24_max=states['sensor.trovis_stat_af1_24h_max'].state;
+                          var AF1_7d_min=states['sensor.trovis_stat_af1_7d_min'].state;
+                          var AF1_7d_max=states['sensor.trovis_stat_af1_7d_max'].state;
+                          
+                          var VF1=states['sensor.trovis_fuhler_vorlauf_1_vf1'].state;
+                          var VF1_24_min=states['sensor.trovis_stat_vf1_24h_min'].state;
+                          var VF1_24_max=states['sensor.trovis_stat_vf1_24h_max'].state;
+                          var VF1_7d_min=states['sensor.trovis_stat_vf1_7d_min'].state;
+                          var VF1_7d_max=states['sensor.trovis_stat_vf1_7d_max'].state;
+
+                          var RUEF1=states['sensor.trovis_fuhler_rucklauf_1_ruf1'].state;
+                          var RUEF1_24_min=states['sensor.trovis_stat_ruef1_24h_min'].state;
+                          var RUEF1_24_max=states['sensor.trovis_stat_ruef1_24h_max'].state;
+                          var RUEF1_7d_min=states['sensor.trovis_stat_ruef1_7d_min'].state;
+                          var RUEF1_7d_max=states['sensor.trovis_stat_ruef1_7d_max'].state;
+
+                          var SF1=states['sensor.trovis_fuhler_speicher_1_sf1'].state;
+                          var SF1_24_min=states['sensor.trovis_stat_sf1_24h_min'].state;
+                          var SF1_24_max=states['sensor.trovis_stat_sf1_24h_max'].state;
+                          var SF1_7d_min=states['sensor.trovis_stat_sf1_7d_min'].state;
+                          var SF1_7d_max=states['sensor.trovis_stat_sf1_7d_max'].state;
+                          
+                          return `
+
+                            <div style="height:12vh !important;font-size: 180%; font-family:'mydsdigib'">
+                              <table height="100%" width="100%">
+
+                               <colgroup>
+                                  <col width=10%>
+                                  <col width=30% align=char char=".">
+                                  <col width=30% align=char char=".">
+                                  <col width=30% align=char char=".">
+                               </colgroup>
+
+                                <small>
+                                <tr align=right>
+                                  <th></th>
+                                  <th><small>aktuell</small></th>
+                                  <th><small>min/max 24h</small></th>
+                                  <th><small>min/max  7d</small></th>
+                                </tr>
+                                </small>
+                                
+                                <tr align=right>
+                                  <td align=left>AF1</td>
+                                  <td>${AF1} °C</td>
+                                  <td>${AF1_24_min} / ${AF1_24_max}</td>
+                                  <td>${AF1_7d_min} / ${AF1_7d_max}</td>
+                                </tr>
+
+                                <tr align=right>
+                                  <td align=left>VF1</td>
+                                  <td>${VF1} °C</td>
+                                  <td>${VF1_24_min} / ${VF1_24_max}</td>
+                                  <td>${VF1_7d_min} / ${VF1_7d_max}</td>
+                                </tr>
+
+                                <tr align=right>
+                                  <td align=left>RueF1</td>
+                                  <td>${RUEF1} °C</td>
+                                  <td>${RUEF1_24_min} / ${RUEF1_24_max}</td>
+                                  <td>${RUEF1_7d_min} / ${RUEF1_7d_max}</td>
+                                </tr>
+
+                                <tr align=right>
+                                  <td align=left>SF1</td>
+                                  <td>${SF1} °C</td>
+                                  <td>${SF1_24_min} / ${SF1_24_max}</td>
+                                  <td>${SF1_7d_min} / ${SF1_7d_max}</td>
+                                </tr>
+                                
+                              </table>
+                            </div>
+                          `
+                        ]]]
+                      styles:
+                        card:
+                          - color: black
+                          - background: transparent
+                          - padding: 0
+                          - margin: 0
+                          - height: 90% !important
+                        name:
+                          - padding: 5
+                          - margin: 5
+                          - width: 100%
+                          - height: 100% !important
+                  chart:
+                    card:
+                      type: custom:plotly-graph
+                      name: heizkurve
+                      title: ''
+                      raw_plotly_config: true
+                      config:
+                        displaylogo: false
+                      style: |
+                        ha-card {
+                          border: solid 2px var(--primary-color);
+                        }
+                      layout:
+                        title:
+                          text: Heizkurve Hk1
+                          x: 0.045
+                          'y': 0.9
+                          font:
+                            family: Arial
+                            size: 20
+                            color: black
+                            font-face: bold
+                        annotations:
+                          - xref: paper
+                            yref: paper
+                            x: 0.99
+                            'y': 0.1
+                            align: right
+                            textposition: bottom right
+                            font:
+                              family: Arial
+                              size: 12
+                              color: black
+                            text: |
+                              [[[
+                                var niveau = states['sensor.trovis_hk1_niveau'].state;
+                                var steigung = states['sensor.trovis_hk1_steigung'].state;
+                                var vlmin = states['sensor.trovis_hk1_vl_min'].state;
+                                var vlmax = states['sensor.trovis_hk1_vl_max'].state;
+                                var tagsoll = states['sensor.trovis_hk1_raumsoll_tag'].state;
+                                var nachtsoll = states['sensor.trovis_hk1_raumsoll_nacht'].state;
+                                return 'VL min / max: ' + Math.floor(vlmin) + '...' + Math.floor(vlmax) + ' °C<br>' +
+                                  'Steigung / Niveau: ' + steigung + ' / ' + Math.floor(niveau) + ' °C<br>' +
+                                  'Raumsoll Tag / Nacht: ' + Math.floor(tagsoll) + ' / ' + Math.floor(nachtsoll) + ' °C';
+                              ]]]
+                            showarrow: false
+                          - xref: paper
+                            yref: paper
+                            align: left
+                            x: 0.04
+                            'y': 0.85
+                            font:
+                              size: 12
+                              color: black
+                            text: |
+                              [[[
+                                var soll = states['sensor.trovis_hk1_vorlaufsoll'].state;
+                                var ist = states['sensor.trovis_fuhler_vorlauf_1_vf1'].state;
+                                var modus = '';
+                                if (states['binary_sensor.trovis_hk1_tagbetrieb'].state === 'on')
+                                  var modus = 'Tagbetrieb';
+                                else
+                                  var modus = 'Nachtbetrieb';
+                                return modus + '<br>VL soll/ist:' + soll + '/' + ist;
+                              ]]]
+                            showarrow: false
+                        showlegend: false
+                        autosize: false
+                        paper_bgcolor: rgba(0,0,0,0)
+                        plot_bgcolor: rgba(0,0,0,0)
+                        border: 1px
+                        margin:
+                          l: 1
+                          b: 3
+                          r: 5
+                          t: 5
+                          pad: 0
+                        xaxis:
+                          showlegend: false
+                          linecolor: grey
+                          linewidth: 1
+                          mirror: true
+                          ticklabelposition: inside
+                          type: number
+                          range:
+                            - 20
+                            - -20
+                        yaxis:
+                          fixedrange: false
+                          linecolor: grey
+                          linewidth: 1
+                          mirror: true
+                          ticklabelposition: inside
+                      entities:
+                        - entity: sensor.trovis_fuhler_aussen_1_af1
+                          internal: true
+                          fn: >-
+                            $fn ({ ys }) => { window.af1_ext = ys[ys.length-1];
+                            }
+                        - entity: binary_sensor.trovis_hk1_tagbetrieb
+                          internal: true
+                          fn: >-
+                            $fn ({ ys }) => { window.hk1_tagbetrieb_ext =
+                            ys[ys.length-1]; }
+                        - entity: sensor.trovis_hk1_raumsoll_tag
+                          internal: true
+                          fn: >-
+                            $fn ({ ys }) => { window.hk1_tagsoll_ext =
+                            ys[ys.length-1]; }
+                        - entity: sensor.trovis_hk1_raumsoll_nacht
+                          internal: true
+                          fn: >-
+                            $fn ({ ys }) => { window.hk1_nachtsoll_ext =
+                            ys[ys.length-1]; }
+                        - entity: sensor.trovis_hk1_niveau
+                          internal: true
+                          fn: >-
+                            $fn ({ ys }) => { window.hk1_niveau_ext =
+                            ys[ys.length-1]; }
+                        - entity: sensor.trovis_hk1_steigung
+                          internal: true
+                          fn: >-
+                            $fn ({ ys }) => { window.hk1_steigung_ext =
+                            ys[ys.length-1]; }
+                        - entity: sensor.trovis_hk1_vl_min
+                          internal: true
+                          fn: >-
+                            $fn ({ ys }) => { window.hk1_vl_min_ext =
+                            ys[ys.length-1]; }
+                        - entity: sensor.trovis_hk1_vl_max
+                          internal: true
+                          fn: >-
+                            $fn ({ ys }) => { window.hk1_vl_max_ext =
+                            ys[ys.length-1]; }
+                        - name: Aktuell
+                          entity: ''
+                          mode: markers
+                          marker:
+                            color: grey
+                            size: 15
+                            line:
+                              color: black
+                              width: 3
+                            symbol: diamond
+                          x:
+                            - |
+                              [[[
+                                var my_x = states['sensor.trovis_fuhler_aussen_1_af1'].state;
+                                return my_x;
+                              ]]]
+                          'y':
+                            - |
+                              [[[
+                                var my_y = states['sensor.trovis_fuhler_vorlauf_1_vf1'].state;
+                                return my_y;
+                              ]]]
+                        - name: Heizkurve
+                          entity: ''
+                          line:
+                            shape: spline
+                            color: black
+                          fn: |
+                            $fn ({ vars, state }) => {
+
+                              const x = []; 
+                              const y = [];
+
+                              let hk1_tagbetrieb, hk1_tag_soll, hk1_nacht_soll;
+                              let hk1_niveau, hk1_steigung, hk1_vorlauf_min, hk1_vorlauf_max;
+                              let AT, lauf, hk1_SOLL;
+
+                              hk1_tagbetrieb = window.hk1_tagbetrieb_ext;
+                              console.log('hk1_tagbetrieb: ' + window.hk1_tagbetrieb_ext + '|' + hk1_tagbetrieb);
+                              hk1_tag_soll = window.hk1_tagsoll_ext * 1;
+                              hk1_nacht_soll = window.hk1_nachtsoll_ext * 1;
+                              hk1_niveau = window.hk1_niveau_ext * 1;
+                              hk1_steigung = window.hk1_steigung_ext * 1;
+                              hk1_vorlauf_min = window.hk1_vl_min_ext * 1;
+                              hk1_vorlauf_max = window.hk1_vl_max_ext * 1;
+
+                              AT = -20;
+                              lauf = 0;
+
+                              if (hk1_tagbetrieb === 'on')
+                                hk1_SOLL = hk1_tag_soll;
+                              else
+                                hk1_SOLL = hk1_nacht_soll;
+                              
+                              while (AT < 25) {
+                                x[lauf] = AT;
+                                y[lauf] = 24 + hk1_niveau + 2*hk1_steigung*(hk1_SOLL-20) - (0.1 + 0.9*hk1_steigung) * (1.5*(AT-20) + 0.01*Math.pow((AT-20), 2));
+                                if (y[lauf] < hk1_vorlauf_min)
+                                  y[lauf] = hk1_vorlauf_min;
+                                if (y[lauf] > hk1_vorlauf_max)
+                                  y[lauf] = hk1_vorlauf_max;
+                                lauf += 1;
+                                AT += 1;
+                              }
+                              vars.x = x;
+                              vars.y = y;
+                            };
+                          x: $fn ({ vars }) => vars.x
+                          'y': $fn ({ vars }) => vars.y
+          - name: ~~ rechts ~~
+            type: vertical-stack
+            cards:
+              - name: Plot 1
+                type: custom:button-card
+                card_mod:
+                  style: |
+                    ha-card { 
+                      --ha-card-border-radius: 0px; 
+                      --ha-card-border-color: #990000;
+                      --ha-card-border-width: 1px; 
+                      --card-mod-icon-color: white;
+                      padding: 0;
+                      height: 30vh;
+                      margin-top: 2vh;
+                      background: transparent;
+                    }  
+              - name: Plot 2
+                type: custom:button-card
+                card_mod:
+                  style: |
+                    ha-card { 
+                      --ha-card-border-radius: 0px; 
+                      --ha-card-border-color: #990000;
+                      --ha-card-border-width: 1px; 
+                      --card-mod-icon-color: white;
+                      padding: 0;
+                      height: 30vh;
+                      background: transparent;
+                    }  
+              - name: Plot 3
+                type: custom:button-card
+                card_mod:
+                  style: |
+                    ha-card { 
+                      --ha-card-border-radius: 0px; 
+                      --ha-card-border-color: #990000;
+                      --ha-card-border-width: 1px; 
+                      --card-mod-icon-color: white;
+                      padding: 0;
+                      height: 29vh;
+                      background: transparent;
+                    }  
