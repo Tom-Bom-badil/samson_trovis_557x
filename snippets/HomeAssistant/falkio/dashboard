@@ -1,0 +1,449 @@
+views:
+  - title: Home
+    panel: true
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            square: false
+            columns: 9
+            cards:
+              - name: Außen
+                type: custom:button-card
+                show_name: true
+                show_icon: false
+                show_state: true
+                aspect_ratio: 2/1
+                tap_action:
+                  action: toggle
+                entity: sensor.trovis_fuhler_aussen_1_af1
+                styles:
+                  card:
+                    - font-size: 16px
+              - name: Speicher
+                type: custom:button-card
+                show_name: true
+                show_icon: false
+                show_state: true
+                aspect_ratio: 2/1
+                tap_action:
+                  action: toggle
+                entity: sensor.trovis_fuhler_speicher_1_sf1
+              - name: Vorlauf
+                show_name: true
+                show_icon: false
+                show_state: true
+                type: custom:button-card
+                aspect_ratio: 2/1
+                tap_action:
+                  action: toggle
+                entity: sensor.trovis_fuhler_vorlauf_1_vf1
+              - name: RüF1
+                show_name: true
+                show_icon: false
+                show_state: true
+                type: custom:button-card
+                aspect_ratio: 2/1
+                tap_action:
+                  action: toggle
+                entity: sensor.trovis_fuhler_rucklauf_1_ruf1
+              - name: RüF2
+                show_name: true
+                show_icon: false
+                show_state: true
+                type: custom:button-card
+                aspect_ratio: 2/1
+                tap_action:
+                  action: toggle
+                entity: sensor.trovis_fuhler_rucklauf_2_ruf2
+              - name: Steller HK
+                show_name: true
+                show_icon: false
+                show_state: true
+                type: custom:button-card
+                aspect_ratio: 2/1
+                tap_action:
+                  action: toggle
+                entity: sensor.trovis_hk1_stellsignal
+              - name: Steller TW
+                show_name: true
+                show_icon: false
+                show_state: true
+                type: custom:button-card
+                aspect_ratio: 2/1
+                tap_action:
+                  action: toggle
+                entity: sensor.trovis_hk2_stellsignal
+              - name: Vorlauf soll
+                show_name: true
+                show_icon: false
+                show_state: true
+                type: custom:button-card
+                aspect_ratio: 2/1
+                tap_action:
+                  action: toggle
+                entity: sensor.trovis_hk1_vorlaufsoll
+              - name: TW soll
+                show_name: true
+                show_icon: false
+                show_state: true
+                type: custom:button-card
+                aspect_ratio: 2/1
+                tap_action:
+                  action: toggle
+                entity: sensor.trovis_hk2_speichersoll
+          - type: horizontal-stack
+            name: dashboard_komplett
+            cards:
+              - name: ~~ links ~~
+                type: vertical-stack
+                card_mod:
+                  style: |
+                    ha-card { 
+                      background: transparent;
+                      padding: 5%;
+                    }   
+                cards:
+                  - name: L1
+                    show_state: false
+                    show_name: false
+                    type: picture-elements
+                    image: local/trovis/transparent.png
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          --ha-card-border-radius: 0px; 
+                          --ha-card-border-color: #990000;
+                          --ha-card-border-width: 0px; 
+                          --card-mod-icon-color: white;
+                          background: transparent;
+                          padding-left: 10%;
+                          padding-right: 10%;
+                          padding-top: 3%;
+                          padding-bottom: 0%;
+                          margin-bottom: 0%;
+                        }
+                    elements:
+                      - type: image
+                        entity: sensor.trovis_gesamtstatus
+                        state_image:
+                          '0': /local/trovis/status_0_beide_aus.svg
+                          '1': /local/trovis/status_1_TWWan_HKaus.svg
+                          '2': /local/trovis/status_1_TWWaus_HKan.svg
+                          '3': /local/trovis/status_1_TWWan_HKan.svg
+                        style:
+                          top: 0%
+                          left: 0%
+                          transform: translate(0,0)
+                          pointer-events: none
+                      - type: state-label
+                        title: AT
+                        entity: sensor.trovis_fuhler_aussen_1_af1
+                        style:
+                          color: white
+                          left: 2%
+                          top: 3%
+                        tap_action:
+                          action: more-info
+                      - type: state-label
+                        title: SF1
+                        entity: sensor.trovis_fuhler_speicher_1_sf1
+                        style:
+                          color: white
+                          left: 49%
+                          top: 3%
+                        tap_action:
+                          action: more-info
+                      - type: state-label
+                        title: RueF1
+                        entity: sensor.trovis_fuhler_rucklauf_1_ruf1
+                        style:
+                          color: white
+                          left: 50.5%
+                          top: 72%
+                        tap_action:
+                          action: more-info
+                      - type: state-label
+                        title: RK2_%
+                        entity: sensor.trovis_hk2_stellsignal
+                        style:
+                          color: white
+                          left: 42%
+                          top: 41.5%
+                        tap_action:
+                          action: more-info
+                      - type: state-label
+                        title: RueF2
+                        entity: sensor.trovis_fuhler_rucklauf_2_ruf2
+                        style:
+                          color: white
+                          left: 37.3%
+                          top: 65%
+                        tap_action:
+                          action: more-info
+                      - type: state-label
+                        title: VF1
+                        entity: sensor.trovis_fuhler_vorlauf_1_vf1
+                        style:
+                          color: white
+                          left: 79%
+                          top: 36%
+                        tap_action:
+                          action: more-info
+                      - type: state-label
+                        title: RK1_%
+                        entity: sensor.trovis_hk1_stellsignal
+                        style:
+                          color: white
+                          left: 58%
+                          top: 47%
+                        tap_action:
+                          action: more-info
+                  - name: L2
+                    show_state: false
+                    show_name: false
+                    type: picture-elements
+                    elements:
+                      - type: custom:button-card
+                        title: Vorlage
+                        name: ''
+                        styles:
+                          card:
+                            - background-color: transparent
+                            - top: '-100px'
+                            - left: 53%
+                          grid:
+                            - grid-template-areas: |
+                                "text1"
+                                "text2"
+                                "text3"
+                                "text4"
+                            - grid-template-rows: 0.1fr min-content min-content min-content 1fr
+                            - grid-template-columns: 1fr min-content 0.1fr
+                            - gap: 0px 0px
+                          custom_fields:
+                            text1:
+                              - justify-self: start
+                              - align-self: end
+                              - margin-top: 5px
+                              - font-size: 0.5em
+                              - background-color: tranparent
+                            text2:
+                              - justify-self: start
+                              - align-self: end
+                              - margin-top: 0px
+                              - font-size: 0.5em
+                              - background-color: transparent
+                            text3:
+                              - justify-self: start
+                              - align-self: end
+                              - margin-top: 0px
+                              - font-size: 1.5em
+                              - background-color: transparent
+                            text4:
+                              - justify-self: start
+                              - align-self: end
+                              - margin-top: 0px
+                              - font-size: 1.5em
+                              - background-color: transparent
+                        custom_fields:
+                          text1:
+                            card:
+                              type: custom:button-card
+                              name: |
+                                [[[
+                                  var uhr = states['sensor.trovis_uhrzeit_formatiert_2'].state;
+                                  var datum = states['sensor.trovis_datum_formatiert'].state
+                                  return '<small>Uhrzeit: ' + uhr + ' ' +'\t Datum: ' + datum + '</small>'
+                                ]]]
+                              styles:
+                                card:
+                                  - color: black
+                                  - background: transparent
+                          text2:
+                            card:
+                              type: custom:button-card
+                              name: |
+                                [[[
+                                  var version = states['sensor.trovis_regler_firmwareversion'].state;
+                                  var anlage = states['sensor.trovis_regler_hydraulik_anlage'].state
+                                  return '<small>Anlage:   ' + anlage + '         Firmware: ' + version + '</small>'
+                                ]]]
+                              styles:
+                                card:
+                                  - color: black
+                                  - background: transparent
+                          text3:
+                            card:
+                              type: custom:button-card
+                              name: |
+                                [[[
+                                  var steigung = states['sensor.trovis_hk1_steigung'].state;
+                                  var niveau = states['sensor.trovis_hk1_niveau'].state
+                                  return '<small>Steigung: ' + steigung + ' Niveau: ' + niveau + '</small>'
+                                ]]]
+                              styles:
+                                card:
+                                  - color: black
+                                  - background: transparent
+                          text4:
+                            card:
+                              type: custom:button-card
+                              name: |
+                                [[[
+                                  var tagsoll = states['sensor.trovis_hk1_tag_soll'].state;
+                                  var nachtsoll = states['sensor.trovis_hk1_nacht_soll'].state
+                                  return '<small>Tag Soll: ' + tagsoll + '</small>'
+                                ]]]
+                              styles:
+                                card:
+                                  - color: black
+                                  - background: transparent
+                    image: local/trovis/Trovis.svg
+              - name: ~~ rechts ~~
+                type: vertical-stack
+                cards:
+                  - name: R1
+                    type: custom:plotly-graph
+                    title: Aussentemperatur (48h)
+                    layout:
+                      paper_bgcolor: transparent
+                      plot_bgcolor: transparent
+                      xaxis:
+                        showlegend: true
+                      yaxis:
+                        type: number
+                    hours_to_show: 48
+                    refresh_interval: 60
+                    entities:
+                      - name: AT
+                        entity: sensor.trovis_fuhler_aussen_1_af1
+                        line:
+                          shape: spline
+                          color: lightgrey
+                        fill: tozeroy
+                        opacity: 0.5
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          --card-mod-icon-color: white;
+                          padding: 0;
+                          height: 27vh;
+                          background: transparent;
+                          font-size: 10px;
+                          font-weight: 800;
+                          letter-spacing: 0px;
+                        }  
+                  - name: R2
+                    type: custom:plotly-graph
+                    title: Vor- und Rücklauf HK (48h)
+                    layout:
+                      paper_bgcolor: transparent
+                      plot_bgcolor: transparent
+                      xaxis:
+                        showlegend: true
+                      yaxis:
+                        type: number
+                        range:
+                          - 20
+                          - 65
+                      yaxis2:
+                        type: number
+                        range:
+                          - 0
+                          - 100
+                    hours_to_show: 48
+                    refresh_interval: 60
+                    entities:
+                      - name: Vorlauf
+                        entity: sensor.trovis_fuhler_vorlauf_1_vf1
+                        show_value: false
+                        line:
+                          shape: spline
+                          color: '#FF0000'
+                          width: 2
+                      - name: Rücklauf
+                        entity: sensor.trovis_fuhler_rucklauf_1_ruf1
+                        line:
+                          shape: spline
+                          color: '#00B0F0'
+                          width: 2
+                      - name: Steller
+                        entity: sensor.trovis_hk1_stellsignal
+                        line:
+                          shape: spline
+                          color: lightgrey
+                        yaxis: y2
+                        fill: tozeroy
+                        opacity: 0.5
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          --card-mod-icon-color: white;
+                          padding: 0;
+                          height: 27vh;
+                          background: transparent;
+                          font-size: 10px;
+                          font-weight: 800;
+                          letter-spacing: 0px;
+                        }  
+                  - name: R3
+                    type: custom:plotly-graph
+                    title: Trinkwasserkreis (48h)
+                    layout:
+                      paper_bgcolor: transparent
+                      plot_bgcolor: transparent
+                      xaxis:
+                        showlegend: true
+                      yaxis:
+                        type: number
+                        range:
+                          - 20
+                          - 65
+                      yaxis2:
+                        type: number
+                        range:
+                          - 0
+                          - 100
+                    hours_to_show: 48
+                    refresh_interval: 60
+                    entities:
+                      - name: Solltemperatur
+                        entity: sensor.trovis_hk2_speichersoll
+                        line:
+                          dash: dot
+                          color: yellow
+                          width: 2
+                        opacity: 0.6
+                      - name: Speichertemperatur
+                        entity: sensor.trovis_fuhler_speicher_1_sf1
+                        show_value: false
+                        line:
+                          shape: spline
+                          color: '#FF0000'
+                          width: 2
+                      - name: Rücklauf
+                        entity: sensor.trovis_fuhler_rucklauf_2_ruf2
+                        line:
+                          shape: spline
+                          color: '#00B0F0'
+                          width: 2
+                      - name: Steller
+                        entity: sensor.trovis_hk2_stellsignal
+                        line:
+                          shape: spline
+                          color: lightgrey
+                        yaxis: y2
+                        fill: tozeroy
+                        opacity: 0.5
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          --card-mod-icon-color: white;
+                          padding: 0;
+                          height: 27vh;
+                          background: transparent;
+                          font-size: 10px;
+                          font-weight: 800;
+                          letter-spacing: 0px;
+                        } 
