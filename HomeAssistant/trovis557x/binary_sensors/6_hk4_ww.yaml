@@ -66,15 +66,21 @@
   address: 1808
   scan_interval: 60
 
+- name: "Trovis Hk4 Zwischenheizbetrieb"
+  unique_id: trovis_hk4_zwischenheizbetrieb
+  slave: !secret trovis_modbus_address
+  address: 1830
+  scan_interval: 60
+
 # Binaerausgang BA4
-- name: "Trovis Hk4 Speicherladepumpe"
+- name: "Trovis HK4 Speicherladepumpe"
   unique_id: trovis_hk4_slp
   slave: !secret trovis_modbus_address
   address: 59
   scan_interval: 60
 
 # Binaerausgang BA5
-- name: "Trovis Hk4 Zirkulationspumpe"
+- name: "Trovis HK4 Zirkulationspumpe"
   unique_id: trovis_hk4_zp
   slave: !secret trovis_modbus_address
   address: 60
