@@ -12,3 +12,6 @@ modbus:
 
 sensor trovis:      !include trovis557x/template_sensors.yaml
 sensor trovis_stat: !include trovis557x/statistics.yaml
+#please move the code from that file here if you have further input_numbers
+#unfortunately, for input_numbers this doesn't work as the 2 lines before:
+input_number:       !include trovis557x/input_numbers.yaml

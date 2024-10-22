@@ -1,3 +1,5 @@
+# Achtung, die Plotly-Karte hat derzeit in bestimmten Konstellationen ein Problem mit Auto-Refresh!
+
 cards:
   - type: custom:plotly-graph
     title: Vorlauf und Rücklauf (48h)

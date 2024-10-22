@@ -1,4 +1,4 @@
-############################# Sensoren ('Fühler') ################################
+############################# Sensoren ('Fühler') ##############################
 #
 # Maximalausbau - Anordnung nach elektrischem Schaltplan der 5579 (Port 1-17).
 #
@@ -10,6 +10,7 @@
 # Sensoranschluss: 2-Draht, links Port, rechts Massesteg Mitte (Polung egal).
 # !!! Richtige Seite des Massestegs nutzen - andere Seite ist N von 230V. !!!
 # Sensortyp beachten (PT100, PT1000, NTC5K usw - CO5-F01..03, meist PT1000).
+
 
 # Port / Anschluss 1
 - name: "Trovis Fühler Außen 1 (AF1)"
@@ -231,4 +232,3 @@
   device_class: temperature
   data_type: int16
   nan_value: 32767
-  

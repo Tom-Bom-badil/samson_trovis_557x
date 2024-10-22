@@ -1,10 +1,16 @@
-  # Leave indentation intact, or it WILL fail!
+#############################  Template Sensors #################################
 
   - platform: template
   
     sensors:
 
-      # Trovis - overall state
+      # Trovis - overall state; used for grabbing the right visu status pic top left
+      # All pics are stored in www/trovis557x/images - just modify them as needed
+      # Example for Anlage 2.x:
+      # {% if hk1 %} 1    --> automatically uses gesamtstatus-1.svg
+      # {% elif ww %} 2   --> automatically uses gesamtstatus-2.svg
+      # {% else %} 0      --> automatically uses gesamtstatus-0.svg
+      # {% endif %}
       trovis_regler_gesamtstatus:
         unique_id: trovis_r_gesamtstatus
         friendly_name: "Trovis Regler Gesamtstatus"
@@ -17,7 +23,39 @@
           {% else %} 0
           {% endif %}
 
-      # Trovis - formatted date
+      # Trovis - heating curve to display if you tap/click a button
+      # set to 0/1/2/3/4 (0=do nothing, 1..3=Rk1..3/Heating, 4=Rk4/HotWaterTank)
+      trovis_regler_button1_click: # top button
+        unique_id: trovis_r_button_1_click
+        friendly_name: "Trovis Regler Button1 Klick/Tap"
+        value_template: 1
+
+      trovis_regler_button1_doubleclick:
+        unique_id: trovis_r_button_1_doubleclick
+        friendly_name: "Trovis Regler Button1 Double Klick/Tap"
+        value_template: 1
+
+      trovis_regler_button2_click: # middle button
+        unique_id: trovis_r_button_2_click
+        friendly_name: "Trovis Regler Button2 Klick/Tap"
+        value_template: 2
+
+      trovis_regler_button2_doubleclick:
+        unique_id: trovis_r_button_2_doubleclick
+        friendly_name: "Trovis Regler Button2 Double Klick/Tap"
+        value_template: 2
+
+      trovis_regler_button3_click: # bottom button
+        unique_id: trovis_r_button_3_click
+        friendly_name: "Trovis Regler Button3 Klick/Tap"
+        value_template: 3
+
+      trovis_regler_button3_doubleclick:
+        unique_id: trovis_r_button_3_doubleclick
+        friendly_name: "Trovis Regler Button3 Double Klick/Tap"
+        value_template: 4
+
+      # Trovis - current date formatted
       trovis_regler_datum_formatiert:
         unique_id: trovis_z_datum_formatiert
         friendly_name: "Trovis Regler Datum (formatiert)"
@@ -28,7 +66,7 @@
             {{ states('sensor.trovis_regler_datum')[:2] + '.' + states('sensor.trovis_regler_datum')[-2:] + '.' + states('sensor.trovis_regler_jahr') }}
           {% endif %}
 
-      # Trovis - summer mode on
+      # Trovis - date summer mode on
       trovis_hk123_sommerbetrieb_ein_formatiert:
         unique_id: trovis_z_sommerbetrieb_ein_formatiert
         friendly_name: "Trovis Sommerbetrieb ein (formatiert)"
@@ -39,7 +77,7 @@
             {{ states('sensor.trovis_hk123_sommerbetrieb_ein')[:2] + '.' + states('sensor.trovis_hk123_sommerbetrieb_ein')[-2:] + '.' }}
           {% endif %}
 
-      # Trovis - summer mode off
+      # Trovis - date summer mode off
       trovis_hk123_sommerbetrieb_aus_formatiert:
         unique_id: trovis_z_sommerbetrieb_aus_formatiert
         friendly_name: "Trovis Sommerbetrieb aus (formatiert)"
@@ -50,7 +88,7 @@
             {{ states('sensor.trovis_hk123_sommerbetrieb_aus')[:2] + '.' + states('sensor.trovis_hk123_sommerbetrieb_aus')[-2:] + '.' }}
           {% endif %}
 
-      # Trovis - formatted time
+      # Trovis - current time formatted
       trovis_regler_uhrzeit_formatiert:
         unique_id: trovis_z_uhrzeit_formatiert
         friendly_name: "Trovis Regler Uhrzeit (formatiert)"
@@ -74,7 +112,7 @@
           {% set disinfection_day = states('sensor.trovis_hk4_desinfektionstag') | int %}
           {{ weekdays[disinfection_day] }}
 
-      # Trovis - disinfection start time
+      # Trovis - disinfection start time formatted
       trovis_hk4_desinfektionsstart_formatiert:
         unique_id: trovis_z_hk4_desinfektionsstart_formatiert
         friendly_name: "Trovis HK4 Desinfektionsstart (formatiert)"
@@ -89,7 +127,7 @@
             {{ states('sensor.trovis_hk4_desinfektionsstart')[:2] + ':' + states('sensor.trovis_hk4_desinfektionsstart')[-2:] }}
           {% endif %}
 
-      # Trovis - disinfection end time
+      # Trovis - disinfection end time formatted
       trovis_hk4_desinfektionsende_formatiert:
         unique_id: trovis_z_hk4_desinfektionsende_formatiert
         friendly_name: "Trovis HK4 Desinfektionsende (formatiert)"
@@ -104,7 +142,7 @@
             {{ states('sensor.trovis_hk4_desinfektionsende')[:2] + ':' + states('sensor.trovis_hk4_desinfektionsende')[-2:] }}
           {% endif %}
 
-      # Trovis - disinfection duration
+      # Trovis - disinfection duration formatted
       trovis_hk4_desinfektionsdauer_formatiert:
         unique_id: trovis_z_hk4_desinfektionsdauer_formatiert
         friendly_name: "Trovis HK4 Desinfektionsdauer (formatiert)"
@@ -123,7 +161,7 @@
       trovis_regler_schalter_oben_formatiert:
         unique_id: trovis_r_schalter_oben_formatiert
         friendly_name: "Trovis Schalter oben (formatiert)"
-        value_template: >
+        value_template: >-
           {% set positions = ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] %}
           {% set current_position = states('sensor.trovis_regler_schalter_oben') | int %}
           {{ positions[current_position] }}
@@ -132,7 +170,7 @@
       trovis_regler_schalter_mitte_formatiert:
         unique_id: trovis_r_schalter_mitte_formatiert
         friendly_name: "Trovis Schalter mitte (formatiert)"
-        value_template: >
+        value_template: >-
           {% set positions = ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] %}
           {% set current_position = states('sensor.trovis_regler_schalter_mitte') | int %}
           {{ positions[current_position] }}
@@ -141,43 +179,192 @@
       trovis_regler_schalter_unten_formatiert:
         unique_id: trovis_r_schalter_unten_formatiert
         friendly_name: "Trovis Schalter unten (formatiert)"
-        value_template: >
+        value_template: >-
           {% set positions = ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] %}
           {% set current_position = states('sensor.trovis_regler_schalter_unten') | int %}
           {{ positions[current_position] }}
 
-      # Trovis - Hk1 operating mode
-      trovis_regler_hk1_betriebsart_formatiert:
+      # Trovis - Hk1 operating mode as text
+      trovis_hk1_betriebsart_formatiert:
         unique_id: trovis_hk1_betriebsart_formatiert
         friendly_name: "Trovis Hk1 Betriebsart (formatiert)"
-        value_template: >
+        value_template: >-
           {% set modes = ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] %}
           {% set current_mode = states('sensor.trovis_hk1_betriebsart') | int %}
           {{ modes[current_mode] }}
 
-      # Trovis - Hk2 operating mode
-      trovis_regler_hk2_betriebsart_formatiert:
+      # Trovis - Hk2 operating mode as text
+      trovis_hk2_betriebsart_formatiert:
         unique_id: trovis_hk2_betriebsart_formatiert
         friendly_name: "Trovis Hk2 Betriebsart (formatiert)"
-        value_template: >
+        value_template: >-
           {% set modes = ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] %}
           {% set current_mode = states('sensor.trovis_hk2_betriebsart') | int %}
           {{ modes[current_mode] }}
 
-      # Trovis - Hk3 operating mode
-      trovis_regler_hk3_betriebsart_formatiert:
+      # Trovis - Hk3 operating mode as text
+      trovis_hk3_betriebsart_formatiert:
         unique_id: trovis_hk3_betriebsart_formatiert
         friendly_name: "Trovis Hk3 Betriebsart (formatiert)"
-        value_template: >
+        value_template: >-
           {% set modes = ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] %}
           {% set current_mode = states('sensor.trovis_hk3_betriebsart') | int %}
           {{ modes[current_mode] }}
 
-      # Trovis - Hk4 WW operating mode
-      trovis_regler_hk4_betriebsart_formatiert:
+      # Trovis - Hk4 WW operating mode as text
+      trovis_hk4_betriebsart_formatiert:
         unique_id: trovis_hk4_betriebsart_formatiert
         friendly_name: "Trovis Hk4 Betriebsart (formatiert)"
-        value_template: >
+        value_template: >-
           {% set modes = ['PA', 'Auto', 'Stdby', 'Hand', 'Sonne', 'Mond'] %}
           {% set current_mode = states('sensor.trovis_hk4_betriebsart') | int %}
           {{ modes[current_mode] }}
+
+      # Trovis - Hk4 (WW) day time temperatures
+      trovis_hk4_tagestemperaturen:
+        unique_id: trovis_hk4_tagestemperaturen
+        friendly_name: "Trovis Hk4 Tagestemperaturen"
+        value_template: >-
+          {% set min = states('sensor.trovis_hk4_soll_tw') | int %}
+          {% set hysterese = states('sensor.trovis_hk4_schaltdifferenz_tw') | int %}
+          {% set max = min + hysterese %}
+          {{ min|string + '-' + max|string + ' °C' }}
+
+      # Trovis - Hk4 (WW) night time temperatures
+      trovis_hk4_nachttemperaturen:
+        unique_id: trovis_hk4_nachttemperaturen
+        friendly_name: "Trovis Hk4 Nachttemperaturen"
+        value_template: >-
+          {% set min = states('sensor.trovis_hk4_haltewert_tw') | int %}
+          {% set hysterese = states('sensor.trovis_hk4_schaltdifferenz_tw') | int %}
+          {% set max = min + hysterese %}
+          {{ min|string + '-' + max|string + ' °C' }}
+
+      # Trovis - Hk4 (WW) currently set heating temperature
+      trovis_hk4_ladetemperatur:
+        unique_id: trovis_hk4_ladetemperatur
+        friendly_name: "Trovis Hk4 Ladetemperatur"
+        value_template: >-
+          {% set ww_ist = states('sensor.trovis_fuhler_speicher_1_sf1') | float(1) %}
+          {% set ueberhoehung = states('sensor.trovis_hk4_ueberhoehung_tw') | float(1) %}
+          {% set ladesoll = ww_ist + ueberhoehung | float(1) %}
+          {{ 'Ziel-Ladetemperatur: ' + ladesoll|string + ' °C' }}
+
+      # Trovis - Hk4 (WW) general info
+      trovis_hk4_infos:
+        unique_id: trovis_hk4_infos
+        friendly_name: "Trovis Hk4 Infos"
+        value_template: >-
+          {% set sollwert = states('sensor.trovis_hk4_soll_tw') | int %}
+          {% set haltewert = states('sensor.trovis_hk4_haltewert_tw') | int %}
+          {% set schaltdifferenz = states('sensor.trovis_hk4_schaltdifferenz_tw') | int %}
+          {% set ueberhoehung = states('sensor.trovis_hk4_ueberhoehung_tw') | int %}
+          {% set schalter_min = states('sensor.trovis_hk4_minsoll_tw') | int %}
+          {% set schalter_max = states('sensor.trovis_hk4_maxsoll_tw') | int %}
+          {% set ladetemp_max = states('sensor.trovis_hk4_maxladetemperatur_tw') | int %}
+          {% set vl_max = states('sensor.trovis_hk4_maxladetemperatur_tw') | int %}
+          {% set rl_max = states('sensor.trovis_hk4_maxrl_tw') | int %}
+          {% set zwischenheizen = states('binary_sensor.trovis_hk4_zwischenheizbetrieb') | string %}
+
+          {{
+            'Sollwert: ' + sollwert|string + ' °C<br/>' +
+            'Haltewert: ' + haltewert|string + ' °C<br/>' +
+            'Schaltdifferenz: ' + schaltdifferenz|string + ' °C<br/>' +
+            'Überhöhung VL: ' + ueberhoehung|string + ' °C<br/>' +
+            'Drehschalterlimits: ' + schalter_min|string + '-' + schalter_max|string + ' °C<br/>' +
+            'VLsek / RLpri max: ' + vl_max|string + '/' + rl_max|string + ' °C<br/>' +
+            'Zwischenheizen: ' + zwischenheizen
+          }}
+
+      # Trovis - Heating curves HK123
+      # moved here from 'sensors' due to 256 Bytes length limitation (arrays became too long)
+      trovis_hk123_heizkurven:
+        unique_id: trovis_hk123_heizkurven
+        friendly_name: "Trovis Hk123 Heizkurven"
+        value_template: "siehe Attribute"
+        attribute_templates:
+
+          x_werte: >-
+            {% set x = namespace(valsx='') %}
+            {% for lauf in range(-20,21) %}
+              {% set x.valsx = x.valsx + lauf|string + ',' %}
+            {% endfor %}
+            {{ x.valsx[:-1].split(',') | map('int') | list }}
+
+          hk1: >-
+            {% set tagbetrieb = is_state('binary_sensor.trovis_hk1_tagbetrieb', 'on')| int %}
+            {% set tagsoll = states['sensor.trovis_hk1_raumsoll_tag'].state|float %}
+            {% set nachtsoll = states['sensor.trovis_hk1_raumsoll_nacht'].state|float %}
+            {% set niveau = states['sensor.trovis_hk1_niveau'].state|float %}
+            {% set steigung = states['sensor.trovis_hk1_steigung'].state|float %}
+            {% set vl_min = states['sensor.trovis_hk1_vl_min'].state|float %}
+            {% set vl_max = states['sensor.trovis_hk1_vl_max'].state|float %}
+            {% set y = namespace(valsy='') %}
+            {% if tagbetrieb %}
+              {% set soll = tagsoll | int %}
+            {% else %}
+              {% set soll = nachtsoll | int %}
+            {% endif %}
+            {% for lauf in this.attributes.x_werte %}
+              {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
+                          (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
+              {% if vl < vl_min %}
+                {% set vl = vl_min %}
+              {% elif vl > vl_max %}
+                {% set vl = vl_max %}
+              {% endif %}
+              {% set y.valsy = y.valsy + vl|round(2)|string + ',' %}
+            {% endfor %}
+            {{ y.valsy[:-1].split(',') | map('float') | list }}
+
+          hk2: >-
+            {% set tagbetrieb = is_state('binary_sensor.trovis_hk2_tagbetrieb', 'on')| int %}
+            {% set tagsoll = states['sensor.trovis_hk2_raumsoll_tag'].state|float %}
+            {% set nachtsoll = states['sensor.trovis_hk2_raumsoll_nacht'].state|float %}
+            {% set niveau = states['sensor.trovis_hk2_niveau'].state|float %}
+            {% set steigung = states['sensor.trovis_hk2_steigung'].state|float %}
+            {% set vl_min = states['sensor.trovis_hk2_vl_min'].state|float %}
+            {% set vl_max = states['sensor.trovis_hk2_vl_max'].state|float %}
+            {% set y = namespace(valsy='') %}
+            {% if tagbetrieb %}
+              {% set soll = tagsoll | int %}
+            {% else %}
+              {% set soll = nachtsoll | int %}
+            {% endif %}
+            {% for lauf in this.attributes.x_werte %}
+              {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
+                          (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
+              {% if vl < vl_min %}
+                {% set vl = vl_min %}
+              {% elif vl > vl_max %}
+                {% set vl = vl_max %}
+              {% endif %}
+              {% set y.valsy = y.valsy + vl|round(2)|string + ',' %}
+            {% endfor %}
+            {{ y.valsy[:-1].split(',') | map('float') | list }}
+
+          hk3: >-
+            {% set tagbetrieb = is_state('binary_sensor.trovis_hk3_tagbetrieb', 'on')| int %}
+            {% set tagsoll = states['sensor.trovis_hk3_raumsoll_tag'].state|float %}
+            {% set nachtsoll = states['sensor.trovis_hk3_raumsoll_nacht'].state|float %}
+            {% set niveau = states['sensor.trovis_hk3_niveau'].state|float %}
+            {% set steigung = states['sensor.trovis_hk3_steigung'].state|float %}
+            {% set vl_min = states['sensor.trovis_hk3_vl_min'].state|float %}
+            {% set vl_max = states['sensor.trovis_hk3_vl_max'].state|float %}
+            {% set y = namespace(valsy='') %}
+            {% if tagbetrieb %}
+              {% set soll = tagsoll | int %}
+            {% else %}
+              {% set soll = nachtsoll | int %}
+            {% endif %}
+            {% for lauf in this.attributes.x_werte %}
+              {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
+                          (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
+              {% if vl < vl_min %}
+                {% set vl = vl_min %}
+              {% elif vl > vl_max %}
+                {% set vl = vl_max %}
+              {% endif %}
+              {% set y.valsy = y.valsy + vl|round(2)|string + ',' %}
+            {% endfor %}
+            {{ y.valsy[:-1].split(',') | map('float') | list }}

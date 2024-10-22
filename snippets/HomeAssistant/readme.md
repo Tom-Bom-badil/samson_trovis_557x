@@ -16,25 +16,15 @@ Enthält den aktuellen Stand meiner Visu-Entwicklung für HA. Derzeit funktional
 - Links unten: Alle angezeigten Werte inkl Position der Reglerknöpfe, Heizkurve mit Umschaltung Tag-/Nachtsoll, Temperaturen und deren Historie, Reglertyp + Firmware usw sind _live_ und kommen direkt aus dem Regler. Es gibt aber noch etliche Punkte, die ich hier noch implementieren will.
 - Rechts: Die Plots sind zwar in der Rohfassung bereits fertig, werden allerdings erst später nachgereicht.
 
-![image](https://github.com/user-attachments/assets/534518c6-ca7d-4575-a9d6-43975fd17a32)
+![image](https://github.com/user-attachments/assets/eeff6040-99fe-408e-b165-743d995025ff)
 
-![image](https://github.com/user-attachments/assets/14e4dc7b-dc75-4589-ae4d-8b718566ab95)
+![image](https://github.com/user-attachments/assets/693d8a7e-96d5-4b25-a20b-cf9298e4341a)
 
 # **Datei seitenaufteilung.yaml**
 
 Ziel: Eine Konzept für die Aufteilung der Reglervisualisierung mit automatischer Anpassung an verschiedene Auflösungen (Heizungsschema interaktiv links oben, Reglerbild interaktiv links unten, rechts 3 Graphen mit Export-Funktionen etc).
 
-Das Grundgerüst:
 ![seitenaufteilung](https://github.com/user-attachments/assets/374489ba-a67d-4748-b063-ee1df406f228)
-
-Heizung aus (Status 0):
-![seitenaufteilung_status_0](https://github.com/user-attachments/assets/af327bf7-d65c-4389-8d86-f91769436e28)
-
-Heizbetrieb (Status 1):
-![seitenaufteilung_status_1](https://github.com/user-attachments/assets/d53d4dff-0039-4419-b8c1-e6f99d5e1e1e)
-
-Warmwasserbereitung (Status 2):
-![seitenaufteilung_status_2](https://github.com/user-attachments/assets/ec061fe8-5640-43bb-b2e6-92120e75610d)
 
 # **Datei reglerbild_interaktiv.yaml**
 Ziel: Darstellung einer 5575/5576/5579 mit interaktiven Elementen und der tatsächlichen Heizkurve und aktuellem VL als plotly-Graph.
