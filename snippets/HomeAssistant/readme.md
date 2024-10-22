@@ -24,17 +24,7 @@ Enthält den aktuellen Stand meiner Visu-Entwicklung für HA. Derzeit funktional
 
 Ziel: Eine Konzept für die Aufteilung der Reglervisualisierung mit automatischer Anpassung an verschiedene Auflösungen (Heizungsschema interaktiv links oben, Reglerbild interaktiv links unten, rechts 3 Graphen mit Export-Funktionen etc).
 
-Das Grundgerüst:
 ![seitenaufteilung](https://github.com/user-attachments/assets/374489ba-a67d-4748-b063-ee1df406f228)
-
-Heizung aus (Status 0):
-![seitenaufteilung_status_0](https://github.com/user-attachments/assets/af327bf7-d65c-4389-8d86-f91769436e28)
-
-Heizbetrieb (Status 1):
-![seitenaufteilung_status_1](https://github.com/user-attachments/assets/d53d4dff-0039-4419-b8c1-e6f99d5e1e1e)
-
-Warmwasserbereitung (Status 2):
-![seitenaufteilung_status_2](https://github.com/user-attachments/assets/ec061fe8-5640-43bb-b2e6-92120e75610d)
 
 # **Datei reglerbild_interaktiv.yaml**
 Ziel: Darstellung einer 5575/5576/5579 mit interaktiven Elementen und der tatsächlichen Heizkurve und aktuellem VL als plotly-Graph.
