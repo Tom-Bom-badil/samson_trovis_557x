@@ -89,3 +89,12 @@
   data_type: int16
   min_value: 1
   max_value: 6
+
+# bitte noch ignorieren, Vorbereitung für spätere Schreibvorgänge
+# 1732 -> Register 144
+# besser: switch, command_on/command_off, write_type holding
+- name: "Trovis Regler Schreibzugriff setzen"
+  unique_id: trovis_r_schreibzugriff
+  slave: !secret trovis_modbus_address
+  address: 144
+  scan_interval: 60
