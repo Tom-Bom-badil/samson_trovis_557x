@@ -1,0 +1,7 @@
+#############################  Input Numbers ###################################
+
+  trovis_visu_heizkreis:
+    name: 'Enthält anzuzeigende Heizukurve auf dem Regler in der Visu'
+    initial: 1
+    min: 0
+    max: 4
