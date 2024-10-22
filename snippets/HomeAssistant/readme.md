@@ -18,7 +18,7 @@ Enthält den aktuellen Stand meiner Visu-Entwicklung für HA. Derzeit funktional
 
 ![image](https://github.com/user-attachments/assets/eeff6040-99fe-408e-b165-743d995025ff)
 
-![image](https://github.com/user-attachments/assets/2b3852ad-75ce-45d0-b4d3-6e5e1590ea7c)
+![image](https://github.com/user-attachments/assets/693d8a7e-96d5-4b25-a20b-cf9298e4341a)
 
 # **Datei seitenaufteilung.yaml**
 
