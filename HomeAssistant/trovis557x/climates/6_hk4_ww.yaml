@@ -1,0 +1,45 @@
+############################## Klimaentitäten ################################
+#- bitte ignorieren, nur Spielwiese / Vorbereitung für spätere Schreibvorgänge -
+
+
+# - name: "Trovis Hk4 minSOLL TW"
+#   unique_id: trovis_hk4_minsoll
+#   slave: !secret trovis_modbus_address
+#   address: 1801
+#   target_temp_register: 1801
+#   scan_interval: 60
+#   scale: 0.1
+#   precision: 1
+#   data_type: int16
+#   temperature_unit: "°C"
+#   min_temp: 5
+#   max_temp: 90
+#   temp_step: 5
+
+# - name: "Trovis Hk4 SOLL TW"
+#   unique_id: trovis_hk4_soll
+#   slave: !secret trovis_modbus_address
+#   address: 1799
+#   target_temp_register: 1799
+#   scan_interval: 60
+#   scale: 0.1
+#   precision: 1
+#   data_type: int16
+#   temperature_unit: "°C"
+#   min_temp: 5
+#   max_temp: 90
+#   temp_step: 5
+  
+# - name: "Trovis Hk4 maxSOLL TW"
+#   unique_id: trovis_hk4_maxsoll
+#   slave: !secret trovis_modbus_address
+#   address: 1800
+#   target_temp_register: 1800
+#   scan_interval: 60
+#   scale: 0.1
+#   precision: 1
+#   data_type: int16
+#   temperature_unit: "°C"
+#   min_temp: 5
+#   max_temp: 90
+#   temp_step: 5
