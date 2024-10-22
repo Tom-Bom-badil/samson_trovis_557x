@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
+		width="10.4435in" height="4.67577in" viewBox="0 0 751.931 336.656" xml:space="preserve"
+		color-interpolation-filters="sRGB" class="st5">
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st2 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st3 {fill:#ffffff;font-family:Arial Black;font-size:4.00001em}
+		.st4 {font-size:0.250001em}
+		.st5 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<g>
+		<title>Dummy Seite</title>
+		<g id="shape222-3" transform="translate(227.147,-142.816)">
+			<title>Tabelle.222</title>
+			<desc>Status 3 Bitte in HomeAssistant die Datei www/trovis557x/stat...</desc>
+			<textBlock margins="rect(4,4,4,4)" tabSpace="42.5197"/>
+			<textRect cx="141.732" cy="311.144" width="283.47" height="51.0236"/>
+			<rect x="0" y="285.632" width="283.465" height="51.0236" class="st2"/>
+			<text x="32.41" y="289.54" class="st3" langID="1031"><paragraph horizAlign="1"/><tabList/>Status 4<newlineChar/><newlineChar/><newlineChar/>
+			<tspan x="34.41" dy="4.5em" class="st4">Bitte in HomeAssistant die Datei<newlineChar/></tspan>
+			<tspan x="34.41" dy="1.2em" class="st4">www/trovis557x/images/gesamtstatus-4.svg<newlineChar/></tspan>
+			<tspan x="34.41" dy="1.2em" class="st4">mit einem eigenen Bild ersetzen.</tspan></text>
+		</g>
+	</g>
+</svg>
