@@ -1,4 +1,4 @@
-#################  Heizkreis 4, Warmwasser (Regelkreis 4 - CO4/PA4) ##############
+#################  Heizkreis 4, Warmwasser (Regelkreis 4 - CO4/PA4) ############
 
 - name: "Trovis Hk4 Betriebsart"
   unique_id: trovis_hk4_betriebsart
@@ -6,19 +6,7 @@
   address: 111
   scan_interval: 60
 
-- name: "Trovis Hk4 minSOLL TW"
-  unique_id: trovis_hk4_minsoll
-  slave: !secret trovis_modbus_address
-  address: 1801
-  scan_interval: 300
-  scale: 0.1
-  precision: 1
-  unit_of_measurement: "°C"
-  device_class: temperature
-  data_type: int16
-  nan_value: 32767
-
-- name: "Trovis Hk4 SOLL TW"
+- name: "Trovis Hk4 SOLL TW" # 50
   unique_id: trovis_hk4_soll
   slave: !secret trovis_modbus_address
   address: 1799
@@ -30,7 +18,7 @@
   data_type: int16
   nan_value: 32767
 
-- name: "Trovis Hk4 maxSOLL TW"
+- name: "Trovis Hk4 maxSOLL TW" # 60
   unique_id: trovis_hk4_maxsoll
   slave: !secret trovis_modbus_address
   address: 1800
@@ -42,10 +30,10 @@
   data_type: int16
   nan_value: 32767
 
-- name: "Trovis Hk4 Haltewert TW"
-  unique_id: trovis_hk4_haltewert
+- name: "Trovis Hk4 minSOLL TW" # 45
+  unique_id: trovis_hk4_minsoll
   slave: !secret trovis_modbus_address
-  address: 1806
+  address: 1801
   scan_interval: 300
   scale: 0.1
   precision: 1
@@ -54,7 +42,7 @@
   data_type: int16
   nan_value: 32767
 
-- name: "Trovis Hk4 Schaltdifferenz TW"
+- name: "Trovis Hk4 Schaltdifferenz TW" # 10
   unique_id: trovis_hk4_schaltdifferenz
   slave: !secret trovis_modbus_address
   address: 1802
@@ -66,7 +54,7 @@
   data_type: int16
   nan_value: 32767
 
-- name: "Trovis Hk4 Ueberhoehung TW"
+- name: "Trovis Hk4 Ueberhoehung TW" # 22
   unique_id: trovis_hk4_ueberhoehung
   slave: !secret trovis_modbus_address
   address: 1803
@@ -78,7 +66,17 @@
   data_type: int16
   nan_value: 32767
 
-- name: "Trovis Hk4 maxLadetemperatur TW"
+- name: "Trovis Hk4 Nachlauf SLP" # 80
+  unique_id: trovis_hk4_nachlauf_slp
+  slave: !secret trovis_modbus_address
+  address: 1804
+  scan_interval: 300
+  scale: 0.1
+  precision: 1
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk4 maxLadetemperatur TW" # 80
   unique_id: trovis_hk4_max_ladetemp
   slave: !secret trovis_modbus_address
   address: 1805
@@ -90,7 +88,31 @@
   data_type: int16
   nan_value: 32767
 
-- name: "Trovis Hk4 Desinfektionstemperatur TW"
+- name: "Trovis Hk4 Haltewert TW" # 50
+  unique_id: trovis_hk4_haltewert
+  slave: !secret trovis_modbus_address
+  address: 1806
+  scan_interval: 300
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk4 maxRL TW" # 65
+  unique_id: trovis_hk4_max_rl
+  slave: !secret trovis_modbus_address
+  address: 1827
+  scan_interval: 300
+  scale: 0.1
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  data_type: int16
+  nan_value: 32767
+
+- name: "Trovis Hk4 Desinfektionstemperatur TW" # 70?
   unique_id: trovis_hk4_desinfektionstemp
   slave: !secret trovis_modbus_address
   address: 1829
@@ -101,3 +123,8 @@
   device_class: temperature
   data_type: int16
   nan_value: 32767
+
+#-------------------------------
+#            minsoll: 1801, werte: [20.0,25.0,30.0,35.0,40.0,45.0,50.0,55.0,60.0,65.0,70.0,75.0,80.0,85.0,90.0]
+#            maxsoll: 1800, werte: [20.0,25.0,30.0,35.0,40.0,45.0,50.0,55.0,60.0,65.0,70.0,75.0,80.0,85.0,90.0]
+#            solltemperatur: 1799, werte: [20.0,25.0,30.0,35.0,40.0,45.0,50.0,55.0,60.0,65.0,70.0,75.0,80.0,85.0,90.0]
