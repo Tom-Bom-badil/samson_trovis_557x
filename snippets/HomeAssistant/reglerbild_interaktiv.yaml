@@ -1,440 +1,673 @@
-- type: horizontal-stack
-  name: dashboard_komplett
-  cards:
-    - type: vertical-stack
-      name: links
+name: Regler komplett
+show_name: false
+title: Trovis Regler
+type: custom:button-card
+card_mod:
+  style: |
+    ha-card { 
+    /*  --ha-card-border-radius: 0px; 
+      --ha-card-border-color: #990000;
+      --ha-card-border-width: 1px; */
+      --card-mod-icon-color: white;
+      margin-top: -3vh;
+      margin-left: 2vh;
+      width: 47vw !important;
+      height: 46vh !important;
+      background: transparent;
+      overflow: hidden;
+    }
+aspect_ratio: 8/4.5
+entity: none
+variables:
+  var_weather_entity: weather.forecast_zu_hause
+styles:
+  card:
+    - background-color: lightgray
+    - border-radius: 0
+    - border: 6px gray inset
+    - padding: 1%
+  grid:
+    - grid-template-areas: |
+        "samson anlage modell"
+        "button1 display display"
+        "button1 display display"
+        "button2 display display"
+        "button2 chart chart"
+        "button3 chart chart"
+        "button3 chart chart"
+    - grid-template-rows: 0.1fr 1fr min-content min-content min-content 1fr
+    - grid-template-columns: 1fr 2fr 1fr
+    - gap: 0.5 rem
+  custom_fields:
+    samson:
+      - justify-self: start
+      - align-self: end
+      - margin-top: 0px
+      - font-size: 1.5em
+      - background-color: transparent
+    anlage:
+      - justify-self: start
+      - align-self: end
+      - margin-top: 0px
+      - font-size: 8px
+      - background-color: transparent
+    modell:
+      - justify-self: end
+      - align-self: end
+      - margin-top: 0px
+      - font-size: 1.5em
+      - background-color: transparent
+    button1:
+      - justify-self: start
+      - align-self: start
+      - margin-right: 5px
+      - "--ha-card-background": transparent
+      - "--ha-card-border-radius": 0px
+      - width: 75%
+    button2:
+      - justify-self: start
+      - align-self: mid
+      - margin-right: 5px
+      - "--ha-card-background": transparent
+      - "--ha-card-border-radius": 0px
+      - width: 75%
+    button3:
+      - justify-self: start
+      - align-self: end
+      - margin-right: 5px
+      - "--ha-card-background": transparent
+      - "--ha-card-border-radius": 0px
+      - width: 75%
+    display:
+      - justify-self: start
+      - align-self: start
+      - background-color: "#a6a9a0"
+      - "--ha-card-border-radius": 0px
+      - height: 100% !important
+      - width: 100% !important
+      - padding: 0
+      - margin: 0
+      - border: 2px inset
+    chart:
+      - "--ha-card-background": transparent
+      - "--ha-card-border-radius": 0px
+      - margin: 0
+      - margin-right: "-5px !important"
+      - height: 100%
+custom_fields:
+  samson:
+    card:
+      type: custom:button-card
+      name: |
+        [[[ return 'Samson' ]]]
+      styles:
+        card:
+          - color: black
+          - background: transparent
+          - font-size: 1em
+          - font-weight: bold
+  anlage:
+    card:
+      type: custom:button-card
+      name: |
+        [[[
+          let version = states['sensor.trovis_regler_firmwareversion'].state;
+          let anlage = states['sensor.trovis_regler_hydraulik_anlage'].state
+          return '<small>Anlage ' + anlage + ', Firmware ' + version + '</small>'
+        ]]]
+      styles:
+        card:
+          - color: black
+          - background: transparent
+  modell:
+    card:
+      type: custom:button-card
+      name: |
+        [[[
+          let modell = states['sensor.trovis_regler_modell'].state;
+          return 'Trovis ' + modell
+        ]]]
+      styles:
+        card:
+          - color: black
+          - background: transparent
+          - font-size: 1em
+          - font-weight: bold
+  button1:
+    card:
+      type: picture
+      image: |
+        [[[
+          let stat = states['sensor.trovis_regler_schalter_oben'].state;
+          return '/local/trovis557x/images/drehschalter/typ1-stellung-' + stat + '.png'
+        ]]]
+      tap_action:
+        action: call-service
+        service: input_number.set_value
+        service_data:
+          entity_id: input_number.trovis_visu_heizkreis
+          value: |-
+            [[[
+              return states['sensor.trovis_regler_button1_click'].state;
+            ]]]
+      double_tap_action:
+        action: call-service
+        service: input_number.set_value
+        service_data:
+          entity_id: input_number.trovis_visu_heizkreis
+          value: |-
+            [[[
+              return states['sensor.trovis_regler_button1_doubleclick'].state;
+            ]]]
+  button2:
+    card:
+      type: picture
+      image: |
+        [[[
+          let stat = states['sensor.trovis_regler_schalter_mitte'].state;
+          return '/local/trovis557x/images/drehschalter/typ2-stellung-' + stat + '.png'
+        ]]]
+      tap_action:
+        action: call-service
+        service: input_number.set_value
+        service_data:
+          entity_id: input_number.trovis_visu_heizkreis
+          value: |-
+            [[[
+              return states['sensor.trovis_regler_button2_click'].state;
+            ]]]
+      double_tap_action:
+        action: call-service
+        service: input_number.set_value
+        service_data:
+          entity_id: input_number.trovis_visu_heizkreis
+          value: |-
+            [[[
+              return states['sensor.trovis_regler_button2_doubleclick'].state;
+            ]]]
+  button3:
+    card:
+      type: picture
+      image: |
+        [[[
+          let stat = states['sensor.trovis_regler_schalter_unten'].state;
+          return '/local/trovis557x/images/drehschalter/typ3.0-stellung-' + stat + '.png'
+        ]]]
+      tap_action:
+        action: call-service
+        service: input_number.set_value
+        service_data:
+          entity_id: input_number.trovis_visu_heizkreis
+          value: |-
+            [[[
+              return states['sensor.trovis_regler_button3_click'].state;
+            ]]]
+      double_tap_action:
+        action: call-service
+        service: input_number.set_value
+        service_data:
+          entity_id: input_number.trovis_visu_heizkreis
+          value: |-
+            [[[
+              return states['sensor.trovis_regler_button3_doubleclick'].state;
+            ]]]
+  display:
+    card:
+      type: custom:button-card
+      aspect_ratio: 8/2.5
+      name: |
+        [[[
+          let AF1=states['sensor.trovis_fuhler_aussen_1_af1'].state;
+          let AF1_24_min=states['sensor.trovis_stat_af1_24h_min'].state;
+          let AF1_24_max=states['sensor.trovis_stat_af1_24h_max'].state;
+          let AF1_7d_min=states['sensor.trovis_stat_af1_7d_min'].state;
+          let AF1_7d_max=states['sensor.trovis_stat_af1_7d_max'].state;
+          
+          let VF1=states['sensor.trovis_fuhler_vorlauf_1_vf1'].state;
+          let VF1_24_min=states['sensor.trovis_stat_vf1_24h_min'].state;
+          let VF1_24_max=states['sensor.trovis_stat_vf1_24h_max'].state;
+          let VF1_7d_min=states['sensor.trovis_stat_vf1_7d_min'].state;
+          let VF1_7d_max=states['sensor.trovis_stat_vf1_7d_max'].state;
+
+          let RUEF1=states['sensor.trovis_fuhler_rucklauf_1_ruf1'].state;
+          let RUEF1_24_min=states['sensor.trovis_stat_ruef1_24h_min'].state;
+          let RUEF1_24_max=states['sensor.trovis_stat_ruef1_24h_max'].state;
+          let RUEF1_7d_min=states['sensor.trovis_stat_ruef1_7d_min'].state;
+          let RUEF1_7d_max=states['sensor.trovis_stat_ruef1_7d_max'].state;
+
+          let SF1=states['sensor.trovis_fuhler_speicher_1_sf1'].state;
+          let SF1_24_min=states['sensor.trovis_stat_sf1_24h_min'].state;
+          let SF1_24_max=states['sensor.trovis_stat_sf1_24h_max'].state;
+          let SF1_7d_min=states['sensor.trovis_stat_sf1_7d_min'].state;
+          let SF1_7d_max=states['sensor.trovis_stat_sf1_7d_max'].state;
+          
+          return `
+
+            <div style="height:12vh !important;font-size: 180%; font-family:'mydsdigib'">
+              <table height="100%" width="100%">
+
+               <colgroup>
+                  <col width=10%>
+                  <col width=30% align=char char=".">
+                  <col width=30% align=char char=".">
+                  <col width=30% align=char char=".">
+               </colgroup>
+
+                <small>
+                <tr align=right>
+                  <th></th>
+                  <th><small>aktuell</small></th>
+                  <th><small>min/max 24h</small></th>
+                  <th><small>min/max  7d</small></th>
+                </tr>
+                </small>
+                
+                <tr align=right>
+                  <td align=left>AF1</td>
+                  <td>${AF1} °C</td>
+                  <td>${AF1_24_min} / ${AF1_24_max}</td>
+                  <td>${AF1_7d_min} / ${AF1_7d_max}</td>
+                </tr>
+
+                <tr align=right>
+                  <td align=left>VF1</td>
+                  <td>${VF1} °C</td>
+                  <td>${VF1_24_min} / ${VF1_24_max}</td>
+                  <td>${VF1_7d_min} / ${VF1_7d_max}</td>
+                </tr>
+
+                <tr align=right>
+                  <td align=left>RueF1</td>
+                  <td>${RUEF1} °C</td>
+                  <td>${RUEF1_24_min} / ${RUEF1_24_max}</td>
+                  <td>${RUEF1_7d_min} / ${RUEF1_7d_max}</td>
+                </tr>
+
+                <tr align=right>
+                  <td align=left>SF1</td>
+                  <td>${SF1} °C</td>
+                  <td>${SF1_24_min} / ${SF1_24_max}</td>
+                  <td>${SF1_7d_min} / ${SF1_7d_max}</td>
+                </tr>
+                
+              </table>
+            </div>
+          `
+        ]]]
+      styles:
+        card:
+          - color: black
+          - background: transparent
+          - padding: 0
+          - margin: 0
+          - height: 90% !important
+        name:
+          - padding: 5
+          - margin: 5
+          - width: 100%
+          - height: 100% !important
+  chart:
+    card:
+      type: custom:stack-in-card
+      layout_type: grid
+      card_mod:
+        style: |
+          ha-card { 
+            --ha-card-border-radius: 0px; 
+            /** --ha-card-border-color: #990000; **/
+            --ha-card-border-width: 0px;
+            --card-mod-icon-color: white;
+            margin-left: 0;
+            margin-top: 0;
+            margin-right: -1vh;
+            margin-bottom: 1vh;
+            width: 100% !important;
+            /**height: 10vh !important;**/
+            background: transparent;
+            /**background-size: contain;**/
+          }
+      styles:
+        card:
+          - height: 80% !important
       cards:
-        - type: picture-elements
-          name: linksoben
-          show_state: false
-          show_name: false
-          image: /local/trovis557x/images/heizbetrieb.svg
-          card_mod:
-            style: |
-              ha-card { 
-                --ha-card-border-radius: 0px; 
-                --ha-card-border-color: #990000;
-                --ha-card-border-width: 0px; 
-                --card-mod-icon-color: white;
-                background: transparent;
-                padding-left: 10%;
-                padding-right: 10%;
-                padding-top: 3%;
-                padding-bottom: 0%;
-                margin-bottom: 0%;
-              }
-          tap_action:
-            action: navigate
-            navigation_path: /lovelace/zehn
-          elements:
-            - type: state-label
-              title: AT
-              entity: sensor.trovis_fuhler_vorlauf_1_vf1
-              style:
-                color: white
-                left: 3%
-                top: 2%
-              tap_action:
-                action: more-info
-            - type: state-label
-              title: SF1
-              entity: sensor.trovis_fuhler_vorlauf_1_vf1
-              style:
-                color: white
-                left: 51%
-                top: 7%
-              tap_action:
-                action: more-info
-            - type: state-label
-              title: RueF1
-              entity: sensor.trovis_fuhler_vorlauf_1_vf1
-              style:
-                color: white
-                left: 35%
-                top: 50%
-              tap_action:
-                action: more-info
-            - type: state-label
-              title: RK1_%
-              entity: sensor.trovis_regler_hardwareversion
-              suffix: '%'
-              style:
-                color: white
-                left: 40%
-                top: 71%
-              tap_action:
-                action: more-info
-            - type: state-label
-              title: RueF1
-              entity: sensor.trovis_fuhler_vorlauf_1_vf1
-              style:
-                color: white
-                left: 72%
-                top: 72%
-              tap_action:
-                action: more-info
-            - type: state-icon
-              title: dummy
-              entity: sensor.trovis_fuhler_vorlauf_1_vf1
-              style:
-                top: 8%
-                left: 93%
-        - type: custom:button-card
-          title: Trovis Regler
-          aspect_ratio: 8/4.5
-          entity: none
-          variables:
-            dummy_placeholder_entity_for_later_use: weather.forecast_zu_hause
-          styles:
-            card:
-              - background-color: lightgray
-              - border-radius: 0
-              - border: 6px gray inset
-              - padding: 1%
-              - transform: scale(0.8);
-              - top: '-12%'
+        - type: conditional
+          conditions:
+            - condition: state
+              entity: input_number.trovis_visu_heizkreis
+              state: "4.0"
+          card:
             card_mod:
               style: |
                 ha-card { 
-                  --ha-card-border-radius: 0px; 
+                  /** --ha-card-border-radius: 0px; 
                   --ha-card-border-color: #990000;
-                  --ha-card-border-width: 0px; 
+                  --ha-card-border-width: 2px; **/
                   --card-mod-icon-color: white;
-                }                       
-            grid:
-              - grid-template-areas: |
-                  "samson anlage modell"
-                  "button1 display display"
-                  "button1 display display"
-                  "button2 display display"
-                  "button2 chart chart"
-                  "button3 chart chart"
-                  "button3 chart chart"
-              - grid-template-rows: 0.1fr 1fr min-content min-content min-content 1fr
-              - grid-template-columns: 1fr 2fr 1fr
-              - gap: .5rem
-            custom_fields:
-              samson:
-                - justify-self: start
-                - align-self: end
-                - margin-top: 0px
-                - font-size: 1.5em
-                - background-color: transparent
-              anlage:
-                - justify-self: start
-                - align-self: end
-                - margin-top: 0px
-                - font-size: 8px
-                - background-color: transparent
-              modell:
-                - justify-self: end
-                - align-self: end
-                - margin-top: 0px
-                - font-size: 1.5em
-                - background-color: transparent
-              button1:
-                - justify-self: start
-                - align-self: start
-                - margin-right: 5px
-                - '--ha-card-background': transparent
-                - '--ha-card-border-radius': 0px
-              button2:
-                - justify-self: start
-                - align-self: mid
-                - margin-right: 5px
-                - '--ha-card-background': transparent
-                - '--ha-card-border-radius': 0px
-              button3:
-                - justify-self: start
-                - align-self: end
-                - margin-right: 5px
-                - '--ha-card-background': transparent
-                - '--ha-card-border-radius': 0px
-              display:
-                - justify-self: start
-                - align-self: start
-                - background-color: '#a6a9a0'
-                - '--ha-card-border-radius': 0px
-                - height: 100% !important
-                - width: 100%
-                - padding: 0
-                - margin: 0
-                - border: 2px inset
-              chart:
-                - '--ha-card-background': transparent
-                - '--ha-card-border-radius': 0px
-                - height: 100%
-          custom_fields:
-            samson:
-              card:
-                type: custom:button-card
-                name: |
-                  [[[ return 'Samson' ]]]
-                styles:
-                  card:
-                    - color: black
-                    - background: transparent
-                    - font-size: 1em
-                    - font-weight: bold
-            anlage:
-              card:
-                type: custom:button-card
+                  margin: 0vh;
+                  width: 100% !important;
+                  background: transparent;
+                }
+            type: picture-elements
+            image: /local/trovis557x/images/1px_transparent.png
+            elements:
+              - type: image
+                image: /local/trovis557x/images/wasserspeicher.svg
+                style:
+                  top: 0%
+                  left: 0%
+                  transform: translate(0%,-2%)
+                  pointer-events: none
+                  margin-right: "-10px"
+              - type: state-label
+                title: max_vl
+                prefix: "Vorlauf max. "
+                entity: sensor.trovis_hk4_maxladetemperatur_tw
+                style:
+                  color: black
+                  left: 92%
+                  top: 3%
+                  font-weight: bold
+                  font-size: x-small
+                tap_action:
+                  action: more-info
+              - type: state-label
+                title: max_rl
+                prefix: "Primär-Rücklauf max. "
+                entity: sensor.trovis_hk4_maxrl_tw
+                style:
+                  color: black
+                  left: 89%
+                  top: 27%
+                  font-weight: bold
+                  font-size: x-small
+                tap_action:
+                  action: more-info
+              - type: state-label
+                title: lade_temp
+                entity: sensor.trovis_hk4_ww_ladetemperatur
+                style:
+                  color: black
+                  left: 53%
+                  top: 3%
+                  font-size: x-small
+              - type: state-label
+                title: tag_temps
+                entity: sensor.trovis_hk4_ww_tagestemperaturen
+                style:
+                  font-size: small
+                  color: black
+                  left: 29%
+                  top: 9%
+              - type: state-label
+                title: nacht_temps
+                entity: sensor.trovis_hk4_ww_nachttemperaturen
+                style:
+                  font-size: small
+                  color: black
+                  left: 29%
+                  top: 22%
+              - type: state-label
+                title: ist_sf1
+                entity: sensor.trovis_fuhler_speicher_1_sf1
+                style:
+                  color: black
+                  left: 29%
+                  top: 15.5%
+                  font-size: x-large
+                  font-family: mydsdigib
+                tap_action:
+                  action: more-info
+              - type: custom:button-card
+                title: ww-infos
                 name: |
                   [[[
-                    var version = states['sensor.trovis_regler_firmwareversion'].state;
-                    var anlage = states['sensor.trovis_regler_hydraulik_anlage'].state
-                    return '<small>Anlage ' + anlage + ', Firmware ' + version + '</small>'
-                  ]]]
-                styles:
-                  card:
-                    - color: black
-                    - background: transparent
-            modell:
-              card:
-                type: custom:button-card
-                name: |
-                  [[[
-                    var modell = states['sensor.trovis_regler_modell'].state;
-                    return 'Trovis ' + modell
-                  ]]]
-                styles:
-                  card:
-                    - color: black
-                    - background: transparent
-                    - font-size: 1em
-                    - font-weight: bold
-            button1:
-              card:
-                type: picture
-                image: /local/trovis557x/images/drehschalter-heizung-1.png
-            button2:
-              card:
-                type: picture
-                image: /local/trovis557x/images/drehschalter-heizung-1.png
-            button3:
-              card:
-                type: picture
-                image: /local/trovis557x/images/drehschalter-heizung-1.png
-                styles: null
-            display:
-              card:
-                type: custom:button-card
-                aspect_ratio: 7/2.5
-                name: |
-                  [[[
-                    var VF1=states['sensor.trovis_fuhler_vorlauf_1_vf1'].state;
-                    var AF1=states['sensor.trovis_fuhler_aussen_1_af1'].state;
-                    var RUEF1=states['sensor.trovis_fuhler_rucklauf_1_ruf1'].state;
-                    var SF1=states['sensor.trovis_fuhler_speicher_1_sf1'].state;
-                    
+                    let sollwert=parseInt(states['sensor.trovis_hk4_soll_tw'].state);
+                    let haltewert=parseInt(states['sensor.trovis_hk4_haltewert_tw'].state);
+                    let schaltdifferenz=parseInt(states['sensor.trovis_hk4_schaltdifferenz_tw'].state);
+                    let ueberhoehung=parseInt(states['sensor.trovis_hk4_ueberhoehung_tw'].state);
+                    let schalter_min=parseInt(states['sensor.trovis_hk4_minsoll_tw'].state);
+                    let schalter_max=parseInt(states['sensor.trovis_hk4_maxsoll_tw'].state);
+                    let vl_max=parseInt(states['sensor.trovis_hk4_maxladetemperatur_tw'].state);
+                    let rl_max=parseInt(states['sensor.trovis_hk4_maxrl_tw'].state);
+                    let zwischenheizen=states['binary_sensor.trovis_hk4_zwischenheizbetrieb'].state;
+                    if (zwischenheizen == 'off') {
+                      zwischenheizen = "AUS"
+                    } else {
+                      zwischenheizen = "20'WW/10'H."
+                    }
                     return `
-
-                      <div style="height:12vh !important;font-size: 200%; font-family:'mydsdigib'">
+                      <div style="text-align:left; color:black; font-size:small">
                         <table height="100%" width="100%">
 
-                         <colgroup>
-                            <col width=10%>
-                            <col width=30% align=char char=".">
-                            <col width=30% align=char char=".">
-                            <col width=30% align=char char=".">
-                         </colgroup>
+                          <tr>
+                            <td>Sollwert:</td>
+                            <td align=right>${sollwert} °C</td>
+                          </tr>
 
-                          <small>
-                          <tr align=right>
-                            <th></th>
-                            <th><small>jetzt</small></th>
-                            <th><small>min/max 24h</small></th>
-                            <th><small>min/max  7d</small></th>
+                          <tr>
+                            <td>Haltewert:</td>
+                            <td align=right>${haltewert} °C</td>
                           </tr>
-                          </small>
-                          
-                          <tr align=right>
-                            <td align=left>AF1</td>
-                            <td>${AF1}°</td>
-                            <td>-10.0/10.0 °C</td>
-                            <td>-10.0/10.0 °C</td>
+
+                          <tr>
+                            <td>Schaltdifferenz:</td>
+                            <td align=right>${schaltdifferenz} °C</td>
                           </tr>
-                          
-                          <tr align=right>
-                            <td align=left>VF1</td>
-                            <td>${VF1}°</td>
-                            <td>c</td>
-                            <td>d</td>
+
+                          <tr>
+                            <td>Überhöhung VL:</td>
+                            <td align=right>${ueberhoehung} °C</td>
+                          </tr>
+
+                          <tr>
+                            <td>Drehschalterlimits:</td>
+                            <td align=right>${schalter_min}-${schalter_max} °C</td>
                           </tr>
                           
-                          <tr align=right>
-                            <td align=left>RUEF1</td>
-                            <td>${RUEF1}°</td>
-                            <td>e</td>
-                            <td>f</td>
-                          </tr>
-                          
-                          <tr align=right>
-                            <td align=left>SF1</td>
-                            <td>${SF1}°</td>
-                            <td>g</td>
-                            <td>h</td>
+                          <tr>
+                            <td>Zwischenheizen:</td>
+                            <td align=right>${zwischenheizen}</td>
                           </tr>
                           
                         </table>
                       </div>
                     `
                   ]]]
-                styles:
-                  card:
-                    - color: black
-                    - background: transparent
-                    - border: 2px red inset
-                    - padding: 0
-                    - margin: 0
-                    - height: 90% !important
-                  name:
-                    - padding: 5
-                    - margin: 5
-                    - width: 100%
-                    - height: 100% !important
-            chart:
-              card:
-                type: custom:plotly-graph
-                name: heizkurve
-                title: ''
-                raw_plotly_config: true
-                config:
-                  displaylogo: false
-                style: |
-                  ha-card {
-                    border: solid 2px var(--primary-color);
+                show:
+                  icon: false
+                  name: true
+                  state: true
+                style:
+                  left: 86%
+                  top: 15.5%
+                  border-style: inset
+                  width: 9vw
+        - type: conditional
+          conditions:
+            - condition: state
+              entity: input_number.trovis_visu_heizkreis
+              state: "0.0"
+          card:
+            type: picture-elements
+            elements:
+              - type: state-badge
+                entity: sensor.trovis_stat_af1_24h_min
+                style:
+                  top: 32%
+                  left: 90%
+            image: /local/trovis557x/images/wasserspeicher.svg
+        - type: conditional
+          conditions:
+            - condition: or
+              conditions:
+                - condition: state
+                  entity: input_number.trovis_visu_heizkreis
+                  state: "1.0"
+                - condition: state
+                  entity: input_number.trovis_visu_heizkreis
+                  state: "2.0"
+                - condition: state
+                  entity: input_number.trovis_visu_heizkreis
+                  state: "3.0"
+          card:
+            type: custom:plotly-graph
+            name: heizkurve
+            card_mod:
+              style: |
+                ha-card { 
+                  /** --ha-card-border-radius: 0px; 
+                  --ha-card-border-color: #990000;
+                  --ha-card-border-width: 2px; **/
+                  --card-mod-icon-color: white;
+                  width: 100% !important;
+                  height: 20vh;
+                }
+            title: ""
+            raw_plotly_config: true
+            config:
+              displaylogo: false
+              responsive: true
+            style: |
+              ha-card {
+                border: solid 2px var(--primary-color);
+              }
+            entities:
+              - entity: ""
+                name: Aktuell
+                mode: markers
+                marker:
+                  color: grey
+                  size: 15
+                  line:
+                    color: black
+                    width: 3
+                  symbol: diamond
+                x:
+                  - |-
+                    [[[
+                      /* replaces: '$ex hass.states['sensor.trovis_fuhler_aussen_1_af1'].state' */
+                      return states['sensor.trovis_fuhler_aussen_1_af1'].state;
+                    ]]]
+                "y":
+                  - |-
+                    [[[
+                      /* replaces: '$ex hass.states['sensor.trovis_fuhler_vorlauf_1_vf1'].state' */
+                      return states['sensor.trovis_fuhler_vorlauf_1_vf1'].state;
+                    ]]]
+              - entity: input_number.trovis_visu_heizkreis
+              - name: Heizkurve
+                entity: ""
+                line:
+                  shape: spline
+                  color: black
+                fn: |
+                  $fn ({ vars, state }) => {
                   }
-                layout:
-                  title:
-                    text: Heizkurve HK1
-                    x: 0.01
-                    'y': 0.95
-                    font:
-                      family: Arial
-                      size: 20
-                      color: black
-                      font-face: bold
-                  annotations:
-                    - xref: paper
-                      yref: paper
-                      x: 0.9
-                      'y': 0.1
-                      align: right
-                      textposition: bottom right
-                      font:
-                        family: Arial
-                        size: 12
-                        color: black
-                      text: |
-                        Raumsoll Tag/Nacht: 19/19 °C<br/>
-                    - xref: paper
-                      yref: paper
-                      x: 0.9
-                      'y': 0.3
-                      align: right
-                      textposition: bottom right
-                      font:
-                        family: Arial
-                        size: 12
-                        color: black
-                      text: |
-                        RK1 Niveau/Steigung: -1/0,2<br/>
-                        Rk1 VL min/max: 20/37
-                    - xref: paper
-                      yref: paper
-                      x: 0.005
-                      'y': 0.9
-                      font:
-                        size: 12
-                        color: black
-                      text: |
-                        SOLL/IST: 26.8/28.7 °C
-                      showarrow: false
-                  showlegend: false
-                  autosize: false
-                  paper_bgcolor: rgba(0,0,0,0)
-                  plot_bgcolor: rgba(0,0,0,0)
-                  border: 1px
-                  margin:
-                    l: 1
-                    b: 3
-                    r: 5
-                    t: 5
-                    pad: 0
-                  xaxis:
-                    showlegend: false
-                    linecolor: grey
-                    linewidth: 1
-                    mirror: true
-                    ticklabelposition: inside
-                    type: number
-                    range:
-                      - 20
-                      - -20
-                  yaxis:
-                    fixedrange: false
-                    linecolor: grey
-                    linewidth: 1
-                    mirror: true
-                    ticklabelposition: inside
-                    range:
-                      - 20
-                      - 40
-                entities:
-                  - entity: ''
-                    mode: markers
-                    marker:
-                      color: grey
-                      size: 15
-                      line:
-                        color: black
-                        width: 3
-                      symbol: diamond
-                    x:
-                      - 8
-                    'y':
-                      - 28.6
-                  - entity: ''
-                    name: Heizkurve
-                    line:
-                      shape: spline
-                      color: black
-                    fn: |
-                      $fn ({ vars, state }) => {
-                        const x = []; 
-                        const y = [];
-                        
-                        let af1 = 6.2;
-                        let tagbetrieb_rk1 = 1;
-                        let tag_soll = 19;
-                        let nacht_soll = 19;
-                        let niveau = -1;
-                        let steigung = 0.2;
-                        let vorlauf_min = 20;
-                        let vorlauf_max = 37;
-                        
-                        let AT = -20;
-                        let lauf=0;
-
-                        if (tagbetrieb_rk1)
-                          SOLL = tag_soll;
-                        else
-                          SOLL = nacht_soll;
-                        while (AT < 25) {
-                          x[lauf] = AT;
-                          y[lauf] =
-                            24 + niveau + 2 * steigung * (SOLL - 20) -
-                            (0.1 + 0.9 * steigung) * (1.5 * (AT - 20) + 0.01 * Math.pow(AT - 20, 2));
-                          if (y[lauf] < vorlauf_min) y[lauf] = vorlauf_min;
-                          if (y[lauf] > vorlauf_max) y[lauf] = vorlauf_max;
-                          lauf += 1;
-                          AT += 1;
-                         }
-                        console.log("X-Werte:", x);
-                        console.log("Y-Werte:", y);
-                        vars.x = x;
-                        vars.y = y;
-                      };
-                    x: $fn ({ vars }) => vars.x
-                    y: $fn ({ vars }) => vars.y
+                x: |
+                  [[[
+                    /* replaces: 'x: $ex JSON.parse(JSON.stringify(vars.trovis_hk123_x')) */
+                    return states['sensor.trovis_hk123_heizkurven'].attributes.x_werte;
+                  ]]]
+                "y": |
+                  [[[
+                    /* replaces: '"y": $ex JSON.parse(JSON.stringify(vars.trovis_y')); */
+                    let kreis = parseInt(states['input_number.trovis_visu_heizkreis'].state);
+                    if (kreis == 1) {
+                      console.log('HK1: <br/>' + states['sensor.trovis_hk123_heizkurven'].attributes.hk1);
+                      return states['sensor.trovis_hk123_heizkurven'].attributes.hk1;
+                    } else if (kreis == 2) {
+                      console.log('HK2: <br/>' + states['sensor.trovis_hk123_heizkurven'].attributes.hk2);
+                      return states['sensor.trovis_hk123_heizkurven'].attributes.hk2;
+                    } else if (kreis == 3) {
+                      console.log('HK3: <br/>' + states['sensor.trovis_hk123_heizkurven'].attributes.hk3);
+                      return states['sensor.trovis_hk123_heizkurven'].attributes.hk3;
+                    }
+                  ]]]
+            layout:
+              title:
+                text: |
+                  [[[
+                      /* arbeitet nicht zuverlässig: $ex 'Heizkreis ' + parseInt(vars.heizkreis); */
+                      return 'Heizkreis ' + parseInt(states['input_number.trovis_visu_heizkreis'].state);
+                  ]]]
+                x: 0.045
+                "y": 0.9
+                font:
+                  family: Arial
+                  size: 20
+                  color: black
+                  font-face: bold
+              annotations:
+                - xref: paper
+                  yref: paper
+                  x: 0.99
+                  "y": 0.1
+                  align: right
+                  textposition: bottom right
+                  font:
+                    family: Arial
+                    size: 12
+                    color: black
+                  text: |
+                    [[[
+                      let kreis, niveau, steigung, vlmin, vlmax, vlsoll, vlist;
+                      kreis = Math.floor(states['input_number.trovis_visu_heizkreis'].state);
+                      if (kreis === 4)
+                        return 'WW';
+                      else
+                        niveau=Math.floor(states['sensor.trovis_hk'+kreis+'_niveau'].state);
+                        steigung=states['sensor.trovis_hk'+kreis+'_steigung'].state;
+                        vlmin=Math.floor(states['sensor.trovis_hk'+kreis+'_vl_min'].state);
+                        vlmax=Math.floor(states['sensor.trovis_hk'+kreis+'_vl_max'].state);
+                        vlsoll=states['sensor.trovis_hk'+kreis+'_vorlaufsoll'].state
+                        vlist=states['sensor.trovis_fuhler_vorlauf_'+kreis+'_vf'+kreis].state
+                        return 'Vorlauf min / max: ' + vlmin + ' / ' + vlmax + ' °C<br>' +
+                          'Steigung / Niveau: ' + steigung + ' / ' + niveau + ' °C<br>' +
+                          'Vorlauf SOLL vs. IST: ' + vlsoll + ' / ' + vlist + ' °C';
+                    ]]]
+                  showarrow: false
+                - xref: paper
+                  yref: paper
+                  align: left
+                  x: 0.04
+                  "y": 0.85
+                  font:
+                    size: 12
+                    color: black
+                  text: |
+                    [[[
+                      let modus;
+                      if (states['binary_sensor.trovis_hk1_tagbetrieb'].state === 'on')
+                        modus = 'Tagbetrieb';
+                      else
+                        modus = 'Nachtbetrieb';
+                      return modus;
+                    ]]]
+                  showarrow: false
+              showlegend: false
+              autosize: false
+              paper_bgcolor: rgba(0,0,0,0)
+              plot_bgcolor: rgba(0,0,0,0)
+              border: 1px
+              margin:
+                l: 1
+                b: 3
+                r: 5
+                t: 5
+                pad: 0
+              xaxis:
+                showlegend: false
+                linecolor: grey
+                linewidth: 1
+                mirror: true
+                ticklabelposition: inside
+                type: number
+                range:
+                  - 20
+                  - -20
+              yaxis:
+                fixedrange: false
+                linecolor: grey
+                linewidth: 1
+                mirror: true
+                ticklabelposition: inside
