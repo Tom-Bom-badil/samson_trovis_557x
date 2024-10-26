@@ -96,7 +96,7 @@ cards:
           - type: state-label
             title: RK1_%
             entity: sensor.trovis_hk1_3pkt_stellsignal
-            suffix: '%'
+            suffix: "%"
             style:
               color: white
               left: 40%
@@ -175,36 +175,38 @@ cards:
               - justify-self: start
               - align-self: start
               - margin-right: 5px
-              - '--ha-card-background': transparent
-              - '--ha-card-border-radius': 0px
+              - "--ha-card-background": transparent
+              - "--ha-card-border-radius": 0px
               - width: 75%
             button2:
               - justify-self: start
               - align-self: mid
               - margin-right: 5px
-              - '--ha-card-background': transparent
-              - '--ha-card-border-radius': 0px
+              - "--ha-card-background": transparent
+              - "--ha-card-border-radius": 0px
               - width: 75%
             button3:
               - justify-self: start
               - align-self: end
               - margin-right: 5px
-              - '--ha-card-background': transparent
-              - '--ha-card-border-radius': 0px
+              - "--ha-card-background": transparent
+              - "--ha-card-border-radius": 0px
               - width: 75%
             display:
               - justify-self: start
               - align-self: start
-              - background-color: '#a6a9a0'
-              - '--ha-card-border-radius': 0px
+              - background-color: "#a6a9a0"
+              - "--ha-card-border-radius": 0px
               - height: 100% !important
               - width: 100% !important
               - padding: 0
               - margin: 0
               - border: 2px inset
             chart:
-              - '--ha-card-background': transparent
-              - '--ha-card-border-radius': 0px
+              - "--ha-card-background": transparent
+              - "--ha-card-border-radius": 0px
+              - margin: 0
+              - margin-right: "-5px !important"
               - height: 100%
         custom_fields:
           samson:
@@ -446,7 +448,7 @@ cards:
                   conditions:
                     - condition: state
                       entity: input_number.trovis_visu_heizkreis
-                      state: '4.0'
+                      state: "4.0"
                   card:
                     card_mod:
                       style: |
@@ -469,25 +471,28 @@ cards:
                           left: 0%
                           transform: translate(0%,-2%)
                           pointer-events: none
+                          margin-right: "-10px"
                       - type: state-label
                         title: max_vl
-                        prefix: 'max. '
+                        prefix: "Vorlauf max. "
                         entity: sensor.trovis_hk4_maxladetemperatur_tw
                         style:
                           color: black
-                          left: 95%
+                          left: 92%
                           top: 3%
+                          font-weight: bold
                           font-size: x-small
                         tap_action:
                           action: more-info
                       - type: state-label
                         title: max_rl
-                        prefix: 'max. '
+                        prefix: "Primär-Rücklauf max. "
                         entity: sensor.trovis_hk4_maxrl_tw
                         style:
                           color: black
-                          left: 95%
-                          top: 28%
+                          left: 89%
+                          top: 27%
+                          font-weight: bold
                           font-size: x-small
                         tap_action:
                           action: more-info
@@ -496,25 +501,25 @@ cards:
                         entity: sensor.trovis_hk4_ww_ladetemperatur
                         style:
                           color: black
-                          left: 70%
+                          left: 53%
                           top: 3%
                           font-size: x-small
                       - type: state-label
                         title: tag_temps
                         entity: sensor.trovis_hk4_ww_tagestemperaturen
                         style:
-                          font-weight: bold
+                          font-size: small
                           color: black
                           left: 29%
-                          top: 8%
+                          top: 9%
                       - type: state-label
                         title: nacht_temps
                         entity: sensor.trovis_hk4_ww_nachttemperaturen
                         style:
-                          font-weight: bold
+                          font-size: small
                           color: black
                           left: 29%
-                          top: 23%
+                          top: 22%
                       - type: state-label
                         title: ist_sf1
                         entity: sensor.trovis_fuhler_speicher_1_sf1
@@ -523,28 +528,79 @@ cards:
                           left: 29%
                           top: 15.5%
                           font-size: x-large
-                          font-weight: bold
+                          font-family: mydsdigib
                         tap_action:
                           action: more-info
                       - type: custom:button-card
                         title: ww-infos
-                        name: >
-                          [[[ return '<div style="text-align:left;
-                          color:black;font-size:x-small">' +
-                          states['sensor.trovis_hk4_ww_infos'].state +
-                          '</div>'; ]]]
+                        name: |
+                          [[[
+                            let sollwert=parseInt(states['sensor.trovis_hk4_soll_tw'].state);
+                            let haltewert=parseInt(states['sensor.trovis_hk4_haltewert_tw'].state);
+                            let schaltdifferenz=parseInt(states['sensor.trovis_hk4_schaltdifferenz_tw'].state);
+                            let ueberhoehung=parseInt(states['sensor.trovis_hk4_ueberhoehung_tw'].state);
+                            let schalter_min=parseInt(states['sensor.trovis_hk4_minsoll_tw'].state);
+                            let schalter_max=parseInt(states['sensor.trovis_hk4_maxsoll_tw'].state);
+                            let vl_max=parseInt(states['sensor.trovis_hk4_maxladetemperatur_tw'].state);
+                            let rl_max=parseInt(states['sensor.trovis_hk4_maxrl_tw'].state);
+                            let zwischenheizen=states['binary_sensor.trovis_hk4_zwischenheizbetrieb'].state;
+                            if (zwischenheizen == 'off') {
+                              zwischenheizen = "AUS"
+                            } else {
+                              zwischenheizen = "20'WW/10'H."
+                            }
+                            return `
+                              <div style="text-align:left; color:black; font-size:small">
+                                <table height="100%" width="100%">
+
+                                  <tr>
+                                    <td>Sollwert:</td>
+                                    <td align=right>${sollwert} °C</td>
+                                  </tr>
+
+                                  <tr>
+                                    <td>Haltewert:</td>
+                                    <td align=right>${haltewert} °C</td>
+                                  </tr>
+
+                                  <tr>
+                                    <td>Schaltdifferenz:</td>
+                                    <td align=right>${schaltdifferenz} °C</td>
+                                  </tr>
+
+                                  <tr>
+                                    <td>Überhöhung VL:</td>
+                                    <td align=right>${ueberhoehung} °C</td>
+                                  </tr>
+
+                                  <tr>
+                                    <td>Drehschalterlimits:</td>
+                                    <td align=right>${schalter_min}-${schalter_max} °C</td>
+                                  </tr>
+                                  
+                                  <tr>
+                                    <td>Zwischenheizen:</td>
+                                    <td align=right>${zwischenheizen}</td>
+                                  </tr>
+                                  
+                                </table>
+                              </div>
+                            `
+                          ]]]
                         show:
                           icon: false
                           name: true
                           state: true
                         style:
-                          left: 80%
-                          top: 17%
+                          left: 86%
+                          top: 15.5%
+                          border-style: inset
+                          width: 9vw
                 - type: conditional
                   conditions:
                     - condition: state
                       entity: input_number.trovis_visu_heizkreis
-                      state: '0.0'
+                      state: "0.0"
                   card:
                     type: picture-elements
                     elements:
@@ -560,13 +616,13 @@ cards:
                       conditions:
                         - condition: state
                           entity: input_number.trovis_visu_heizkreis
-                          state: '1.0'
+                          state: "1.0"
                         - condition: state
                           entity: input_number.trovis_visu_heizkreis
-                          state: '2.0'
+                          state: "2.0"
                         - condition: state
                           entity: input_number.trovis_visu_heizkreis
-                          state: '3.0'
+                          state: "3.0"
                   card:
                     type: custom:plotly-graph
                     name: heizkurve
@@ -580,7 +636,7 @@ cards:
                           width: 100% !important;
                           height: 20vh;
                         }
-                    title: ''
+                    title: ""
                     raw_plotly_config: true
                     config:
                       displaylogo: false
@@ -590,7 +646,7 @@ cards:
                         border: solid 2px var(--primary-color);
                       }
                     entities:
-                      - entity: ''
+                      - entity: ""
                         name: Aktuell
                         mode: markers
                         marker:
@@ -606,7 +662,7 @@ cards:
                               /* replaces: '$ex hass.states['sensor.trovis_fuhler_aussen_1_af1'].state' */
                               return states['sensor.trovis_fuhler_aussen_1_af1'].state;
                             ]]]
-                        'y':
+                        "y":
                           - |-
                             [[[
                               /* replaces: '$ex hass.states['sensor.trovis_fuhler_vorlauf_1_vf1'].state' */
@@ -614,7 +670,7 @@ cards:
                             ]]]
                       - entity: input_number.trovis_visu_heizkreis
                       - name: Heizkurve
-                        entity: ''
+                        entity: ""
                         line:
                           shape: spline
                           color: black
@@ -626,7 +682,7 @@ cards:
                             /* replaces: 'x: $ex JSON.parse(JSON.stringify(vars.trovis_hk123_x')) */
                             return states['sensor.trovis_hk123_heizkurven'].attributes.x_werte;
                           ]]]
-                        'y': |
+                        "y": |
                           [[[
                             /* replaces: '"y": $ex JSON.parse(JSON.stringify(vars.trovis_y')); */
                             let kreis = parseInt(states['input_number.trovis_visu_heizkreis'].state);
@@ -649,7 +705,7 @@ cards:
                               return 'Heizkreis ' + parseInt(states['input_number.trovis_visu_heizkreis'].state);
                           ]]]
                         x: 0.045
-                        'y': 0.9
+                        "y": 0.9
                         font:
                           family: Arial
                           size: 20
@@ -659,7 +715,7 @@ cards:
                         - xref: paper
                           yref: paper
                           x: 0.99
-                          'y': 0.1
+                          "y": 0.1
                           align: right
                           textposition: bottom right
                           font:
@@ -688,7 +744,7 @@ cards:
                           yref: paper
                           align: left
                           x: 0.04
-                          'y': 0.85
+                          "y": 0.85
                           font:
                             size: 12
                             color: black
@@ -759,7 +815,7 @@ cards:
           title:
             text: Vorlauf und Rücklauf (7 Tage)
             x: 0.5
-            'y': 1.1
+            "y": 1.1
           margin:
             t: 0
             l: 0
@@ -769,7 +825,7 @@ cards:
           paper_bgcolor: transparent
           plot_bgcolor: transparent
           xaxis:
-            tickformat: '%a %H:%M'
+            tickformat: "%a %H:%M"
             titlefont:
               color: white
             tickfont:
@@ -780,7 +836,7 @@ cards:
             showlegend: true
             rangeselector:
               x: 0.8
-              'y': 1.05
+              "y": 1.05
               buttons:
                 - count: 12
                   step: hour
@@ -835,7 +891,7 @@ cards:
             entity: sensor.trovis_fuhler_rucklauf_1_ruf1
             line:
               shape: spline
-              color: '#00b0f0'
+              color: "#00b0f0"
               width: 2
       - name: Plot 2
         type: custom:button-card
@@ -862,4 +918,4 @@ cards:
               padding: 0;
               height: 29vh;
               background: transparent;
-            }
+            } 
