@@ -1,1 +1,1 @@
-Die verschiedenen Arten der Drehschalter (Basis: 5576, 5579).
+Die verschiedenen Arten der Drehschalter, jeweils mit Statusanzeige (Basis: 5576, 5579).
