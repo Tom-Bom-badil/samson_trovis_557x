@@ -44,9 +44,6 @@ cards:
               height: 44vh !important;
               background: transparent;
             }
-        tap_action:
-          action: navigate
-          navigation_path: /lovelace/zehn
         elements:
           - type: image
             entity: sensor.trovis_regler_gesamtstatus
@@ -66,6 +63,9 @@ cards:
               left: 0%
               transform: translate(0%,0%)
               pointer-events: none
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/diverses
           - type: state-label
             title: AT
             entity: sensor.trovis_fuhler_aussen_1_af1
@@ -331,33 +331,57 @@ cards:
               aspect_ratio: 8/2.5
               name: |
                 [[[
-                  let AF1=states['sensor.trovis_fuhler_aussen_1_af1'].state;
-                  let AF1_24_min=states['sensor.trovis_stat_af1_24h_min'].state;
-                  let AF1_24_max=states['sensor.trovis_stat_af1_24h_max'].state;
-                  let AF1_7d_min=states['sensor.trovis_stat_af1_7d_min'].state;
-                  let AF1_7d_max=states['sensor.trovis_stat_af1_7d_max'].state;
+                  /*******************
+                  Display rechts oben
+                  ********************/
+                  let AF1 =  states['sensor.trovis_fuhler_aussen_1_af1'].state;
+                  if (AF1 == 'unavailable' || AF1 == 'unknown') { AF = '---' };
+                  let AF1_24_min =  states['sensor.trovis_stat_af1_24h_min'].state;
+                  if (AF1_24_min == 'unavailable') { AF1_24_min = '---' };
+                  let AF1_24_max =  states['sensor.trovis_stat_af1_24h_max'].state;
+                  if (AF1_24_max == 'unavailable') { AF1_24_max = '---' };
+                  let AF1_7d_min =  states['sensor.trovis_stat_af1_7d_min'].state;
+                  if (AF1_7d_min == 'unavailable') { AF1_7d_min = '---' };
+                  let AF1_7d_max =  states['sensor.trovis_stat_af1_7d_max'].state;
+                  if (AF1_7d_max == 'unavailable') { AF1_7d_max = '---' };
                   
-                  let VF1=states['sensor.trovis_fuhler_vorlauf_1_vf1'].state;
-                  let VF1_24_min=states['sensor.trovis_stat_vf1_24h_min'].state;
-                  let VF1_24_max=states['sensor.trovis_stat_vf1_24h_max'].state;
-                  let VF1_7d_min=states['sensor.trovis_stat_vf1_7d_min'].state;
-                  let VF1_7d_max=states['sensor.trovis_stat_vf1_7d_max'].state;
+                  let VF1 =  states['sensor.trovis_fuhler_vorlauf_1_vf1'].state;
+                  if (VF1 == 'unavailable' || VF1 == 'unknown') { VF = '---' };
+                  let VF1_24_min =  states['sensor.trovis_stat_vf1_24h_min'].state;
+                  if (VF1_24_min == 'unavailable') { VF1_24_min = '---' };
+                  let VF1_24_max =  states['sensor.trovis_stat_vf1_24h_max'].state;
+                  if (VF1_24_max == 'unavailable') { VF1_24_max = '---' };
+                  let VF1_7d_min =  states['sensor.trovis_stat_vf1_7d_min'].state;
+                  if (VF1_7d_min == 'unavailable') { VF1_7d_min = '---' };
+                  let VF1_7d_max =  states['sensor.trovis_stat_vf1_7d_max'].state;
+                  if (VF1_7d_max == 'unavailable') { VF1_7d_max = '---' };
 
-                  let RUEF1=states['sensor.trovis_fuhler_rucklauf_1_ruf1'].state;
-                  let RUEF1_24_min=states['sensor.trovis_stat_ruef1_24h_min'].state;
-                  let RUEF1_24_max=states['sensor.trovis_stat_ruef1_24h_max'].state;
-                  let RUEF1_7d_min=states['sensor.trovis_stat_ruef1_7d_min'].state;
-                  let RUEF1_7d_max=states['sensor.trovis_stat_ruef1_7d_max'].state;
+                  let RUEF1 =  states['sensor.trovis_fuhler_rucklauf_1_ruf1'].state;
+                  if (RUEF1 == 'unavailable' || RUEF1 == 'unknown') { RUEF1 = '---' };
+                  let RUEF1_24_min =  states['sensor.trovis_stat_ruef1_24h_min'].state;
+                  if (RUEF1_24_min == 'unavailable') { RUEF1_24_min = '---' };
+                  let RUEF1_24_max =  states['sensor.trovis_stat_ruef1_24h_max'].state;
+                  if (RUEF1_24_max == 'unavailable') { RUEF1_24_max = '---' };
+                  let RUEF1_7d_min =  states['sensor.trovis_stat_ruef1_7d_min'].state;
+                  if (RUEF1_7d_min == 'unavailable') { RUEF1_7d_min = '---' };
+                  let RUEF1_7d_max =  states['sensor.trovis_stat_ruef1_7d_max'].state;
+                  if (RUEF1_7d_max == 'unavailable') { RUEF1_7d_max = '---' };
 
-                  let SF1=states['sensor.trovis_fuhler_speicher_1_sf1'].state;
-                  let SF1_24_min=states['sensor.trovis_stat_sf1_24h_min'].state;
-                  let SF1_24_max=states['sensor.trovis_stat_sf1_24h_max'].state;
-                  let SF1_7d_min=states['sensor.trovis_stat_sf1_7d_min'].state;
-                  let SF1_7d_max=states['sensor.trovis_stat_sf1_7d_max'].state;
+                  let SF1 =  states['sensor.trovis_fuhler_speicher_1_sf1'].state;
+                  if (SF1 == 'unavailable' || SF1 == 'unknown') { SF = '---' };
+                  let SF1_24_min =  states['sensor.trovis_stat_sf1_24h_min'].state;
+                  if (SF1_24_min == 'unavailable') { SF1_24_min = '---' };
+                  let SF1_24_max =  states['sensor.trovis_stat_sf1_24h_max'].state;
+                  if (SF1_24_max == 'unavailable') { SF1_24_max = '---' };
+                  let SF1_7d_min =  states['sensor.trovis_stat_sf1_7d_min'].state;
+                  if (SF1_7d_min == 'unavailable') { SF1_7d_min = '---' };
+                  let SF1_7d_max =  states['sensor.trovis_stat_sf1_7d_max'].state;
+                  if (SF1_7d_max == 'unavailable') { SF1_7d_max = '---' };
                   
                   return `
 
-                    <div style="height:12vh !important;font-size: 180%; font-family:'mydsdigib'">
+                    <div style="height:12vh !important;font-size: 180%; font-family:'mydsdigib';
+                     padding-left: 10px; padding-right: 10px;">
                       <table height="100%" width="100%">
 
                        <colgroup>
@@ -367,14 +391,13 @@ cards:
                           <col width=30% align=char char=".">
                        </colgroup>
 
-                        <small>
                         <tr align=right>
                           <th></th>
-                          <th><small>aktuell</small></th>
-                          <th><small>min/max 24h</small></th>
-                          <th><small>min/max  7d</small></th>
+                          <th>&nbsp;<span style="font-size:small">aktuell</span></th>
+                          <th><span style="font-size:small">min/max 24h</span></th>
+                          <th><span style="font-size:small">min/max  7 Tage</span></th>
                         </tr>
-                        </small>
+                        </x-small>
                         
                         <tr align=right>
                           <td align=left>AF1</td>
@@ -499,10 +522,12 @@ cards:
                       - type: state-label
                         title: lade_temp
                         entity: sensor.trovis_hk4_ww_ladetemperatur
+                        prefix: "Vorlaufsoll (IST+Überhöhung): "
                         style:
+                          font-weight: bold
                           color: black
                           left: 53%
-                          top: 3%
+                          top: 3.1%
                           font-size: x-small
                       - type: state-label
                         title: tag_temps
@@ -535,6 +560,9 @@ cards:
                         title: ww-infos
                         name: |
                           [[[
+                            /*******************
+                            Info WW-Kreis rechts
+                            ********************/
                             let sollwert=parseInt(states['sensor.trovis_hk4_soll_tw'].state);
                             let haltewert=parseInt(states['sensor.trovis_hk4_haltewert_tw'].state);
                             let schaltdifferenz=parseInt(states['sensor.trovis_hk4_schaltdifferenz_tw'].state);
@@ -547,42 +575,17 @@ cards:
                             if (zwischenheizen == 'off') {
                               zwischenheizen = "AUS"
                             } else {
-                              zwischenheizen = "20'WW/10'H."
+                              zwischenheizen = "20'/10'"
                             }
                             return `
                               <div style="text-align:left; color:black; font-size:small">
                                 <table height="100%" width="100%">
-
-                                  <tr>
-                                    <td>Sollwert:</td>
-                                    <td align=right>${sollwert} °C</td>
-                                  </tr>
-
-                                  <tr>
-                                    <td>Haltewert:</td>
-                                    <td align=right>${haltewert} °C</td>
-                                  </tr>
-
-                                  <tr>
-                                    <td>Schaltdifferenz:</td>
-                                    <td align=right>${schaltdifferenz} °C</td>
-                                  </tr>
-
-                                  <tr>
-                                    <td>Überhöhung VL:</td>
-                                    <td align=right>${ueberhoehung} °C</td>
-                                  </tr>
-
-                                  <tr>
-                                    <td>Drehschalterlimits:</td>
-                                    <td align=right>${schalter_min}-${schalter_max} °C</td>
-                                  </tr>
-                                  
-                                  <tr>
-                                    <td>Zwischenheizen:</td>
-                                    <td align=right>${zwischenheizen}</td>
-                                  </tr>
-                                  
+                                  <tr><td>Drehschalterlimits:&nbsp; </td><td align=right>${schalter_min}-${schalter_max} °C</td></tr>
+                                  <tr><td>Sollwert:</td><td align=right>${sollwert} °C</td></tr>
+                                  <tr><td>Haltewert:</td><td align=right>${haltewert} °C</td></tr>
+                                  <tr><td>Schaltdifferenz:</td><td align=right>${schaltdifferenz} °C</td></tr>
+                                  <tr><td>Überhöhung:</td><td align=right>${ueberhoehung} °C</td></tr>
+                                  <tr><td>Zwischenheizen:</td><td align=right>${zwischenheizen}</td></tr>
                                 </table>
                               </div>
                             `
@@ -674,35 +677,28 @@ cards:
                         line:
                           shape: spline
                           color: black
-                        fn: |
-                          $fn ({ vars, state }) => {
-                          }
+                        fn: >
+                          $fn ({ vars, state }) => { /* just left as a dummy,
+                          previously used for $ex below */ }
                         x: |
                           [[[
-                            /* replaces: 'x: $ex JSON.parse(JSON.stringify(vars.trovis_hk123_x')) */
+                            /* replaces: 'x: $ex JSON.parse(JSON.stringify(vars.trovis_hk123_x))' */
                             return states['sensor.trovis_hk123_heizkurven'].attributes.x_werte;
                           ]]]
                         "y": |
                           [[[
                             /* replaces: '"y": $ex JSON.parse(JSON.stringify(vars.trovis_y')); */
                             let kreis = parseInt(states['input_number.trovis_visu_heizkreis'].state);
-                            if (kreis == 1) {
-                              console.log('HK1: <br/>' + states['sensor.trovis_hk123_heizkurven'].attributes.hk1);
-                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk1;
-                            } else if (kreis == 2) {
-                              console.log('HK2: <br/>' + states['sensor.trovis_hk123_heizkurven'].attributes.hk2);
-                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk2;
-                            } else if (kreis == 3) {
-                              console.log('HK3: <br/>' + states['sensor.trovis_hk123_heizkurven'].attributes.hk3);
-                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk3;
-                            }
+                            if (kreis == 1) { return states['sensor.trovis_hk123_heizkurven'].attributes.hk1; }
+                            else if (kreis == 2) {return states['sensor.trovis_hk123_heizkurven'].attributes.hk2; }
+                            else if (kreis == 3) { return states['sensor.trovis_hk123_heizkurven'].attributes.hk3; }
                           ]]]
                     layout:
                       title:
                         text: |
                           [[[
-                              /* arbeitet nicht zuverlässig: $ex 'Heizkreis ' + parseInt(vars.heizkreis); */
-                              return 'Heizkreis ' + parseInt(states['input_number.trovis_visu_heizkreis'].state);
+                            /* replaces: $ex 'Heizkreis ' + parseInt(vars.heizkreis); */
+                            return 'Heizkreis ' + parseInt(states['input_number.trovis_visu_heizkreis'].state);
                           ]]]
                         x: 0.045
                         "y": 0.9
@@ -712,6 +708,48 @@ cards:
                           color: black
                           font-face: bold
                       annotations:
+                        - xref: paper
+                          yref: paper
+                          align: left
+                          x: 0.04
+                          "y": 0.85
+                          font:
+                            size: 12
+                            color: black
+                          text: |
+                            [[[
+                              /*********************
+                              Info im Plot inks oben
+                              **********************/
+                              let button, current_mode, text, kreis, modus;
+                              kreis = parseInt(states['input_number.trovis_visu_heizkreis'].state);
+                              if (kreis == 4) {
+                                text = 'WW';
+                                button = 1;
+                              } else {
+                                if (kreis == 1)      { button = 'oben' }
+                                else if (kreis == 2) { button = 'mitte' }
+                                else if (kreis == 3) { button = 'unten' }
+                                else { button = 'oben' }
+                                current_mode = parseInt(states['sensor.trovis_regler_schalter_' + button].state);
+                                if      (current_mode == 0)  { text = 'Drehschalter auf Einstellungen' }
+                                else if (current_mode == 2)  { text = 'Aus / Frostschutzmodus' }
+                                else if (current_mode == 3)  { text = 'Handbetrieb' }
+                                else if (current_mode == 4)  { text = 'Tagbetrieb' }
+                                else if (current_mode == 5)  { text = 'Nachtbetrieb' }
+                                else if (current_mode == 10) { text = 'Fehler - 2 Drehschalter auf Einstellung?' }
+                                else if (current_mode == 1)  { 
+                                  modus = states['sensor.trovis_regler_hk' + kreis + '_betriebsart_formatiert'].state;
+                                  if (modus == 'Stdby') { modus = 'Standby' }
+                                  else if (modus == 'Sonne') { modus = 'Tag' }
+                                  else if (modus == 'Mond') { modus = 'Nacht' }
+                                  text = 'Automatikbetrieb, ' + modus + 'modus';
+                                }
+                                else { text = 'Betriebsart nicht verfügbar'; }
+                              }
+                              return text;
+                            ]]]
+                          showarrow: false
                         - xref: paper
                           yref: paper
                           x: 0.99
@@ -724,7 +762,10 @@ cards:
                             color: black
                           text: |
                             [[[
-                              let kreis, niveau, steigung, vlmin, vlmax, vlsoll, vlist;
+                              /************************
+                              Info im Plot rechts unten
+                              *************************/
+                              let kreis, niveau, steigung, vlmin, vlmax, vlsoll, vlist, tagsoll, nachtsoll;
                               kreis = Math.floor(states['input_number.trovis_visu_heizkreis'].state);
                               if (kreis === 4)
                                 return 'WW';
@@ -733,29 +774,15 @@ cards:
                                 steigung=states['sensor.trovis_hk'+kreis+'_steigung'].state;
                                 vlmin=Math.floor(states['sensor.trovis_hk'+kreis+'_vl_min'].state);
                                 vlmax=Math.floor(states['sensor.trovis_hk'+kreis+'_vl_max'].state);
-                                vlsoll=states['sensor.trovis_hk'+kreis+'_vorlaufsoll'].state
-                                vlist=states['sensor.trovis_fuhler_vorlauf_'+kreis+'_vf'+kreis].state
-                                return 'Vorlauf min / max: ' + vlmin + ' / ' + vlmax + ' °C<br>' +
-                                  'Steigung / Niveau: ' + steigung + ' / ' + niveau + ' °C<br>' +
-                                  'Vorlauf SOLL vs. IST: ' + vlsoll + ' / ' + vlist + ' °C';
-                            ]]]
-                          showarrow: false
-                        - xref: paper
-                          yref: paper
-                          align: left
-                          x: 0.04
-                          "y": 0.85
-                          font:
-                            size: 12
-                            color: black
-                          text: |
-                            [[[
-                              let modus;
-                              if (states['binary_sensor.trovis_hk1_tagbetrieb'].state === 'on')
-                                modus = 'Tagbetrieb';
-                              else
-                                modus = 'Nachtbetrieb';
-                              return modus;
+                                tagsoll=Math.floor(states['sensor.trovis_hk'+kreis+'_raumsoll_tag'].state);
+                                nachtsoll=Math.floor(states['sensor.trovis_hk'+kreis+'_raumsoll_nacht'].state);
+                                vlsoll=states['sensor.trovis_hk'+kreis+'_vorlaufsoll'].state;
+                                if (vlsoll == 'unavailable') { vlsoll = '---'; };
+                                vlist=states['sensor.trovis_fuhler_vorlauf_'+kreis+'_vf'+kreis].state;
+                                return 'Steigung / Niveau: ' + steigung + ' / ' + niveau + ' °C<br>' +
+                                  'Vorlaufbegrenzung: ' + vlmin + '...' + vlmax + ' °C<br>' +
+                                  'Raumsoll Tag / Nacht: ' + tagsoll + ' / ' + nachtsoll + ' °C<br>' +
+                                  'Vorlaufsoll vs. IST: ' + vlsoll + ' ./. ' + vlist + ' °C';
                             ]]]
                           showarrow: false
                       showlegend: false
@@ -869,7 +896,7 @@ cards:
             mirror: true
             ticklabelposition: inside
             type: number
-        hours_to_show: 168
+        hours_to_show: 48
         refresh_interval: 60
         entities:
           - name: AT
@@ -918,4 +945,4 @@ cards:
               padding: 0;
               height: 29vh;
               background: transparent;
-            } 
+            }  
