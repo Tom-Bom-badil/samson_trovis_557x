@@ -1,8 +1,8 @@
 #########################################################################################################################
 #
 # Komplette Home Assistant Lovelace Dashboard Seite
-# !!! erfordert card-mod und button-card add-on's (--> Installation über HACS im linken Button-Bereich) !!!
-# !!! basiert auf den Sensors-Definitionen meines Projekts - ein anderer Aufbau erfordert viele Anpassungen !!!
+# !!! erfordert card-mod, button-card und plotly graph card add-on's (--> Installation mit HACS im linken Button-Bereich)
+# !!! basiert auf den Sensors-Definitionen meines Projekts - ein anderer Sensor-Aufbau erfordert viele Anpassungen
 #
 # Installation:
 # - alles unterhalb dieses Kommentars (ab type:) markieren und kopieren/Ctrl-C (diesen Kommentar unbedingt weglassen!)
