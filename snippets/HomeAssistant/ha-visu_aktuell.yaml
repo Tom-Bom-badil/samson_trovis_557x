@@ -12,6 +12,7 @@
 # - in den Code-Bereich klicken und Ctrl-V (=Paste), speichern
 #
 #########################################################################################################################
+
 type: horizontal-stack
 name: dashboard_komplett
 cards:
@@ -62,10 +63,10 @@ cards:
               top: 0%
               left: 0%
               transform: translate(0%,0%)
-              pointer-events: none
+              z-index: 100;
             tap_action:
               action: navigate
-              navigation_path: /lovelace/diverses
+              navigation_path: trovis-einstellungen
           - type: state-label
             title: AT
             entity: sensor.trovis_fuhler_aussen_1_af1
@@ -329,6 +330,9 @@ cards:
             card:
               type: custom:button-card
               aspect_ratio: 8/2.5
+              tap_action:
+                action: navigate
+                navigation_path: trovis-plots
               name: |
                 [[[
                   /*******************
@@ -820,13 +824,17 @@ cards:
         card_mod:
           style: |
             ha-card { 
-              --ha-card-border-radius: 0px; 
-              --ha-card-border-color: #990000;
-              --ha-card-border-width: 1px; 
-              height: 27vh;
-              margin-left: 2%;
-              width: 96%;
-              background: transparent;
+                --ha-card-border-radius: 0px; 
+                --ha-card-border-color: #grey;
+                --ha-card-border-width: 1px;
+                --card-mod-icon-color: white;
+                padding: 0;
+                height: 30vh;
+                /* height: 100% !important; */
+                margin-left: 2%;
+                width: 96%;
+                background: transparent;
+                transform: scale(0.9);
             }
         autosize: true
         paper_bgcolor: rgba(0,0,0,0)
@@ -840,7 +848,7 @@ cards:
           responsive: true
         layout:
           title:
-            text: Vorlauf und Rücklauf (7 Tage)
+            text: Vorlauf und Rücklauf
             x: 0.5
             "y": 1.1
           margin:
@@ -906,6 +914,7 @@ cards:
             line:
               shape: spline
               color: lightgrey
+              smoothing: 0.2
             yaxis: y2
           - name: Vorlauf sekundär
             entity: sensor.trovis_fuhler_vorlauf_1_vf1
@@ -920,29 +929,176 @@ cards:
               shape: spline
               color: "#00b0f0"
               width: 2
-      - name: Plot 2
-        type: custom:button-card
+      - type: custom:plotly-graph
         card_mod:
-          style: |
-            ha-card { 
-              --ha-card-border-radius: 0px; 
-              --ha-card-border-color: #990000;
-              --ha-card-border-width: 1px; 
-              --card-mod-icon-color: white;
-              padding: 0;
-              height: 30vh;
-              background: transparent;
-            }  
-      - name: Plot 3
-        type: custom:button-card
+          style:
+            .: |
+              ha-card { 
+                --ha-card-border-radius: 0px; 
+                --ha-card-border-color: #grey;
+                --ha-card-border-width: 1px;
+                --card-mod-icon-color: white;
+                padding: 0;
+                height: 30vh;
+                /* height: 100% !important; */
+                margin-left: 2%;
+                width: 96%;
+                background: transparent;
+                transform: scale(0.9);
+              }
+        autosize: true
+        defaults:
+          yaxes:
+            fixedrange: true
+        config:
+          displaylogo: false
+          responsive: true
+        layout:
+          title:
+            text: Warmwasser
+            x: 0.5
+            "y": 1.1
+          paper_bgcolor: transparent
+          plot_bgcolor: transparent
+          margin:
+            t: 0
+            l: 0
+            r: 0
+            b: 5
+            pad: 0
+          xaxis:
+            showlegend: true
+          yaxis:
+            type: number
+            titlefont:
+              color: white
+            tickfont:
+              color: white
+            fixedrange: false
+            linecolor: grey
+            linewidth: 1
+            mirror: true
+            ticklabelposition: inside
+            range:
+              - 45
+              - 65
+          yaxis2:
+            titlefont:
+              color: white
+            tickfont:
+              color: white
+            fixedrange: false
+            linecolor: grey
+            linewidth: 1
+            mirror: true
+            ticklabelposition: inside
+            type: boolean
+            range:
+              - 0
+              - 1
+        hours_to_show: 48
+        refresh_interval: 60
+        entities:
+          - name: Speichertemperatur
+            entity: sensor.trovis_fuhler_speicher_1_sf1
+            layout:
+              xaxis:
+                showlegend: true
+            line:
+              shape: spline
+              color: "#00b0f0"
+              smoothing: 0.2
+            fill: tozeroy
+          - name: Erwärmung (SLP-Signal)
+            entity: binary_sensor.trovis_hk4_speicherladepumpe
+            line:
+              color: lightgrey
+            fill: tozeroy
+            yaxis: y2
+      - type: custom:plotly-graph
         card_mod:
-          style: |
-            ha-card { 
-              --ha-card-border-radius: 0px; 
-              --ha-card-border-color: #990000;
-              --ha-card-border-width: 1px; 
-              --card-mod-icon-color: white;
-              padding: 0;
-              height: 29vh;
-              background: transparent;
-            }  
+          style:
+            .: |
+              ha-card {
+                --ha-card-border-radius: 0px; 
+                --ha-card-border-color: #grey;
+                --ha-card-border-width: 1px;
+                --card-mod-icon-color: white;
+                padding: 0;
+                height: 30vh;
+                /* height: 100% !important; */
+                margin-left: 2%;
+                width: 96%;
+                background: transparent;
+                transform: scale(0.9);
+              }
+        autosize: true
+        defaults:
+          yaxes:
+            fixedrange: true
+        config:
+          displaylogo: false
+          responsive: true
+        layout:
+          title:
+            text: Pumpen und Ventile
+            x: 0.5
+            "y": 1.1
+          paper_bgcolor: transparent
+          plot_bgcolor: transparent
+          margin:
+            t: 0
+            l: 0
+            r: 0
+            b: 5
+            pad: 0
+          xaxis:
+            showlegend: true
+          yaxis:
+            titlefont:
+              color: white
+            tickfont:
+              color: white
+            fixedrange: false
+            linecolor: grey
+            linewidth: 1
+            mirror: true
+            ticklabelposition: inside
+            type: number
+            range:
+              - 0
+              - 100
+          yaxis2:
+            titlefont:
+              color: white
+            tickfont:
+              color: white
+            fixedrange: false
+            linecolor: grey
+            linewidth: 1
+            mirror: true
+            ticklabelposition: inside
+            type: boolean
+            range:
+              - 0
+              - 1
+        hours_to_show: 48
+        refresh_interval: 60
+        entities:
+          - name: Stellventil %
+            entity: sensor.trovis_hk1_3pkt_stellsignal
+            line:
+              shape: spline
+              color: "#00b0f0"
+            fill: tozeroy
+          - name: 3Wege-Ventil Rk1/WW
+            entity: binary_sensor.trovis_hk4_speicherladepumpe
+            line:
+              color: red
+            yaxis: y2
+          - name: UP1
+            entity: binary_sensor.trovis_hk1_umwaelzpumpe
+            line:
+              color: rgba(211,211,211,0.1)
+            fill: tozeroy
+            yaxis: y2
