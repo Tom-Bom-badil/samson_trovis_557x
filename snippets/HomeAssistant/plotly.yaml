@@ -1,4 +1,4 @@
-# Achtung, die Plotly-Karte hat derzeit in bestimmten Konstellationen ein Problem mit Auto-Refresh!
+# Plotly Graph mit simulierten Vorlauf-,Rücklauf und Außentemperaturen (aus ehemaligen Echtwerten)
 
 cards:
   - type: custom:plotly-graph
