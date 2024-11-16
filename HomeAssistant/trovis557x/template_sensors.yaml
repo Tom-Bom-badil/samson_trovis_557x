@@ -1,11 +1,10 @@
-#############################  Template Sensors #################################
+#############################  Template Sensors ################################
 
   - platform: template
   
     sensors:
 
       # Trovis - overall state; used for grabbing the right visu status pic top left
-      # All pics are stored in www/trovis557x/images - just modify them as needed
       # Example for Anlage 2.x:
       # {% if hk1 %} 1    --> automatically uses gesamtstatus-1.svg
       # {% elif ww %} 2   --> automatically uses gesamtstatus-2.svg
@@ -15,8 +14,11 @@
         unique_id: trovis_r_gesamtstatus
         friendly_name: "Trovis Regler Gesamtstatus"
         value_template: >-
+          {# hier alle wichtigen Merkmale der eigenen Heizung definieren #}
           {% set hk1 = is_state('binary_sensor.trovis_hk1_umwaelzpumpe', 'on') %}
           {% set ww  = is_state('binary_sensor.trovis_hk4_speicherladepumpe', 'on') %}
+          {# Heizungszustände ableiten -> Bild zur Zahl wird automatisch ausgewählt #}
+          {# Bilder: /www/trovis557x/images/gesamtstatus/status-<zahl>.svg #}
           {% if hk1 and not ww %} 1
           {% elif ww and not hk1 %} 2
           {% elif hk1 and ww %} 3
@@ -228,7 +230,7 @@
           {% set min = states('sensor.trovis_hk4_soll_tw') | int %}
           {% set hysterese = states('sensor.trovis_hk4_schaltdifferenz_tw') | int %}
           {% set max = min + hysterese %}
-          {{ min|string + '-' + max|string + ' °C' }}
+          {{ min|string + '-' + max|string + '°' }}
 
       # Trovis - Hk4 (WW) night time temperatures
       trovis_hk4_nachttemperaturen:
@@ -238,134 +240,15 @@
           {% set min = states('sensor.trovis_hk4_haltewert_tw') | int %}
           {% set hysterese = states('sensor.trovis_hk4_schaltdifferenz_tw') | int %}
           {% set max = min + hysterese %}
-          {{ min|string + '-' + max|string + ' °C' }}
+          {{ min|string + '-' + max|string + '°' }}
 
       # Trovis - Hk4 (WW) currently set heating temperature
       trovis_hk4_ladetemperatur:
         unique_id: trovis_hk4_ladetemperatur
         friendly_name: "Trovis Hk4 Ladetemperatur"
+        unit_of_measurement: '°C'
         value_template: >-
           {% set ww_ist = states('sensor.trovis_fuhler_speicher_1_sf1') | float(1) %}
           {% set ueberhoehung = states('sensor.trovis_hk4_ueberhoehung_tw') | float(1) %}
           {% set ladesoll = ww_ist + ueberhoehung | float(1) %}
-          {{ 'Ziel-Ladetemperatur: ' + ladesoll|string + ' °C' }}
-
-      # Trovis - Hk4 (WW) general info
-      trovis_hk4_infos:
-        unique_id: trovis_hk4_infos
-        friendly_name: "Trovis Hk4 Infos"
-        value_template: >-
-          {% set sollwert = states('sensor.trovis_hk4_soll_tw') | int %}
-          {% set haltewert = states('sensor.trovis_hk4_haltewert_tw') | int %}
-          {% set schaltdifferenz = states('sensor.trovis_hk4_schaltdifferenz_tw') | int %}
-          {% set ueberhoehung = states('sensor.trovis_hk4_ueberhoehung_tw') | int %}
-          {% set schalter_min = states('sensor.trovis_hk4_minsoll_tw') | int %}
-          {% set schalter_max = states('sensor.trovis_hk4_maxsoll_tw') | int %}
-          {% set ladetemp_max = states('sensor.trovis_hk4_maxladetemperatur_tw') | int %}
-          {% set vl_max = states('sensor.trovis_hk4_maxladetemperatur_tw') | int %}
-          {% set rl_max = states('sensor.trovis_hk4_maxrl_tw') | int %}
-          {% set zwischenheizen = states('binary_sensor.trovis_hk4_zwischenheizbetrieb') | string %}
-
-          {{
-            'Sollwert: ' + sollwert|string + ' °C<br/>' +
-            'Haltewert: ' + haltewert|string + ' °C<br/>' +
-            'Schaltdifferenz: ' + schaltdifferenz|string + ' °C<br/>' +
-            'Überhöhung VL: ' + ueberhoehung|string + ' °C<br/>' +
-            'Drehschalterlimits: ' + schalter_min|string + '-' + schalter_max|string + ' °C<br/>' +
-            'VLsek / RLpri max: ' + vl_max|string + '/' + rl_max|string + ' °C<br/>' +
-            'Zwischenheizen: ' + zwischenheizen
-          }}
-
-      # Trovis - Heating curves HK123
-      # moved here from 'sensors' due to 256 Bytes length limitation (arrays became too long)
-      trovis_hk123_heizkurven:
-        unique_id: trovis_hk123_heizkurven
-        friendly_name: "Trovis Hk123 Heizkurven"
-        value_template: "siehe Attribute"
-        attribute_templates:
-
-          x_werte: >-
-            {% set x = namespace(valsx='') %}
-            {% for lauf in range(-20,21) %}
-              {% set x.valsx = x.valsx + lauf|string + ',' %}
-            {% endfor %}
-            {{ x.valsx[:-1].split(',') | map('int') | list }}
-
-          hk1: >-
-            {% set tagbetrieb = is_state('binary_sensor.trovis_hk1_tagbetrieb', 'on')| int(0) %}
-            {% set tagsoll = states['sensor.trovis_hk1_raumsoll_tag'].state|float(0) %}
-            {% set nachtsoll = states['sensor.trovis_hk1_raumsoll_nacht'].state|float(0) %}
-            {% set niveau = states['sensor.trovis_hk1_niveau'].state|float(0) %}
-            {% set steigung = states['sensor.trovis_hk1_steigung'].state|float(0) %}
-            {% set vl_min = states['sensor.trovis_hk1_vl_min'].state|float(0) %}
-            {% set vl_max = states['sensor.trovis_hk1_vl_max'].state|float(0) %}
-            {% set y = namespace(valsy='') %}
-            {% if tagbetrieb %}
-              {% set soll = tagsoll | int %}
-            {% else %}
-              {% set soll = nachtsoll | int %}
-            {% endif %}
-            {# wirft Fehler beim Start: for lauf in this.attributes.x_werte #}
-            {% for lauf in range(-20,21) %}
-              {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
-                (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
-              {% if vl < vl_min %}
-                {% set vl = vl_min %}
-              {% elif vl > vl_max %}
-                {% set vl = vl_max %}
-              {% endif %}
-              {% set y.valsy = y.valsy + vl|round(2,default=0)|string + ',' %}
-            {% endfor %}
-            {{ y.valsy[:-1].split(',') | map('float') | list }}
-
-          hk2: >-
-            {% set tagbetrieb = is_state('binary_sensor.trovis_hk2_tagbetrieb', 'on')| int(0) %}
-            {% set tagsoll = states['sensor.trovis_hk2_raumsoll_tag'].state|float(0) %}
-            {% set nachtsoll = states['sensor.trovis_hk2_raumsoll_nacht'].state|float(0) %}
-            {% set niveau = states['sensor.trovis_hk2_niveau'].state|float(0) %}
-            {% set steigung = states['sensor.trovis_hk2_steigung'].state|float(0) %}
-            {% set vl_min = states['sensor.trovis_hk2_vl_min'].state|float(0) %}
-            {% set vl_max = states['sensor.trovis_hk2_vl_max'].state|float(0) %}
-            {% set y = namespace(valsy='') %}
-            {% if tagbetrieb %}
-              {% set soll = tagsoll | int %}
-            {% else %}
-              {% set soll = nachtsoll | int %}
-            {% endif %}
-            {% for lauf in range(-20,21) %}
-              {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
-                (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
-              {% if vl < vl_min %}
-                {% set vl = vl_min %}
-              {% elif vl > vl_max %}
-                {% set vl = vl_max %}
-              {% endif %}
-              {% set y.valsy = y.valsy + vl|round(2,default=0)|string + ',' %}
-            {% endfor %}
-            {{ y.valsy[:-1].split(',') | map('float') | list }}
-
-          hk3: >-
-            {% set tagbetrieb = is_state('binary_sensor.trovis_hk3_tagbetrieb', 'on')| int(0) %}
-            {% set tagsoll = states['sensor.trovis_hk3_raumsoll_tag'].state|float(0) %}
-            {% set nachtsoll = states['sensor.trovis_hk3_raumsoll_nacht'].state|float(0) %}
-            {% set niveau = states['sensor.trovis_hk3_niveau'].state|float(0) %}
-            {% set steigung = states['sensor.trovis_hk3_steigung'].state|float(0) %}
-            {% set vl_min = states['sensor.trovis_hk3_vl_min'].state|float(0) %}
-            {% set vl_max = states['sensor.trovis_hk3_vl_max'].state|float(0) %}
-            {% set y = namespace(valsy='') %}
-            {% if tagbetrieb %}
-              {% set soll = tagsoll | int %}
-            {% else %}
-              {% set soll = nachtsoll | int %}
-            {% endif %}
-            {% for lauf in range(-20,21) %}
-              {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
-                (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
-              {% if vl < vl_min %}
-                {% set vl = vl_min %}
-              {% elif vl > vl_max %}
-                {% set vl = vl_max %}
-              {% endif %}
-              {% set y.valsy = y.valsy + vl|round(2,default=0)|string + ',' %}
-            {% endfor %}
-            {{ y.valsy[:-1].split(',') | map('float') | list }}
+          {{ ladesoll }}

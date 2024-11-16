@@ -1,0 +1,559 @@
+##############################  Heating Curves #################################
+
+  - platform: template
+  
+    sensors:
+
+      # Trovis - Heating curves HK123
+      # moved here from 'sensors' due to 256 Bytes length limitation
+      # (arrays became too long)
+      trovis_hk123_heizkurven:
+        unique_id: trovis_hk123_heizkurven
+        friendly_name: "Trovis Hk123 Heizkurven"
+        value_template: "siehe Attribute"
+        attribute_templates:
+
+          x_werte: >-
+            {% set x = namespace(valsx='') %}
+            {% for lauf in range(-20,21) %}
+              {% set x.valsx = x.valsx + lauf|string + ',' %}
+            {% endfor %}
+            {{ x.valsx[:-1].split(',') | map('int') | list }}
+
+          ###############################  Hk1 #################################
+
+          hk1: >-
+            {% set tagbetrieb = is_state('binary_sensor.trovis_hk1_tagbetrieb', 'on')| int(0) %}
+            {% set tagsoll = states['sensor.trovis_hk1_raumsoll_tag'].state|float(0) %}
+            {% set nachtsoll = states['sensor.trovis_hk1_raumsoll_nacht'].state|float(0) %}
+            {% set niveau = states['sensor.trovis_hk1_niveau'].state|float(0) %}
+            {% set steigung = states['sensor.trovis_hk1_steigung'].state|float(0) %}
+            {% set vl_min = states['sensor.trovis_hk1_vl_min'].state|float(0) %}
+            {% set vl_max = states['sensor.trovis_hk1_vl_max'].state|float(0) %}
+            {% set y = namespace(valsy='') %}
+            {% if tagbetrieb %}
+              {% set soll = tagsoll | int %}
+            {% else %}
+              {% set soll = nachtsoll | int %}
+            {% endif %}
+            {# wirft Fehler während Neustart: for lauf in this.attributes.x_werte #}
+            {% for lauf in range(-20,21) %}
+              {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
+                (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
+              {% if vl < vl_min %}
+                {% set vl = vl_min %}
+              {% elif vl > vl_max %}
+                {% set vl = vl_max %}
+              {% endif %}
+              {% set y.valsy = y.valsy + vl|round(2,default=0)|string + ',' %}
+            {% endfor %}
+            {{ y.valsy[:-1].split(',') | map('float') | list }}
+
+          hk1_tagkurve: >-
+            {% set tagbetrieb = "1" | int(0) %}
+            {% set tagsoll = states['sensor.trovis_hk1_raumsoll_tag'].state|float(0) %}
+            {% set nachtsoll = states['sensor.trovis_hk1_raumsoll_nacht'].state|float(0) %}
+            {% set niveau = states['sensor.trovis_hk1_niveau'].state|float(0) %}
+            {% set steigung = states['sensor.trovis_hk1_steigung'].state|float(0) %}
+            {% set vl_min = states['sensor.trovis_hk1_vl_min'].state|float(0) %}
+            {% set vl_max = states['sensor.trovis_hk1_vl_max'].state|float(0) %}
+            {% set y = namespace(valsy='') %}
+            {% if tagbetrieb %}
+              {% set soll = tagsoll | int %}
+            {% else %}
+              {% set soll = nachtsoll | int %}
+            {% endif %}
+            {% for lauf in range(-20,21) %}
+              {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
+                (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
+              {% if vl < vl_min %}
+                {% set vl = vl_min %}
+              {% elif vl > vl_max %}
+                {% set vl = vl_max %}
+              {% endif %}
+              {% set y.valsy = y.valsy + vl|round(2,default=0)|string + ',' %}
+            {% endfor %}
+            {{ y.valsy[:-1].split(',') | map('float') | list }}
+
+          hk1_nachtkurve: >-
+            {% set tagbetrieb = "0" | int(0) %}
+            {% set tagsoll = states['sensor.trovis_hk1_raumsoll_tag'].state|float(0) %}
+            {% set nachtsoll = states['sensor.trovis_hk1_raumsoll_nacht'].state|float(0) %}
+            {% set niveau = states['sensor.trovis_hk1_niveau'].state|float(0) %}
+            {% set steigung = states['sensor.trovis_hk1_steigung'].state|float(0) %}
+            {% set vl_min = states['sensor.trovis_hk1_vl_min'].state|float(0) %}
+            {% set vl_max = states['sensor.trovis_hk1_vl_max'].state|float(0) %}
+            {% set y = namespace(valsy='') %}
+            {% if tagbetrieb %}
+              {% set soll = tagsoll | int %}
+            {% else %}
+              {% set soll = nachtsoll | int %}
+            {% endif %}
+            {% for lauf in range(-20,21) %}
+              {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
+                (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
+              {% if vl < vl_min %}
+                {% set vl = vl_min %}
+              {% elif vl > vl_max %}
+                {% set vl = vl_max %}
+              {% endif %}
+              {% set y.valsy = y.valsy + vl|round(2,default=0)|string + ',' %}
+            {% endfor %}
+            {{ y.valsy[:-1].split(',') | map('float') | list }}
+
+          hk1_sim_tag: >-
+            {% set tagbetrieb = 1 | int(0) %}
+            {% set tagsoll = states['input_number.trovis_hk1_raumsoll_tag'].state|float(0) %}
+            {% set nachtsoll = states['input_number.trovis_hk1_raumsoll_nacht'].state|float(0) %}
+            {% set niveau = states['input_number.trovis_hk1_niveau'].state|float(0) %}
+            {% set steigung = states['input_number.trovis_hk1_steigung'].state|float(0) %}
+            {% set vl_min = states['input_number.trovis_hk1_vl_min'].state|float(0) %}
+            {% set vl_max = states['input_number.trovis_hk1_vl_max'].state|float(0) %}
+            {% set y = namespace(valsy='') %}
+            {% if tagbetrieb %}
+              {% set soll = tagsoll | int %}
+            {% else %}
+              {% set soll = nachtsoll | int %}
+            {% endif %}
+            {% for lauf in range(-20,21) %}
+              {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
+                (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
+              {% if vl < vl_min %}
+                {% set vl = vl_min %}
+              {% elif vl > vl_max %}
+                {% set vl = vl_max %}
+              {% endif %}
+              {% set y.valsy = y.valsy + vl|round(2,default=0)|string + ',' %}
+            {% endfor %}
+            {{ y.valsy[:-1].split(',') | map('float') | list }}
+
+          hk1_sim_nacht: >-
+            {% set tagbetrieb = 0 | int(0) %}
+            {% set tagsoll = states['input_number.trovis_hk1_raumsoll_tag'].state|float(0) %}
+            {% set nachtsoll = states['input_number.trovis_hk1_raumsoll_nacht'].state|float(0) %}
+            {% set niveau = states['input_number.trovis_hk1_niveau'].state|float(0) %}
+            {% set steigung = states['input_number.trovis_hk1_steigung'].state|float(0) %}
+            {% set vl_min = states['input_number.trovis_hk1_vl_min'].state|float(0) %}
+            {% set vl_max = states['input_number.trovis_hk1_vl_max'].state|float(0) %}
+            {% set y = namespace(valsy='') %}
+            {% if tagbetrieb %}
+              {% set soll = tagsoll | int %}
+            {% else %}
+              {% set soll = nachtsoll | int %}
+            {% endif %}
+            {% for lauf in range(-20,21) %}
+              {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
+                (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
+              {% if vl < vl_min %}
+                {% set vl = vl_min %}
+              {% elif vl > vl_max %}
+                {% set vl = vl_max %}
+              {% endif %}
+              {% set y.valsy = y.valsy + vl|round(2,default=0)|string + ',' %}
+            {% endfor %}
+            {{ y.valsy[:-1].split(',') | map('float') | list }}
+
+          hk1_sim_text: >-
+            {% set sim_text = '' %}
+            {% set tagsoll = states['sensor.trovis_hk1_raumsoll_tag'].state|int(0) %}
+            {% set nachtsoll = states['sensor.trovis_hk1_raumsoll_nacht'].state|int(0) %}
+            {% set niveau = states['sensor.trovis_hk1_niveau'].state|int(0) %}
+            {% set steigung = states['sensor.trovis_hk1_steigung'].state|float(0)|round(1) %}
+            {% set vl_min = states['sensor.trovis_hk1_vl_min'].state|int(0) %}
+            {% set vl_max = states['sensor.trovis_hk1_vl_max'].state|int(0) %}
+            {% set tagsoll_ = states['input_number.trovis_hk1_raumsoll_tag'].state|int(0) %}
+            {% set nachtsoll_ = states['input_number.trovis_hk1_raumsoll_nacht'].state|int(0) %}
+            {% set niveau_ = states['input_number.trovis_hk1_niveau'].state|int(0) %}
+            {% set steigung_ = states['input_number.trovis_hk1_steigung'].state|float(0)|round(1) %}
+            {% set vl_min_ = states['input_number.trovis_hk1_vl_min'].state|int(0) %}
+            {% set vl_max_ = states['input_number.trovis_hk1_vl_max'].state|int(0) %}
+            {% if niveau != niveau_ %}
+              {% set sim_text = sim_text + 'Niveau: ' + niveau|string + ' → ' + niveau_|string + '°<br>' %}
+            {% endif %}
+            {% if steigung != steigung_ %}
+              {% set sim_text = sim_text + 'Steigung: ' + steigung|string + ' → ' + steigung_|string + '<br>' %}
+            {% endif %}
+            {% if tagsoll != tagsoll_ %}
+              {% set sim_text = sim_text + 'Tagsoll: ' + tagsoll|string + ' → ' + tagsoll_|string + '°<br>' %}
+            {% endif %}
+            {% if nachtsoll != nachtsoll_ %}
+              {% set sim_text = sim_text + 'Nachtsoll: ' + nachtsoll|string + ' → ' + nachtsoll_|string + '°<br>' %}
+            {% endif %}
+            {% if vl_min != vl_min_ %}
+              {% set sim_text = sim_text + 'VLmin: ' + vl_min|string + ' → ' + vl_min_|string + '°<br>' %}
+            {% endif %}
+            {% if vl_max != vl_max_ %}
+              {% set sim_text = sim_text + 'VLmax: ' + vl_max|string + ' → ' + vl_max_|string + '°' %}
+            {% endif %}
+            {{ sim_text }}
+
+          ###############################  Hk2 #################################
+
+          hk2: >-
+            {% set tagbetrieb = is_state('binary_sensor.trovis_hk2_tagbetrieb', 'on')| int(0) %}
+            {% set tagsoll = states['sensor.trovis_hk2_raumsoll_tag'].state|float(0) %}
+            {% set nachtsoll = states['sensor.trovis_hk2_raumsoll_nacht'].state|float(0) %}
+            {% set niveau = states['sensor.trovis_hk2_niveau'].state|float(0) %}
+            {% set steigung = states['sensor.trovis_hk2_steigung'].state|float(0) %}
+            {% set vl_min = states['sensor.trovis_hk2_vl_min'].state|float(0) %}
+            {% set vl_max = states['sensor.trovis_hk2_vl_max'].state|float(0) %}
+            {% set y = namespace(valsy='') %}
+            {% if tagbetrieb %}
+              {% set soll = tagsoll | int %}
+            {% else %}
+              {% set soll = nachtsoll | int %}
+            {% endif %}
+            {% for lauf in range(-20,21) %}
+              {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
+                (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
+              {% if vl < vl_min %}
+                {% set vl = vl_min %}
+              {% elif vl > vl_max %}
+                {% set vl = vl_max %}
+              {% endif %}
+              {% set y.valsy = y.valsy + vl|round(2,default=0)|string + ',' %}
+            {% endfor %}
+            {{ y.valsy[:-1].split(',') | map('float') | list }}
+
+          hk2_tagkurve: >-
+            {% set tagbetrieb = "1" | int(0) %}
+            {% set tagsoll = states['sensor.trovis_hk2_raumsoll_tag'].state|float(0) %}
+            {% set nachtsoll = states['sensor.trovis_hk2_raumsoll_nacht'].state|float(0) %}
+            {% set niveau = states['sensor.trovis_hk2_niveau'].state|float(0) %}
+            {% set steigung = states['sensor.trovis_hk2_steigung'].state|float(0) %}
+            {% set vl_min = states['sensor.trovis_hk2_vl_min'].state|float(0) %}
+            {% set vl_max = states['sensor.trovis_hk2_vl_max'].state|float(0) %}
+            {% set y = namespace(valsy='') %}
+            {% if tagbetrieb %}
+              {% set soll = tagsoll | int %}
+            {% else %}
+              {% set soll = nachtsoll | int %}
+            {% endif %}
+            {% for lauf in range(-20,21) %}
+              {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
+                (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
+              {% if vl < vl_min %}
+                {% set vl = vl_min %}
+              {% elif vl > vl_max %}
+                {% set vl = vl_max %}
+              {% endif %}
+              {% set y.valsy = y.valsy + vl|round(2,default=0)|string + ',' %}
+            {% endfor %}
+            {{ y.valsy[:-1].split(',') | map('float') | list }}
+
+          hk2_nachtkurve: >-
+            {% set tagbetrieb = "0" | int(0) %}
+            {% set tagsoll = states['sensor.trovis_hk2_raumsoll_tag'].state|float(0) %}
+            {% set nachtsoll = states['sensor.trovis_hk2_raumsoll_nacht'].state|float(0) %}
+            {% set niveau = states['sensor.trovis_hk2_niveau'].state|float(0) %}
+            {% set steigung = states['sensor.trovis_hk2_steigung'].state|float(0) %}
+            {% set vl_min = states['sensor.trovis_hk2_vl_min'].state|float(0) %}
+            {% set vl_max = states['sensor.trovis_hk2_vl_max'].state|float(0) %}
+            {% set y = namespace(valsy='') %}
+            {% if tagbetrieb %}
+              {% set soll = tagsoll | int %}
+            {% else %}
+              {% set soll = nachtsoll | int %}
+            {% endif %}
+            {% for lauf in range(-20,21) %}
+              {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
+                (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
+              {% if vl < vl_min %}
+                {% set vl = vl_min %}
+              {% elif vl > vl_max %}
+                {% set vl = vl_max %}
+              {% endif %}
+              {% set y.valsy = y.valsy + vl|round(2,default=0)|string + ',' %}
+            {% endfor %}
+            {{ y.valsy[:-1].split(',') | map('float') | list }}
+
+          hk2_sim_tag: >-
+            {% set tagbetrieb = 1 | int(0) %}
+            {% set tagsoll = states['input_number.trovis_hk2_raumsoll_tag'].state|float(0) %}
+            {% set nachtsoll = states['input_number.trovis_hk2_raumsoll_nacht'].state|float(0) %}
+            {% set niveau = states['input_number.trovis_hk2_niveau'].state|float(0) %}
+            {% set steigung = states['input_number.trovis_hk2_steigung'].state|float(0) %}
+            {% set vl_min = states['input_number.trovis_hk2_vl_min'].state|float(0) %}
+            {% set vl_max = states['input_number.trovis_hk2_vl_max'].state|float(0) %}
+            {% set y = namespace(valsy='') %}
+            {% if tagbetrieb %}
+              {% set soll = tagsoll | int %}
+            {% else %}
+              {% set soll = nachtsoll | int %}
+            {% endif %}
+            {% for lauf in range(-20,21) %}
+              {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
+                (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
+              {% if vl < vl_min %}
+                {% set vl = vl_min %}
+              {% elif vl > vl_max %}
+                {% set vl = vl_max %}
+              {% endif %}
+              {% set y.valsy = y.valsy + vl|round(2,default=0)|string + ',' %}
+            {% endfor %}
+            {{ y.valsy[:-1].split(',') | map('float') | list }}
+
+          hk2_sim_nacht: >-
+            {% set tagbetrieb = 0 | int(0) %}
+            {% set tagsoll = states['input_number.trovis_hk2_raumsoll_tag'].state|float(0) %}
+            {% set nachtsoll = states['input_number.trovis_hk2_raumsoll_nacht'].state|float(0) %}
+            {% set niveau = states['input_number.trovis_hk2_niveau'].state|float(0) %}
+            {% set steigung = states['input_number.trovis_hk2_steigung'].state|float(0) %}
+            {% set vl_min = states['input_number.trovis_hk2_vl_min'].state|float(0) %}
+            {% set vl_max = states['input_number.trovis_hk2_vl_max'].state|float(0) %}
+            {% set y = namespace(valsy='') %}
+            {% if tagbetrieb %}
+              {% set soll = tagsoll | int %}
+            {% else %}
+              {% set soll = nachtsoll | int %}
+            {% endif %}
+            {% for lauf in range(-20,21) %}
+              {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
+                (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
+              {% if vl < vl_min %}
+                {% set vl = vl_min %}
+              {% elif vl > vl_max %}
+                {% set vl = vl_max %}
+              {% endif %}
+              {% set y.valsy = y.valsy + vl|round(2,default=0)|string + ',' %}
+            {% endfor %}
+            {{ y.valsy[:-1].split(',') | map('float') | list }}
+
+          hk2_sim_text: >-
+            {% set sim_text = '' %}
+            {% set tagsoll = states['sensor.trovis_hk2_raumsoll_tag'].state|int(0) %}
+            {% set nachtsoll = states['sensor.trovis_hk2_raumsoll_nacht'].state|int(0) %}
+            {% set niveau = states['sensor.trovis_hk2_niveau'].state|int(0) %}
+            {% set steigung = states['sensor.trovis_hk2_steigung'].state|float(0)|round(1) %}
+            {% set vl_min = states['sensor.trovis_hk2_vl_min'].state|int(0) %}
+            {% set vl_max = states['sensor.trovis_hk2_vl_max'].state|int(0) %}
+            {% set tagsoll_ = states['input_number.trovis_hk2_raumsoll_tag'].state|int(0) %}
+            {% set nachtsoll_ = states['input_number.trovis_hk2_raumsoll_nacht'].state|int(0) %}
+            {% set niveau_ = states['input_number.trovis_hk2_niveau'].state|int(0) %}
+            {% set steigung_ = states['input_number.trovis_hk2_steigung'].state|float(0)|round(1) %}
+            {% set vl_min_ = states['input_number.trovis_hk2_vl_min'].state|int(0) %}
+            {% set vl_max_ = states['input_number.trovis_hk2_vl_max'].state|int(0) %}
+            {% if niveau != niveau_ %}
+              {% set sim_text = sim_text + 'Niveau: ' + niveau|string + ' → ' + niveau_|string + '°<br>' %}
+            {% endif %}
+            {% if steigung != steigung_ %}
+              {% set sim_text = sim_text + 'Steigung: ' + steigung|string + ' → ' + steigung_|string + '<br>' %}
+            {% endif %}
+            {% if tagsoll != tagsoll_ %}
+              {% set sim_text = sim_text + 'Tagsoll: ' + tagsoll|string + ' → ' + tagsoll_|string + '°<br>' %}
+            {% endif %}
+            {% if nachtsoll != nachtsoll_ %}
+              {% set sim_text = sim_text + 'Nachtsoll: ' + nachtsoll|string + ' → ' + nachtsoll_|string + '°<br>' %}
+            {% endif %}
+            {% if vl_min != vl_min_ %}
+              {% set sim_text = sim_text + 'VLmin: ' + vl_min|string + ' → ' + vl_min_|string + '°<br>' %}
+            {% endif %}
+            {% if vl_max != vl_max_ %}
+              {% set sim_text = sim_text + 'VLmax: ' + vl_max|string + ' → ' + vl_max_|string + '°' %}
+            {% endif %}
+            {{ sim_text }}
+
+          ###############################  Hk3 #################################
+
+          # hk3: >-
+          #   {% set tagbetrieb = is_state('binary_sensor.trovis_hk3_tagbetrieb', 'on')| int(0) %}
+          #   {% set tagsoll = states['sensor.trovis_hk3_raumsoll_tag'].state|float(0) %}
+          #   {% set nachtsoll = states['sensor.trovis_hk3_raumsoll_nacht'].state|float(0) %}
+          #   {% set niveau = states['sensor.trovis_hk3_niveau'].state|float(0) %}
+          #   {% set steigung = states['sensor.trovis_hk3_steigung'].state|float(0) %}
+          #   {% set vl_min = states['sensor.trovis_hk3_vl_min'].state|float(0) %}
+          #   {% set vl_max = states['sensor.trovis_hk3_vl_max'].state|float(0) %}
+          #   {% set y = namespace(valsy='') %}
+          #   {% if tagbetrieb %}
+          #     {% set soll = tagsoll | int %}
+          #   {% else %}
+          #     {% set soll = nachtsoll | int %}
+          #   {% endif %}
+          #   {% for lauf in range(-20,21) %}
+          #     {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
+          #       (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
+          #     {% if vl < vl_min %}
+          #       {% set vl = vl_min %}
+          #     {% elif vl > vl_max %}
+          #       {% set vl = vl_max %}
+          #     {% endif %}
+          #     {% set y.valsy = y.valsy + vl|round(2,default=0)|string + ',' %}
+          #   {% endfor %}
+          #   {{ y.valsy[:-1].split(',') | map('float') | list }}
+
+          # hk3_tagkurve: >-
+          #   {% set tagbetrieb = "1" | int(0) %}
+          #   {% set tagsoll = states['sensor.trovis_hk3_raumsoll_tag'].state|float(0) %}
+          #   {% set nachtsoll = states['sensor.trovis_hk3_raumsoll_nacht'].state|float(0) %}
+          #   {% set niveau = states['sensor.trovis_hk3_niveau'].state|float(0) %}
+          #   {% set steigung = states['sensor.trovis_hk3_steigung'].state|float(0) %}
+          #   {% set vl_min = states['sensor.trovis_hk3_vl_min'].state|float(0) %}
+          #   {% set vl_max = states['sensor.trovis_hk3_vl_max'].state|float(0) %}
+          #   {% set y = namespace(valsy='') %}
+          #   {% if tagbetrieb %}
+          #     {% set soll = tagsoll | int %}
+          #   {% else %}
+          #     {% set soll = nachtsoll | int %}
+          #   {% endif %}
+          #   {% for lauf in range(-20,21) %}
+          #     {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
+          #       (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
+          #     {% if vl < vl_min %}
+          #       {% set vl = vl_min %}
+          #     {% elif vl > vl_max %}
+          #       {% set vl = vl_max %}
+          #     {% endif %}
+          #     {% set y.valsy = y.valsy + vl|round(2,default=0)|string + ',' %}
+          #   {% endfor %}
+          #   {{ y.valsy[:-1].split(',') | map('float') | list }}
+
+          # hk3_nachtkurve: >-
+          #   {% set tagbetrieb = "0" | int(0) %}
+          #   {% set tagsoll = states['sensor.trovis_hk3_raumsoll_tag'].state|float(0) %}
+          #   {% set nachtsoll = states['sensor.trovis_hk3_raumsoll_nacht'].state|float(0) %}
+          #   {% set niveau = states['sensor.trovis_hk3_niveau'].state|float(0) %}
+          #   {% set steigung = states['sensor.trovis_hk3_steigung'].state|float(0) %}
+          #   {% set vl_min = states['sensor.trovis_hk3_vl_min'].state|float(0) %}
+          #   {% set vl_max = states['sensor.trovis_hk3_vl_max'].state|float(0) %}
+          #   {% set y = namespace(valsy='') %}
+          #   {% if tagbetrieb %}
+          #     {% set soll = tagsoll | int %}
+          #   {% else %}
+          #     {% set soll = nachtsoll | int %}
+          #   {% endif %}
+          #   {% for lauf in range(-20,21) %}
+          #     {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
+          #       (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
+          #     {% if vl < vl_min %}
+          #       {% set vl = vl_min %}
+          #     {% elif vl > vl_max %}
+          #       {% set vl = vl_max %}
+          #     {% endif %}
+          #     {% set y.valsy = y.valsy + vl|round(2,default=0)|string + ',' %}
+          #   {% endfor %}
+          #   {{ y.valsy[:-1].split(',') | map('float') | list }}
+
+          # hk3_sim_tag: >-
+          #   {% set tagbetrieb = 1 | int(0) %}
+          #   {% set tagsoll = states['input_number.trovis_hk3_raumsoll_tag'].state|float(0) %}
+          #   {% set nachtsoll = states['input_number.trovis_hk3_raumsoll_nacht'].state|float(0) %}
+          #   {% set niveau = states['input_number.trovis_hk3_niveau'].state|float(0) %}
+          #   {% set steigung = states['input_number.trovis_hk3_steigung'].state|float(0) %}
+          #   {% set vl_min = states['input_number.trovis_hk3_vl_min'].state|float(0) %}
+          #   {% set vl_max = states['input_number.trovis_hk3_vl_max'].state|float(0) %}
+          #   {% set y = namespace(valsy='') %}
+          #   {% if tagbetrieb %}
+          #     {% set soll = tagsoll | int %}
+          #   {% else %}
+          #     {% set soll = nachtsoll | int %}
+          #   {% endif %}
+          #   {% for lauf in range(-20,21) %}
+          #     {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
+          #       (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
+          #     {% if vl < vl_min %}
+          #       {% set vl = vl_min %}
+          #     {% elif vl > vl_max %}
+          #       {% set vl = vl_max %}
+          #     {% endif %}
+          #     {% set y.valsy = y.valsy + vl|round(2,default=0)|string + ',' %}
+          #   {% endfor %}
+          #   {{ y.valsy[:-1].split(',') | map('float') | list }}
+
+          # hk3_sim_nacht: >-
+          #   {% set tagbetrieb = 0 | int(0) %}
+          #   {% set tagsoll = states['input_number.trovis_hk3_raumsoll_tag'].state|float(0) %}
+          #   {% set nachtsoll = states['input_number.trovis_hk3_raumsoll_nacht'].state|float(0) %}
+          #   {% set niveau = states['input_number.trovis_hk3_niveau'].state|float(0) %}
+          #   {% set steigung = states['input_number.trovis_hk3_steigung'].state|float(0) %}
+          #   {% set vl_min = states['input_number.trovis_hk3_vl_min'].state|float(0) %}
+          #   {% set vl_max = states['input_number.trovis_hk3_vl_max'].state|float(0) %}
+          #   {% set y = namespace(valsy='') %}
+          #   {% if tagbetrieb %}
+          #     {% set soll = tagsoll | int %}
+          #   {% else %}
+          #     {% set soll = nachtsoll | int %}
+          #   {% endif %}
+          #   {% for lauf in range(-20,21) %}
+          #     {% set vl = (24 + niveau + 2*steigung*(soll-20) - (0.1 + 0.9*steigung) *
+          #       (1.5*(lauf-20) + 0.01*((lauf-20)*(lauf-20)))) %}
+          #     {% if vl < vl_min %}
+          #       {% set vl = vl_min %}
+          #     {% elif vl > vl_max %}
+          #       {% set vl = vl_max %}
+          #     {% endif %}
+          #     {% set y.valsy = y.valsy + vl|round(2,default=0)|string + ',' %}
+          #   {% endfor %}
+          #   {{ y.valsy[:-1].split(',') | map('float') | list }}
+
+          # hk3_sim_text: >-
+          #   {% set sim_text = '' %}
+          #   {% set tagsoll = states['sensor.trovis_hk3_raumsoll_tag'].state|int(0) %}
+          #   {% set nachtsoll = states['sensor.trovis_hk3_raumsoll_nacht'].state|int(0) %}
+          #   {% set niveau = states['sensor.trovis_hk3_niveau'].state|int(0) %}
+          #   {% set steigung = states['sensor.trovis_hk3_steigung'].state|float(0)|round(1) %}
+          #   {% set vl_min = states['sensor.trovis_hk3_vl_min'].state|int(0) %}
+          #   {% set vl_max = states['sensor.trovis_hk3_vl_max'].state|int(0) %}
+          #   {% set tagsoll_ = states['input_number.trovis_hk3_raumsoll_tag'].state|int(0) %}
+          #   {% set nachtsoll_ = states['input_number.trovis_hk3_raumsoll_nacht'].state|int(0) %}
+          #   {% set niveau_ = states['input_number.trovis_hk3_niveau'].state|int(0) %}
+          #   {% set steigung_ = states['input_number.trovis_hk3_steigung'].state|float(0)|round(1) %}
+          #   {% set vl_min_ = states['input_number.trovis_hk3_vl_min'].state|int(0) %}
+          #   {% set vl_max_ = states['input_number.trovis_hk3_vl_max'].state|int(0) %}
+          #   {% if niveau != niveau_ %}
+          #     {% set sim_text = sim_text + 'Niveau: ' + niveau|string + ' → ' + niveau_|string + '°<br>' %}
+          #   {% endif %}
+          #   {% if steigung != steigung_ %}
+          #     {% set sim_text = sim_text + 'Steigung: ' + steigung|string + ' → ' + steigung_|string + '<br>' %}
+          #   {% endif %}
+          #   {% if tagsoll != tagsoll_ %}
+          #     {% set sim_text = sim_text + 'Tagsoll: ' + tagsoll|string + ' → ' + tagsoll_|string + '°<br>' %}
+          #   {% endif %}
+          #   {% if nachtsoll != nachtsoll_ %}
+          #     {% set sim_text = sim_text + 'Nachtsoll: ' + nachtsoll|string + ' → ' + nachtsoll_|string + '°<br>' %}
+          #   {% endif %}
+          #   {% if vl_min != vl_min_ %}
+          #     {% set sim_text = sim_text + 'VLmin: ' + vl_min|string + ' → ' + vl_min_|string + '°<br>' %}
+          #   {% endif %}
+          #   {% if vl_max != vl_max_ %}
+          #     {% set sim_text = sim_text + 'VLmax: ' + vl_max|string + ' → ' + vl_max_|string + '°' %}
+          #   {% endif %}
+          #   {{ sim_text }}
+
+          ###############################  Hk4 #################################
+
+          hk4_sim_text: >-
+            {% set sim_text = '' %}
+
+            {% set sollwert = states['sensor.trovis_hk4_soll_tw'].state|int(0) %}
+            {% set haltewert = states['sensor.trovis_hk4_haltewert_tw'].state|int(0) %}
+            {% set ueberhoehung = states['sensor.trovis_hk4_ueberhoehung_tw'].state|int(0) %}
+            {% set schaltdiff = states['sensor.trovis_hk4_schaltdifferenz_tw'].state|int(0) %}
+            {% set maxlade = states['sensor.trovis_hk4_maxladetemperatur_tw'].state|int(0) %}
+            {% set maxrl = states['sensor.trovis_hk4_maxrl_tw'].state|int(0) %}
+            
+            {% set sollwert_ = states['input_number.trovis_hk4_soll_tw'].state|int(0) %}
+            {% set haltewert_ = states['input_number.trovis_hk4_haltewert_tw'].state|int(0) %}
+            {% set ueberhoehung_ = states['input_number.trovis_hk4_ueberhoehung_tw'].state|int(0) %}
+            {% set schaltdiff_ = states['input_number.trovis_hk4_schaltdifferenz_tw'].state|int(0) %}
+            {% set maxlade_ = states['input_number.trovis_hk4_maxladetemperatur_tw'].state|int(0) %}
+            {% set maxrl_ = states['input_number.trovis_hk4_maxrl_tw'].state|int(0) %}
+
+            {% if sollwert != sollwert_ %}
+              {% set sim_text = sim_text + 'Sollwert: ' + sollwert|string + ' → ' + sollwert_|string + '°<br>' %}
+            {% endif %}
+            {% if haltewert != haltewert_ %}
+              {% set sim_text = sim_text + 'Haltewert: ' + haltewert|string + ' → ' + haltewert_|string + '<br>' %}
+            {% endif %}
+            {% if ueberhoehung != ueberhoehung_ %}
+              {% set sim_text = sim_text + 'Überhöhung: ' + ueberhoehung|string + ' → ' + ueberhoehung_|string + '°<br>' %}
+            {% endif %}
+            {% if schaltdiff != schaltdiff_ %}
+              {% set sim_text = sim_text + 'Schaltdiff: ' + schaltdiff|string + ' → ' + schaltdiff_|string + '°<br>' %}
+            {% endif %}
+            {% if maxlade != maxlade_ %}
+              {% set sim_text = sim_text + 'VL max: ' + maxlade|string + ' → ' + maxlade_|string + '°<br>' %}
+            {% endif %}
+            {% if maxrl != maxrl_ %}
+              {% set sim_text = sim_text + 'RL max: ' + maxrl|string + ' → ' + maxrl_|string + '°' %}
+            {% endif %}
+            {{ sim_text }}

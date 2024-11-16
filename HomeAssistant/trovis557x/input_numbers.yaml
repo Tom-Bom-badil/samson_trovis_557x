@@ -1,7 +1,159 @@
 #############################  Input Numbers ###################################
 
   trovis_visu_heizkreis:
-    name: 'Enthält anzuzeigende Heizukurve auf dem Regler in der Visu'
+    name: 'Enthält die anzuzeigende Heizukurve auf dem Regler in der Visu'
     initial: 1
     min: 0
     max: 4
+
+  ##################################  Hk1 ######################################
+
+  trovis_hk1_steigung:
+    name: 'Trovis Rk1 Steigung'
+    min: 0.2
+    max: 3.2
+    step: 0.1
+
+  trovis_hk1_niveau:
+    name: 'Trovis Rk1 Niveau'
+    min: -20
+    max: 20
+    step: 1
+
+  trovis_hk1_raumsoll_tag:
+    name: 'Trovis Rk1 Raumsoll Tag'
+    min: 0
+    max: 40
+    step: 0.5
+
+  trovis_hk1_raumsoll_nacht:
+    name: 'Trovis Rk1 Raumsoll Nacht'
+    min: 0
+    max: 40
+    step: 0.5
+
+  trovis_hk1_vl_min:
+    name: 'Trovis Rk1 VL min'
+    min: 0
+    max: 100
+    step: 1
+
+  trovis_hk1_vl_max:
+    name: 'Trovis Rk1 VL max'
+    min: 0
+    max: 100
+    step: 1
+
+  ##################################  Hk2 ######################################
+
+  trovis_hk2_steigung:
+    name: 'Trovis Rk2 Steigung'
+    min: 0.2
+    max: 3.2
+    step: 0.1
+
+  trovis_hk2_niveau:
+    name: 'Trovis Rk2 Niveau'
+    min: -20
+    max: 20
+    step: 1
+
+  trovis_hk2_raumsoll_tag:
+    name: 'Trovis Rk2 Raumsoll Tag'
+    min: 0
+    max: 40
+    step: 0.5
+
+  trovis_hk2_raumsoll_nacht:
+    name: 'Trovis Rk2 Raumsoll Nacht'
+    min: 0
+    max: 40
+    step: 0.5
+
+  trovis_hk2_vl_min:
+    name: 'Trovis Rk2 VL min'
+    min: 0
+    max: 100
+    step: 1
+
+  trovis_hk2_vl_max:
+    name: 'Trovis Rk2 VL max'
+    min: 0
+    max: 100
+    step: 1
+
+  ##################################  Hk3 ######################################
+
+  trovis_hk3_steigung:
+    name: 'Trovis Rk3 Steigung'
+    min: 0.2
+    max: 3.2
+    step: 0.1
+
+  trovis_hk3_niveau:
+    name: 'Trovis Rk3 Niveau'
+    min: -20
+    max: 20
+    step: 1
+
+  trovis_hk3_raumsoll_tag:
+    name: 'Trovis Rk3 Raumsoll Tag'
+    min: 0
+    max: 40
+    step: 0.5
+
+  trovis_hk3_raumsoll_nacht:
+    name: 'Trovis Rk3 Raumsoll Nacht'
+    min: 0
+    max: 40
+    step: 0.5
+
+  trovis_hk3_vl_min:
+    name: 'Trovis Rk3 VL min'
+    min: 0
+    max: 100
+    step: 1
+
+  trovis_hk3_vl_max:
+    name: 'Trovis Rk3 VL max'
+    min: 0
+    max: 100
+    step: 1
+
+  ##################################  Hk4 ######################################
+  
+  trovis_hk4_soll_tw:
+    name: 'Trovis Rk4 Sollwert'
+    min: 20
+    max: 90
+    step: 1
+
+  trovis_hk4_haltewert_tw:
+    name: 'Trovis Rk4 Haltewert'
+    min: 20
+    max: 90
+    step: 1
+
+  trovis_hk4_schaltdifferenz_tw:
+    name: 'Trovis Rk4 Schaltdifferenz'
+    min: 0
+    max: 30
+    step: 1
+
+  trovis_hk4_ueberhoehung_tw:
+    name: 'Trovis Rk4 Überhöhung'
+    min: 0
+    max: 50
+    step: 1
+
+  trovis_hk4_maxladetemperatur_tw:
+    name: 'Trovis Rk4 Maximale Ladetemperatur (VLsek)'
+    min: 0
+    max: 90
+    step: 1
+
+  trovis_hk4_maxrl_tw:
+    name: 'Trovis Rk4 Maximale Rücklauftemperatur (RLpri)'
+    min: 5
+    max: 90
+    step: 1

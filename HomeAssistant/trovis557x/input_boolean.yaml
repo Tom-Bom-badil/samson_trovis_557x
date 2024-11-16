@@ -1,0 +1,5 @@
+#############################  Input Boolean ###################################
+
+  trovis_hk1_simu_tag_nacht:
+    name: 'Trovis Rk1 Simulation Umstellung Tag/Nacht'
+    initial: true

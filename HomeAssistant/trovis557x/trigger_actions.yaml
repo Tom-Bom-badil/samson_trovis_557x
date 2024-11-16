@@ -1,0 +1,241 @@
+############################  Triggers & Actions ###############################
+
+  ###################################  Hk1 #####################################
+
+  - trigger:
+      - trigger: homeassistant
+        event: start
+      - trigger: state
+        entity_id: sensor.trovis_hk1_steigung
+
+    action:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.trovis_hk1_steigung
+        data:
+          value: "{{ states('sensor.trovis_hk1_steigung')|float(0.0)|round(1) }}"
+
+  - trigger:
+      - trigger: homeassistant
+        event: start
+      - trigger: state
+        entity_id: sensor.trovis_hk1_niveau
+
+    action:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.trovis_hk1_niveau
+        data:
+          value: "{{ states('sensor.trovis_hk1_niveau')|int(0) }}"
+
+  - trigger:
+      - trigger: homeassistant
+        event: start
+      - trigger: state
+        entity_id: sensor.trovis_hk1_raumsoll_tag
+
+    action:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.trovis_hk1_raumsoll_tag
+        data:
+          value: "{{ states('sensor.trovis_hk1_raumsoll_tag')|float(0.0)|round(1) }}"
+
+  - trigger:
+      - trigger: homeassistant
+        event: start
+      - trigger: state
+        entity_id: sensor.trovis_hk1_raumsoll_nacht
+
+    action:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.trovis_hk1_raumsoll_nacht
+        data:
+          value: "{{ states('sensor.trovis_hk1_raumsoll_nacht')|float(0.0)|round(1) }}"
+
+  - trigger:
+      - trigger: homeassistant
+        event: start
+      - trigger: state
+        entity_id: sensor.trovis_hk1_vl_min
+
+    action:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.trovis_hk1_vl_min
+        data:
+          value: "{{ states('sensor.trovis_hk1_vl_min')|int(0) }}"
+
+  - trigger:
+      - trigger: homeassistant
+        event: start
+      - trigger: state
+        entity_id: sensor.trovis_hk1_vl_max
+
+    action:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.trovis_hk1_vl_max
+        data:
+          value: "{{ states('sensor.trovis_hk1_vl_max')|int(0) }}"
+
+  ###################################  Hk2 #####################################
+
+  # - trigger:
+  #     - trigger: homeassistant
+  #       event: start
+  #     - trigger: state
+  #       entity_id: sensor.trovis_hk2_steigung
+
+  #   action:
+  #     - action: input_number.set_value
+  #       target:
+  #         entity_id: input_number.trovis_hk2_steigung
+  #       data:
+  #         value: "{{ states('sensor.trovis_hk2_steigung')|float(0.0)|round(1) }}"
+
+  # - trigger:
+  #     - trigger: homeassistant
+  #       event: start
+  #     - trigger: state
+  #       entity_id: sensor.trovis_hk2_niveau
+
+  #   action:
+  #     - action: input_number.set_value
+  #       target:
+  #         entity_id: input_number.trovis_hk2_niveau
+  #       data:
+  #         value: "{{ states('sensor.trovis_hk2_niveau')|int(0) }}"
+
+  - trigger:
+      - trigger: homeassistant
+        event: start
+      - trigger: state
+        entity_id: sensor.trovis_hk2_raumsoll_tag
+
+    action:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.trovis_hk2_raumsoll_tag
+        data:
+          value: "{{ states('sensor.trovis_hk2_raumsoll_tag')|float(0.0)|round(1) }}"
+
+  - trigger:
+      - trigger: homeassistant
+        event: start
+      - trigger: state
+        entity_id: sensor.trovis_hk2_raumsoll_nacht
+
+    action:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.trovis_hk2_raumsoll_nacht
+        data:
+          value: "{{ states('sensor.trovis_hk2_raumsoll_nacht')|float(0.0)|round(1) }}"
+
+  - trigger:
+      - trigger: homeassistant
+        event: start
+      - trigger: state
+        entity_id: sensor.trovis_hk2_vl_min
+
+    action:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.trovis_hk2_vl_min
+        data:
+          value: "{{ states('sensor.trovis_hk2_vl_min')|int(0) }}"
+
+  - trigger:
+      - trigger: homeassistant
+        event: start
+      - trigger: state
+        entity_id: sensor.trovis_hk2_vl_max
+
+    action:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.trovis_hk2_vl_max
+        data:
+          value: "{{ states('sensor.trovis_hk2_vl_max')|int(0) }}"
+
+  ###################################  Hk3 #####################################
+
+  # - trigger:
+  #     - trigger: homeassistant
+  #       event: start
+  #     - trigger: state
+  #       entity_id: sensor.trovis_hk3_steigung
+
+  #   action:
+  #     - action: input_number.set_value
+  #       target:
+  #         entity_id: input_number.trovis_hk3_steigung
+  #       data:
+  #         value: "{{ states('sensor.trovis_hk3_steigung')|float(0.0)|round(1) }}"
+
+  # - trigger:
+  #     - trigger: homeassistant
+  #       event: start
+  #     - trigger: state
+  #       entity_id: sensor.trovis_hk3_niveau
+
+  #   action:
+  #     - action: input_number.set_value
+  #       target:
+  #         entity_id: input_number.trovis_hk3_niveau
+  #       data:
+  #         value: "{{ states('sensor.trovis_hk3_niveau')|int(0) }}"
+
+  # - trigger:
+  #     - trigger: homeassistant
+  #       event: start
+  #     - trigger: state
+  #       entity_id: sensor.trovis_hk3_raumsoll_tag
+
+  #   action:
+  #     - action: input_number.set_value
+  #       target:
+  #         entity_id: input_number.trovis_hk3_raumsoll_tag
+  #       data:
+  #         value: "{{ states('sensor.trovis_hk3_raumsoll_tag')|float(0.0)|round(1) }}"
+
+  # - trigger:
+  #     - trigger: homeassistant
+  #       event: start
+  #     - trigger: state
+  #       entity_id: sensor.trovis_hk3_raumsoll_nacht
+
+  #   action:
+  #     - action: input_number.set_value
+  #       target:
+  #         entity_id: input_number.trovis_hk3_raumsoll_nacht
+  #       data:
+  #         value: "{{ states('sensor.trovis_hk3_raumsoll_nacht')|float(0.0)|round(1) }}"
+
+  # - trigger:
+  #     - trigger: homeassistant
+  #       event: start
+  #     - trigger: state
+  #       entity_id: sensor.trovis_hk3_vl_min
+
+  #   action:
+  #     - action: input_number.set_value
+  #       target:
+  #         entity_id: input_number.trovis_hk3_vl_min
+  #       data:
+  #         value: "{{ states('sensor.trovis_hk3_vl_min')|int(0) }}"
+
+  # - trigger:
+  #     - trigger: homeassistant
+  #       event: start
+  #     - trigger: state
+  #       entity_id: sensor.trovis_hk3_vl_max
+
+  #   action:
+  #     - action: input_number.set_value
+  #       target:
+  #         entity_id: input_number.trovis_hk3_vl_max
+  #       data:
+  #         value: "{{ states('sensor.trovis_hk3_vl_max')|int(0) }}"
