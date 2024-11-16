@@ -1,17 +1,24 @@
 # Add this to your configuration.yaml (HA root directory)
 
+homeassistant:
+  packages:
+    trovis:
+      input_number:      !include trovis557x/input_numbers.yaml
+      input_datetime:    !include trovis557x/input_datetime.yaml
+      sensor main:       !include trovis557x/template_sensors.yaml
+      sensor statistics: !include trovis557x/statistics.yaml
+      sensor curves:     !include trovis557x/heating_curves.yaml
+      template triggers: !include trovis557x/trigger_actions.yaml
+      automation start:  !include trovis557x/trigger_startup.yaml
+      automation update: !include trovis557x/trigger_updates.yaml
+
 modbus:
   - name: trovis
     type: !secret trovis_connection_type
     host: !secret trovis_ip
     port: !secret trovis_port
-    sensors:        !include_dir_merge_list trovis557x/sensors/
-    binary_sensors: !include_dir_merge_list trovis557x/binary_sensors/
-    switches:       !include_dir_merge_list trovis557x/switches/
-    climates:       !include_dir_merge_list trovis557x/climates/
-
-sensor trovis:      !include trovis557x/template_sensors.yaml
-sensor trovis_stat: !include trovis557x/statistics.yaml
-#please move the code from that file here if you have further input_numbers
-#unfortunately, for input_numbers this doesn't work as the 2 lines before:
-input_number:       !include trovis557x/input_numbers.yaml
+    sensors:        !include_dir_merge_list trovis557x/registers/
+    binary_sensors: !include_dir_merge_list trovis557x/coils/
+    message_wait_milliseconds: 30
+    timeout: 10
+    delay: 5
