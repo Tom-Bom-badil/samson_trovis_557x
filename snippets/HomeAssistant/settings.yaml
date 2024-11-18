@@ -1,0 +1,4361 @@
+  - title: Samson Trovis Einstellungen
+    path: trovis-einstellungen
+    type: custom:grid-layout
+    subview: true
+    sections: []
+    badges: []
+    dense_section_placement: false
+    cards:
+      - type: horizontal-stack
+        title: Reglereinstellungen
+        cards:
+          - type: custom:button-card
+            title: ''
+            name: ''
+            entity: ''
+            styles:
+              card:
+                - border: 0
+                - padding: 0
+                - padding-left: 20px
+                - margin: 0
+                - margin-top: 0px
+                - margin-bottom: '-10px'
+                - '--ha-card-background': transparent
+                - '--ha-card-border-radius': 0px
+              grid:
+                - grid-template-areas: |
+                    "text feld bild"
+                    "text feld bild"
+                    "kommentar kommentar kommentar"
+                - grid-template-columns: 25% 64% 10% auto
+                - grid-template-rows: auto
+                - border: 0
+                - margin: 0
+                - padding: 0
+              custom_fields:
+                text:
+                  - border: 0
+                  - margin: 0
+                  - padding: 0
+                  - text-align: left
+                  - justify-self: start
+                  - '--ha-card-background': transparent
+                  - '--ha-card-border-radius': 0px
+                  - '--ha-card-border-width': 0px
+                feld:
+                  - border: 0
+                  - margin: 0
+                  - padding: 0
+                  - text-align: left
+                  - justify-self: start
+                  - '--ha-card-background': transparent
+                  - '--ha-card-border-radius': 0px
+                  - '--ha-card-border-style': 0px
+                bild:
+                  - border: solid 0px
+                  - margin: 0px
+                  - background: transparent
+                kommentar:
+                  - border: 0
+                  - margin: 0
+                  - margin-top: 0px
+                  - padding: 0
+                  - text-align: left
+                  - justify-self: start
+                  - '--ha-card-background': transparent
+                  - '--ha-card-border-radius': 0px
+                  - '--ha-card-border-style': 0px
+            custom_fields:
+              text:
+                card:
+                  type: custom:button-card
+                  name: |
+                    [[[
+                      return `<div>Zeit aktuell:<br>Trovis-Zeit*:</div>`;
+                    ]]]
+                  styles:
+                    card:
+                      - color: white
+                      - background: transparent
+                      - justify-self: start
+                      - margin: 0
+                      - padding: 0
+                    name:
+                      - margin: 0
+                      - padding: 0
+                      - font-size: 0.9em
+                      - text-align: left
+              feld:
+                card:
+                  type: custom:button-card
+                  name: |
+                    [[[
+                      let tdatum=states['sensor.trovis_regler_datum_formatiert'].state;
+                      let tuhrzeit=states['sensor.trovis_regler_uhrzeit_formatiert'].state;
+                      let jetzt=states['sensor.date_time'].state;
+                      let jahr=jetzt.substr(0,4);
+                      let monat=jetzt.substr(5,2);
+                      let tag=jetzt.substr(8,2);
+                      let zeit=jetzt.substr(12,5);
+                      jetzt = tag + '.' + monat + '.' + jahr + ', ' + zeit;
+                          /*
+                          .state ==
+                          states['input_number.trovis_hk1_steigung'].state) ? 'white' : '#3E95EF';
+                          style="margin-top:5px;color:${farbe}"
+                          */
+                      return `<div>${jetzt}<br>${tdatum}, ${tuhrzeit}</div>`;
+                    ]]]
+                  styles:
+                    card:
+                      - color: white
+                      - background: transparent
+                      - justify-self: start
+                      - margin: 0
+                      - padding: 0
+                    name:
+                      - margin: 0
+                      - padding: 0
+                      - font-size: 0.9em
+                      - text-align: left
+              kommentar:
+                card:
+                  type: custom:button-card
+                  name: |
+                    [[[
+                      return `<small>* Toleranz ±1 Minute wegen Modbus-Auslesezeiten</small>`;
+                    ]]]
+                  card_mod:
+                    style: |
+                      ha-card .content {
+                        display: none !important;
+                      }
+                      ha-card {
+                        padding-top: 0px !important;
+                        padding-bottom: 0px !important;
+                        padding: 0px !important;
+                        height: 0.80em;
+                        border: none;
+                      }
+              bild:
+                card:
+                  type: custom:button-card
+                  entity: input_number.trovis_hk1_steigung
+                  aspect_ratio: 1/1
+                  show_state: false
+                  show_name: false
+                  show_label: false
+                  show_icon: true
+                  icon: mdi:lead-pencil
+                  color: '#3E95EF'
+                  state:
+                    - color: rgba(255,255,255,0.1)
+                      value: |
+                        [[[
+                          return states['sensor.trovis_hk1_steigung'].state;
+                        ]]]
+                  styles:
+                    icon:
+                      - width: 35px
+                      - height: 35px
+                      - padding: 0px
+                  card_mod:
+                    style: |
+                      ha-card {
+                        padding-top: 0px !important;
+                        padding-bottom: 0px !important;
+                        border: none;
+                      }
+          - type: custom:button-card
+            title: ''
+            name: ''
+            entity: ''
+            styles:
+              card:
+                - border: 0
+                - padding: 0
+                - padding-left: 20px
+                - margin: 0
+                - margin-top: 0px
+                - margin-bottom: '-10px'
+                - '--ha-card-background': transparent
+                - '--ha-card-border-radius': 0px
+              grid:
+                - grid-template-areas: |
+                    "text feld bild"
+                    "text feld bild"
+                    "kommentar kommentar kommentar"
+                - grid-template-columns: 35% 54% 10% auto
+                - grid-template-rows: auto
+                - border: 0
+                - margin: 0
+                - padding: 0
+              custom_fields:
+                text:
+                  - border: 0
+                  - margin: 0
+                  - padding: 0
+                  - text-align: left
+                  - justify-self: start
+                  - '--ha-card-background': transparent
+                  - '--ha-card-border-radius': 0px
+                  - '--ha-card-border-width': 0px
+                feld:
+                  - border: 0
+                  - margin: 0
+                  - padding: 0
+                  - text-align: left
+                  - justify-self: start
+                  - '--ha-card-background': transparent
+                  - '--ha-card-border-radius': 0px
+                  - '--ha-card-border-style': 0px
+                bild:
+                  - border: solid 0px
+                  - margin: 0px
+                  - background: transparent
+                kommentar:
+                  - border: 0
+                  - margin: 0
+                  - margin-top: 0px
+                  - padding: 0
+                  - text-align: left
+                  - '--ha-card-background': transparent
+                  - '--ha-card-border-radius': 0px
+                  - '--ha-card-border-style': 0px
+            custom_fields:
+              text:
+                card:
+                  type: custom:button-card
+                  name: |
+                    [[[
+                      return `<div>Sommer ein / Tage:<br>Sommer aus / Tage:<br>AT-Grenzemperatur:</div>`;
+                    ]]]
+                  styles:
+                    card:
+                      - color: white
+                      - background: transparent
+                      - justify-self: start
+                      - margin: 0
+                      - padding: 0
+                    name:
+                      - margin: 0
+                      - padding: 0
+                      - font-size: 0.9em
+                      - text-align: left
+              feld:
+                card:
+                  type: custom:button-card
+                  name: |
+                    [[[
+                      return `<div>eins<br>zwei<br>drei</div>`;
+                    ]]]
+                  styles:
+                    card:
+                      - color: white
+                      - background: transparent
+                      - justify-self: start
+                      - margin: 0
+                      - padding: 0
+                    name:
+                      - margin: 0
+                      - padding: 0
+                      - font-size: 0.9em
+                      - text-align: left
+              kommentar:
+                card:
+                  type: tile
+                  entity: input_datetime.only_date
+                  color: blue
+                  card_mod:
+                    style: |
+                      ha-card .content {
+                        display: none !important;
+                      }
+                      ha-card {
+                        padding-top: 0px !important;
+                        padding-bottom: 10px !important;
+                        height: 0.80em;
+                        border: none;
+                      }
+              bild:
+                card:
+                  type: custom:button-card
+                  entity: input_number.trovis_hk1_steigung
+                  aspect_ratio: 1/1
+                  show_state: false
+                  show_name: false
+                  show_label: false
+                  show_icon: true
+                  icon: mdi:lead-pencil
+                  color: '#3E95EF'
+                  state:
+                    - color: rgba(255,255,255,0.1)
+                      value: |
+                        [[[
+                          return states['sensor.trovis_hk1_steigung'].state;
+                        ]]]
+                  styles:
+                    icon:
+                      - width: 35px
+                      - height: 35px
+                      - padding: 0px
+                  card_mod:
+                    style: |
+                      ha-card {
+                        padding-top: 0px !important;
+                        padding-bottom: 0px !important;
+                        border: none;
+                      }
+          - type: custom:button-card
+            title: ''
+            name: ''
+            entity: ''
+            styles:
+              card:
+                - border: 0
+                - padding: 0
+                - padding-left: 20px
+                - margin: 0
+                - margin-top: 0px
+                - margin-bottom: '-10px'
+                - '--ha-card-background': transparent
+                - '--ha-card-border-radius': 0px
+              grid:
+                - grid-template-areas: |
+                    "text feld bild"
+                    "text feld bild"
+                    "kommentar kommentar kommentar"
+                - grid-template-columns: 35% 54% 10% auto
+                - grid-template-rows: auto
+                - border: 0
+                - margin: 0
+                - padding: 0
+              custom_fields:
+                text:
+                  - border: 0
+                  - margin: 0
+                  - padding: 0
+                  - text-align: left
+                  - justify-self: start
+                  - '--ha-card-background': transparent
+                  - '--ha-card-border-radius': 0px
+                  - '--ha-card-border-width': 0px
+                feld:
+                  - border: 0
+                  - margin: 0
+                  - padding: 0
+                  - text-align: left
+                  - justify-self: start
+                  - '--ha-card-background': transparent
+                  - '--ha-card-border-radius': 0px
+                  - '--ha-card-border-style': 0px
+                bild:
+                  - border: solid 0px
+                  - margin: 0px
+                  - background: transparent
+                kommentar:
+                  - border: 0
+                  - margin: 0
+                  - margin-top: 0px
+                  - padding: 0
+                  - text-align: left
+                  - '--ha-card-background': transparent
+                  - '--ha-card-border-radius': 0px
+                  - '--ha-card-border-style': 0px
+            custom_fields:
+              text:
+                card:
+                  type: custom:button-card
+                  name: |
+                    [[[
+                      return `<div>AT-Verzögerung ↑:<br>AT-Verzögerung ↓:</div>`;
+                    ]]]
+                  styles:
+                    card:
+                      - color: white
+                      - background: transparent
+                      - justify-self: start
+                      - margin: 0
+                      - padding: 0
+                    name:
+                      - margin: 0
+                      - padding: 0
+                      - font-size: 0.9em
+                      - text-align: left
+              feld:
+                card:
+                  type: custom:button-card
+                  name: |
+                    [[[
+                      return `<div>x °C/h<br>y °C/h</div>`;
+                    ]]]
+                  styles:
+                    card:
+                      - color: white
+                      - background: transparent
+                      - justify-self: start
+                      - margin: 0
+                      - padding: 0
+                    name:
+                      - margin: 0
+                      - padding: 0
+                      - font-size: 0.9em
+                      - text-align: left
+              kommentar:
+                card:
+                  type: tile
+                  entity: input_datetime.only_date
+                  color: blue
+                  card_mod:
+                    style: |
+                      ha-card .content {
+                        display: none !important;
+                      }
+                      ha-card {
+                        padding-top: 0px !important;
+                        padding-bottom: 10px !important;
+                        height: 0.80em;
+                        border: none;
+                      }
+              bild:
+                card:
+                  type: custom:button-card
+                  entity: input_number.trovis_hk1_steigung
+                  aspect_ratio: 1/1
+                  show_state: false
+                  show_name: false
+                  show_label: false
+                  show_icon: true
+                  icon: mdi:lead-pencil
+                  color: '#3E95EF'
+                  state:
+                    - color: rgba(255,255,255,0.1)
+                      value: |
+                        [[[
+                          return states['sensor.trovis_hk1_steigung'].state;
+                        ]]]
+                  styles:
+                    icon:
+                      - width: 35px
+                      - height: 35px
+                      - padding: 0px
+                  card_mod:
+                    style: |
+                      ha-card {
+                        padding-top: 0px !important;
+                        padding-bottom: 0px !important;
+                        border: none;
+                      }
+          - type: custom:button-card
+            title: ''
+            name: ''
+            entity: ''
+            styles:
+              card:
+                - border: 0
+                - padding: 0
+                - padding-left: 20px
+                - margin: 0
+                - margin-top: 0px
+                - margin-bottom: '-10px'
+                - '--ha-card-background': transparent
+                - '--ha-card-border-radius': 0px
+              grid:
+                - grid-template-areas: |
+                    "text feld bild"
+                    "text feld bild"
+                    "kommentar kommentar kommentar"
+                - grid-template-columns: 35% 54% 10% auto
+                - grid-template-rows: auto
+                - border: 0
+                - margin: 0
+                - padding: 0
+              custom_fields:
+                text:
+                  - border: 0
+                  - margin: 0
+                  - padding: 0
+                  - text-align: left
+                  - justify-self: start
+                  - '--ha-card-background': transparent
+                  - '--ha-card-border-radius': 0px
+                  - '--ha-card-border-width': 0px
+                feld:
+                  - border: 0
+                  - margin: 0
+                  - padding: 0
+                  - text-align: left
+                  - justify-self: start
+                  - '--ha-card-background': transparent
+                  - '--ha-card-border-radius': 0px
+                  - '--ha-card-border-style': 0px
+                bild:
+                  - border: solid 0px
+                  - margin: 0px
+                  - background: transparent
+                kommentar:
+                  - border: 0
+                  - margin: 0
+                  - margin-top: 0px
+                  - padding: 0
+                  - text-align: left
+                  - '--ha-card-background': transparent
+                  - '--ha-card-border-radius': 0px
+                  - '--ha-card-border-style': 0px
+            custom_fields:
+              text:
+                card:
+                  type: custom:button-card
+                  name: |
+                    [[[
+                      return `<div>Desinfektionstag:<br>Start/Dauer:<br>Temperatur:</div>`;
+                    ]]]
+                  styles:
+                    card:
+                      - color: white
+                      - background: transparent
+                      - justify-self: start
+                      - margin: 0
+                      - padding: 0
+                    name:
+                      - margin: 0
+                      - padding: 0
+                      - font-size: 0.9em
+                      - text-align: left
+              feld:
+                card:
+                  type: custom:button-card
+                  name: |
+                    [[[
+                      return `<div>Mo-So<br>00:00 / 00:00<br>x °C</div>`;
+                    ]]]
+                  styles:
+                    card:
+                      - color: white
+                      - background: transparent
+                      - justify-self: start
+                      - margin: 0
+                      - padding: 0
+                    name:
+                      - margin: 0
+                      - padding: 0
+                      - font-size: 0.9em
+                      - text-align: left
+              kommentar:
+                card:
+                  type: tile
+                  entity: input_datetime.only_date
+                  color: blue
+                  card_mod:
+                    style: |
+                      ha-card .content {
+                        display: none !important;
+                      }
+                      ha-card {
+                        padding-top: 0px !important;
+                        padding-bottom: 10px !important;
+                        height: 0.80em;
+                        border: none;
+                      }
+              bild:
+                card:
+                  type: custom:button-card
+                  entity: input_number.trovis_hk1_steigung
+                  aspect_ratio: 1/1
+                  show_state: false
+                  show_name: false
+                  show_label: false
+                  show_icon: true
+                  icon: mdi:lead-pencil
+                  color: '#3E95EF'
+                  state:
+                    - color: rgba(255,255,255,0.1)
+                      value: |
+                        [[[
+                          return states['sensor.trovis_hk1_steigung'].state;
+                        ]]]
+                  styles:
+                    icon:
+                      - width: 35px
+                      - height: 35px
+                      - padding: 0px
+                  card_mod:
+                    style: |
+                      ha-card {
+                        padding-top: 0px !important;
+                        padding-bottom: 0px !important;
+                        border: none;
+                      }
+      - type: horizontal-stack
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: >
+                  <h2><ha-icon icon="mdi:radiator"></ha-icon> Regelkreis
+                  Rk1</h2>
+                style: |
+                  ha-card {
+                    border: 0px;
+                    }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - justify-self: start
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=states['sensor.trovis_hk1_steigung'].state
+                          var farbe=(states['sensor.trovis_hk1_steigung'].state ==
+                              states['input_number.trovis_hk1_steigung'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>Steigung (${aktuell})</b><br/>
+                            <small>Verändert die Steilheit der Kurve</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk1_steigung
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk1_steigung
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk1_steigung'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - justify-self: start
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk1_niveau'].state);
+                          aktuell = aktuell > 0 ? '+' + aktuell : aktuell;
+                          var farbe=(states['sensor.trovis_hk1_niveau'].state ==
+                              states['input_number.trovis_hk1_niveau'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>Niveau (${aktuell}°C)</b><br/>
+                            <small>Hebt / senkt den Fußpunkt der Kurve</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - justify-self: start
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk1_niveau
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk1_niveau
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk1_niveau'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - justify-self: start
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk1_raumsoll_tag'].state);
+                          var farbe=(states['sensor.trovis_hk1_raumsoll_tag'].state ==
+                              states['input_number.trovis_hk1_raumsoll_tag'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>Raumsoll Tag (${aktuell}°C)</b><br/>
+                            <small>Diagonalverschiebung im Regelbetrieb</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - justify-self: start
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk1_raumsoll_tag
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk1_raumsoll_tag
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk1_raumsoll_tag'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - justify-self: start
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk1_raumsoll_nacht'].state);
+                          var farbe=(states['sensor.trovis_hk1_raumsoll_nacht'].state ==
+                              states['input_number.trovis_hk1_raumsoll_nacht'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>Raumsoll Nacht (${aktuell}°C)</b><br/>
+                            <small>Diagonalverschiebung im Absenkbetrieb</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - justify-self: start
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk1_raumsoll_nacht
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk1_raumsoll_nacht
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk1_raumsoll_nacht'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - justify-self: start
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk1_vl_min'].state);
+                          var farbe=(states['sensor.trovis_hk1_vl_min'].state ==
+                              states['input_number.trovis_hk1_vl_min'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>VL<sub>min</sub> (${aktuell}°C)</b><br/>
+                            <small>Untere Begrenzung der Vorlauftemperatur</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - justify-self: start
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk1_vl_min
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk1_vl_min
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk1_vl_min'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - justify-self: start
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk1_vl_max'].state);
+                          var farbe=(states['sensor.trovis_hk1_vl_max'].state ==
+                              states['input_number.trovis_hk1_vl_max'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>VL<sub>max</sub> (${aktuell}°C)</b><br/>
+                            <small>Obere Begrenzung der Vorlauftemperatur</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - justify-self: start
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk1_vl_max
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk1_vl_max
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk1_vl_max'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - margin: 0
+                    - aspect-ratio: 7/4.5
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"links plot rechts"'
+                    - grid-template-columns: 0% 100% auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                custom_fields:
+                  plot:
+                    card:
+                      type: custom:plotly-graph
+                      title: ''
+                      entities:
+                        - name: Tag (aktuell)
+                          entity: ''
+                          line:
+                            shape: spline
+                            color: orange
+                            width: 3
+                          x: |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.x_werte
+                            ]]]
+                          'y': |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk1_tagkurve;
+                            ]]]
+                        - name: Nacht (aktuell)
+                          entity: ''
+                          line:
+                            shape: spline
+                            color: blue
+                            width: 3
+                          x: |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.x_werte
+                            ]]]
+                          'y': |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk1_nachtkurve;
+                            ]]]
+                        - name: Tag (neu)
+                          entity: ''
+                          visible: |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk1_sim_text == '' ? 'legendonly' : 'true';
+                            ]]]
+                          line:
+                            shape: spline
+                            color: orange
+                            dash: dot
+                            width: 2
+                          x: |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.x_werte;
+                            ]]]
+                          'y': |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk1_sim_tag
+                            ]]]
+                        - name: Nacht (neu)
+                          entity: ''
+                          visible: |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk1_sim_text == '' ? 'legendonly' : 'true';
+                            ]]]
+                          line:
+                            shape: spline
+                            color: blue
+                            dash: dot
+                            width: 2
+                          x: |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.x_werte
+                            ]]]
+                          'y': |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk1_sim_nacht
+                            ]]]
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            border: none;
+                            "--ha-card-background": transparent
+                            "--ha-card-border-radius": 0px
+                            "--ha-card-border-style": 0px
+                          }
+                      layout:
+                        xaxis:
+                          fixedrange: true
+                          showlegend: true
+                          linecolor: grey
+                          linewidth: 1
+                          mirror: true
+                          ticklabelposition: inside
+                          type: number
+                          range:
+                            - 20
+                            - -20
+                        yaxis:
+                          fixedrange: true
+                          color: white
+                          linecolor: grey
+                          linewidth: 1
+                          mirror: true
+                          ticklabelposition: inside
+                        showlegend: false
+                        autosize: false
+                        paper_bgcolor: rgba(0,0,0,0)
+                        plot_bgcolor: rgba(0,0,0,0)
+                        border: 1px
+                        margin:
+                          l: 20
+                          b: 3
+                          r: 5
+                          t: 5
+                          pad: 0
+                        annotations:
+                          - xref: paper
+                            yref: paper
+                            x: 0.99
+                            'y': 0.05
+                            align: right
+                            textposition: bottom right
+                            font:
+                              family: Arial
+                              size: 10
+                              color: white
+                            text: |
+                              [[[
+                                return states['sensor.trovis_hk123_heizkurven'].attributes.hk1_sim_text;
+                              ]]]
+                            showarrow: false
+          - title: Regelkreis 2 (Hk2, heizen)
+            type: vertical-stack
+            cards:
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - justify-self: start
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=states['sensor.trovis_hk2_steigung'].state
+                          var farbe=(states['sensor.trovis_hk2_steigung'].state ==
+                              states['input_number.trovis_hk2_steigung'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>Steigung (${aktuell})</b><br/>
+                            <small>Verändert die Steilheit der Kurve</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk2_steigung
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk2_steigung
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk2_steigung'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - justify-self: start
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk2_niveau'].state);
+                          aktuell = aktuell > 0 ? '+' + aktuell : aktuell;
+                          var farbe=(states['sensor.trovis_hk2_niveau'].state ==
+                              states['input_number.trovis_hk2_niveau'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>Niveau (${aktuell}°C)</b><br/>
+                            <small>Hebt / senkt den Fußpunkt der Kurve</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - justify-self: start
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk2_niveau
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk2_niveau
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk2_niveau'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - justify-self: start
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk2_raumsoll_tag'].state);
+                          var farbe=(states['sensor.trovis_hk2_raumsoll_tag'].state ==
+                              states['input_number.trovis_hk2_raumsoll_tag'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>Raumsoll Tag (${aktuell}°C)</b><br/>
+                            <small>Diagonalverschiebung im Regelbetrieb</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - justify-self: start
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk2_raumsoll_tag
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk2_raumsoll_tag
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk2_raumsoll_tag'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - justify-self: start
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk2_raumsoll_nacht'].state);
+                          var farbe=(states['sensor.trovis_hk2_raumsoll_nacht'].state ==
+                              states['input_number.trovis_hk2_raumsoll_nacht'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>Raumsoll Nacht (${aktuell}°C)</b><br/>
+                            <small>Diagonalverschiebung im Absenkbetrieb</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - justify-self: start
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk2_raumsoll_nacht
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk2_raumsoll_nacht
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk2_raumsoll_nacht'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - justify-self: start
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk2_vl_min'].state);
+                          var farbe=(states['sensor.trovis_hk2_vl_min'].state ==
+                              states['input_number.trovis_hk2_vl_min'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>VL<sub>min</sub> (${aktuell}°C)</b><br/>
+                            <small>Untere Begrenzung der Vorlauftemperatur</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - justify-self: start
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk2_vl_min
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk2_vl_min
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk2_vl_min'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - justify-self: start
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk2_vl_max'].state);
+                          var farbe=(states['sensor.trovis_hk2_vl_max'].state ==
+                              states['input_number.trovis_hk2_vl_max'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>VL<sub>max</sub> (${aktuell}°C)</b><br/>
+                            <small>Obere Begrenzung der Vorlauftemperatur</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - justify-self: start
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk2_vl_max
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk2_vl_max
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk2_vl_max'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - margin: 0
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"links plot rechts"'
+                    - grid-template-columns: 0% 100% auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                custom_fields:
+                  plot:
+                    card:
+                      type: custom:plotly-graph
+                      title: ''
+                      entities:
+                        - name: Tag (aktuell)
+                          entity: ''
+                          line:
+                            shape: spline
+                            color: orange
+                            width: 3
+                          x: |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.x_werte
+                            ]]]
+                          'y': |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk2_tagkurve;
+                            ]]]
+                        - name: Nacht (aktuell)
+                          entity: ''
+                          line:
+                            shape: spline
+                            color: blue
+                            width: 3
+                          x: |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.x_werte
+                            ]]]
+                          'y': |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk2_nachtkurve;
+                            ]]]
+                        - name: Tag (neu)
+                          entity: ''
+                          visible: |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk2_sim_text == '' ? 'legendonly' : 'true';
+                            ]]]
+                          line:
+                            shape: spline
+                            color: orange
+                            dash: dot
+                            width: 2
+                          x: |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.x_werte;
+                            ]]]
+                          'y': |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk2_sim_tag
+                            ]]]
+                        - name: Nacht (neu)
+                          entity: ''
+                          visible: |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk2_sim_text == '' ? 'legendonly' : 'true';
+                            ]]]
+                          line:
+                            shape: spline
+                            color: blue
+                            dash: dot
+                            width: 2
+                          x: |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.x_werte
+                            ]]]
+                          'y': |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk2_sim_nacht
+                            ]]]
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            border: none;
+                            "--ha-card-background": transparent
+                            "--ha-card-border-radius": 0px
+                            "--ha-card-border-style": 0px
+                          }
+                      layout:
+                        xaxis:
+                          showlegend: true
+                          linecolor: grey
+                          linewidth: 1
+                          mirror: true
+                          ticklabelposition: inside
+                          type: number
+                          range:
+                            - 20
+                            - -20
+                        yaxis:
+                          fixedrange: true
+                          linecolor: grey
+                          linewidth: 1
+                          mirror: true
+                          ticklabelposition: inside
+                        showlegend: false
+                        autosize: false
+                        paper_bgcolor: rgba(0,0,0,0)
+                        plot_bgcolor: rgba(0,0,0,0)
+                        border: 1px
+                        margin:
+                          l: 20
+                          b: 3
+                          r: 5
+                          t: 5
+                          pad: 0
+                        annotations:
+                          - xref: paper
+                            yref: paper
+                            x: 0.99
+                            'y': 0.05
+                            align: right
+                            textposition: bottom right
+                            font:
+                              family: Arial
+                              size: 10
+                              color: white
+                            text: |
+                              [[[
+                                return states['sensor.trovis_hk123_heizkurven'].attributes.hk2_sim_text;
+                              ]]]
+                            showarrow: false
+          - title: Regelkreis 3 (Hk3, heizen - nur 5578/79)
+            type: vertical-stack
+            cards:
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - justify-self: start
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=states['sensor.trovis_hk3_steigung'].state
+                          var farbe=(states['sensor.trovis_hk3_steigung'].state ==
+                              states['input_number.trovis_hk3_steigung'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>Steigung (${aktuell})</b><br/>
+                            <small>Verändert die Steilheit der Kurve</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk3_steigung
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk3_steigung
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk3_steigung'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - justify-self: start
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk3_niveau'].state);
+                          aktuell = aktuell > 0 ? '+' + aktuell : aktuell;
+                          var farbe=(states['sensor.trovis_hk3_niveau'].state ==
+                              states['input_number.trovis_hk3_niveau'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>Niveau (${aktuell}°C)</b><br/>
+                            <small>Hebt / senkt den Fußpunkt der Kurve</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - justify-self: start
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk3_niveau
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk3_niveau
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk3_niveau'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - justify-self: start
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk3_raumsoll_tag'].state);
+                          var farbe=(states['sensor.trovis_hk3_raumsoll_tag'].state ==
+                              states['input_number.trovis_hk3_raumsoll_tag'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>Raumsoll Tag (${aktuell}°C)</b><br/>
+                            <small>Diagonalverschiebung im Regelbetrieb</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - justify-self: start
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk3_raumsoll_tag
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk3_raumsoll_tag
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk3_raumsoll_tag'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - justify-self: start
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk3_raumsoll_nacht'].state);
+                          var farbe=(states['sensor.trovis_hk3_raumsoll_nacht'].state ==
+                              states['input_number.trovis_hk3_raumsoll_nacht'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>Raumsoll Nacht (${aktuell}°C)</b><br/>
+                            <small>Diagonalverschiebung im Absenkbetrieb</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - justify-self: start
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk3_raumsoll_nacht
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk3_raumsoll_nacht
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk3_raumsoll_nacht'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - justify-self: start
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk3_vl_min'].state);
+                          var farbe=(states['sensor.trovis_hk3_vl_min'].state ==
+                              states['input_number.trovis_hk3_vl_min'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>VL<sub>min</sub> (${aktuell}°C)</b><br/>
+                            <small>Untere Begrenzung der Vorlauftemperatur</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - justify-self: start
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk3_vl_min
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk3_vl_min
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk3_vl_min'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - justify-self: start
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk3_vl_max'].state);
+                          var farbe=(states['sensor.trovis_hk3_vl_max'].state ==
+                              states['input_number.trovis_hk3_vl_max'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>VL<sub>max</sub> (${aktuell}°C)</b><br/>
+                            <small>Obere Begrenzung der Vorlauftemperatur</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - justify-self: start
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk3_vl_max
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk3_vl_max
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk3_vl_max'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - margin: 0
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"links plot rechts"'
+                    - grid-template-columns: 0% 100% auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                custom_fields:
+                  plot:
+                    card:
+                      type: custom:plotly-graph
+                      title: ''
+                      entities:
+                        - name: Tag (aktuell)
+                          entity: ''
+                          line:
+                            shape: spline
+                            color: orange
+                            width: 3
+                          x: |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.x_werte
+                            ]]]
+                          'y': |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk3_tagkurve;
+                            ]]]
+                        - name: Nacht (aktuell)
+                          entity: ''
+                          line:
+                            shape: spline
+                            color: blue
+                            width: 3
+                          x: |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.x_werte
+                            ]]]
+                          'y': |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk3_nachtkurve;
+                            ]]]
+                        - name: Tag (neu)
+                          entity: ''
+                          visible: |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk3_sim_text == '' ? 'legendonly' : 'true';
+                            ]]]
+                          line:
+                            shape: spline
+                            color: orange
+                            dash: dot
+                            width: 2
+                          x: |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.x_werte;
+                            ]]]
+                          'y': |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk3_sim_tag
+                            ]]]
+                        - name: Nacht (neu)
+                          entity: ''
+                          visible: |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk3_sim_text == '' ? 'legendonly' : 'true';
+                            ]]]
+                          line:
+                            shape: spline
+                            color: blue
+                            dash: dot
+                            width: 2
+                          x: |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.x_werte
+                            ]]]
+                          'y': |
+                            [[[
+                              return states['sensor.trovis_hk123_heizkurven'].attributes.hk3_sim_nacht
+                            ]]]
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            border: none;
+                            "--ha-card-background": transparent
+                            "--ha-card-border-radius": 0px
+                            "--ha-card-border-style": 0px
+                          }
+                      layout:
+                        xaxis:
+                          showlegend: true
+                          linecolor: grey
+                          linewidth: 1
+                          mirror: true
+                          ticklabelposition: inside
+                          type: number
+                          range:
+                            - 20
+                            - -20
+                        yaxis:
+                          fixedrange: false
+                          linecolor: grey
+                          linewidth: 1
+                          mirror: true
+                          ticklabelposition: inside
+                        showlegend: false
+                        autosize: false
+                        paper_bgcolor: rgba(0,0,0,0)
+                        plot_bgcolor: rgba(0,0,0,0)
+                        border: 1px
+                        margin:
+                          l: 20
+                          b: 3
+                          r: 5
+                          t: 5
+                          pad: 0
+                        annotations:
+                          - xref: paper
+                            yref: paper
+                            x: 0.99
+                            'y': 0.05
+                            align: right
+                            textposition: bottom right
+                            font:
+                              family: Arial
+                              size: 10
+                              color: white
+                            text: |
+                              [[[
+                                return states['sensor.trovis_hk123_heizkurven'].attributes.hk3_sim_text;
+                              ]]]
+                            showarrow: false
+          - type: vertical-stack
+            title: Regelkreis 4 (Hk4, Warmwasser)
+            cards:
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - justify-self: start
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk4_soll_tw'].state);
+                          var farbe=(states['sensor.trovis_hk4_soll_tw'].state ==
+                              states['input_number.trovis_hk4_soll_tw'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>Sollwert (${aktuell}°C)</b><br/>
+                            <small>Minimale WW-Temperatur Tag</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk4_soll_tw
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk4_soll_tw
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk4_soll_tw'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - justify-self: start
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk4_haltewert_tw'].state);
+                          var farbe=(states['sensor.trovis_hk4_haltewert_tw'].state ==
+                              states['input_number.trovis_hk4_haltewert_tw'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>Haltewert (${aktuell}°C)</b><br/>
+                            <small>Minimale WW-Temperatur Nacht</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk4_haltewert_tw
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk4_haltewert_tw
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk4_haltewert_tw'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - justify-self: start
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk4_schaltdifferenz_tw'].state);
+                          var farbe=(states['sensor.trovis_hk4_schaltdifferenz_tw'].state ==
+                              states['input_number.trovis_hk4_schaltdifferenz_tw'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>Schaltdifferenz (${aktuell}°C)</b><br/>
+                            <small>Maximale WW-Temperatur (min+x)</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk4_schaltdifferenz_tw
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk4_schaltdifferenz_tw
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk4_schaltdifferenz_tw'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - justify-self: start
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk4_ueberhoehung_tw'].state);
+                          var farbe=(states['sensor.trovis_hk4_ueberhoehung_tw'].state ==
+                              states['input_number.trovis_hk4_ueberhoehung_tw'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>Überhöhung (${aktuell}°C)</b><br/>
+                            <small>Erhöhung Vorlauf zu Speichertemp.</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk4_ueberhoehung_tw
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk4_ueberhoehung_tw
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk4_ueberhoehung_tw'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - justify-self: start
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk4_maxladetemperatur_tw'].state);
+                          var farbe=(states['sensor.trovis_hk4_maxladetemperatur_tw'].state ==
+                              states['input_number.trovis_hk4_maxladetemperatur_tw'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>Max. Ladetemperatur (${aktuell}°C)</b><br/>
+                            <small>Begrenzung Vorlauf zum Speicher</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk4_maxladetemperatur_tw
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk4_maxladetemperatur_tw
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk4_maxladetemperatur_tw'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                title: ''
+                name: ''
+                entity: ''
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - padding-left: 20px
+                    - margin: 0
+                    - margin-top: '-20px'
+                    - margin-bottom: '-10px'
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"text feld bild"'
+                    - grid-template-columns: 60% 30% auto
+                    - grid-template-rows: auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                  custom_fields:
+                    text:
+                      - border: 0
+                      - margin: 0
+                      - padding: 0
+                      - justify-self: start
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-width': 0px
+                    feld:
+                      - border: 0
+                      - margin: 0
+                      - margin-top: 25px
+                      - padding: 0
+                      - text-align: left
+                      - '--ha-card-background': transparent
+                      - '--ha-card-border-radius': 0px
+                      - '--ha-card-border-style': 0px
+                    bild:
+                      - border: solid 0px
+                      - margin: 0px
+                      - background: transparent
+                custom_fields:
+                  text:
+                    card:
+                      type: custom:button-card
+                      name: |
+                        [[[
+                          var aktuell=parseInt(states['sensor.trovis_hk4_maxrl_tw'].state);
+                          var farbe=(states['sensor.trovis_hk4_maxrl_tw'].state ==
+                              states['input_number.trovis_hk4_maxrl_tw'].state) ? 'white' : '#3E95EF';
+                          return `
+                          <div style="margin-top:5px;color:${farbe}">
+                            <b>Max. Rücklauf Primär (${aktuell}°C)</b><br/>
+                            <small>Begrenzung Rücklauf zum Versorger</small>
+                          </div>`
+                        ]]]
+                      styles:
+                        card:
+                          - color: white
+                          - background: transparent
+                          - justify-self: start
+                          - margin: 0
+                          - padding: 0
+                        name:
+                          - margin: 0
+                          - padding: 0
+                          - font-size: 0.9em
+                          - text-align: left
+                  feld:
+                    card:
+                      type: tile
+                      entity: input_number.trovis_hk4_maxrl_tw
+                      features:
+                        - style: slider
+                          type: numeric-input
+                      color: blue
+                      card_mod:
+                        style: |
+                          ha-card .content {
+                            display: none !important;
+                          }
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            height: 0.80em;
+                            border: none;
+                          }
+                  bild:
+                    card:
+                      type: custom:button-card
+                      entity: input_number.trovis_hk4_maxrl_tw
+                      aspect_ratio: 1/1
+                      show_state: false
+                      show_name: false
+                      show_label: false
+                      show_icon: true
+                      icon: mdi:lead-pencil
+                      color: '#3E95EF'
+                      state:
+                        - color: rgba(255,255,255,0.1)
+                          value: |
+                            [[[
+                              return states['sensor.trovis_hk4_maxrl_tw'].state;
+                            ]]]
+                      styles:
+                        icon:
+                          - width: 35px
+                          - height: 35px
+                          - padding: 0px
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            border: none;
+                          }
+              - type: custom:button-card
+                styles:
+                  card:
+                    - border: 0
+                    - padding: 0
+                    - margin: 0
+                    - background-image: url("/local/trovis557x/images/ww-speicher.png")
+                    - background-size: auto 80%
+                    - background-position: center center
+                    - background-repeat: no-repeat
+                    - aspect-ratio: 7/4.5
+                    - background-color: transparent
+                    - '--ha-card-background': transparent
+                    - '--ha-card-border-radius': 0px
+                  grid:
+                    - grid-template-areas: '"links plot rechts"'
+                    - grid-template-columns: 0% 100% auto
+                    - border: 0
+                    - margin: 0
+                    - padding: 0
+                custom_fields:
+                  plot:
+                    card:
+                      type: custom:plotly-graph
+                      title: ''
+                      entities:
+                        - name: Tag (aktuell)
+                          entity: ''
+                          line:
+                            shape: spline
+                            color: white
+                            width: 0
+                          x:
+                            - 1
+                            - 2
+                            - 3
+                            - 4
+                            - 5
+                            - 6
+                            - 7
+                            - 8
+                          y":
+                            - 0
+                            - 0
+                            - 0
+                            - 0
+                            - 0
+                            - 0
+                            - 0
+                            - 0
+                      card_mod:
+                        style: |
+                          ha-card {
+                            padding-top: 0px !important;
+                            padding-bottom: 10px !important;
+                            border: none;
+                            "--ha-card-background": transparent
+                            "--ha-card-border-radius": 0px
+                            "--ha-card-border-style": 0px
+                          }
+                      layout:
+                        xaxis:
+                          showlegend: false
+                          linecolor: grey
+                          linewidth: 1
+                          mirror: true
+                          ticklabelposition: none
+                          type: number
+                          fixedrange: true
+                          range:
+                            - 0
+                            - 8
+                        yaxis:
+                          fixedrange: true
+                          linecolor: grey
+                          linewidth: 1
+                          mirror: true
+                          ticklabelposition: inside
+                          range:
+                            - |-
+                              [[[
+                                return parseInt(states['input_number.trovis_hk4_haltewert_tw'].state) - 5;
+                              ]]]
+                            - |-
+                              [[[
+                                return parseInt(states['input_number.trovis_hk4_soll_tw'].state) + 
+                                       parseInt(states['input_number.trovis_hk4_schaltdifferenz_tw'].state) + 5;
+                              ]]]
+                        showlegend: false
+                        autosize: false
+                        paper_bgcolor: rgba(0,0,0,0)
+                        plot_bgcolor: rgba(0,0,0,0)
+                        border: 1px
+                        margin:
+                          l: 20
+                          b: 3
+                          r: 5
+                          t: 5
+                          pad: 0
+                        annotations:
+                          - xref: paper
+                            yref: paper
+                            x: 0.99
+                            'y': 0.05
+                            align: right
+                            textposition: bottom right
+                            font:
+                              family: Arial
+                              size: 10
+                              color: white
+                            text: |
+                              [[[
+                                return states['sensor.trovis_hk123_heizkurven'].attributes.hk4_sim_text;
+                              ]]]
+                            showarrow: false
+                        shapes:
+                          - name: Tag
+                            type: rect
+                            xref: x
+                            yref: 'y'
+                            x0: 1
+                            y0: |
+                              [[[
+                                return parseInt(states['sensor.trovis_hk4_soll_tw'].state);
+                              ]]]
+                            x1: 3
+                            y1: |
+                              [[[
+                                return parseInt(states['sensor.trovis_hk4_soll_tw'].state) + 
+                                       parseInt(states['sensor.trovis_hk4_schaltdifferenz_tw'].state);
+                              ]]]
+                            line:
+                              color: rgba(0,0,0,0)
+                              width: 0
+                            fillcolor: orange
+                            opacity: 0.8
+                            label:
+                              textposition: middle center
+                              text: Price drop
+                              font-face: bold
+                              font:
+                                size: 14
+                                color: white
+                          - name: Nacht
+                            type: rect
+                            xref: x
+                            yref: 'y'
+                            x0: 1
+                            y0: |
+                              [[[
+                                return parseInt(states['sensor.trovis_hk4_haltewert_tw'].state);
+                              ]]]
+                            x1: 3
+                            y1: |
+                              [[[
+                                return parseInt(states['sensor.trovis_hk4_haltewert_tw'].state) + 
+                                       parseInt(states['sensor.trovis_hk4_schaltdifferenz_tw'].state);
+                              ]]]
+                            line:
+                              color: rgba(0,0,0,0)
+                              width: 0
+                            fillcolor: blue
+                            opacity: 0.8
+                          - name: SimTag
+                            type: rect
+                            xref: x
+                            yref: 'y'
+                            x0: 5
+                            y0: |
+                              [[[
+                                return parseInt(states['input_number.trovis_hk4_soll_tw'].state);
+                              ]]]
+                            x1: 7
+                            y1: |
+                              [[[
+                                return parseInt(states['input_number.trovis_hk4_soll_tw'].state) + 
+                                       parseInt(states['input_number.trovis_hk4_schaltdifferenz_tw'].state);
+                              ]]]
+                            line:
+                              color: orange
+                              dash: dot
+                              width: 3
+                            opacity: 0.8
+                            visible: |
+                              [[[
+                                return states['sensor.trovis_hk123_heizkurven'].attributes.hk4_sim_text == '' ?
+                                false : true;
+                              ]]]
+                          - name: SimNacht
+                            type: rect
+                            xref: x
+                            yref: 'y'
+                            x0: 5
+                            y0: |
+                              [[[
+                                return parseInt(states['input_number.trovis_hk4_haltewert_tw'].state);
+                              ]]]
+                            x1: 7
+                            y1: |
+                              [[[
+                                return parseInt(states['input_number.trovis_hk4_haltewert_tw'].state) + 
+                                       parseInt(states['input_number.trovis_hk4_schaltdifferenz_tw'].state);
+                              ]]]
+                            line:
+                              color: blue
+                              dash: dot
+                              width: 3
+                            opacity: 0.8
+                            visible: |
+                              [[[
+                                return states['sensor.trovis_hk123_heizkurven'].attributes.hk4_sim_text == '' ?
+                                false : true;
+                              ]]]
+    background:
+      image: /local/trovis557x/images/background.png
+  - title: trovis-plots
+    path: trovis-plots
+    cards:
+      - type: vertical-stack
+        cards:
+          - title: ''
+            type: custom:plotly-graph
+            hours_to_show: 48
+            refresh_interval: 120
+            autosize: true
+            defaults:
+              yaxes:
+                fixedrange: false
+              entities:
+                line:
+                  shape: spline
+            config:
+              displaylogo: false
+              responsive: false
+            layout:
+              paper_bgcolor: transparent
+              plot_bgcolor: transparent
+              yaxis:
+                titlefont:
+                  color: white
+                tickfont:
+                  color: white
+                linecolor: grey
+                linewidth: 2
+                mirror: true
+                ticklabelposition: outside
+                type: number
+                fixedrange: false
+                zeroline: true
+                autorange: true
+                rangemode: normal
+              yaxis2:
+                titlefont:
+                  color: white
+                tickfont:
+                  color: white
+                fixedrange: false
+                linecolor: grey
+                linewidth: 1
+                mirror: true
+                ticklabelposition: inside
+                type: number
+                rangemode: normal
+            card_mod:
+              style: |
+                ha-card { 
+                  /** --ha-card-border-color: #990000; **/
+                  --ha-card-border-radius: 0px; 
+                  --ha-card-border-width: 0px;
+                  --card-mod-icon-color: white;
+                  /* margin-left: 2vh;
+                  margin-top: 2vh; */
+                  width: 95vw !important;
+                  height: 45vh !important;
+                  background: transparent;
+                }
+            entities:
+              - entity: sensor.trovis_fuhler_aussen_1_af1
+                name: Außenfühler AF1
+                legendgroup: AF (für Gruppierungen)
+                fillcolor: rgba(168, 216, 234, 0.2)
+                fill: tozeroy
+                line:
+                  yaxis: y2
+                  shape: spline
+                  color: grey
+                  width: 0
+              - entity: sensor.trovis_fuhler_aussen_2_af2
+                name: 'AF2     '
+                visible: legendonly
+                line:
+                  shape: spline
+                  color: grey
+                  yaxis: y2
+                  width: 3
+              - entity: sensor.trovis_fuhler_raum_1_rf1
+                name: Raumfühler RF1
+                visible: legendonly
+                line:
+                  shape: spline
+                  width: 3
+                  color: '#00ff00'
+              - entity: sensor.trovis_fuhler_raum_2_rf2
+                name: RF2
+                visible: legendonly
+                line:
+                  width: 3
+                  shape: spline
+                  color: '#007a00'
+              - entity: sensor.trovis_fuhler_raum_3_rf3
+                name: 'RF3     '
+                visible: legendonly
+                line:
+                  width: 3
+                  shape: spline
+                  color: '#004300'
+              - entity: sensor.trovis_fuhler_rucklauf_1_ruf1
+                name: Rücklauffühler RueF1
+                line:
+                  width: 3
+                  shape: spline
+                  color: '#0000f9'
+              - entity: sensor.trovis_fuhler_rucklauf_2_ruf2
+                name: 'RueF2     '
+                visible: legendonly
+                line:
+                  shape: spline
+                  width: 3
+                  color: '#00005e'
+              - entity: sensor.trovis_fuhler_speicher_1_sf1
+                name: Speicherfühler SF1
+                line:
+                  width: 3
+                  shape: spline
+                  color: '#fcfc00'
+              - entity: sensor.trovis_fuhler_speicher_2_sf2
+                visible: legendonly
+                name: 'SF2     '
+                line:
+                  width: 3
+                  shape: spline
+                  color: '#808000'
+              - entity: sensor.trovis_fuhler_vorlauf_1_vf1
+                name: Vorlauffühler VF1
+                line:
+                  width: 3
+                  shape: spline
+                  color: '#ff0000'
+              - entity: sensor.trovis_fuhler_vorlauf_2_vf2
+                name: VF2
+                visible: legendonly
+                line:
+                  width: 3
+                  shape: spline
+                  color: '#bf0000'
+              - entity: sensor.trovis_fuhler_vorlauf_3_vf3
+                visible: legendonly
+                name: VF3
+                line:
+                  width: 3
+                  shape: spline
+                  color: '#6A0000'
+              - entity: sensor.trovis_fuhler_vorlauf_4_vf4
+                visible: legendonly
+                name: VF4
+                line:
+                  width: 3
+                  shape: spline
+                  color: '#430000'
+          - type: custom:plotly-graph
+            hours_to_show: 48
+            refresh_interval: 120
+            autosize: true
+            defaults:
+              yaxes:
+                fixedrange: false
+              entities:
+                line:
+                  shape: spline
+            entities:
+              - entity: binary_sensor.trovis_hk1_umwaelzpumpe
+              - entity: binary_sensor.trovis_hk2_umwaelzpumpe
+              - entity: binary_sensor.trovis_hk3_umwaelzpumpe
+              - entity: binary_sensor.trovis_hk4_speicherladepumpe
+              - entity: binary_sensor.trovis_hk4_zirkulationspumpe
+              - entity: sensor.trovis_hk1_3pkt_stellsignal
+                line:
+                  shape: spline
+                  color: '#00b0f0'
+                  yaxis: y2
+                  width: 3
+                  fill: tozeroy
+              - entity: sensor.trovis_hk2_3pkt_stellsignal
+                line:
+                  shape: spline
+                  color: green
+                  yaxis: y2
+                  width: 3
+              - entity: sensor.trovis_hk3_3pkt_stellsignal
+                line:
+                  shape: spline
+                  color: blue
+                  yaxis: y2
+                  width: 3
+            card_mod:
+              style: |
+                ha-card { 
+                  /** --ha-card-border-color: #990000; **/
+                  --ha-card-border-radius: 0px; 
+                  --ha-card-border-width: 0px;
+                  --card-mod-icon-color: white;
+                  /* margin-left: 2vh;
+                  margin-top: 2vh; */
+                  width: 95vw !important;
+                  height: 45vh !important;
+                  background: transparent;
+                }
+            layout:
+              showlegend: false
+              updatemenus:
+                - buttons:
+                    - args:
+                        - layout:
+                            showlegend: true
+                      args2:
+                        - layout:
+                            showlegend: false
+                      label: toggle legend
+                      method: animate
+                  direction: right
+                  pad:
+                    r: 10
+                    t: 10
+                  type: buttons
+                  x: 1
+                  xanchor: right
+                  'y': 1
+                  yanchor: top
+              paper_bgcolor: transparent
+              plot_bgcolor: transparent
+              yaxis:
+                categoryorder: array
+                categoryarray:
+                  - 'off'
+                  - 'on'
+                showgrid: true
+                titlefont:
+                  color: white
+                tickfont:
+                  color: white
+                linecolor: grey
+                linewidth: 2
+                mirror: true
+                ticklabelposition: outside
+                fixedrange: false
+                zeroline: false
+                autorange: false
+                range:
+                  - 0
+                  - 1
+                tick0: '0'
+                nticks: '2'
+                tickmode: array
+                tickvals:
+                  - 0
+                  - 1
+              yaxis2:
+                titlefont:
+                  color: white
+                tickfont:
+                  color: white
+                fixedrange: false
+                linecolor: grey
+                linewidth: 1
+                mirror: true
+                ticklabelposition: outside
+                range:
+                  - 0
+                  - 100
