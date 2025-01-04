@@ -9,7 +9,8 @@ Einbindung einer Trovis 557x in Home Assistant:
 
 Hinweis: Die Dateistruktur entspricht der von Home Assistant, beginnend mit dem HA-Rootverzeichnis. Der Hauptteil der Konfiguration befindet sich nach Funktion geordnet im Verzeichnis trovis557x/. Grund dafür ist, späteren Einsteigern die Einarbeitung in die verschiedenen Reglermodelle mit ihren verschiedenen Funktionen, Sensoren und der Anzahl der Heizkreise zu vereinfachen.
 
-![image](https://github.com/user-attachments/assets/8cea7360-2cf3-4bdc-adca-aaf51222f315)
+![image](https://github.com/user-attachments/assets/dc3795b2-d6b7-486f-8bde-55d3f148b2f4)
 
-![image](https://github.com/user-attachments/assets/028b1e60-2d0a-4b1e-8bbe-269102a0cb8a)
+![image](https://github.com/user-attachments/assets/26e20b98-6936-40a5-9f47-650bb71c301e)
 
+![image](https://github.com/user-attachments/assets/a82bb47d-ffe4-4405-bba8-783470814d56)
