@@ -11,4 +11,6 @@ Hinweis: Die Dateistruktur entspricht der von Home Assistant, beginnend mit dem 
 
 ![image](https://github.com/user-attachments/assets/dc3795b2-d6b7-486f-8bde-55d3f148b2f4)
 
+![image](https://github.com/user-attachments/assets/26e20b98-6936-40a5-9f47-650bb71c301e)
+
 ![image](https://github.com/user-attachments/assets/a82bb47d-ffe4-4405-bba8-783470814d56)
