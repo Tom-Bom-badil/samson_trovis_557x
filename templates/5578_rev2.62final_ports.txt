@@ -1,0 +1,16 @@
+Universalausgänge - Zuweisung:
+
+0	= Input 		(0-10V)
+1	= Stellsignal Rk1 	(Y1)
+2	= Stellsignal Rk2	(Y2)
+3	= Stellsignal Rk3	(Y3)
+4	= Stellsignal Rk4      	(Y4)
+5	= Außentemperatur	(AT)
+6	= Bedarfsanforderung
+7	= Zirkulationspumpe 	(ZP)
+8	= Speicherladepumpe 	(SLP)
+9	= Spreizungsregelung
+10	= 10V Versorgung
+11	= Folgeausgang 1
+12	= Folgeausgang 2
+13	= Folgeausgang 3
