@@ -1,11 +1,11 @@
 {
   "domain": "samson_trovis",
-  "name": "Samson Trovis",
-  "version": "0.0.1",
-  "documentation": "https://github.com/Tom-Bom-badil/samson_trovis_557x",
-  "issue_tracker": "https://github.com/Tom-Bom-badil/samson_trovis_557x/issues",
-  "dependencies": [],
+  "name": "Samson Trovis 557x",
   "codeowners": ["@Tom-Bom-badil"],
+  "dependencies": [],
+  "documentation": "https://github.com/Tom-Bom-badil/samson_trovis_557x",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/Tom-Bom-badil/samson_trovis_557x/issues",
   "requirements": [],
-  "iot_class": "local_polling"
+  "version": "v2026.01.1"
 }
