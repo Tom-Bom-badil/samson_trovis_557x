@@ -34,7 +34,7 @@
   unique_id: trovis_hk1_raumsoll_tag
   slave: !secret trovis_modbus_address
   address: 1002
-  scan_interval: 900
+  scan_interval: 60
   scale: 0.1
   precision: 1
   unit_of_measurement: "°C"
@@ -46,7 +46,7 @@
   unique_id: trovis_hk1_raumsoll_nacht
   slave: !secret trovis_modbus_address
   address: 1003
-  scan_interval: 900
+  scan_interval: 60
   scale: 0.1
   precision: 1
   unit_of_measurement: "°C"
@@ -58,7 +58,7 @@
   unique_id: trovis_hk1_vl_min
   slave: !secret trovis_modbus_address
   address: 1001
-  scan_interval: 900
+  scan_interval: 60
   scale: 0.1
   precision: 1
   unit_of_measurement: "°C"
@@ -70,7 +70,7 @@
   unique_id: trovis_hk1_vl_max
   slave: !secret trovis_modbus_address
   address: 1000
-  scan_interval: 900
+  scan_interval: 60
   scale: 0.1
   precision: 1
   unit_of_measurement: "°C"
@@ -87,6 +87,7 @@
   precision: 1
   min_value: 0.2
   max_value: 3.2
+  input_type: holding
   data_type: int16
   nan_value: 32767
 
@@ -100,7 +101,8 @@
   unit_of_measurement: "°C"
   device_class: temperature
   data_type: int16
-  # min_value: -30
+  input_type: holding
+  min_value: -30
   max_value: 30
   nan_value: 32767
 
@@ -108,7 +110,7 @@
   unique_id: trovis_hk1_rl_fusspunkt
   slave: !secret trovis_modbus_address
   address: 1011
-  scan_interval: 900
+  scan_interval: 60
   scale: 0.1
   precision: 1
   unit_of_measurement: "°C"
@@ -120,7 +122,7 @@
   unique_id: trovis_hk1_rl_niveau
   slave: !secret trovis_modbus_address
   address: 1009
-  scan_interval: 900
+  scan_interval: 60
   scale: 0.1
   precision: 1
   unit_of_measurement: "°C"

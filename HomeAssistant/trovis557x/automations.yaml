@@ -1,0 +1,199 @@
+  ################################ Trigger #####################################
+
+- alias: "Trovis Heizkurven Sync (Start + Änderungen)"
+  id: trovis_heizkurven_sync
+  mode: restart
+
+  trigger:
+    # Beim Neustart immer alles initialisieren
+    - platform: homeassistant
+      event: start
+
+    # Bei Änderungen nachziehen
+    - platform: state
+      entity_id:
+        # ---------------- HK1 ----------------
+        - sensor.trovis_hk1_vl_niveau
+        - sensor.trovis_hk1_vl_steigung
+        - sensor.trovis_hk1_raumsoll_tag
+        - sensor.trovis_hk1_raumsoll_nacht
+        - sensor.trovis_hk1_vl_min
+        - sensor.trovis_hk1_vl_max
+
+        # ---------------- HK2 ----------------
+        - sensor.trovis_hk2_vl_steigung
+        - sensor.trovis_hk2_vl_niveau
+        - sensor.trovis_hk2_raumsoll_tag
+        - sensor.trovis_hk2_raumsoll_nacht
+        - sensor.trovis_hk2_vl_min
+        - sensor.trovis_hk2_vl_max
+
+        # ---------------- HK3  ---------------
+        # - sensor.trovis_hk3_vl_steigung
+        # - sensor.trovis_hk3_vl_niveau
+        # - sensor.trovis_hk3_raumsoll_tag
+        # - sensor.trovis_hk3_raumsoll_nacht
+        # - sensor.trovis_hk3_vl_min
+        # - sensor.trovis_hk3_vl_max
+
+        # ---------------- HK4 (TW) -----------
+        - sensor.trovis_hk4_haltewert_tw
+        - sensor.trovis_hk4_maxladetemperatur_tw
+        - sensor.trovis_hk4_maxrl_tw
+        - sensor.trovis_hk4_schaltdifferenz_tw
+        - sensor.trovis_hk4_soll_tw
+        - sensor.trovis_hk4_ueberhoehung_tw
+
+  action:
+
+    ##################################### Rk1 ##################################
+
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.trovis_hk1_steigung
+      data:
+        value: "{{ states('sensor.trovis_hk1_vl_steigung') | float(0.2) | round(1) }}"
+
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.trovis_hk1_niveau
+      data:
+        value: "{{ states('sensor.trovis_hk1_vl_niveau') | int(0) }}"
+
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.trovis_hk1_raumsoll_tag
+      data:
+        value: "{{ states('sensor.trovis_hk1_raumsoll_tag') | float(0.0) | round(1) }}"
+
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.trovis_hk1_raumsoll_nacht
+      data:
+        value: "{{ states('sensor.trovis_hk1_raumsoll_nacht') | float(0.0) | round(1) }}"
+
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.trovis_hk1_vl_min
+      data:
+        value: "{{ states('sensor.trovis_hk1_vl_min') | int(0) }}"
+
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.trovis_hk1_vl_max
+      data:
+        value: "{{ states('sensor.trovis_hk1_vl_max') | int(0) }}"
+
+    ##################################### Rk2 ##################################
+
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.trovis_hk2_steigung
+      data:
+        value: "{{ states('sensor.trovis_hk2_vl_steigung') | float(0.2) | round(1) }}"
+
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.trovis_hk2_niveau
+      data:
+        value: "{{ states('sensor.trovis_hk2_vl_niveau') | int(0) }}"
+
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.trovis_hk2_raumsoll_tag
+      data:
+        value: "{{ states('sensor.trovis_hk2_raumsoll_tag') | float(0.0) | round(1) }}"
+
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.trovis_hk2_raumsoll_nacht
+      data:
+        value: "{{ states('sensor.trovis_hk2_raumsoll_nacht') | float(0.0) | round(1) }}"
+
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.trovis_hk2_vl_min
+      data:
+        value: "{{ states('sensor.trovis_hk2_vl_min') | int(0) }}"
+
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.trovis_hk2_vl_max
+      data:
+        value: "{{ states('sensor.trovis_hk2_vl_max') | int(0) }}"
+
+    ##################################### Rk3 ##################################
+
+    # - action: input_number.set_value
+    #   target:
+    #     entity_id: input_number.trovis_hk3_steigung
+    #   data:
+    #     value: "{{ states('sensor.trovis_hk3_vl_steigung') | float(0.2) | round(1) }}"
+
+    # - action: input_number.set_value
+    #   target:
+    #     entity_id: input_number.trovis_hk3_niveau
+    #   data:
+    #     value: "{{ states('sensor.trovis_hk3_vl_niveau') | int(0) }}"
+
+    # - action: input_number.set_value
+    #   target:
+    #     entity_id: input_number.trovis_hk3_raumsoll_tag
+    #   data:
+    #     value: "{{ states('sensor.trovis_hk3_raumsoll_tag') | float(0.0) | round(1) }}"
+
+    # - action: input_number.set_value
+    #   target:
+    #     entity_id: input_number.trovis_hk3_raumsoll_nacht
+    #   data:
+    #     value: "{{ states('sensor.trovis_hk3_raumsoll_nacht') | float(0.0) | round(1) }}"
+
+    # - action: input_number.set_value
+    #   target:
+    #     entity_id: input_number.trovis_hk3_vl_min
+    #   data:
+    #     value: "{{ states('sensor.trovis_hk3_vl_min') | int(0) }}"
+
+    # - action: input_number.set_value
+    #   target:
+    #     entity_id: input_number.trovis_hk3_vl_max
+    #   data:
+    #     value: "{{ states('sensor.trovis_hk3_vl_max') | int(0) }}"
+
+    ##################################### Rk4 ##################################
+
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.trovis_hk4_haltewert_tw
+      data:
+        value: "{{ states('sensor.trovis_hk4_haltewert_tw') | int(0) }}"
+
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.trovis_hk4_maxladetemperatur_tw
+      data:
+        value: "{{ states('sensor.trovis_hk4_maxladetemperatur_tw') | int(0) }}"
+
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.trovis_hk4_maxrl_tw
+      data:
+        value: "{{ states('sensor.trovis_hk4_maxrl_tw') | int(0) }}"
+
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.trovis_hk4_schaltdifferenz_tw
+      data:
+        value: "{{ states('sensor.trovis_hk4_schaltdifferenz_tw') | int(0) }}"
+
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.trovis_hk4_soll_tw
+      data:
+        value: "{{ states('sensor.trovis_hk4_soll_tw') | int(0) }}"
+
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.trovis_hk4_ueberhoehung_tw
+      data:
+        value: "{{ states('sensor.trovis_hk4_ueberhoehung_tw') | int(0) }}"

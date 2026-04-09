@@ -3,75 +3,75 @@
 # Hk3 ist nur bei den 'großen' Modellen vorhanden (5578, 5579).
 # Warmwasser ist Hk4!
 
-- name: "Trovis Hk3 Handbetrieb"
-  unique_id: trovis_hk3_handbetrieb
-  slave: !secret trovis_modbus_address
-  address: 6
-  scan_interval: 60
+# - name: "Trovis Hk3 Handbetrieb"
+#   unique_id: trovis_hk3_handbetrieb
+#   slave: !secret trovis_modbus_address
+#   address: 6
+#   scan_interval: 60
 
-- name: "Trovis Hk3 Automatikbetrieb"
-  unique_id: trovis_hk3_automatikbetrieb
-  slave: !secret trovis_modbus_address
-  address: 1399
-  scan_interval: 60
+# - name: "Trovis Hk3 Automatikbetrieb"
+#   unique_id: trovis_hk3_automatikbetrieb
+#   slave: !secret trovis_modbus_address
+#   address: 1399
+#   scan_interval: 60
 
-- name: "Trovis Hk3 Tagbetrieb"
-  unique_id: trovis_hk3_tagbetrieb
-  slave: !secret trovis_modbus_address
-  address: 1400
-  scan_interval: 60
+# - name: "Trovis Hk3 Tagbetrieb"
+#   unique_id: trovis_hk3_tagbetrieb
+#   slave: !secret trovis_modbus_address
+#   address: 1400
+#   scan_interval: 60
 
-- name: "Trovis Hk3 Nachtbetrieb"
-  unique_id: trovis_hk3_nachtbetrieb
-  slave: !secret trovis_modbus_address
-  address: 1401
-  scan_interval: 60
+# - name: "Trovis Hk3 Nachtbetrieb"
+#   unique_id: trovis_hk3_nachtbetrieb
+#   slave: !secret trovis_modbus_address
+#   address: 1401
+#   scan_interval: 60
 
-- name: "Trovis Hk3 Haltebetrieb"
-  unique_id: trovis_hk3_haltebetrieb
-  slave: !secret trovis_modbus_address
-  address: 1402
-  scan_interval: 60
+# - name: "Trovis Hk3 Haltebetrieb"
+#   unique_id: trovis_hk3_haltebetrieb
+#   slave: !secret trovis_modbus_address
+#   address: 1402
+#   scan_interval: 60
 
-- name: "Trovis Hk3 Stuetzbetrieb"
-  unique_id: trovis_hk3_stuetzbetrieb
-  slave: !secret trovis_modbus_address
-  address: 1403
-  scan_interval: 60
+# - name: "Trovis Hk3 Stuetzbetrieb"
+#   unique_id: trovis_hk3_stuetzbetrieb
+#   slave: !secret trovis_modbus_address
+#   address: 1403
+#   scan_interval: 60
 
-- name: "Trovis Hk3 Aufheizbetrieb"
-  unique_id: trovis_hk3_aufheizbetrieb
-  slave: !secret trovis_modbus_address
-  address: 1404
-  scan_interval: 60
+# - name: "Trovis Hk3 Aufheizbetrieb"
+#   unique_id: trovis_hk3_aufheizbetrieb
+#   slave: !secret trovis_modbus_address
+#   address: 1404
+#   scan_interval: 60
 
-- name: "Trovis Hk3 Ruecklauftemperaturbegrenzung"
-  unique_id: trovis_hk3_rlbegrenzung
-  slave: !secret trovis_modbus_address
-  address: 1405
-  scan_interval: 60
+# - name: "Trovis Hk3 Ruecklauftemperaturbegrenzung"
+#   unique_id: trovis_hk3_rlbegrenzung
+#   slave: !secret trovis_modbus_address
+#   address: 1405
+#   scan_interval: 60
 
-- name: "Trovis Hk3 AT Abschaltung"
-  unique_id: trovis_hk3_atabschaltung
-  slave: !secret trovis_modbus_address
-  address: 1406
-  scan_interval: 60
+# - name: "Trovis Hk3 AT Abschaltung"
+#   unique_id: trovis_hk3_atabschaltung
+#   slave: !secret trovis_modbus_address
+#   address: 1406
+#   scan_interval: 60
 
-- name: "Trovis Hk3 Standby"
-  unique_id: trovis_hk3_standby
-  slave: !secret trovis_modbus_address
-  address: 1407
-  scan_interval: 60
+# - name: "Trovis Hk3 Standby"
+#   unique_id: trovis_hk3_standby
+#   slave: !secret trovis_modbus_address
+#   address: 1407
+#   scan_interval: 60
 
-- name: "Trovis Hk3 Frostschutz"
-  unique_id: trovis_hk3_frostschutz
-  slave: !secret trovis_modbus_address
-  address: 1408
-  scan_interval: 60
+# - name: "Trovis Hk3 Frostschutz"
+#   unique_id: trovis_hk3_frostschutz
+#   slave: !secret trovis_modbus_address
+#   address: 1408
+#   scan_interval: 60
 
-# Binaerausgang BA3
-- name: "Trovis Hk3 Umwaelzpumpe"
-  unique_id: trovis_hk3_up3
-  slave: !secret trovis_modbus_address
-  address: 58
-  scan_interval: 60
+# # Binaerausgang BA3
+# - name: "Trovis Hk3 Umwaelzpumpe"
+#   unique_id: trovis_hk3_up3
+#   slave: !secret trovis_modbus_address
+#   address: 58
+#   scan_interval: 60

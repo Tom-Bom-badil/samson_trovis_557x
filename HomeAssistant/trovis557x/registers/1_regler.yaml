@@ -4,7 +4,7 @@
   unique_id: trovis_r_modell
   slave: !secret trovis_modbus_address
   address: 0
-  scan_interval: 3600
+  scan_interval: 60 #3600
 
 - name: "Trovis Regler Hydraulik (Anlage)"
   unique_id: trovis_r_anlage
@@ -20,26 +20,26 @@
   address: 2
   scale: 0.01
   precision: 2
-  scan_interval: 900
+  scan_interval: 60 #900
 
 - name: "Trovis Regler Hardwareversion"
   unique_id: trovis_r_hardware
   slave: !secret trovis_modbus_address
   address: 3
   #precision: 0
-  scan_interval: 3600
+  scan_interval: 60 #3600
 
 - name: "Trovis Regler Sonderfunktionen"
   unique_id: trovis_r_sonderfunktionen
   slave: !secret trovis_modbus_address
   address: 4
-  scan_interval: 3600
+  scan_interval: 60 #3600
 
 - name: "Trovis Regler Seriennummer"
   unique_id: trovis_r_seriennummer
   slave: !secret trovis_modbus_address
   address: 5
-  scan_interval: 3600
+  scan_interval: 60 #3600
 
 - name: "Trovis Regler Fehlerstatus"
   unique_id: trovis_r_fehlerstatus
@@ -98,3 +98,74 @@
   slave: !secret trovis_modbus_address
   address: 144
   scan_interval: 60
+
+
+#-----------------------------------------------------------------------------
+#- name: "Trovis Regler Uhrzeit"
+#  unique_id: trovis_r_Uhrzeit
+#  slave: !secret trovis_modbus_address
+#  address: 99
+#  scan_interval: 60
+  # device_class: timestamp # geht schief
+  # value_template: >         # geht nicht
+  #   {% set x = ('%04x' % value|int(0)) %}
+  #   {{ today_at('%s:%s' % (x[:2],x[-2:])) }}
+
+#- name: "Trovis Regler Datum"
+#  unique_id: trovis_r_datum
+#  slave: !secret trovis_modbus_address
+#  address: 100
+#  scan_interval: 60
+# Irrweg:
+#  count: 1
+#  data_type: custom
+#  structure: "f"
+
+#- name: "Trovis Regler Jahr"
+#  unique_id: trovis_r_jahr
+#  slave: !secret trovis_modbus_address
+#  address: 101
+#  scan_interval: 60
+  # test
+  # attributes:
+  #  _test: >
+  #    'hallo'
+  #  _version: >
+  #      {{states.sensors.trovis_r_modell}}
+
+#- name: "Non-Modbus Sensor"     geht nicht
+  #address: -1
+  #state: >-
+  #  {% if states('sensor.trovis_regler_uhrzeit')|float < 1000 %}
+  #    {{ '0' + states('sensor.trovis_regler_uhrzeit')[:1] + ':' + states('sensor.trovis_regler_uhrzeit')[-2:] }}
+  #  {% else %}
+  #    {{ states('sensor.trovis_regler_uhrzeit')[:2] + ':' + states('sensor.trovis_regler_uhrzeit')[-2:] }}
+  #  {% endif %}
+
+# unbenutzte Attribute / bitte ignorieren:
+
+# count: 1
+# data_type: custom
+# structure: ">h"
+# "{0:-04d}"
+# device_class: date
+
+#modbus:
+#  - name: hub1
+#    type: tcp
+#    host: IP_ADDRESS
+#    port: 502
+#    sensors:
+#      - name: Room_1
+#        slave: 10
+#        address: 0
+
+# -->    input_type: holding / input
+
+#        unit_of_measurement: °C
+#        state_class: measurement
+#        count: 1
+#        scale: 0.1
+#        offset: 0
+#        precision: 1
+#        data_type: integer

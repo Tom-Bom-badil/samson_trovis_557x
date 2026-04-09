@@ -5,12 +5,15 @@ homeassistant:
     trovis:
       input_number:      !include trovis557x/input_numbers.yaml
       input_datetime:    !include trovis557x/input_datetime.yaml
-      sensor main:       !include trovis557x/template_sensors.yaml
+      automation:        !include trovis557x/automations.yaml        # new file!
+      template:          !include trovis557x/templates.yaml          # new file!
       sensor statistics: !include trovis557x/statistics.yaml
-      sensor curves:     !include trovis557x/heating_curves.yaml
-      template triggers: !include trovis557x/trigger_actions.yaml
-      automation start:  !include trovis557x/trigger_startup.yaml
-      automation update: !include trovis557x/trigger_updates.yaml
+      # deprecated! sensor main:       !include trovis557x/template_sensors.yaml
+      # deprecated! sensor curves:     !include trovis557x/heating_curves.yaml
+      # deprecated! template triggers: !include trovis557x/trigger_actions.yaml
+      # deprecated! automation triggers: !include trovis557x/trigger_actions.yaml
+      # deprecated! automation start:    !include trovis557x/trigger_startup.yaml
+      # deprecated! automation update:   !include trovis557x/trigger_updates.yaml
 
 modbus:
   - name: trovis
@@ -19,6 +22,6 @@ modbus:
     port: !secret trovis_port
     sensors:        !include_dir_merge_list trovis557x/registers/
     binary_sensors: !include_dir_merge_list trovis557x/coils/
-    message_wait_milliseconds: 30
-    timeout: 10
-    delay: 5
+    # message_wait_milliseconds: 30
+    # timeout: 10
+    # delay: 5

@@ -232,3 +232,5 @@
   device_class: temperature
   data_type: int16
   nan_value: 32767
+
+## Hier noch bei Bedarf die Analogeingänge einfügen, wenn benutzt

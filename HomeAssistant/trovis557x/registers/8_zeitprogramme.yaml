@@ -65,4 +65,3 @@
   slave: !secret trovis_modbus_address
   address: 1838
   scan_interval: 60
-  
