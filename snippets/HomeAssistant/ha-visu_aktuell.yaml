@@ -385,15 +385,15 @@ cards:
                   return `
 
                     <div style="height:12vh !important;font-size: 180%; font-family:'mydsdigib';
-                     padding-left: 10px; padding-right: 10px;">
+                      padding-left: 10px; padding-right: 10px;">
                       <table height="100%" width="100%">
 
-                       <colgroup>
+                        <colgroup>
                           <col width=10%>
                           <col width=30% align=char char=".">
                           <col width=30% align=char char=".">
                           <col width=30% align=char char=".">
-                       </colgroup>
+                        </colgroup>
 
                         <tr align=right>
                           <th></th>
@@ -525,7 +525,7 @@ cards:
                           action: more-info
                       - type: state-label
                         title: lade_temp
-                        entity: sensor.trovis_hk4_ww_ladetemperatur
+                        entity: sensor.trovis_hk4_ladetemperatur
                         prefix: "Vorlaufsoll (IST+Überhöhung): "
                         style:
                           font-weight: bold
@@ -535,7 +535,7 @@ cards:
                           font-size: x-small
                       - type: state-label
                         title: tag_temps
-                        entity: sensor.trovis_hk4_ww_tagestemperaturen
+                        entity: sensor.trovis_hk4_tagestemperaturen
                         style:
                           font-size: small
                           color: black
@@ -543,7 +543,7 @@ cards:
                           top: 9%
                       - type: state-label
                         title: nacht_temps
-                        entity: sensor.trovis_hk4_ww_nachttemperaturen
+                        entity: sensor.trovis_hk4_nachttemperaturen
                         style:
                           font-size: small
                           color: black
@@ -771,22 +771,23 @@ cards:
                               *************************/
                               let kreis, niveau, steigung, vlmin, vlmax, vlsoll, vlist, tagsoll, nachtsoll;
                               kreis = Math.floor(states['input_number.trovis_visu_heizkreis'].state);
-                              if (kreis === 4)
+                              if (kreis === 4) {
                                 return 'WW';
-                              else
-                                niveau=Math.floor(states['sensor.trovis_hk'+kreis+'_niveau'].state);
-                                steigung=states['sensor.trovis_hk'+kreis+'_steigung'].state;
-                                vlmin=Math.floor(states['sensor.trovis_hk'+kreis+'_vl_min'].state);
-                                vlmax=Math.floor(states['sensor.trovis_hk'+kreis+'_vl_max'].state);
-                                tagsoll=Math.floor(states['sensor.trovis_hk'+kreis+'_raumsoll_tag'].state);
-                                nachtsoll=Math.floor(states['sensor.trovis_hk'+kreis+'_raumsoll_nacht'].state);
-                                vlsoll=states['sensor.trovis_hk'+kreis+'_vorlaufsoll'].state;
-                                if (vlsoll == 'unavailable') { vlsoll = '---'; };
-                                vlist=states['sensor.trovis_fuhler_vorlauf_'+kreis+'_vf'+kreis].state;
+                              } else {
+                                niveau = Math.floor(states['sensor.trovis_hk' + kreis + '_vl_niveau'].state);
+                                steigung = states['sensor.trovis_hk' + kreis + '_vl_steigung'].state;
+                                vlmin = Math.floor(states['sensor.trovis_hk' + kreis + '_vl_min'].state);
+                                vlmax = Math.floor(states['sensor.trovis_hk' + kreis + '_vl_max'].state);
+                                tagsoll = Math.floor(states['sensor.trovis_hk' + kreis + '_raumsoll_tag'].state);
+                                nachtsoll = Math.floor(states['sensor.trovis_hk' + kreis + '_raumsoll_nacht'].state);
+                                vlsoll = states['sensor.trovis_hk' + kreis + '_vl_soll'].state;
+                                if (vlsoll == 'unavailable') { vlsoll = '---'; }
+                                vlist = states['sensor.trovis_fuhler_vorlauf_' + kreis + '_vf' + kreis].state;
                                 return 'Steigung / Niveau: ' + steigung + ' / ' + niveau + ' °C<br>' +
                                   'Vorlaufbegrenzung: ' + vlmin + '...' + vlmax + ' °C<br>' +
                                   'Raumsoll Tag / Nacht: ' + tagsoll + ' / ' + nachtsoll + ' °C<br>' +
                                   'Vorlaufsoll vs. IST: ' + vlsoll + ' ./. ' + vlist + ' °C';
+                              }
                             ]]]
                           showarrow: false
                       showlegend: false
@@ -843,10 +844,15 @@ cards:
         defaults:
           yaxes:
             fixedrange: true
+        raw_plotly_config: false
         config:
           displaylogo: false
           responsive: true
         layout:
+          modebar:
+            add: lasso2d
+            buttons: "['autoScale2d', 'zoom2d', 'lasso2d']"
+          modebarbuttons: "['autoScale2d', 'zoom2d', 'lasso2d']"
           title:
             text: Vorlauf und Rücklauf
             x: 0.5
@@ -878,6 +884,8 @@ cards:
                 - count: 1
                   step: day
                 - count: 2
+                  step: day
+                - count: 7
                   step: day
           yaxis:
             titlefont:
@@ -968,6 +976,9 @@ cards:
             pad: 0
           xaxis:
             showlegend: true
+            range:
+              - $ex Date.now()-172800000;
+              - $ex Date.now();
           yaxis:
             type: number
             titlefont:
@@ -1007,12 +1018,14 @@ cards:
             line:
               shape: spline
               color: "#00b0f0"
-              smoothing: 0.2
+              smoothing: 0.3
+              width: 0
             fill: tozeroy
           - name: Erwärmung (SLP-Signal)
             entity: binary_sensor.trovis_hk4_speicherladepumpe
             line:
               color: lightgrey
+              width: 0
             fill: tozeroy
             yaxis: y2
       - type: custom:plotly-graph
@@ -1054,6 +1067,9 @@ cards:
             pad: 0
           xaxis:
             showlegend: true
+            range:
+              - $ex Date.now()-172800000;
+              - $ex Date.now();
           yaxis:
             titlefont:
               color: white
@@ -1088,17 +1104,20 @@ cards:
           - name: Stellventil %
             entity: sensor.trovis_hk1_3pkt_stellsignal
             line:
-              shape: spline
               color: "#00b0f0"
+              width: 0
+              smoothing: 1
             fill: tozeroy
           - name: 3Wege-Ventil Rk1/WW
             entity: binary_sensor.trovis_hk4_speicherladepumpe
             line:
               color: red
+              width: 2
             yaxis: y2
           - name: UP1
             entity: binary_sensor.trovis_hk1_umwaelzpumpe
             line:
               color: rgba(211,211,211,0.1)
+              width: 0
             fill: tozeroy
             yaxis: y2
