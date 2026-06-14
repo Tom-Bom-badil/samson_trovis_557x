@@ -204,6 +204,39 @@ class TrovisApi:
         )
 
 
+    async def async_write_register_option(
+        self,
+        description: TrovisRegisterDescription,
+        option: str,
+    ) -> bool:
+        """Write a selected option to one TROVIS register."""
+        if description.address is None:
+            return False
+
+        if description.read_only:
+            _LOGGER.warning("Refusing to write read-only TROVIS register: %s", description.key)
+            return False
+
+        if description.enum_map is None:
+            _LOGGER.warning("Cannot write TROVIS select without enum_map: %s", description.key)
+            return False
+
+        reverse_map = {str(label): raw_value for raw_value, label in description.enum_map.items()}
+
+        if option not in reverse_map:
+            _LOGGER.warning(
+                "Invalid TROVIS select option for %s: %s",
+                description.key,
+                option,
+            )
+            return False
+
+        return await self.transport.async_write_register(
+            int(description.address),
+            int(reverse_map[option]),
+        )
+
+
     def _convert_value_to_register(
         self,
         description: TrovisRegisterDescription,
