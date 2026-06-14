@@ -183,6 +183,45 @@ class TrovisApi:
         return value
 
 
+    async def async_write_register_description(
+        self,
+        description: TrovisRegisterDescription,
+        value: float,
+    ) -> bool:
+        """Write a converted value to one TROVIS register."""
+        if description.address is None:
+            return False
+
+        if description.read_only:
+            _LOGGER.warning("Refusing to write read-only TROVIS register: %s", description.key)
+            return False
+
+        raw_value = self._convert_value_to_register(description, value)
+
+        return await self.transport.async_write_register(
+            int(description.address),
+            raw_value,
+        )
+
+
+    def _convert_value_to_register(
+        self,
+        description: TrovisRegisterDescription,
+        value: float,
+    ) -> int:
+        """Convert a Home Assistant value to a raw register value."""
+        if description.scale == 0:
+            raise ValueError(f"Cannot write register {description.key}: scale must not be 0")
+
+        raw_value = round((float(value) - description.offset) / description.scale)
+
+        if description.value_type == TrovisRegisterValueType.SIGNED and raw_value < 0:
+            raw_value += 0x10000
+
+        return int(raw_value)
+
+
+
     async def _async_read_coil_descriptions(
         self,
         descriptions: tuple[TrovisCoilDescription, ...],

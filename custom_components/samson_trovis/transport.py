@@ -51,10 +51,12 @@ class TrovisTransport:
         self.port_url = str(data[CONF_PORT_URL])
         self.slave_id = int(data.get(CONF_SLAVE_ID, DEFAULT_SLAVE_ID))
 
+
     async def async_close(self) -> None:
         """Close the transport connection."""
         # The first config-flow test opens and closes the client per request.
         return
+
 
     async def async_read_registers(self, address: int, count: int) -> list[int] | None:
         """Read a holding register block."""
@@ -63,6 +65,7 @@ class TrovisTransport:
             address,
             count,
         )
+
 
     def _read_registers_sync(self, address: int, count: int) -> list[int] | None:
         """Read holding registers using the synchronous PyModbus client."""
@@ -240,6 +243,7 @@ class TrovisTransport:
 
         return ModbusSerialClient(method="rtu", **kwargs)
 
+
     def _read_holding_registers(self, client: Any, address: int, count: int) -> Any:
         """Read holding registers with PyModbus version compatibility."""
         for slave_kwarg in (
@@ -259,6 +263,7 @@ class TrovisTransport:
         _LOGGER.warning("Installed PyModbus version does not support known slave/device_id arguments")
         return None
 
+
     async def async_read_coils(self, address: int, count: int) -> list[bool] | None:
         """Read a coil block."""
         return await self.hass.async_add_executor_job(
@@ -267,10 +272,89 @@ class TrovisTransport:
             count,
         )
 
+
     async def async_write_register(self, address: int, value: int) -> bool:
-        """Write a single register."""
-        _LOGGER.debug("Write register not implemented yet: address=%s value=%s", address, value)
-        return False
+        """Write a single holding register."""
+        return await self.hass.async_add_executor_job(
+            self._write_register_sync,
+            address,
+            value,
+        )
+
+
+    def _write_register_sync(self, address: int, value: int) -> bool:
+        """Write a single holding register using the synchronous PyModbus client."""
+        if ModbusSerialClient is None:
+            _LOGGER.error("PyModbus is not available in the Home Assistant runtime")
+            return False
+
+        client = self._create_client()
+
+        try:
+            if not client.connect():
+                _LOGGER.warning("Could not connect to TROVIS on %s", self.port_url)
+                return False
+
+            _LOGGER.debug(
+                "Writing TROVIS holding register: port=%s slave_id=%s address=%s value=%s",
+                self.port_url,
+                self.slave_id,
+                address,
+                value,
+            )
+
+            response = self._write_register(client, address, value)
+
+            if response is None:
+                return False
+
+            if hasattr(response, "isError") and response.isError():
+                _LOGGER.warning(
+                    "TROVIS Modbus write error response: port=%s slave_id=%s address=%s value=%s response=%s",
+                    self.port_url,
+                    self.slave_id,
+                    address,
+                    value,
+                    response,
+                )
+                return False
+
+            return True
+
+        except Exception as err:  # noqa: BLE001
+            _LOGGER.warning(
+                "Failed to write TROVIS register: port=%s slave_id=%s address=%s value=%s error=%s",
+                self.port_url,
+                self.slave_id,
+                address,
+                value,
+                err,
+            )
+            return False
+
+        finally:
+            client.close()
+
+
+    def _write_register(self, client: Any, address: int, value: int) -> Any:
+        """Write a register with PyModbus version compatibility."""
+        for slave_kwarg in (
+            {"device_id": self.slave_id},
+            {"slave": self.slave_id},
+            {"unit": self.slave_id},
+        ):
+            try:
+                return client.write_register(
+                    address=address,
+                    value=value,
+                    **slave_kwarg,
+                )
+            except TypeError:
+                continue
+
+        _LOGGER.warning("Installed PyModbus version does not support known slave/device_id arguments")
+        return None
+
 
     async def async_write_coil(self, address: int, value: bool) -> bool:
         """Write a single coil."""
