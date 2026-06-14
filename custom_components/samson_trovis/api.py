@@ -338,3 +338,22 @@ class TrovisApi:
             data[description.key] = bool(coils[index])
 
         return data
+
+
+    async def async_write_coil_description(
+        self,
+        description: TrovisCoilDescription,
+        value: bool,
+    ) -> bool:
+        """Write a value to one TROVIS coil."""
+        if description.address is None:
+            return False
+
+        if description.read_only:
+            _LOGGER.warning("Refusing to write read-only TROVIS coil: %s", description.key)
+            return False
+
+        return await self.transport.async_write_coil(
+            int(description.address),
+            bool(value),
+        )

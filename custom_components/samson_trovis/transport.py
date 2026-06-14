@@ -358,5 +358,81 @@ class TrovisTransport:
 
     async def async_write_coil(self, address: int, value: bool) -> bool:
         """Write a single coil."""
-        _LOGGER.debug("Write coil not implemented yet: address=%s value=%s", address, value)
+        return await self.hass.async_add_executor_job(
+            self._write_coil_sync,
+            address,
+            value,
+        )
+
+def _write_coil_sync(self, address: int, value: bool) -> bool:
+    """Write a single coil using the synchronous PyModbus client."""
+    if ModbusSerialClient is None:
+        _LOGGER.error("PyModbus is not available in the Home Assistant runtime")
         return False
+
+    client = self._create_client()
+
+    try:
+        if not client.connect():
+            _LOGGER.warning("Could not connect to TROVIS on %s", self.port_url)
+            return False
+
+        _LOGGER.debug(
+            "Writing TROVIS coil: port=%s slave_id=%s address=%s value=%s",
+            self.port_url,
+            self.slave_id,
+            address,
+            value,
+        )
+
+        response = self._write_coil(client, address, value)
+
+        if response is None:
+            return False
+
+        if hasattr(response, "isError") and response.isError():
+            _LOGGER.warning(
+                "TROVIS Modbus coil write error response: port=%s slave_id=%s address=%s value=%s response=%s",
+                self.port_url,
+                self.slave_id,
+                address,
+                value,
+                response,
+            )
+            return False
+
+        return True
+
+    except Exception as err:  # noqa: BLE001
+        _LOGGER.warning(
+            "Failed to write TROVIS coil: port=%s slave_id=%s address=%s value=%s error=%s",
+            self.port_url,
+            self.slave_id,
+            address,
+            value,
+            err,
+        )
+        return False
+
+    finally:
+        client.close()
+
+
+    def _write_coil(self, client: Any, address: int, value: bool) -> Any:
+        """Write a coil with PyModbus version compatibility."""
+        for slave_kwarg in (
+            {"device_id": self.slave_id},
+            {"slave": self.slave_id},
+            {"unit": self.slave_id},
+        ):
+            try:
+                return client.write_coil(
+                    address=address,
+                    value=value,
+                    **slave_kwarg,
+                )
+            except TypeError:
+                continue
+
+        _LOGGER.warning("Installed PyModbus version does not support known slave/device_id arguments")
+        return None
