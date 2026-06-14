@@ -1,0 +1,56 @@
+{
+  "title": "Samson Trovis",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Samson Trovis Heizungsregler hinzufügen",
+        "description": "Konfiguriere die serielle/Serial-over-TCP-Verbindung und die Modbus-Slave-ID.",
+        "data": {
+          "name": "Name",
+          "port_url": "Serieller Port / Port-URL",
+          "slave_id": "Modbus-Slave-ID",
+          "model": "Modell",
+          "slug": "Entity-ID-Präfix"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Es konnte keine Verbindung zum Regler hergestellt werden."
+    },
+    "abort": {
+      "already_configured": "Dieser TROVIS-Regler ist bereits konfiguriert."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Samson Trovis Optionen",
+        "description": "Wähle die aktiven Funktionsbereiche. Nur aktivierte Bereiche werden abgefragt.",
+        "data": {
+          "controller": "Regler",
+          "measurements": "Messwerte",
+          "hc1": "Heizkreis 1",
+          "hc2": "Heizkreis 2",
+          "hc3": "Heizkreis 3",
+          "hc4_dhw": "Heizkreis 4 / Warmwasser",
+          "heat_meters": "Wärmemengenzähler",
+          "schedules": "Zeitprogramme",
+          "miscellaneous": "Sonstiges",
+          "diagnostic": "Diagnose / Rohwerte"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "model": { "name": "Modell" },
+      "hydraulic_scheme": { "name": "Hydraulikschema" },
+      "firmware_version": { "name": "Firmware-Version" }
+    },
+    "binary_sensor": {
+      "general_fault": { "name": "Sammelstörung" },
+      "manual_mode_lock": { "name": "Sperrung Handbetrieb" },
+      "rotary_switch_lock": { "name": "Sperrung Drehschalter" }
+    }
+  }
+}

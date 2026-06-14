@@ -1,0 +1,56 @@
+{
+  "title": "Samson Trovis",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add SAMSON TROVIS controller",
+        "description": "Configure the serial/serial-over-TCP connection and Modbus slave ID.",
+        "data": {
+          "name": "Name",
+          "port_url": "Serial port / port URL",
+          "slave_id": "Modbus slave ID",
+          "model": "Model",
+          "slug": "Entity ID prefix"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not connect to the controller."
+    },
+    "abort": {
+      "already_configured": "This TROVIS controller is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Samson Trovis options",
+        "description": "Select the active functional areas. Only enabled areas will be polled.",
+        "data": {
+          "controller": "Controller",
+          "measurements": "Measurements",
+          "hc1": "Heating circuit 1",
+          "hc2": "Heating circuit 2",
+          "hc3": "Heating circuit 3",
+          "hc4_dhw": "Heating circuit 4 / domestic hot water",
+          "heat_meters": "Heat meters",
+          "schedules": "Schedules",
+          "miscellaneous": "Miscellaneous",
+          "diagnostic": "Diagnostic / raw values"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "model": { "name": "Model" },
+      "hydraulic_scheme": { "name": "Hydraulic scheme" },
+      "firmware_version": { "name": "Firmware version" }
+    },
+    "binary_sensor": {
+      "general_fault": { "name": "General fault" },
+      "manual_mode_lock": { "name": "Manual mode lock" },
+      "rotary_switch_lock": { "name": "Rotary switch lock" }
+    }
+  }
+}
