@@ -11,7 +11,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from . import TrovisConfigEntry
 from .constants.areas import DEFAULT_ENABLED_AREAS
-from .constants.config import CONF_ENABLED_AREAS
+from .constants.config import CONF_ENABLED_AREAS, CONF_SLUG
 from .constants.descriptions import TrovisRegisterDescription
 from .constants.registers import ALL_REGISTERS
 from .entities import TrovisEntity
@@ -74,6 +74,7 @@ async def async_setup_entry(
     """Set up SAMSON TROVIS select entities."""
     coordinator = entry.runtime_data.coordinator
     enabled_areas = set(entry.options.get(CONF_ENABLED_AREAS) or DEFAULT_ENABLED_AREAS)
+    entity_slug = entry.data.get(CONF_SLUG, entry.title)
 
     entities = [
         TrovisRegisterSelect(coordinator, description)
@@ -85,8 +86,9 @@ async def async_setup_entry(
     ]
 
     _LOGGER.info(
-        "Setting up %s SAMSON TROVIS select entities: enabled_areas=%s all_registers=%s",
+        "Setting up %s SAMSON TROVIS select entities for %s: enabled_areas=%s all_registers=%s",
         len(entities),
+        entity_slug,
         sorted(enabled_areas),
         len(ALL_REGISTERS),
     )
