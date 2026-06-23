@@ -29,10 +29,10 @@
         "data": {
           "controller": "Regler",
           "measurements": "Messwerte",
-          "hc1": "Heizkreis 1",
-          "hc2": "Heizkreis 2",
-          "hc3": "Heizkreis 3",
-          "hc4_dhw": "Heizkreis 4 / Warmwasser",
+          "heating_circuit_1": "Heizkreis 1",
+          "heating_circuit_2": "Heizkreis 2",
+          "heating_circuit_3": "Heizkreis 3",
+          "heating_circuit_4_domestic_hot_water": "Heizkreis 4 / Warmwasser",
           "heat_meters": "Wärmemengenzähler",
           "schedules": "Zeitprogramme",
           "miscellaneous": "Sonstiges",
@@ -45,7 +45,20 @@
     "sensor": {
       "model": { "name": "Modell" },
       "hydraulic_scheme": { "name": "Hydraulikschema" },
-      "firmware_version": { "name": "Firmware-Version" }
+      "firmware_version": { "name": "Firmware-Version" },
+      "outside_temperature_1": { "name": "Außentemperatur 1" },
+      "outside_temperature_2": { "name": "Außentemperatur 2" },
+      "hc1_flow_temperature": { "name": "Heizkreis 1 Vorlauftemperatur" },
+      "hc2_flow_temperature": { "name": "Heizkreis 2 Vorlauftemperatur" },
+      "hc3_flow_temperature": { "name": "Heizkreis 3 Vorlauftemperatur" },
+      "hc4_flow_temperature": { "name": "Heizkreis 4 Vorlauftemperatur" },
+      "hc1_return_temperature": { "name": "Heizkreis 1 Rücklauftemperatur" },
+      "hc2_return_temperature": { "name": "Heizkreis 2 Rücklauftemperatur" },
+      "hc3_return_temperature": { "name": "Heizkreis 3 Rücklauftemperatur" },
+      "dhw_storage_temperature": { "name": "Warmwasser Speichertemperatur" },
+      "dhw_storage_temperature_lower": { "name": "Warmwasser untere Speichertemperatur" },
+      "storage_remote_temperature": { "name": "Speicher-/Ferngebertemperatur" },
+      "00_library": {  "name": "00 Library" }
     },
     "binary_sensor": {
       "general_fault": { "name": "Sammelstörung" },

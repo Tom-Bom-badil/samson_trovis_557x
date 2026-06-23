@@ -10,6 +10,7 @@ from homeassistant.helpers.entity import async_generate_entity_id
 from .constants.config import CONF_SLUG
 from .constants.descriptions import TrovisEntityDescription
 from .coordinator import TrovisDataUpdateCoordinator
+from .device_info import get_area_device_info
 
 
 class TrovisEntity(CoordinatorEntity[TrovisDataUpdateCoordinator]):
@@ -33,7 +34,7 @@ class TrovisEntity(CoordinatorEntity[TrovisDataUpdateCoordinator]):
         self._attr_unique_id = f"{coordinator.entry.entry_id}_{entity_key}"
         self._attr_translation_key = entity_key
         self._attr_has_entity_name = True
-        self._attr_device_info = coordinator.device_info
+        self._attr_device_info = get_area_device_info(coordinator.entry, description.area)
         self._attr_suggested_object_id = f"{entity_slug}_{entity_key}"
 
         self.entity_id = async_generate_entity_id(

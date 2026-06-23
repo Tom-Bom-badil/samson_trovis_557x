@@ -29,10 +29,10 @@
         "data": {
           "controller": "Controller",
           "measurements": "Measurements",
-          "hc1": "Heating circuit 1",
-          "hc2": "Heating circuit 2",
-          "hc3": "Heating circuit 3",
-          "hc4_dhw": "Heating circuit 4 / domestic hot water",
+          "heating_circuit_1": "Heating circuit 1",
+          "heating_circuit_2": "Heating circuit 2",
+          "heating_circuit_3": "Heating circuit 3",
+          "heating_circuit_4_domestic_hot_water": "Heating circuit 4 / domestic hot water",
           "heat_meters": "Heat meters",
           "schedules": "Schedules",
           "miscellaneous": "Miscellaneous",
@@ -45,7 +45,20 @@
     "sensor": {
       "model": { "name": "Model" },
       "hydraulic_scheme": { "name": "Hydraulic scheme" },
-      "firmware_version": { "name": "Firmware version" }
+      "firmware_version": { "name": "Firmware version" },
+      "outside_temperature_1": { "name": "Outside temperature 1" },
+      "outside_temperature_2": { "name": "Outside temperature 2" },
+      "hc1_flow_temperature": { "name": "Heating circuit 1 flow temperature" },
+      "hc2_flow_temperature": { "name": "Heating circuit 2 flow temperature" },
+      "hc3_flow_temperature": { "name": "Heating circuit 3 flow temperature" },
+      "hc4_flow_temperature": { "name": "Heating circuit 4 flow temperature" },
+      "hc1_return_temperature": { "name": "Heating circuit 1 return temperature" },
+      "hc2_return_temperature": { "name": "Heating circuit 2 return temperature" },
+      "hc3_return_temperature": { "name": "Heating circuit 3 return temperature" },
+      "dhw_storage_temperature": { "name": "DHW storage temperature" },
+      "dhw_storage_temperature_lower": { "name": "DHW lower storage temperature" },
+      "storage_remote_temperature": { "name": "Storage/remote temperature" },
+      "00_library": {  "name": "00 Library" }
     },
     "binary_sensor": {
       "general_fault": { "name": "General fault" },

@@ -7,12 +7,13 @@ from typing import Any
 
 from homeassistant.config_entries import ConfigEntry
 
-from .transport import TrovisTransport
+from .transport import TrovisTransport, MODBUS_BACKEND
+
 from .constants.descriptions import TrovisCoilDescription, TrovisRegisterDescription, TrovisRegisterValueType
-from .constants.areas import AREA_CONTROLLER, DEFAULT_ENABLED_AREAS
 from .constants.models import MODEL_OPTIONS
-from .constants.registers import CONTROLLER_REGISTERS
-from .constants.coils import CONTROLLER_COILS
+from .constants.areas import DEFAULT_ENABLED_AREAS
+from .constants.registers import REGISTER_GROUPS
+from .constants.coils import COIL_GROUPS
 from .constants.config import (
     CONF_ENABLED_AREAS,
     CONTROLLER_MODEL_REGISTER,
@@ -62,13 +63,19 @@ class TrovisApi:
 
         return model
 
+
     async def async_read_enabled_areas(self) -> dict[str, Any]:
         """Read all enabled areas."""
         data: dict[str, Any] = {}
+        for area in sorted(self.enabled_areas):
+            if area in REGISTER_GROUPS:
+                data.update(await self._async_read_register_descriptions(REGISTER_GROUPS[area]))
+            if area in COIL_GROUPS:
+                data.update(await self._async_read_coil_descriptions(COIL_GROUPS[area]))
 
-        if AREA_CONTROLLER in self.enabled_areas:
-            data.update(await self._async_read_register_descriptions(CONTROLLER_REGISTERS))
-            data.update(await self._async_read_coil_descriptions(CONTROLLER_COILS))
+        # dummy - delete later
+        data["00_library"] = MODBUS_BACKEND
+        #
 
         return data
 
@@ -139,22 +146,19 @@ class TrovisApi:
 
     async def _async_read_register_descriptions(
         self,
-        descriptions: tuple[TrovisRegisterDescription, ...],
+        descriptions: Iterable[TrovisRegisterDescription],
     ) -> dict[str, Any]:
-        """Read and convert a list of register descriptions."""
-        descriptions_with_address = sorted(
-            (description for description in descriptions if description.address is not None),
-            key=lambda description: int(description.address),
-        )
-
-        if not descriptions_with_address:
-            return {}
-
+        """Read register descriptions and return converted values."""
         data: dict[str, Any] = {}
-
-        for group in self._split_register_groups(descriptions_with_address):
+        readable_descriptions = tuple(
+            description
+            for description in descriptions
+            if description.address is not None
+        )
+        if not readable_descriptions:
+            return data
+        for group in self._split_register_groups(readable_descriptions):
             data.update(await self._async_read_register_group(group))
-
         return data
 
 

@@ -1,12 +1,12 @@
 {
   "domain": "samson_trovis",
-  "name": "Samson Trovis",
+  "name": "SAMSON TROVIS",
   "codeowners": ["@Tom-Bom-badil"],
   "config_flow": true,
-  "documentation": "https://github.com/Tom-Bom-badil/samson_trovis_557x/wiki",
-  "integration_type": "device",
+  "documentation": "https://github.com/Tom-Bom-badil/samson_trovis_557x",
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/Tom-Bom-badil/samson_trovis_557x/issues",
-  "requirements": [],
+  "requirements": [
+    "modbus-connection[pymodbus,tmodbus] @ git+https://github.com/home-assistant-libs/modbus-connection.git@main"
+  ],
   "version": "0.0.0"
 }

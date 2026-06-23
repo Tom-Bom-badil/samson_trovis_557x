@@ -2,30 +2,50 @@
 
 from __future__ import annotations
 
-from .areas import (
-    AREA_DIAGNOSTIC,
-    AREA_CONTROLLER,
-    AREA_HC1,
-    AREA_HC2,
-    AREA_HC3,
-    AREA_HC4_DHW,
-    AREA_MEASUREMENTS,
-    AREA_MISC,
-    AREA_SCHEDULES,
-    AREA_HEAT_METERS,
-)
-from .descriptions import TrovisRegisterDescription
+from homeassistant.components.sensor import SensorDeviceClass, SensorStateClass
+from homeassistant.const import UnitOfTemperature, EntityCategory
 
+from .areas import (
+    AREA_CONTROLLER,
+    AREA_DIAGNOSTIC,
+    AREA_HEAT_METERS,
+    AREA_HEATING_CIRCUIT_1,
+    AREA_HEATING_CIRCUIT_2,
+    AREA_HEATING_CIRCUIT_3,
+    AREA_HEATING_CIRCUIT_4_DOMESTIC_HOT_WATER,
+    AREA_MEASUREMENTS,
+    AREA_MISCELLANEOUS,
+    AREA_SCHEDULES,
+)
+from .descriptions import TrovisRegisterDescription, TrovisRegisterValueType
 
 DIAGNOSTIC_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
-MEASUREMENT_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
-HC1_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
-HC2_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
-HC3_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
-HC4_DHW_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
+HEATING_CIRCUIT_1_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
+HEATING_CIRCUIT_2_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
+HEATING_CIRCUIT_3_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
+HEATING_CIRCUIT_4_DOMESTIC_HOT_WATER_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
 HEAT_METERS_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
 SCHEDULE_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
-MISC_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
+MISCELLANEOUS_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
+
+
+MEASUREMENT_REGISTERS: tuple[TrovisRegisterDescription, ...] = (
+    ### dummy only, delete later
+    TrovisRegisterDescription(key="00_library", area=AREA_CONTROLLER, address=None, read_only=True, icon="mdi:library", description="Current Modbus backend"),
+    ###
+    TrovisRegisterDescription(key="outside_temperature_1", area=AREA_MEASUREMENTS, address=9, read_only=True, value_type=TrovisRegisterValueType.SIGNED, scale=0.1, native_unit_of_measurement=UnitOfTemperature.CELSIUS, device_class=SensorDeviceClass.TEMPERATURE, state_class=SensorStateClass.MEASUREMENT, description="Outside sensor AF1"),
+    TrovisRegisterDescription(key="outside_temperature_2", area=AREA_MEASUREMENTS, address=10, read_only=True, value_type=TrovisRegisterValueType.SIGNED, scale=0.1, native_unit_of_measurement=UnitOfTemperature.CELSIUS, device_class=SensorDeviceClass.TEMPERATURE, state_class=SensorStateClass.MEASUREMENT, description="Outside sensor AF2"),
+    TrovisRegisterDescription(key="hc1_flow_temperature", area=AREA_MEASUREMENTS, address=12, read_only=True, value_type=TrovisRegisterValueType.SIGNED, scale=0.1, native_unit_of_measurement=UnitOfTemperature.CELSIUS, device_class=SensorDeviceClass.TEMPERATURE, state_class=SensorStateClass.MEASUREMENT, description="Flow sensor VF1"),
+    TrovisRegisterDescription(key="hc2_flow_temperature", area=AREA_MEASUREMENTS, address=13, read_only=True, value_type=TrovisRegisterValueType.SIGNED, scale=0.1, native_unit_of_measurement=UnitOfTemperature.CELSIUS, device_class=SensorDeviceClass.TEMPERATURE, state_class=SensorStateClass.MEASUREMENT, description="Flow sensor VF2"),
+    TrovisRegisterDescription(key="hc3_flow_temperature", area=AREA_MEASUREMENTS, address=14, read_only=True, value_type=TrovisRegisterValueType.SIGNED, scale=0.1, native_unit_of_measurement=UnitOfTemperature.CELSIUS, device_class=SensorDeviceClass.TEMPERATURE, state_class=SensorStateClass.MEASUREMENT, description="Flow sensor VF3"),
+    TrovisRegisterDescription(key="hc4_flow_temperature", area=AREA_MEASUREMENTS, address=15, read_only=True, value_type=TrovisRegisterValueType.SIGNED, scale=0.1, native_unit_of_measurement=UnitOfTemperature.CELSIUS, device_class=SensorDeviceClass.TEMPERATURE, state_class=SensorStateClass.MEASUREMENT, description="Flow sensor VF4"),
+    TrovisRegisterDescription(key="hc1_return_temperature", area=AREA_MEASUREMENTS, address=16, read_only=True, value_type=TrovisRegisterValueType.SIGNED, scale=0.1, native_unit_of_measurement=UnitOfTemperature.CELSIUS, device_class=SensorDeviceClass.TEMPERATURE, state_class=SensorStateClass.MEASUREMENT, description="Return sensor RüF1"),
+    TrovisRegisterDescription(key="hc2_return_temperature", area=AREA_MEASUREMENTS, address=17, read_only=True, value_type=TrovisRegisterValueType.SIGNED, scale=0.1, native_unit_of_measurement=UnitOfTemperature.CELSIUS, device_class=SensorDeviceClass.TEMPERATURE, state_class=SensorStateClass.MEASUREMENT, description="Return sensor RüF2"),
+    TrovisRegisterDescription(key="hc3_return_temperature", area=AREA_MEASUREMENTS, address=18, read_only=True, value_type=TrovisRegisterValueType.SIGNED, scale=0.1, native_unit_of_measurement=UnitOfTemperature.CELSIUS, device_class=SensorDeviceClass.TEMPERATURE, state_class=SensorStateClass.MEASUREMENT, description="Return sensor RüF3"),
+    TrovisRegisterDescription(key="dhw_storage_temperature", area=AREA_MEASUREMENTS, address=22, read_only=True, value_type=TrovisRegisterValueType.SIGNED, scale=0.1, native_unit_of_measurement=UnitOfTemperature.CELSIUS, device_class=SensorDeviceClass.TEMPERATURE, state_class=SensorStateClass.MEASUREMENT, description="Storage temperature SF1"),
+    TrovisRegisterDescription(key="dhw_storage_temperature_lower", area=AREA_MEASUREMENTS, address=23, read_only=True, value_type=TrovisRegisterValueType.SIGNED, scale=0.1, native_unit_of_measurement=UnitOfTemperature.CELSIUS, device_class=SensorDeviceClass.TEMPERATURE, state_class=SensorStateClass.MEASUREMENT, description="Lower storage temperature SF2"),
+    TrovisRegisterDescription(key="storage_remote_temperature", area=AREA_MEASUREMENTS, address=24, read_only=True, value_type=TrovisRegisterValueType.SIGNED, scale=0.1, native_unit_of_measurement=UnitOfTemperature.CELSIUS, device_class=SensorDeviceClass.TEMPERATURE, state_class=SensorStateClass.MEASUREMENT, description="Storage/remote sensor SF3/FG3"),
+)
 
 
 CONTROLLER_REGISTERS: tuple[TrovisRegisterDescription, ...] = (
@@ -39,13 +59,13 @@ REGISTER_GROUPS: dict[str, tuple[TrovisRegisterDescription, ...]] = {
     AREA_DIAGNOSTIC: DIAGNOSTIC_REGISTERS,
     AREA_CONTROLLER: CONTROLLER_REGISTERS,
     AREA_MEASUREMENTS: MEASUREMENT_REGISTERS,
-    AREA_HC1: HC1_REGISTERS,
-    AREA_HC2: HC2_REGISTERS,
-    AREA_HC3: HC3_REGISTERS,
-    AREA_HC4_DHW: HC4_DHW_REGISTERS,
+    AREA_HEATING_CIRCUIT_1: HEATING_CIRCUIT_1_REGISTERS,
+    AREA_HEATING_CIRCUIT_2: HEATING_CIRCUIT_2_REGISTERS,
+    AREA_HEATING_CIRCUIT_3: HEATING_CIRCUIT_3_REGISTERS,
+    AREA_HEATING_CIRCUIT_4_DOMESTIC_HOT_WATER: HEATING_CIRCUIT_4_DOMESTIC_HOT_WATER_REGISTERS,
     AREA_HEAT_METERS: HEAT_METERS_REGISTERS,
     AREA_SCHEDULES: SCHEDULE_REGISTERS,
-    AREA_MISC: MISC_REGISTERS,
+    AREA_MISCELLANEOUS: MISCELLANEOUS_REGISTERS,
 }
 
 
