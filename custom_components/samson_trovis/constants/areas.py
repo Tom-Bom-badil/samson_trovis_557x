@@ -41,12 +41,12 @@ ROOT_DEVICE_AREAS: tuple[str, ...] = (
     AREA_DIAGNOSTIC,
 )
 
-AREA_DEVICE_NAMES: dict[str, str] = {
-    AREA_MEASUREMENTS: "Measurements",
-    AREA_HEATING_CIRCUIT_1: "Heating circuit 1",
-    AREA_HEATING_CIRCUIT_2: "Heating circuit 2",
-    AREA_HEATING_CIRCUIT_3: "Heating circuit 3",
-    AREA_HEATING_CIRCUIT_4_DOMESTIC_HOT_WATER: "Heating circuit 4 (Hot water)",
-    AREA_HEAT_METERS: "Heat meters",
-    AREA_SCHEDULES: "Schedules",
+AREA_DEVICE_TRANSLATION_KEYS: dict[str, str] = {
+    AREA_MEASUREMENTS: "measurements",
+    AREA_HEATING_CIRCUIT_1: "heating_circuit_1",
+    AREA_HEATING_CIRCUIT_2: "heating_circuit_2",
+    AREA_HEATING_CIRCUIT_3: "heating_circuit_3",
+    AREA_HEATING_CIRCUIT_4_DOMESTIC_HOT_WATER: "hot_water",
+    AREA_HEAT_METERS: "heat_meters",
+    AREA_SCHEDULES: "schedules",
 }

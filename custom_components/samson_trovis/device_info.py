@@ -5,7 +5,7 @@ from __future__ import annotations
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.device_registry import DeviceInfo
 
-from .constants.areas import AREA_DEVICE_NAMES, ROOT_DEVICE_AREAS
+from .constants.areas import AREA_DEVICE_TRANSLATION_KEYS, ROOT_DEVICE_AREAS
 from .constants.config import CONF_MODEL, DOMAIN, MANUFACTURER
 
 
@@ -24,12 +24,18 @@ def get_area_device_info(entry: ConfigEntry, area: str) -> DeviceInfo:
     if area in ROOT_DEVICE_AREAS:
         return get_device_info(entry)
 
-    area_name = AREA_DEVICE_NAMES.get(area, area.replace("_", " ").title())
+    translation_key = AREA_DEVICE_TRANSLATION_KEYS.get(area)
 
-    return {
+    device_info: DeviceInfo = {
         "identifiers": {(DOMAIN, f"{entry.entry_id}_{area}")},
         "manufacturer": MANUFACTURER,
         "model": entry.data.get(CONF_MODEL),
-        "name": area_name,
         "via_device": (DOMAIN, entry.entry_id),
     }
+
+    if translation_key is not None:
+        device_info["translation_key"] = translation_key
+    else:
+        device_info["name"] = area.replace("_", " ").title()
+
+    return device_info
