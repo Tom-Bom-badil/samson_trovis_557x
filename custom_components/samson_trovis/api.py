@@ -64,14 +64,33 @@ class TrovisApi:
         return model
 
 
+    # async def async_read_enabled_areas(self) -> dict[str, Any]:
+    #     """Read all enabled areas."""
+    #     data: dict[str, Any] = {}
+    #     for area in sorted(self.enabled_areas):
+    #         if area in REGISTER_GROUPS:
+    #             data.update(await self._async_read_register_descriptions(REGISTER_GROUPS[area]))
+    #         if area in COIL_GROUPS:
+    #             data.update(await self._async_read_coil_descriptions(COIL_GROUPS[area]))
+
+    #     # dummy - delete later
+    #     data["00_library"] = MODBUS_BACKEND
+    #     #
+
+    #     return data
+
     async def async_read_enabled_areas(self) -> dict[str, Any]:
-        """Read all enabled areas."""
+        """Read all enabled functional areas."""
         data: dict[str, Any] = {}
-        for area in sorted(self.enabled_areas):
-            if area in REGISTER_GROUPS:
-                data.update(await self._async_read_register_descriptions(REGISTER_GROUPS[area]))
-            if area in COIL_GROUPS:
-                data.update(await self._async_read_coil_descriptions(COIL_GROUPS[area]))
+        enabled_areas = self.enabled_areas
+        for area, descriptions in REGISTER_GROUPS.items():
+            if area not in enabled_areas:
+                continue
+            data.update(await self._async_read_register_descriptions(descriptions))
+        for area, descriptions in COIL_GROUPS.items():
+            if area not in enabled_areas:
+                continue
+            data.update(await self._async_read_coil_descriptions(descriptions))
 
         # dummy - delete later
         data["00_library"] = MODBUS_BACKEND

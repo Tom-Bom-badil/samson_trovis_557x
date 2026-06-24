@@ -30,22 +30,23 @@ DEFAULT_ENABLED_AREAS: tuple[str, ...] = (
     AREA_CONTROLLER,
     AREA_MEASUREMENTS,
     AREA_HEATING_CIRCUIT_1,
-    AREA_HEATING_CIRCUIT_2,
+    AREA_HEATING_CIRCUIT_2,  # delete for production
+    AREA_HEATING_CIRCUIT_3,  # delete for production
     AREA_HEATING_CIRCUIT_4_DOMESTIC_HOT_WATER,
 )
 
 ROOT_DEVICE_AREAS: tuple[str, ...] = (
     AREA_CONTROLLER,
-    AREA_MEASUREMENTS,
     AREA_MISCELLANEOUS,
     AREA_DIAGNOSTIC,
 )
 
 AREA_DEVICE_NAMES: dict[str, str] = {
+    AREA_MEASUREMENTS: "Measurements",
     AREA_HEATING_CIRCUIT_1: "Heating circuit 1",
     AREA_HEATING_CIRCUIT_2: "Heating circuit 2",
     AREA_HEATING_CIRCUIT_3: "Heating circuit 3",
-    AREA_HEATING_CIRCUIT_4_DOMESTIC_HOT_WATER: "Hot water",
+    AREA_HEATING_CIRCUIT_4_DOMESTIC_HOT_WATER: "Heating circuit 4 (Hot water)",
     AREA_HEAT_METERS: "Heat meters",
     AREA_SCHEDULES: "Schedules",
 }

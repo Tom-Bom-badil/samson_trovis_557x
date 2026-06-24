@@ -58,6 +58,10 @@
       "dhw_storage_temperature": { "name": "Warmwasser Speichertemperatur" },
       "dhw_storage_temperature_lower": { "name": "Warmwasser untere Speichertemperatur" },
       "storage_remote_temperature": { "name": "Speicher-/Ferngebertemperatur" },
+      "heating_circuit_1_flow_temperature_setpoint": { "name": "Heizkreis 1 Vorlauftemperatur-Sollwert" },
+      "heating_circuit_2_flow_temperature_setpoint": { "name": "Heizkreis 2 Vorlauftemperatur-Sollwert" },
+      "heating_circuit_3_flow_temperature_setpoint": { "name": "Heizkreis 3 Vorlauftemperatur-Sollwert" },
+      "heating_circuit_4_domestic_hot_water_flow_temperature_setpoint": { "name": "Heizkreis 4 / Warmwasser Vorlauftemperatur-Sollwert" },
       "00_library": {  "name": "00 Library" }
     },
     "binary_sensor": {

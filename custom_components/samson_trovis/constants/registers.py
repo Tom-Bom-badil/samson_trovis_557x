@@ -19,14 +19,18 @@ from .areas import (
 )
 from .descriptions import TrovisRegisterDescription, TrovisRegisterValueType
 
+
 DIAGNOSTIC_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
-HEATING_CIRCUIT_1_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
-HEATING_CIRCUIT_2_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
-HEATING_CIRCUIT_3_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
-HEATING_CIRCUIT_4_DOMESTIC_HOT_WATER_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
 HEAT_METERS_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
 SCHEDULE_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
 MISCELLANEOUS_REGISTERS: tuple[TrovisRegisterDescription, ...] = ()
+
+
+CONTROLLER_REGISTERS: tuple[TrovisRegisterDescription, ...] = (
+    TrovisRegisterDescription(key="model", area=AREA_CONTROLLER, address=0, read_only=True, description="Controller model"),
+    TrovisRegisterDescription(key="hydraulic_scheme", area=AREA_CONTROLLER, address=1, read_only=True, scale=0.1, format_as_text=True, text_decimals=1, description="Hydraulic scheme"),
+    TrovisRegisterDescription(key="firmware_version", area=AREA_CONTROLLER, address=2, read_only=True, scale=0.01, format_as_text=True, text_decimals=2, description="Firmware version"),
+)
 
 
 MEASUREMENT_REGISTERS: tuple[TrovisRegisterDescription, ...] = (
@@ -48,10 +52,23 @@ MEASUREMENT_REGISTERS: tuple[TrovisRegisterDescription, ...] = (
 )
 
 
-CONTROLLER_REGISTERS: tuple[TrovisRegisterDescription, ...] = (
-    TrovisRegisterDescription(key="model", area=AREA_CONTROLLER, address=0, read_only=True, description="Controller model"),
-    TrovisRegisterDescription(key="hydraulic_scheme", area=AREA_CONTROLLER, address=1, read_only=True, scale=0.1, format_as_text=True, text_decimals=1, description="Hydraulic scheme"),
-    TrovisRegisterDescription(key="firmware_version", area=AREA_CONTROLLER, address=2, read_only=True, scale=0.01, format_as_text=True, text_decimals=2, description="Firmware version"),
+HEATING_CIRCUIT_1_REGISTERS: tuple[TrovisRegisterDescription, ...] = (
+    TrovisRegisterDescription(key="heating_circuit_1_flow_temperature_setpoint", area=AREA_HEATING_CIRCUIT_1, address=999, read_only=True, value_type=TrovisRegisterValueType.SIGNED, scale=0.1, native_unit_of_measurement=UnitOfTemperature.CELSIUS, device_class=SensorDeviceClass.TEMPERATURE, description="Heating circuit 1 flow temperature setpoint"),
+)
+
+
+HEATING_CIRCUIT_2_REGISTERS: tuple[TrovisRegisterDescription, ...] = (
+    TrovisRegisterDescription(key="heating_circuit_2_flow_temperature_setpoint", area=AREA_HEATING_CIRCUIT_2, address=1199, read_only=True, value_type=TrovisRegisterValueType.SIGNED, scale=0.1, native_unit_of_measurement=UnitOfTemperature.CELSIUS, device_class=SensorDeviceClass.TEMPERATURE, description="Heating circuit 2 flow temperature setpoint"),
+)
+
+
+HEATING_CIRCUIT_3_REGISTERS: tuple[TrovisRegisterDescription, ...] = (
+    TrovisRegisterDescription(key="heating_circuit_3_flow_temperature_setpoint", area=AREA_HEATING_CIRCUIT_3, address=1399, read_only=True, value_type=TrovisRegisterValueType.SIGNED, scale=0.1, native_unit_of_measurement=UnitOfTemperature.CELSIUS, device_class=SensorDeviceClass.TEMPERATURE, description="Heating circuit 3 flow temperature setpoint"),
+)
+
+
+HEATING_CIRCUIT_4_DOMESTIC_HOT_WATER_REGISTERS: tuple[TrovisRegisterDescription, ...] = (
+    TrovisRegisterDescription(key="heating_circuit_4_domestic_hot_water_flow_temperature_setpoint", area=AREA_HEATING_CIRCUIT_4_DOMESTIC_HOT_WATER, address=1799, read_only=True, value_type=TrovisRegisterValueType.SIGNED, scale=0.1, native_unit_of_measurement=UnitOfTemperature.CELSIUS, device_class=SensorDeviceClass.TEMPERATURE, description="Heating circuit 4 / domestic hot water flow temperature setpoint"),
 )
 
 
