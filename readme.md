@@ -1,3 +1,14 @@
+<br/>
+
+$${\color{blue}Note as of 09/2026: After being several years online,}$$
+
+$${\color{blue}this Repo and it's Wiki are currently undergoing a major revision.}$$
+
+$${\color{blue}Please expect broken links and moved files.}$$
+
+<br/><br/>
+
+
 Informationen zu Samson Trovis 557x Heizungsreglern (und baugleichen Pewo, Yados, Sauter Modellen) und Software für deren Modbus-Anbindung.
 
 Das umfangreiche [Wiki](https://github.com/Tom-Bom-badil/samson_trovis_557x/wiki) ist ein guter Startpunkt.
