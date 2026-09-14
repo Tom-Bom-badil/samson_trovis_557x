@@ -1,0 +1,816 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Verbindung",
+        "description": "Wähle eine Home Assistant bereits bekannte serielle Schnittstelle aus.\n\n**ODER**\n\nGib die Verbindungsdaten manuell in einem der folgenden Formate ein:\n\n- `ip_adresse:port`\n  Native Modbus/TCP-Verbindung, z. B. über einen Seriell-Ethernet-Adapter mit aktivem Modbus-TCP-Server (Standard-Port: 502).\n\n- `socket://ip_adresse:port`\n  Modbus RTU über eine transparente TCP-Verbindung, z. B. einen Seriell-Ethernet-Adapter im transparenten Modus.\n\n- `/dev/serial/by-id/...`, `/dev/ttyUSB...`, `/dev/...`\n  Modbus RTU über eine physische oder virtuelle lokale serielle Schnittstelle, z. B. einen USB-Seriell-Adapter oder ein `socat`-Device. Dies wird normalerweise automatisch ausgefüllt, wenn eine bekannte Schnittstelle ausgewählt wird.\n\n- `esphome-hass://esphome/ID?port_name=PORT`\n  Modbus RTU über einen ESPHome Serial Proxy unter Verwendung eines UART-Ports auf einem entfernten ESP. Dies wird normalerweise automatisch ausgefüllt, wenn eine bekannte Schnittstelle ausgewählt wird.\n\nDer Regler wird geprüft, bevor die Einrichtung fortgesetzt wird.",
+        "data": {
+          "connection": "Schnittstelle für die Kommunikation mit dem TROVIS.",
+          "unit_id": "Eindeutige Modbus-Adresse des TROVIS (PA6; Standard 246).",
+          "baudrate": "Serielle Geschwindigkeit des TROVIS (PA6; Standard 19.200)."
+        }
+      },
+      "device": {
+        "title": "Regler einrichten",
+        "data": {
+          "name": "Eindeutiger Name",
+          "slug": "Präfix der Entity-IDs",
+          "access_code": "Zugriffscode"
+        },
+        "data_description": {
+          "name": "Eindeutiger Anzeigename für diesen Regler, z.B. 'SAMSON TROVIS'. Für jeden Regler einen anderen Namen verwenden.",
+          "slug": "Präfix für die erzeugten Entity-IDs, z.B. 't5578'. Daraus entstehen IDs wie 'sensor.t5578_sensor_af1'.",
+          "access_code": "Zahlencode für den Schreibzugriff (siehe letzte Seite der Geräteanleitung)."
+        }
+      },
+      "reconfigure": {
+        "title": "Regler neu konfigurieren",
+        "description": "Wähle eine Home Assistant bereits bekannte serielle Schnittstelle aus.\n\n**ODER**\n\nGib die Verbindungsdaten manuell in einem der folgenden Formate ein:\n\n- `ip_adresse:port`\n  Native Modbus/TCP-Verbindung, z. B. über einen Seriell-Ethernet-Adapter mit aktivem Modbus-TCP-Server (Standard-Port: 502).\n\n- `socket://ip_adresse:port`\n  Modbus RTU über eine transparente TCP-Verbindung, z. B. einen Seriell-Ethernet-Adapter im transparenten Modus.\n\n- `/dev/serial/by-id/...`, `/dev/ttyUSB...`, `/dev/...`\n  Modbus RTU über eine physische oder virtuelle lokale serielle Schnittstelle, z. B. einen USB-Seriell-Adapter oder ein `socat`-Device. Dies wird normalerweise automatisch ausgefüllt, wenn eine bekannte Schnittstelle ausgewählt wird.\n\n- `esphome-hass://esphome/ID?port_name=PORT`\n  Modbus RTU über einen ESPHome Serial Proxy unter Verwendung eines UART-Ports auf einem entfernten ESP. Dies wird normalerweise automatisch ausgefüllt, wenn eine bekannte Schnittstelle ausgewählt wird.\n\nReglermodell und angeschlossene Sensoren werden erneut automatisch erkannt.",
+        "data": {
+          "connection": "Schnittstelle für die Kommunikation mit dem TROVIS.",
+          "unit_id": "Eindeutige Modbus-Adresse des TROVIS (PA6; Standard 246).",
+          "baudrate": "Serielle Geschwindigkeit des TROVIS (PA6; Standard 19.200).",
+          "name": "Eindeutiger Name",
+          "access_code": "Zugriffscode"
+        },
+        "data_description": {
+          "name": "Eindeutiger Anzeigename für diesen Regler.",
+          "access_code": "Zahlencode für den Schreibzugriff."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Kommunikation mit dem Regler fehlgeschlagen. Verbindungseinstellungen, Geräteadresse und Erreichbarkeit des Reglers prüfen.",
+      "connection_required": "Wähle eine bekannte serielle Schnittstelle aus oder gib eine Verbindung ein.",
+      "invalid_connection": "Die Verbindung ist ungültig. Verwende /dev/..., esphome-hass://..., socket://host:port oder host:port."
+    },
+    "abort": {
+      "reconfigure_successful": "Die Neukonfiguration war erfolgreich."
+    }
+  },
+  "device": {
+    "rk1": {
+      "name": "Rk1 – Regelkreis 1"
+    },
+    "rk1_heating": {
+      "name": "Rk1 – Heizkreis 1"
+    },
+    "rk1_precontrol": {
+      "name": "Rk1 – Vorregelkreis"
+    },
+    "rk1_buffer_tank": {
+      "name": "Rk1 – Pufferspeicherkreis"
+    },
+    "rk2": {
+      "name": "Rk2 – Regelkreis 2"
+    },
+    "rk2_heating": {
+      "name": "Rk2 – Heizkreis 2"
+    },
+    "rk2_precontrol": {
+      "name": "Rk2 – Vorregelkreis"
+    },
+    "rk3": {
+      "name": "Rk3 – Regelkreis 3"
+    },
+    "rk3_heating": {
+      "name": "Rk3 – Heizkreis 3"
+    },
+    "rk3_precontrol": {
+      "name": "Rk3 – Vorregelkreis"
+    },
+    "rk4": {
+      "name": "Rk4 – Regelkreis 4"
+    },
+    "rk4_dhw": {
+      "name": "Rk4 – Warmwasser"
+    },
+    "measurements": {
+      "name": "Messwerte"
+    },
+    "pumps_and_valves": {
+      "name": "Pumpen und Ventile"
+    },
+    "solar": {
+      "name": "Solar – Solarkreis"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "system_code": {
+        "name": "Anlagenkennziffer"
+      },
+      "system_overall_status": {
+        "name": "Regler Gesamtstatus"
+      },
+      "controller_model_code": {
+        "name": "Regler: Modellcode"
+      },
+      "controller_firmware": {
+        "name": "Regler: Firmware"
+      },
+      "controller_hardware_version": {
+        "name": "Regler: Hardwareversion"
+      },
+      "controller_serial_number": {
+        "name": "Regler: Seriennummer"
+      },
+      "outdoor_temperature_1": {
+        "name": "AF1 Außensensor 1"
+      },
+      "outdoor_temperature_2": {
+        "name": "AF2 Außensensor 2"
+      },
+      "flow_temperature_1": {
+        "name": "VF1 Vorlaufsensor 1"
+      },
+      "flow_temperature_2": {
+        "name": "VF2 Vorlaufsensor 2"
+      },
+      "flow_temperature_3": {
+        "name": "VF3 Vorlaufsensor 3"
+      },
+      "flow_temperature_4": {
+        "name": "VF4 Vorlaufsensor 4"
+      },
+      "return_temperature_1": {
+        "name": "RüF1 Rücklaufsensor 1"
+      },
+      "return_temperature_2": {
+        "name": "RüF2 Rücklaufsensor 2"
+      },
+      "return_temperature_3": {
+        "name": "RüF3 Rücklaufsensor 3"
+      },
+      "room_temperature_1": {
+        "name": "RF1 Raumsensor 1"
+      },
+      "room_temperature_2": {
+        "name": "RF2 Raumsensor 2"
+      },
+      "room_temperature_3": {
+        "name": "RF3 Raumsensor 3"
+      },
+      "ww_storage_temperature": {
+        "name": "SF1 Speichersensor 1"
+      },
+      "ww_storage_temperature_lower": {
+        "name": "SF2 Speichersensor 2"
+      },
+      "sf3": {
+        "name": "SF3 Speichersensor 3"
+      },
+      "ae1": {
+        "name": "AE1 Analogeingang 1"
+      },
+      "ae2": {
+        "name": "AE2 Analogeingang 2"
+      },
+      "ae3": {
+        "name": "AE3 Analogeingang 3"
+      },
+      "fg1": {
+        "name": "FG1 Ferngeber 1"
+      },
+      "fg2": {
+        "name": "FG2 Ferngeber 2"
+      },
+      "fg3": {
+        "name": "FG3 Ferngeber 3"
+      },
+      "pulse_rate": {
+        "name": "IMP Impulsrate"
+      },
+      "analog_input_voltage": {
+        "name": "AE Analogeingang 0-10V "
+      },
+      "analog_input_current": {
+        "name": "AE Analogeingang 0-20mA"
+      },
+      "analog_output_voltage": {
+        "name": "AA1 Analogausgang 0-10V"
+      },
+      "summer_outdoor_temperature_average": {
+        "name": "Außentemperaturmittelwert Sommer"
+      },
+      "valve_setpoint": {
+        "name": "{component} Ventil Stellwert"
+      },
+      "room_setpoint_active": {
+        "name": "{component} Aktives Raum-Soll"
+      },
+      "rk4_setpoint_active": {
+        "name": "{component} Aktiver Sollwert"
+      },
+      "error_status": {
+        "name": "Fehlerstatus"
+      },
+      "max_flow_setpoint": {
+        "name": "Maximaler Vorlaufsollwert"
+      },
+      "switch_top": {
+        "name": "Drehschalter oben",
+        "state": {
+          "program": "Programm",
+          "automatic": "Automatik",
+          "standby": "Abgeschaltet",
+          "manual": "Handbetrieb",
+          "day": "Tagbetrieb",
+          "night": "Nachtbetrieb"
+        }
+      },
+      "switch_middle": {
+        "name": "Drehschalter Mitte",
+        "state": {
+          "program": "Programm",
+          "automatic": "Automatik",
+          "standby": "Abgeschaltet",
+          "manual": "Handbetrieb",
+          "day": "Tagbetrieb",
+          "night": "Nachtbetrieb"
+        }
+      },
+      "switch_bottom": {
+        "name": "Drehschalter unten",
+        "state": {
+          "program": "Programm",
+          "automatic": "Automatik",
+          "standby": "Abgeschaltet",
+          "manual": "Handbetrieb",
+          "day": "Tagbetrieb",
+          "night": "Nachtbetrieb"
+        }
+      },
+      "special_functions": {
+        "name": "Sonderfunktionen"
+      },
+      "station_address": {
+        "name": "Modbus Stationsadresse"
+      },
+      "error_count": {
+        "name": "Fehleranzahl"
+      },
+      "flow_setpoint": {
+        "name": "{component} Vorlauf Soll"
+      },
+      "return_flow_temperature_setpoint": {
+        "name": "{component} Rücklauf Soll"
+      },
+      "flow_control_deviation": {
+        "name": "{component} Vorlauf Regeldifferenz"
+      },
+      "heating_curves": {
+        "name": "{component} Heizkennlinie Status",
+        "state": {
+          "error": "Fehler",
+          "calculated": "Berechnet"
+        }
+      },
+      "heating_operating_mode": {
+        "name": "{component} Heizkennlinie Berechnungsart",
+        "state": {
+          "heating_curve": "Heizkurve",
+          "four_point": "4-Punkt-Kennlinie",
+          "fixed_setpoint": "Festwert"
+        }
+      },
+      "solar_operating_hours": {
+        "name": "Betriebsstunden"
+      },
+      "storage_status": {
+        "name": "{component} Speicherstatus",
+        "state": {
+          "standby": "Standby",
+          "monitoring": "Überwachung",
+          "circulation": "Zirkulation",
+          "demand": "Anforderung",
+          "charging": "Laden",
+          "pump_overrun": "Nachlauf",
+          "discharge_protection": "Entladeschutz"
+        }
+      },
+      "active_charging_setpoint": {
+        "name": "{component} Aktiver Ladesollwert"
+      },
+      "control_deviation": {
+        "name": "{component} Regelabweichung"
+      },
+      "buffer_tank_status": {
+        "name": "Pufferspeicherstatus",
+        "state": {
+          "standby": "Standby",
+          "monitoring": "Überwachung",
+          "reserved": "Reserviert / nicht dokumentiert",
+          "demand": "Anforderung",
+          "charging": "Laden",
+          "pump_overrun": "Nachlauf",
+          "discharge_protection": "Entladeschutz"
+        }
+      },
+      "operating_mode_code": {
+        "name": "{component} Betriebsart-Code"
+      },
+      "ui_helper_simulation_values": {
+        "name": "Helper - {component} Simulationswerte"
+      }
+    },
+    "binary_sensor": {
+      "general_fault": {
+        "name": "Störung"
+      },
+      "summer_active": {
+        "name": "Sommerbetrieb"
+      },
+      "pump_running": {
+        "name": "{component} Pumpe läuft"
+      },
+      "frost_protection": {
+        "name": "{component} Frostschutz"
+      },
+      "standby": {
+        "name": "{component} Betriebsart Standby"
+      },
+      "storage_tank_charging_pump_running": {
+        "name": "{component} Speicherladepumpe"
+      },
+      "disinfection_active": {
+        "name": "{component} Desinfektion läuft"
+      },
+      "circulation_pump_running": {
+        "name": "{component} Zirkulationspumpe"
+      },
+      "data_entry_active": {
+        "name": "Dateneingabe aktiv"
+      },
+      "data_entry_performed": {
+        "name": "Dateneingabe erfolgt"
+      },
+      "global_level_autark": {
+        "name": "Autarke Steuerung (global)"
+      },
+      "outdoor_temperature_control_autonomous": {
+        "name": "Autarke AT-Regelung"
+      },
+      "any_circuit_not_automatic": {
+        "name": "Mindestens ein Regelkreis nicht im Automatikbetrieb"
+      },
+      "rotary_switch_not_automatic": {
+        "name": "Mindestens ein Drehschalter nicht im Automatikbetrieb"
+      },
+      "manual_active": {
+        "name": "{component} Betriebsart Hand"
+      },
+      "automatic": {
+        "name": "{component} Betriebsart Automatik"
+      },
+      "day_active": {
+        "name": "{component} Betriebsart Tag"
+      },
+      "night_active": {
+        "name": "{component} Betriebsart Nacht"
+      },
+      "hold_active": {
+        "name": "{component} Betriebsart Halten"
+      },
+      "setback_active": {
+        "name": "{component} Betriebsart Absenken"
+      },
+      "heat_up_active": {
+        "name": "{component} Betriebsart Aufheizen"
+      },
+      "return_limit_active": {
+        "name": "{component} Rücklauf Begrenzung"
+      },
+      "outdoor_temperature_deactivation": {
+        "name": "{component} AT-Abschaltung aktiv"
+      },
+      "valve_closing": {
+        "name": "{component} Ventil schließen",
+        "state": {
+          "off": "Inaktiv",
+          "on": "Aktiv"
+        }
+      },
+      "valve_opening": {
+        "name": "{component} Ventil öffnen",
+        "state": {
+          "off": "Inaktiv",
+          "on": "Aktiv"
+        }
+      },
+      "mode_control_autonomous": {
+        "name": "{component} Autarke Betriebsart-Steuerung"
+      },
+      "valve_control_autonomous": {
+        "name": "{component} Autarke Ventilsteuerung"
+      },
+      "pump_control_autonomous": {
+        "name": "{component} Autarke Pumpensteuerung"
+      },
+      "flow_setpoint_control_autonomous": {
+        "name": "{component} Autarke Vorlauf-Soll-Steuerung"
+      },
+      "return_flow_temperature_setpoint_control_autonomous": {
+        "name": "{component} Autarke Rücklauf-Soll-Steuerung"
+      },
+      "room_setpoint_control_autonomous": {
+        "name": "{component} Autarke Raum-Soll-Steuerung"
+      },
+      "priority": {
+        "name": "{component} Vorrangschaltung"
+      },
+      "maximum_charging_temperature_limit_active": {
+        "name": "{component} Ladetemperaturbegrenzung"
+      },
+      "storage_tank_charging_active": {
+        "name": "{component} Speicherladung aktiv"
+      },
+      "storage_tank_charging_locked": {
+        "name": "{component} Speicherladung gesperrt"
+      },
+      "storage_tank_charging_pump_control_autonomous": {
+        "name": "{component} Autarke Steuerung SLP"
+      },
+      "circulation_pump_control_autonomous": {
+        "name": "{component} Autarke Steuerung ZP"
+      },
+      "special_setpoint_control_autonomous": {
+        "name": "{component} Autarke Steuerung Sondersollwert"
+      },
+      "solar_pump_running": {
+        "name": "Solarkreispumpe"
+      }
+    },
+    "climate": {
+      "rk1": {
+        "name": "Rk1 Klima"
+      },
+      "rk2": {
+        "name": "Rk2 Klima"
+      },
+      "rk3": {
+        "name": "Rk3 Klima"
+      }
+    },
+    "water_heater": {
+      "rk4": {
+        "name": "Rk4 – WW / Trinkwassererwärmung"
+      }
+    },
+    "number": {
+      "year": {
+        "name": "Aktuelles Jahr"
+      },
+      "room_setpoint_day": {
+        "name": "{component} Raumsoll Tag"
+      },
+      "room_setpoint_night": {
+        "name": "{component} Raumsoll Nacht"
+      },
+      "gradient": {
+        "name": "{component} Vorlauf Steigung"
+      },
+      "level": {
+        "name": "{component} Vorlauf Niveau"
+      },
+      "four_point_outdoor_temperature_1": {
+        "name": "{component} 4-Punkt P1 - AT"
+      },
+      "four_point_flow_temperature_day_1": {
+        "name": "{component} 4-Punkt P1 - VL Tag"
+      },
+      "four_point_flow_temperature_night_1": {
+        "name": "{component} 4-Punkt P1 - VL Nacht"
+      },
+      "four_point_return_flow_temperature_1": {
+        "name": "{component} 4-Punkt P1 - RL"
+      },
+      "four_point_outdoor_temperature_2": {
+        "name": "{component} 4-Punkt P2 - AT"
+      },
+      "four_point_flow_temperature_day_2": {
+        "name": "{component} 4-Punkt P2 - VL Tag"
+      },
+      "four_point_flow_temperature_night_2": {
+        "name": "{component} 4-Punkt P2 - VL Nacht"
+      },
+      "four_point_return_flow_temperature_2": {
+        "name": "{component} 4-Punkt P2 - RL"
+      },
+      "four_point_outdoor_temperature_3": {
+        "name": "{component} 4-Punkt P3 - AT"
+      },
+      "four_point_flow_temperature_day_3": {
+        "name": "{component} 4-Punkt P3 - VL Tag"
+      },
+      "four_point_flow_temperature_night_3": {
+        "name": "{component} 4-Punkt P3 - VL Nacht"
+      },
+      "four_point_return_flow_temperature_3": {
+        "name": "{component} 4-Punkt P3 - RL"
+      },
+      "four_point_outdoor_temperature_4": {
+        "name": "{component} 4-Punkt P4 - AT"
+      },
+      "four_point_flow_temperature_day_4": {
+        "name": "{component} 4-Punkt P4 - VL Tag"
+      },
+      "four_point_flow_temperature_night_4": {
+        "name": "{component} 4-Punkt P4 - VL Nacht"
+      },
+      "four_point_return_flow_temperature_4": {
+        "name": "{component} 4-Punkt P4 - RL"
+      },
+      "rk4_setpoint": {
+        "name": "{component} Sollwert Tag"
+      },
+      "rk4_setpoint_night": {
+        "name": "{component} Sollwert Nacht"
+      },
+      "rk4_setpoint_min": {
+        "name": "{component} Einstellbarer Sollwert min"
+      },
+      "rk4_setpoint_max": {
+        "name": "{component} Einstelbarer Sollwert max"
+      },
+      "summer_days_on": {
+        "name": "Sommerbetrieb: Einschalttage"
+      },
+      "summer_days_off": {
+        "name": "Sommerbetrieb: Ausschalttage"
+      },
+      "summer_outdoor_temperature_limit": {
+        "name": "Sommerbetrieb: AT-Grenzwert"
+      },
+      "outdoor_temperature_delay": {
+        "name": "Verzögerung der AT"
+      },
+      "frost_protection_limit": {
+        "name": "Frostschutzgrenzwert"
+      },
+      "temperature_monitoring_deviation": {
+        "name": "Temperaturüberwachung Abweichung"
+      },
+      "temperature_monitoring_window": {
+        "name": "Temperaturüberwachung Zeitfenster"
+      },
+      "outdoor_temperature_input_range_start": {
+        "name": "Übertragungsbereich Außentemperatur Anfang"
+      },
+      "outdoor_temperature_input_range_end": {
+        "name": "Übertragungsbereich Außentemperatur Ende"
+      },
+      "minimum_flow_temperature": {
+        "name": "{component} Vorlauf min"
+      },
+      "maximum_flow_temperature": {
+        "name": "{component} Vorlauf max"
+      },
+      "return_flow_gradient": {
+        "name": "{component} Rücklauf Steigung"
+      },
+      "return_flow_level": {
+        "name": "{component} Rücklauf Niveau"
+      },
+      "return_flow_base_point": {
+        "name": "{component} Rücklauf Fußpunkt"
+      },
+      "maximum_return_flow_temperature": {
+        "name": "{component} Rücklauf max"
+      },
+      "fixed_setpoint_day": {
+        "name": "{component} Vorlauf Festwert Tag"
+      },
+      "fixed_setpoint_night": {
+        "name": "{component} Vorlauf Festwert Nacht"
+      },
+      "hysteresis": {
+        "name": "{component} Schaltdifferenz"
+      },
+      "charging_temperature_boost": {
+        "name": "{component} Ladetemperatur Überhöhung"
+      },
+      "storage_tank_charging_pump_lag_factor": {
+        "name": "{component} Nachlauffaktor SLP"
+      },
+      "maximum_charging_temperature": {
+        "name": "{component} Ladetemperatur max"
+      },
+      "rk4_maximum_return_flow_temperature": {
+        "name": "{component} Rücklauftemperatur max"
+      },
+      "disinfection_temperature": {
+        "name": "{component} Desinfektionstemperatur"
+      },
+      "disinfection_hold_time": {
+        "name": "{component} Desinfektion Haltezeit"
+      },
+      "special_setpoint": {
+        "name": "{component} Sondersollwert"
+      },
+      "solar_pump_on_temperature_difference": {
+        "name": "Einschaltdifferenz Solarkreispumpe"
+      },
+      "solar_pump_off_temperature_difference": {
+        "name": "Ausschaltdifferenz Solarkreispumpe"
+      },
+      "solar_maximum_storage_temperature": {
+        "name": "Maximale Speichertemperatur (Solar)"
+      },
+      "buffer_tank_minimum_charging_setpoint": {
+        "name": "Minimaler Sollwert Pufferladung (0 = AUTO/AT)"
+      },
+      "buffer_tank_charging_end_temperature": {
+        "name": "Pufferladung beenden (0 = AUTO/AT)"
+      },
+      "buffer_tank_charging_temperature_boost": {
+        "name": "Ladetemperatur Überhöhung"
+      },
+      "buffer_tank_charging_pump_lag_factor": {
+        "name": "Nachlauf Ladepumpe"
+      },
+      "control_parameter_kp": {
+        "name": "{component} PI/PID Verstärkung (Kp)"
+      },
+      "control_parameter_tn": {
+        "name": "{component} PI/PID Nachstellzeit (Tn)"
+      },
+      "control_parameter_tv": {
+        "name": "{component} PI/PID Vorhaltezeit (Tv)"
+      },
+      "control_parameter_ty": {
+        "name": "{component} PI/PID Ventillaufzeit (Ty)"
+      },
+      "control_parameter_hysteresis": {
+        "name": "{component} Zweipunkt Schaltdifferenz"
+      },
+      "control_parameter_minimum_on_time": {
+        "name": "{component} Zweipunkt Mindest-Einschaltzeit"
+      },
+      "control_parameter_minimum_off_time": {
+        "name": "{component} Zweipunkt Mindest-Ausschaltzeit"
+      },
+      "helper_dashboard_controller_button_clicked": {
+        "name": "Helper - Auf dem Dashboard aktiver Reglerknopf"
+      }
+    },
+    "date": {
+      "summer_start": {
+        "name": "Sommerzeitraum Beginn"
+      },
+      "summer_end": {
+        "name": "Sommerzeitraum Ende"
+      },
+      "controller_date": {
+        "name": "Reglerdatum"
+      }
+    },
+    "time": {
+      "controller_time": {
+        "name": "Reglerzeit"
+      },
+      "disinfection_start": {
+        "name": "{component} Desinfektion Beginn"
+      },
+      "disinfection_stop": {
+        "name": "{component} Desinfektion Ende"
+      }
+    },
+    "select": {
+      "operation_mode": {
+        "name": "{component} Betriebsart",
+        "state": {
+          "program": "Programm",
+          "automatic": "Automatik",
+          "standby": "Abgeschaltet",
+          "manual": "Handbetrieb",
+          "day": "Tagbetrieb",
+          "night": "Nachtbetrieb"
+        }
+      },
+      "disinfection_weekday": {
+        "name": "{component} Desinfektion Wochentag",
+        "state": {
+          "off": "Aus",
+          "monday": "Montag",
+          "tuesday": "Dienstag",
+          "wednesday": "Mittwoch",
+          "thursday": "Donnerstag",
+          "friday": "Freitag",
+          "saturday": "Samstag",
+          "sunday": "Sonntag"
+        }
+      },
+      "dashboard_helper_controller_selected": {
+        "name": "Helper - Auf dem Dashboard ausgewählter Regler"
+      }
+    },
+    "text": {
+      "excluded_registers": {
+        "name": "Ausgeschlossene Register (0-basiert, z.B. 3,5-6,8)"
+      },
+      "excluded_coils": {
+        "name": "Ausgeschlossene Coils (0-basiert, z.B. 3,5-6,8)"
+      }
+    },
+    "switch": {
+      "write_access": {
+        "name": "Schreibzugriff"
+      },
+      "delayed_outdoor_temperature_adaptation_falling": {
+        "name": "Verzögerte AT fallend"
+      },
+      "delayed_outdoor_temperature_adaptation_rising": {
+        "name": "Verzögerte AT steigend"
+      },
+      "automatic_summer_standard_time_switchover": {
+        "name": "Auto Sommer-/Winterzeit"
+      },
+      "optimization": {
+        "name": "{component} Modus 'Optimierung'"
+      },
+      "adaptation": {
+        "name": "{component} Modus 'Adaption'"
+      },
+      "trovis_5570_room_control_unit": {
+        "name": "{component} Raumleitgerät TROVIS 5570 (Gerätebus)"
+      },
+      "intermediate_heating_operation": {
+        "name": "{component} Zwischenheizbetrieb"
+      },
+      "manual_levels_locked": {
+        "name": "Sperrung Handebene"
+      },
+      "rotary_switch_locked": {
+        "name": "Sperrung Drehschalter"
+      },
+      "glt_timeout_active": {
+        "name": "Auto-Autark nach 30 Minuten"
+      },
+      "disinfection_enabled": {
+        "name": "{component} Desinfektion (wöchentlich)"
+      },
+      "forced_charging": {
+        "name": "{component} Zwangsladung"
+      },
+      "forced_charging_uses_storage_tank_sensor_2": {
+        "name": "{component} Zwangsladung mit SF2"
+      },
+      "storage_tank_charging_enabled": {
+        "name": "{component} Speicherladung freigegeben"
+      },
+      "intermediate_heating_function_enabled": {
+        "name": "{component} Zwischenheizen nach 20 Minuten"
+      },
+      "pump_control": {
+        "name": "{component} Umwälzpumpe"
+      },
+      "storage_tank_charging_pump_control": {
+        "name": "{component} Speicherladepumpe"
+      },
+      "circulation_pump_control": {
+        "name": "{component} Zirkulationspumpe"
+      },
+      "temperature_monitoring_enabled": {
+        "name": "Temperaturüberwachung"
+      },
+      "control_parameter_mode": {
+        "name": "{component} Regelungsart 3-Punkt"
+      }
+    }
+  },
+  "services": {
+    "set_simulation_value": {
+      "name": "Simulationswert setzen",
+      "description": "Ändert einen lokalen Heizkreis-Simulationsparameter, ohne auf den Regler zu schreiben.",
+      "fields": {
+        "field": {
+          "name": "Parameter",
+          "description": "Zu ändernder Simulationsparameter."
+        },
+        "value": {
+          "name": "Wert",
+          "description": "Neuer lokaler Simulationswert."
+        }
+      }
+    },
+    "reset_simulation": {
+      "name": "Simulation zurücksetzen",
+      "description": "Übernimmt die aktuell am Regler gelesenen Werte erneut als Simulations-Ausgangszustand."
+    }
+  },
+  "exceptions": {
+    "not_simulation_entity": {
+      "message": "Die Entity {entity_id} ist kein TROVIS-Heizkurven-Simulationshelper."
+    },
+    "simulation_field_not_available": {
+      "message": "Der Parameter {field} ist für die Regelungsart {mode} bei {entity_id} nicht verfügbar."
+    },
+    "simulation_field_not_numeric": {
+      "message": "Für den Parameter {field} bei {entity_id} sind keine numerischen TROVIS-Metadaten vorhanden."
+    },
+    "simulation_value_out_of_range": {
+      "message": "Der Wert {value} für {field} bei {entity_id} liegt außerhalb des zulässigen Bereichs {min_value} bis {max_value}."
+    }
+  }
+}

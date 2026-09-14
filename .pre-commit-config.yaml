@@ -1,0 +1,10 @@
+# Run with prek (https://github.com/j178/prek): `prek install` then commits are
+# auto-formatted; `prek run --all-files` to check everything. The vendored
+# libraries under custom_components/trovis557x/vendor are excluded via pyproject.
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.18
+    hooks:
+      - id: ruff-format
+      - id: ruff-check
+        args: [--fix]

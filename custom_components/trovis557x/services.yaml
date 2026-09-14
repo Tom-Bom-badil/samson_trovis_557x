@@ -1,0 +1,56 @@
+set_simulation_value:
+  target:
+    entity:
+      domain: sensor
+      integration: trovis557x
+  fields:
+    field:
+      required: true
+      example: gradient
+      selector:
+        select:
+          options:
+            - gradient
+            - level
+            - room_setpoint_day
+            - room_setpoint_night
+            - minimum_flow_temperature
+            - maximum_flow_temperature
+            - return_flow_gradient
+            - return_flow_level
+            - return_flow_base_point
+            - maximum_return_flow_temperature
+            - four_point_outdoor_temperature_1
+            - four_point_outdoor_temperature_2
+            - four_point_outdoor_temperature_3
+            - four_point_outdoor_temperature_4
+            - four_point_flow_temperature_day_1
+            - four_point_flow_temperature_day_2
+            - four_point_flow_temperature_day_3
+            - four_point_flow_temperature_day_4
+            - four_point_flow_temperature_night_1
+            - four_point_flow_temperature_night_2
+            - four_point_flow_temperature_night_3
+            - four_point_flow_temperature_night_4
+            - four_point_return_flow_temperature_1
+            - four_point_return_flow_temperature_2
+            - four_point_return_flow_temperature_3
+            - four_point_return_flow_temperature_4
+            - fixed_setpoint_day
+            - fixed_setpoint_night
+            - setpoint_day
+            - setpoint_night
+            - hysteresis
+            - charging_temperature_boost
+            - maximum_charging_temperature
+    value:
+      required: true
+      example: 1.4
+      selector:
+        number:
+          mode: box
+reset_simulation:
+  target:
+    entity:
+      domain: sensor
+      integration: trovis557x
