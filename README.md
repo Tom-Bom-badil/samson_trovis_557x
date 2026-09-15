@@ -17,7 +17,9 @@ This GitHub Repo contains a Home Assistant custom integration for monitoring and
 adjusting SAMSON TROVIS 557x heating and district heating controllers over
 Modbus, including compatible OEM variants from Sauter, Pewo, Yados and others.
 
-It is the successor of previous Trovis projects for other home automation systems that have been around since ~2016, and of the HA Modbus YAML configuration for Trovis that has grown over the last couple of years.
+It is the successor of previous Trovis projects for other home automation systems
+that have been around since ~2016, and of the HA Modbus YAML configuration for
+Trovis that has grown over the last couple of years.
 
 The integration is primarily intended for easy monitoring of an already
 commissioned system, and for occasional fine adjustment.
