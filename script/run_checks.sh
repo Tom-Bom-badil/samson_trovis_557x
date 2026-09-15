@@ -7,8 +7,9 @@ PYTHON_BIN="${PYTHON_BIN:-python}"
 cd "$ROOT_DIR"
 
 if ! "$PYTHON_BIN" -m ruff --version >/dev/null 2>&1; then
-    echo "ERROR: Ruff is not available in this environment."
-    exit 1
+    "$PYTHON_BIN" -m pip install \
+        --root-user-action=ignore \
+        "ruff>=0.15,<0.16"
 fi
 
 if ! "$PYTHON_BIN" -c "import pytest" >/dev/null 2>&1; then

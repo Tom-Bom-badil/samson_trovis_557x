@@ -96,7 +96,7 @@ def test_simulation_service_description_contract() -> None:
 
     assert "set_simulation_value:" in services
     assert "reset_simulation:" in services
-    assert "integration: trovis557x" in services
+    assert "integration: samson_trovis_557x" in services
     assert "domain: sensor" in services
     assert "- gradient" in services
     assert "- four_point_outdoor_temperature_1" in services

@@ -2,7 +2,7 @@ set_simulation_value:
   target:
     entity:
       domain: sensor
-      integration: trovis557x
+      integration: samson_trovis_557x
   fields:
     field:
       required: true
@@ -53,4 +53,4 @@ reset_simulation:
   target:
     entity:
       domain: sensor
-      integration: trovis557x
+      integration: samson_trovis_557x

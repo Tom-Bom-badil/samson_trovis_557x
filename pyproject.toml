@@ -3,6 +3,10 @@ testpaths = ["tests"]
 
 [tool.ruff]
 target-version = "py312"
+exclude = [
+    ".deprecated",
+    "SmartHomeNG",
+]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B"]

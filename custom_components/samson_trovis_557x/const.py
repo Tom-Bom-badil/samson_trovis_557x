@@ -5,7 +5,7 @@ from __future__ import annotations
 from datetime import timedelta
 from typing import Final
 
-DOMAIN: Final = "trovis557x"
+DOMAIN: Final = "samson_trovis_557x"
 
 CONF_CONNECTION: Final = "connection"
 CONF_CONNECTION_TYPE: Final = "type"
