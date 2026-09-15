@@ -32,6 +32,11 @@ The TROVIS controller continues to perform the actual heating control. Home
 Assistant reads its operating state and, when explicitly enabled, writes
 supported settings back to it.
 
+## 👉 Installation
+
+Install the integration through HACS, restart Home Assistant and add
+**SAMSON TROVIS 557x** under **Settings → Devices & services → Add integration**. See the [Installation and Setup](https://github.com/Tom-Bom-badil/samson_trovis_557x/wiki/Installation-and-setup) section of the wiki for detailed instructions.
+
 ## 👉 Features
 
 Depending on the detected controller and hydronic configuration, the integration
@@ -59,13 +64,6 @@ The following controllers are currently supported:
 
 <sup>(for details, see the [project wiki](https://github.com/Tom-Bom-badil/samson_trovis_557x/wiki/Supported-controllers))</sup>
 
-## 👉 Related projects
-
-- [`trovis-modbus`](https://github.com/Tom-Bom-badil/trovis-modbus) –
-  a generic library that contains a controller-specific data model and read/write logic
-- [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection) –
-  a backend-neutral Modbus connection API used internally by the integration
-
 ## 👉 Documentation: Wiki
 
 Lots of in-depth insights into how everything works, including installation
@@ -79,3 +77,10 @@ so you can find a lot of useful information there.
 ## 👉 Reporting issues or asking questions
 
 Please use the [discussions](https://github.com/Tom-Bom-badil/samson_trovis_557x/discussions) on Github.
+
+## 👉 Related projects
+
+- [`trovis-modbus`](https://github.com/Tom-Bom-badil/trovis-modbus) -
+  a generic library that contains a controller-specific data model and read/write logic
+- [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection) -
+  a backend-neutral Modbus connection API used internally by the integration
