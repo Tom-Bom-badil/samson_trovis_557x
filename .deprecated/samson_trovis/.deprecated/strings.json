@@ -1,0 +1,87 @@
+{
+  "title": "Samson Trovis",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add SAMSON TROVIS controller",
+        "description": "Configure the serial/serial-over-TCP connection and Modbus slave ID.",
+        "data": {
+          "name": "Name",
+          "port_url": "Serial port / port URL",
+          "slave_id": "Modbus slave ID",
+          "model": "Model",
+          "slug": "Entity ID prefix"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not connect to the controller."
+    },
+    "abort": {
+      "already_configured": "This TROVIS controller is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Samson Trovis options",
+        "description": "Select the active functional areas. Only enabled areas will be polled.",
+        "data": {
+          "controller": "Controller",
+          "measurements": "Measurements",
+          "heating_circuit_1": "Heating circuit 1",
+          "heating_circuit_2": "Heating circuit 2",
+          "heating_circuit_3": "Heating circuit 3",
+          "heating_circuit_4_domestic_hot_water": "Heating circuit 4 / domestic hot water",
+          "heat_meters": "Heat meters",
+          "schedules": "Schedules",
+          "miscellaneous": "Miscellaneous",
+          "diagnostic": "Diagnostic / raw values"
+        }
+      }
+    }
+  },
+  "device": {
+    "measurements": { "name": "Measurements" },
+    "heating_circuit_1": { "name": "Heating circuit 1" },
+    "heating_circuit_2": { "name": "Heating circuit 2" },
+    "heating_circuit_3": { "name": "Heating circuit 3" },
+    "hot_water": { "name": "Heating circuit 4 / Hot water" },
+    "heat_meters": { "name": "Heat meters" },
+    "schedules": { "name": "Schedules" }
+  },
+  "entity": {
+    "sensor": {
+      "model": { "name": "Model" },
+      "hydraulic_scheme": { "name": "Hydraulic scheme" },
+      "firmware_version": { "name": "Firmware version" },
+      "outside_temperature_1": { "name": "AF1 outside sensor 1" },
+      "outside_temperature_2": { "name": "AF2 outside sensor 2" },
+      "dhw_storage_temperature": { "name": "SF1 storage sensor 1" },
+      "dhw_storage_temperature_lower": { "name": "SF2 storage sensor 2" },
+      "room_temperature_1": { "name": "RF1 room sensor 1" },
+      "room_temperature_2": { "name": "RF2 room sensor 2" },
+      "room_temperature_3": { "name": "RF3 room sensor 3" },
+      "flow_temperature_1": { "name": "VF1 flow sensor 1" },
+      "flow_temperature_2": { "name": "VF2 flow sensor 2" },
+      "flow_temperature_3": { "name": "VF3 flow sensor 3" },
+      "flow_temperature_4": { "name": "VF4 flow sensor 4" },
+      "return_temperature_1": { "name": "RüF1 return sensor 1" },
+      "return_temperature_2": { "name": "RüF2 return sensor 2" },
+      "return_temperature_3": { "name": "RüF3 return sensor 3" },
+      "remote_adjustment_1": { "name": "FG1 remote adjuster 1" },
+      "remote_adjustment_2": { "name": "FG2 remote adjuster 2" },
+      "storage_remote_temperature": { "name": "SF3/FG3 storage sensor / remote adjuster 3" },
+      "heating_circuit_1_flow_temperature_setpoint": { "name": "Heating circuit 1 flow temperature setpoint" },
+      "heating_circuit_2_flow_temperature_setpoint": { "name": "Heating circuit 2 flow temperature setpoint" },
+      "heating_circuit_3_flow_temperature_setpoint": { "name": "Heating circuit 3 flow temperature setpoint" },
+      "heating_circuit_4_domestic_hot_water_temperature_setpoint": { "name": "Hot water temperature setpoint" },
+      "00_library": {  "name": "00 Library" }
+    },
+    "binary_sensor": {
+      "general_fault": { "name": "General fault" },
+      "manual_mode_lock": { "name": "Manual mode lock" },
+      "rotary_switch_lock": { "name": "Rotary switch lock" }
+    }
+  }
+}

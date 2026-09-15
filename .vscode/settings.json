@@ -1,0 +1,9 @@
+{
+  "githubPullRequests.remotes": ["origin"],
+  "githubPullRequests.createOnPublishBranch": "ask",
+  "git.pullRebase": true,
+  "git.confirmSync": false,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoImportCompletions": true,
+  "editor.formatOnSave": true
+}

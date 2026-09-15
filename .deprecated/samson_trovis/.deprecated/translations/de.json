@@ -1,0 +1,87 @@
+{
+  "title": "Samson Trovis",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Samson Trovis Heizungsregler hinzufügen",
+        "description": "Konfiguriere die serielle/Serial-over-TCP-Verbindung und die Modbus-Slave-ID.",
+        "data": {
+          "name": "Name",
+          "port_url": "Serieller Port / Port-URL",
+          "slave_id": "Modbus-Slave-ID",
+          "model": "Modell",
+          "slug": "Entity-ID-Präfix"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Es konnte keine Verbindung zum Regler hergestellt werden."
+    },
+    "abort": {
+      "already_configured": "Dieser TROVIS-Regler ist bereits konfiguriert."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Samson Trovis Optionen",
+        "description": "Wähle die aktiven Funktionsbereiche. Nur aktivierte Bereiche werden abgefragt.",
+        "data": {
+          "controller": "Regler",
+          "measurements": "Messwerte",
+          "heating_circuit_1": "Heizkreis 1",
+          "heating_circuit_2": "Heizkreis 2",
+          "heating_circuit_3": "Heizkreis 3",
+          "heating_circuit_4_domestic_hot_water": "Heizkreis 4 / Warmwasser",
+          "heat_meters": "Wärmemengenzähler",
+          "schedules": "Zeitprogramme",
+          "miscellaneous": "Sonstiges",
+          "diagnostic": "Diagnose / Rohwerte"
+        }
+      }
+    }
+  },
+  "device": {
+    "measurements": { "name": "Messwerte" },
+    "heating_circuit_1": { "name": "Heizkreis 1" },
+    "heating_circuit_2": { "name": "Heizkreis 2" },
+    "heating_circuit_3": { "name": "Heizkreis 3" },
+    "hot_water": { "name": "Heizkreis 4 / Warmwasser" },
+    "heat_meters": { "name": "Wärmemengenzähler" },
+    "schedules": { "name": "Zeitprogramme" }
+  },
+  "entity": {
+    "sensor": {
+      "model": { "name": "Modell" },
+      "hydraulic_scheme": { "name": "Hydraulikschema" },
+      "firmware_version": { "name": "Firmware-Version" },
+      "outside_temperature_1": { "name": "AF1 Außenfühler 1" },
+      "outside_temperature_2": { "name": "AF2 Außenfühler 2" },
+      "dhw_storage_temperature": { "name": "SF1 Speicherfühler 1" },
+      "dhw_storage_temperature_lower": { "name": "SF2 Speicherfühler 2" },
+      "room_temperature_1": { "name": "RF1 Raumfühler 1" },
+      "room_temperature_2": { "name": "RF2 Raumfühler 2" },
+      "room_temperature_3": { "name": "RF3 Raumfühler 3" },
+      "flow_temperature_1": { "name": "VF1 Vorlauffühler 1" },
+      "flow_temperature_2": { "name": "VF2 Vorlauffühler 2" },
+      "flow_temperature_3": { "name": "VF3 Vorlauffühler 3" },
+      "flow_temperature_4": { "name": "VF4 Vorlauffühler 4" },
+      "return_temperature_1": { "name": "RüF1 Rücklauffühler 1" },
+      "return_temperature_2": { "name": "RüF2 Rücklauffühler 2" },
+      "return_temperature_3": { "name": "RüF3 Rücklauffühler 3" },
+      "remote_adjustment_1": { "name": "FG1 Ferngeber 1" },
+      "remote_adjustment_2": { "name": "FG2 Ferngeber 2" },
+      "storage_remote_temperature": { "name": "SF3/FG3 Speicherfühler/Ferngeber 3" },
+      "heating_circuit_1_flow_temperature_setpoint": { "name": "Heizkreis 1 Vorlauftemperatur-Sollwert" },
+      "heating_circuit_2_flow_temperature_setpoint": { "name": "Heizkreis 2 Vorlauftemperatur-Sollwert" },
+      "heating_circuit_3_flow_temperature_setpoint": { "name": "Heizkreis 3 Vorlauftemperatur-Sollwert" },
+      "heating_circuit_4_domestic_hot_water_temperature_setpoint": { "name": "Warmwasser-Temperatur-Sollwert" },
+      "00_library": {  "name": "00 Library" }
+    },
+    "binary_sensor": {
+      "general_fault": { "name": "Sammelstörung" },
+      "manual_mode_lock": { "name": "Sperrung Handbetrieb" },
+      "rotary_switch_lock": { "name": "Sperrung Drehschalter" }
+    }
+  }
+}
