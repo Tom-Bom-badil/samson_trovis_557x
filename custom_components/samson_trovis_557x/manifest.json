@@ -1,7 +1,7 @@
 {
   "domain": "samson_trovis_557x",
   "name": "SAMSON TROVIS 557x",
-  "codeowners": ["@Tom-Bom-badil"],
+  "codeowners": ["@Tom-Bom-badil","@balloob"],
   "config_flow": true,
   "dependencies": ["modbus", "recorder"],
   "documentation": "https://github.com/Tom-Bom-badil/samson_trovis_557x/wiki",
