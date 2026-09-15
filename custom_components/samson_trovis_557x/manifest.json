@@ -1,7 +1,7 @@
 {
   "domain": "samson_trovis_557x",
   "name": "SAMSON TROVIS 557x",
-  "codeowners": ["@Tom-Bom-badil","@balloob"],
+  "codeowners": ["@Tom-Bom-badil"],
   "config_flow": true,
   "dependencies": ["modbus", "recorder"],
   "documentation": "https://github.com/Tom-Bom-badil/samson_trovis_557x/wiki",
@@ -9,6 +9,6 @@
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/Tom-Bom-badil/samson_trovis_557x/issues",
   "loggers": ["trovis_modbus"],
-  "requirements": ["trovis-modbus>=3.0.0,<4"],
-  "version": "v2026.09.1"
+  "requirements": ["trovis-modbus>=3.1.0,<4"],
+  "version": "v2026.09.2"
 }
