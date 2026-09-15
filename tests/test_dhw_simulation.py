@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-COMPONENT = ROOT / "custom_components" / "trovis557x"
+COMPONENT = ROOT / "custom_components" / "samson_trovis_557x"
 
 
 def test_rk4_simulation_helper_entity_contract() -> None:

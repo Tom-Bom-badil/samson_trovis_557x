@@ -9,7 +9,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-COMPONENT = ROOT / "custom_components" / "trovis557x"
+COMPONENT = ROOT / "custom_components" / "samson_trovis_557x"
 TRANSLATIONS = COMPONENT / "translations"
 
 

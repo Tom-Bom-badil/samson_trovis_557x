@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-COMPONENT = ROOT / "custom_components" / "trovis557x"
+COMPONENT = ROOT / "custom_components" / "samson_trovis_557x"
 TRANSLATIONS = COMPONENT / "translations"
 
 
@@ -35,7 +35,7 @@ def test_manifest_contract() -> None:
     """Validate the integration-owned package and backend contract."""
     manifest = _load_json(COMPONENT / "manifest.json")
 
-    assert manifest["domain"] == "trovis557x"
+    assert manifest["domain"] == "samson_trovis_557x"
     assert manifest["config_flow"] is True
     assert manifest["integration_type"] == "device"
     assert manifest["iot_class"] == "local_polling"

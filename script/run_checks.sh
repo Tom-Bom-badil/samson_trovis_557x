@@ -34,9 +34,9 @@ from pathlib import Path
 
 paths = [
     Path("hacs.json"),
-    Path("custom_components/trovis557x/manifest.json"),
-    Path("custom_components/trovis557x/strings.json"),
-    *Path("custom_components/trovis557x/translations").glob("*.json"),
+    Path("custom_components/samson_trovis_557x/manifest.json"),
+    Path("custom_components/samson_trovis_557x/strings.json"),
+    *Path("custom_components/samson_trovis_557x/translations").glob("*.json"),
 ]
 
 for path in paths:

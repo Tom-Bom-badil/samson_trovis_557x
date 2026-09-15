@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-COMPONENT = ROOT / "custom_components" / "trovis557x"
+COMPONENT = ROOT / "custom_components" / "samson_trovis_557x"
 
 
 def _load_json(path: Path) -> dict:

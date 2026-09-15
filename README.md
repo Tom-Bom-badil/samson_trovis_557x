@@ -7,13 +7,13 @@
 [![HA Analytics](https://img.shields.io/badge/dynamic/json?url=https://analytics.home-assistant.io/custom_integrations.json&query=$.trovis557x.total&label=HA%20Analytics&suffix=%20installations%20%2A&color=green)](https://analytics.home-assistant.io/)
 
 
-## SAMSON TROVIS 557x – Home Assistant Custom Integration
+## Samson Trovis 557x – Home Automation Integrations
 
 <img width="100%" alt="SAMSON TROVIS controllers" src="https://github.com/user-attachments/assets/2afe0be0-614a-4dbd-9fdc-4132434ffd36" />
 
 <br/>
 
-This is a Home Assistant custom integration for monitoring and
+This Github Repo contains the Integrations is a Home Assistant custom integration for monitoring and
 adjusting SAMSON TROVIS 557x heating and district heating controllers over
 Modbus, including compatible OEM variants from Sauter, Pewo, Yados and others.
 
