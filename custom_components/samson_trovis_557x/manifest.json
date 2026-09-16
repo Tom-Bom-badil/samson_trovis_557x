@@ -9,6 +9,6 @@
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/Tom-Bom-badil/samson_trovis_557x/issues",
   "loggers": ["trovis_modbus"],
-  "requirements": ["trovis-modbus>=3.1.0,<4"],
+  "requirements": ["trovis-modbus>=3.1.2,<4"],
   "version": "v2026.09.3"
 }
