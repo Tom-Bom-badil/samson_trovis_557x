@@ -3,7 +3,7 @@
   "name": "SAMSON TROVIS 557x",
   "codeowners": ["@Tom-Bom-badil"],
   "config_flow": true,
-  "dependencies": ["modbus", "recorder"],
+  "dependencies": ["modbus", "recorder", "usb"],
   "documentation": "https://github.com/Tom-Bom-badil/samson_trovis_557x/wiki",
   "integration_type": "device",
   "iot_class": "local_polling",
