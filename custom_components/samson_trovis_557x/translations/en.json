@@ -439,6 +439,20 @@
       },
       "solar_pump_running": {
         "name": "Solar circuit pump"
+      },
+      "glt_mode_control_active": {
+        "name": "{component} - GLT operating-mode control active",
+        "state": {
+          "off": "AUTARK",
+          "on": "GLT"
+        }
+      },
+      "any_operating_mode_glt_active": {
+        "name": "At least one control circuit under GLT operating-mode control",
+        "state": {
+          "off": "AUTARK",
+          "on": "GLT"
+        }
       }
     },
     "climate": {
@@ -686,6 +700,14 @@
           "manual": "Manual",
           "day": "Day",
           "night": "Night"
+        }
+      },
+      "pump_setting": {
+        "name": "{component} setting",
+        "state": {
+          "auto": "Auto",
+          "on": "On",
+          "off": "Off"
         }
       },
       "disinfection_weekday": {

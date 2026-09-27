@@ -527,6 +527,54 @@ class TrovisEntity(CoordinatorEntity["TrovisCoordinator"]):
         # Keep the old full-refresh path for those exceptional writes only.
         await self.coordinator.async_request_refresh()
 
+    async def _async_set_operating_mode(self, value: object) -> None:
+        """Set one external operating mode without the HA write-access gate."""
+        from trovis_modbus import (
+            TrovisValueValidationError,
+            TrovisWriteAccessDisabledError,
+            TrovisWriteAccessError,
+            TrovisWriteVerificationError,
+        )
+
+        try:
+            await self._subsystem.async_set_operating_mode(
+                value,
+                access_code=self.coordinator.access_code,
+            )
+        except (
+            TrovisWriteAccessDisabledError,
+            TrovisWriteAccessError,
+            TrovisWriteVerificationError,
+            TrovisValueValidationError,
+        ) as err:
+            raise HomeAssistantError(str(err)) from err
+
+        # The library verified active_mode and refreshed mode ownership. Publish
+        # those targeted cache updates without a full controller refresh.
+        self.coordinator.async_set_updated_data(self.coordinator.device)
+
+    async def _async_release_operating_mode_control(self) -> None:
+        """Release this circuit's operating-mode ownership back to AUTARK."""
+        from trovis_modbus import (
+            TrovisWriteAccessDisabledError,
+            TrovisWriteAccessError,
+            TrovisWriteVerificationError,
+        )
+
+        try:
+            await self._subsystem.async_release_operating_mode_control(
+                access_code=self.coordinator.access_code,
+            )
+        except (
+            TrovisWriteAccessDisabledError,
+            TrovisWriteAccessError,
+            TrovisWriteVerificationError,
+        ) as err:
+            raise HomeAssistantError(str(err)) from err
+
+        # The library verified ownership=AUTARK and refreshed active_mode.
+        self.coordinator.async_set_updated_data(self.coordinator.device)
+
 
 async def _async_set_simulation_value(
     entity: Any,

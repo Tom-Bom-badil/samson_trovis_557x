@@ -439,6 +439,20 @@
       },
       "solar_pump_running": {
         "name": "Solarkreispumpe"
+      },
+      "glt_mode_control_active": {
+        "name": "{component} GLT-Betriebsartensteuerung aktiv",
+        "state": {
+          "off": "AUTARK",
+          "on": "GLT"
+        }
+      },
+      "any_operating_mode_glt_active": {
+        "name": "Mindestens ein Regelkreis unter GLT-Betriebsartensteuerung",
+        "state": {
+          "off": "AUTARK",
+          "on": "GLT"
+        }
       }
     },
     "climate": {
@@ -686,6 +700,14 @@
           "manual": "Handbetrieb",
           "day": "Tagbetrieb",
           "night": "Nachtbetrieb"
+        }
+      },
+      "pump_setting": {
+        "name": "{component} Einstellung",
+        "state": {
+          "auto": "Auto",
+          "on": "Ein",
+          "off": "Aus"
         }
       },
       "disinfection_weekday": {

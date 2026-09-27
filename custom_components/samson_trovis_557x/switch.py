@@ -146,14 +146,6 @@ def _rk_switch_descriptions(index: int) -> tuple[TrovisSwitchDescription, ...]:
             translation_key="trovis_5570_room_control_unit",
             translation_placeholders=placeholders,
         ),
-        _switch(
-            component,
-            "pump_running",
-            f"Rk{index} - Pump control",
-            key=f"{prefix}_pump_control",
-            translation_key="pump_control",
-            translation_placeholders=placeholders,
-        ),
     )
 
 
@@ -172,22 +164,6 @@ _RK4: tuple[TrovisSwitchDescription, ...] = (
         "Rk4 - Thermal disinfection",
         key="rk4_disinfection_enabled",
         translation_key="disinfection_enabled",
-        translation_placeholders={"component": "Rk4"},
-    ),
-    _switch(
-        "rk4",
-        "storage_tank_charging_pump_running",
-        "Rk4 storage-tank-charging-pump control",
-        key="rk4_storage_tank_charging_pump_control",
-        translation_key="storage_tank_charging_pump_control",
-        translation_placeholders={"component": "Rk4"},
-    ),
-    _switch(
-        "rk4",
-        "circulation_pump_running",
-        "Rk4 circulation-pump control",
-        key="rk4_circulation_pump_control",
-        translation_key="circulation_pump_control",
         translation_placeholders={"component": "Rk4"},
     ),
     # ToDo - this looks like a redundant function ??? CL1831 ./. CO4-F07 + CL407

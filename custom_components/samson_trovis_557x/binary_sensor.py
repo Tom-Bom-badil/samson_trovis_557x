@@ -28,6 +28,8 @@ class TrovisBinaryDescription(BinarySensorEntityDescription):
     component: str
     field: str
     device_component: str | None = None
+    inverted: bool = False
+    device_field: bool = False
 
 
 def _binary(
@@ -41,6 +43,8 @@ def _binary(
     translation_placeholders: dict[str, str] | None = None,
     enabled: bool = True,
     device_component: str | None = None,
+    inverted: bool = False,
+    device_field: bool = False,
 ) -> TrovisBinaryDescription:
     """Return a binary-sensor description."""
     return TrovisBinaryDescription(
@@ -54,6 +58,8 @@ def _binary(
         device_class=device_class,
         entity_category=EntityCategory.DIAGNOSTIC,
         entity_registry_enabled_default=enabled,
+        inverted=inverted,
+        device_field=device_field,
     )
 
 
@@ -100,6 +106,14 @@ _CONTROLLER: tuple[TrovisBinaryDescription, ...] = (
         "any_circuit_not_automatic",
         "At least one circuit not automatic",
         key="any_circuit_not_automatic",
+    ),
+    _binary(
+        "controller",
+        "any_operating_mode_glt_active",
+        "At least one circuit under GLT operating-mode control",
+        key="any_operating_mode_glt_active",
+        translation_key="any_operating_mode_glt_active",
+        device_field=True,
     ),
     _binary(
         "controller",
@@ -329,6 +343,15 @@ _RK4: tuple[TrovisBinaryDescription, ...] = (
     ),
     _binary(
         "rk4",
+        "mode_control_autonomous",
+        "Rk4 GLT operating-mode control active",
+        key="rk4_glt_mode_control_active",
+        translation_key="glt_mode_control_active",
+        translation_placeholders={"component": "Rk4"},
+        inverted=True,
+    ),
+    _binary(
+        "rk4",
         "priority",
         "Domestic hot-water priority",
         key="rk4_priority",
@@ -417,6 +440,9 @@ def _description_supported(
     description: TrovisBinaryDescription,
 ) -> bool:
     """Return whether one binary state applies to the resolved circuit role."""
+    if description.device_field:
+        return hasattr(coordinator.device, description.field)
+
     component = getattr(coordinator.device, description.component)
     if not component_supports_datapoint(component, description.field):
         return False
@@ -451,6 +477,17 @@ async def async_setup_entry(
         component = f"rk{index}"
         placeholders = {"component": f"Rk{index}"}
         descriptions.extend(_pumps_and_valves_rk_binary_descriptions(index))
+        descriptions.append(
+            _binary(
+                component,
+                "mode_control_autonomous",
+                f"Rk{index} GLT operating-mode control active",
+                key=f"rk{index}_glt_mode_control_active",
+                translation_key="glt_mode_control_active",
+                translation_placeholders=placeholders,
+                inverted=True,
+            )
+        )
         descriptions.extend(
             _binary(
                 component,
@@ -500,4 +537,16 @@ class TrovisBinarySensor(TrovisEntity, BinarySensorEntity):
     @property
     def is_on(self) -> bool | None:
         """Return the current boolean state."""
-        return getattr(self._subsystem, self.entity_description.field)
+        if self.entity_description.device_field:
+            value = getattr(
+                self.coordinator.device,
+                self.entity_description.field,
+            )
+        else:
+            value = getattr(self._subsystem, self.entity_description.field)
+
+        if value is None:
+            return None
+        if self.entity_description.inverted:
+            return not bool(value)
+        return bool(value)

@@ -170,7 +170,7 @@ def _operating_mode_code_sensor(
         translation_placeholders={"component": placeholder},
         name=f"{placeholder} - Operating mode code",
         component=component,
-        field="mode",
+        field="active_mode",
         value_kind="operating_mode_code",
         entity_category=EntityCategory.DIAGNOSTIC,
     )

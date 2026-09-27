@@ -10,6 +10,13 @@ from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.restore_state import RestoreEntity
+from trovis_modbus import (
+    PumpControlMode,
+    TrovisValueValidationError,
+    TrovisWriteAccessDisabledError,
+    TrovisWriteAccessError,
+    TrovisWriteVerificationError,
+)
 from trovis_modbus.metadata import EnumMetadata
 
 from . import (
@@ -24,6 +31,18 @@ from .coordinator import TrovisConfigEntry, TrovisCoordinator
 
 _DASHBOARD_CONTROLLER_SELECT_DATA_KEY = "ui_helper_selected_controller_entity"
 _DASHBOARD_CONTROLLER_SELECT_KEY = "ui_helper_selected_controller"
+
+
+@dataclass(frozen=True, kw_only=True)
+class TrovisPumpSelectDescription(SelectEntityDescription):
+    """Describe one AUTO/ON/OFF pump-control select."""
+
+    component: str
+    output_field: str
+    ownership_field: str
+    state_attribute: str
+    setter_method: str
+    translation_placeholders: dict[str, str] | None = None
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -74,6 +93,64 @@ _SELECTS: tuple[TrovisSelectDescription, ...] = (
 )
 
 
+def _pump_setting(
+    component: str,
+    key: str,
+    label: str,
+    output_field: str,
+    ownership_field: str,
+    state_attribute: str,
+    setter_method: str,
+) -> TrovisPumpSelectDescription:
+    """Return one Pumps and Valves AUTO/ON/OFF control description."""
+    return TrovisPumpSelectDescription(
+        key=key,
+        translation_key="pump_setting",
+        name=f"{label} setting",
+        component=component,
+        output_field=output_field,
+        ownership_field=ownership_field,
+        state_attribute=state_attribute,
+        setter_method=setter_method,
+        translation_placeholders={"component": label},
+    )
+
+
+def _rk_pump_setting(index: int) -> TrovisPumpSelectDescription:
+    """Return the control select for one Rk1-Rk3 circulation pump."""
+    return _pump_setting(
+        f"rk{index}",
+        f"pumps_and_valves_up{index}_setting",
+        f"UP{index}",
+        "pump_running",
+        "pump_control_autonomous",
+        "pump_control_mode",
+        "async_set_pump_control_mode",
+    )
+
+
+_RK4_PUMP_SETTINGS: tuple[TrovisPumpSelectDescription, ...] = (
+    _pump_setting(
+        "rk4",
+        "pumps_and_valves_slp_setting",
+        "SLP",
+        "storage_tank_charging_pump_running",
+        "storage_tank_charging_pump_control_autonomous",
+        "storage_tank_charging_pump_control_mode",
+        "async_set_storage_tank_charging_pump_control_mode",
+    ),
+    _pump_setting(
+        "rk4",
+        "pumps_and_valves_zp_setting",
+        "ZP",
+        "circulation_pump_running",
+        "circulation_pump_control_autonomous",
+        "circulation_pump_control_mode",
+        "async_set_circulation_pump_control_mode",
+    ),
+)
+
+
 def _build_dashboard_controllers(hass: HomeAssistant) -> list[dict[str, str]]:
     """Build the controller list used by the global dashboard helper."""
     controllers: list[dict[str, str]] = []
@@ -118,6 +195,23 @@ async def async_setup_entry(
             description.field,
         )
     ]
+
+    pump_descriptions = [
+        *(_rk_pump_setting(index) for index in rk1_to_rk3_indices(coordinator)),
+        *(_RK4_PUMP_SETTINGS if coordinator.device.has_rk4 else ()),
+    ]
+    entities.extend(
+        TrovisPumpControlSelect(coordinator, description)
+        for description in pump_descriptions
+        if component_supports_datapoint(
+            getattr(coordinator.device, description.component),
+            description.output_field,
+        )
+        and component_supports_datapoint(
+            getattr(coordinator.device, description.component),
+            description.ownership_field,
+        )
+    )
 
     domain_data = hass.data.setdefault(DOMAIN, {})
     dashboard_select = domain_data.get(_DASHBOARD_CONTROLLER_SELECT_DATA_KEY)
@@ -236,6 +330,64 @@ class TrovisDashboardControllerSelect(RestoreEntity, SelectEntity):
         self.async_write_ha_state()
 
 
+class TrovisPumpControlSelect(TrovisEntity, SelectEntity):
+    """AUTO/ON/OFF control for one pump on the Pumps and Valves device."""
+
+    entity_description: TrovisPumpSelectDescription
+    _attr_options = [mode.value for mode in PumpControlMode]
+
+    def __init__(
+        self,
+        coordinator: TrovisCoordinator,
+        description: TrovisPumpSelectDescription,
+    ) -> None:
+        super().__init__(
+            coordinator,
+            description.key,
+            description.component,
+            "select",
+            translation_key=description.translation_key,
+            translation_placeholders=description.translation_placeholders,
+            device_component="pumps_and_valves",
+        )
+        self.entity_description = description
+
+    @property
+    def current_option(self) -> str | None:
+        """Return AUTO, ON, or OFF from output ownership and state."""
+        mode = getattr(
+            self._subsystem,
+            self.entity_description.state_attribute,
+            None,
+        )
+        return mode.value if isinstance(mode, PumpControlMode) else None
+
+    async def async_select_option(self, option: str) -> None:
+        """Set one pump to AUTO, ON, or OFF."""
+        if not self.coordinator.device.writing_enabled:
+            raise HomeAssistantError("Please enable writing for changes!")
+
+        try:
+            requested = PumpControlMode(option)
+        except ValueError as err:
+            raise HomeAssistantError(
+                f"Unsupported TROVIS pump option: {option}"
+            ) from err
+
+        setter = getattr(self._subsystem, self.entity_description.setter_method)
+        try:
+            await setter(requested, access_code=self.coordinator.access_code)
+        except (
+            TrovisWriteAccessDisabledError,
+            TrovisWriteAccessError,
+            TrovisWriteVerificationError,
+            TrovisValueValidationError,
+        ) as err:
+            raise HomeAssistantError(str(err)) from err
+
+        self.coordinator.async_set_updated_data(self.coordinator.device)
+
+
 class TrovisSelect(TrovisEntity, SelectEntity):
     """Trovis select entity."""
 
@@ -271,6 +423,29 @@ class TrovisSelect(TrovisEntity, SelectEntity):
     @property
     def current_option(self) -> str | None:
         """Return the currently selected option."""
+        if self.entity_description.field == "mode":
+            ownership = self._subsystem.mode_control_autonomous
+            if ownership is True:
+                # Home Assistant "Automatic" means AUTARK: local TROVIS
+                # ownership, regardless of the currently effective time-program
+                # phase reported by active_mode.
+                return "automatic"
+            if ownership is None:
+                return None
+
+            value = self._subsystem.active_mode
+            if value is None:
+                return None
+            try:
+                # Technical external AUTOMATIC=1 is a valid GLT command but is
+                # deliberately not presented as AUTARK in the normal UI.
+                automatic = self._option_by_key.get("automatic")
+                if automatic is not None and int(value) == int(automatic.value):
+                    return None
+                return self._key_by_value.get(int(value))
+            except (TypeError, ValueError):
+                return None
+
         value = getattr(self._subsystem, self.entity_description.field)
         if value is None:
             return None
@@ -285,6 +460,16 @@ class TrovisSelect(TrovisEntity, SelectEntity):
             selected = self._option_by_key[option]
         except KeyError as err:
             raise HomeAssistantError(f"Unsupported TROVIS option: {option}") from err
+
+        if self.entity_description.field == "mode":
+            if option == "automatic":
+                await self._async_release_operating_mode_control()
+                return
+            await self._async_set_operating_mode(
+                self._enum_metadata.enum_type(selected.value)
+            )
+            return
+
         await self._async_write_datapoint(
             self.entity_description.field,
             self._enum_metadata.enum_type(selected.value),

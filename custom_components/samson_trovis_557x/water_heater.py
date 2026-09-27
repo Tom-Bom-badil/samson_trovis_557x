@@ -24,14 +24,6 @@ from . import (
 )
 from .coordinator import TrovisConfigEntry, TrovisCoordinator
 
-# Operation-list labels <-> controller modes.
-_MODES = {
-    "auto": OperatingMode.AUTOMATIC,
-    "on": OperatingMode.DAY,
-    "off": OperatingMode.STANDBY,
-}
-_REVERSE = {mode: label for label, mode in _MODES.items()}
-
 
 @dataclass(frozen=True, kw_only=True)
 class TrovisWaterHeaterDescription(WaterHeaterEntityDescription):
@@ -62,7 +54,6 @@ class TrovisDomesticHotWaterEntity(TrovisEntity, WaterHeaterEntity):
         WaterHeaterEntityFeature.TARGET_TEMPERATURE
         | WaterHeaterEntityFeature.OPERATION_MODE
     )
-    _attr_operation_list = list(_MODES)
 
     def __init__(self, coordinator: TrovisCoordinator) -> None:
         description = TrovisWaterHeaterDescription(
@@ -111,20 +102,34 @@ class TrovisDomesticHotWaterEntity(TrovisEntity, WaterHeaterEntity):
 
     @property
     def min_temp(self) -> float:
-        return self._domestic_hot_water.setpoint_min or 20.0
+        """Return the controller's current lower DHW setpoint limit."""
+        value = self._domestic_hot_water.setpoint_min
+        return value if value is not None else 5.0
 
     @property
     def max_temp(self) -> float:
-        return self._domestic_hot_water.setpoint_max or 90.0
+        """Return the controller's current upper DHW setpoint limit."""
+        value = self._domestic_hot_water.setpoint_max
+        return value if value is not None else 90.0
 
     @property
     def current_operation(self) -> str | None:
         """Return the current operation mode."""
-        mode = self._domestic_hot_water.mode
+        ownership = self._domestic_hot_water.mode_control_autonomous
+        if ownership is True:
+            # Home Assistant "automatic" represents AUTARK ownership.
+            return "automatic"
+        if ownership is None:
+            return None
+
+        mode = self._domestic_hot_water.active_mode
         if mode is None:
             return None
 
         try:
+            # External AUTOMATIC=1 under GLT is not the same as AUTARK.
+            if mode is OperatingMode.AUTOMATIC:
+                return None
             return self._key_by_value.get(int(mode))
         except (TypeError, ValueError):
             return None
@@ -150,7 +155,10 @@ class TrovisDomesticHotWaterEntity(TrovisEntity, WaterHeaterEntity):
                 f"Unsupported TROVIS operation mode: {operation_mode}"
             ) from err
 
-        await self._async_write_datapoint(
-            "mode",
-            self._enum_metadata.enum_type(selected.value),
+        if operation_mode == "automatic":
+            await self._async_release_operating_mode_control()
+            return
+
+        await self._async_set_operating_mode(
+            self._enum_metadata.enum_type(selected.value)
         )
