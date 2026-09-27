@@ -660,7 +660,13 @@ async def async_setup_entry(
         developer_mode=DEVELOPER_MODE,
     )
 
-    await coordinator.async_config_entry_first_refresh()
+    # old (failing at 5573-1):
+    # await coordinator.async_config_entry_first_refresh()
+    # new:
+    # Populate as much controller state as possible before platform setup, but
+    # do not prevent the config entry from loading when single optional Modbus
+    # blocks (coils or registers) cannot be read.
+    await coordinator.async_refresh()
 
     # Register the physical TROVIS controller before any platform constructs
     # sub-device entities. Home Assistant 2026.9 deprecates identifier tuples
