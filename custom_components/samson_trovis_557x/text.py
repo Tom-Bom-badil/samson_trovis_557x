@@ -88,6 +88,11 @@ class TrovisReadExclusionText(TrovisEntity, TextEntity):
         )
 
     @property
+    def available(self) -> bool:
+        """Keep read exclusions editable while controller polling fails."""
+        return True
+
+    @property
     def native_value(self) -> str:
         """Return the configured exclusion list."""
         return self._value
