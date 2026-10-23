@@ -1,10 +1,14 @@
 [![Home Assistant](https://img.shields.io/badge/Home%20Assistant-%2341BDF5.svg)](https://www.home-assistant.io)
 [![Custom integration](https://img.shields.io/badge/Custom%20Integration-%2341BDF5.svg)](https://www.home-assistant.io/getting-started/concepts-terminology)
 [![HACS Custom Repository](https://img.shields.io/badge/HACS-default-green.svg)](https://www.hacs.xyz/docs/faq/custom_repositories/)
-[![Release](https://img.shields.io/github/v/release/Tom-Bom-badil/samson_trovis_557x?include_prereleases&color=green)](https://github.com/Tom-Bom-badil/samson_trovis_557x/releases)
-[![CI](https://img.shields.io/github/actions/workflow/status/Tom-Bom-badil/samson_trovis_557x/ci.yml?branch=main&label=CI&color=green)](https://github.com/Tom-Bom-badil/samson_trovis_557x/actions/workflows/ci.yml)
+<!-- [![Release](https://img.shields.io/github/v/release/Tom-Bom-badil/samson_trovis_557x?include_prereleases&color=green)](https://github.com/Tom-Bom-badil/samson_trovis_557x/releases) -->
+<!-- [![CI](https://img.shields.io/github/actions/workflow/status/Tom-Bom-badil/samson_trovis_557x/ci.yml?branch=main&label=CI&color=green)](https://github.com/Tom-Bom-badil/samson_trovis_557x/actions/workflows/ci.yml) -->
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Tom-Bom-badil/samson_trovis_557x/graphs/commit-activity)
-<!-- [![HA Analytics](https://img.shields.io/badge/dynamic/json?url=https://analytics.home-assistant.io/custom_integrations.json&query=$.samson_trovis_557x.total&label=HA%20Analytics&suffix=%20installations%20%2A&color=green)](https://analytics.home-assistant.io/) -->
+[![HA Analytics](https://img.shields.io/badge/dynamic/json?url=https://analytics.home-assistant.io/custom_integrations.json&query=$.samson_trovis_557x.total&label=HA%20Analytics&suffix=%20installations%20%2A&color=green)](https://analytics.home-assistant.io/)
+
+<sup><sub>* Less than ¼ of all HA users have opted in to HA Analytics to share their usage data, so the actual number of installations is likely way higher.</sub></sup>
+
+---
 
 
 ## Samson Trovis 557x – Home Automation Integrations
