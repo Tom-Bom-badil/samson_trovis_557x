@@ -10,7 +10,6 @@
 
 ---
 
-
 ## Samson Trovis 557x – Home Automation Integrations
 
 <img width="100%" alt="SAMSON TROVIS controllers" src="https://github.com/user-attachments/assets/2afe0be0-614a-4dbd-9fdc-4132434ffd36" />
@@ -71,9 +70,13 @@ provides:
 Lots of in-depth insights into how everything works, including installation
 instructions, hardware / adapter configuration and tests, troubleshooting guides and technical backgrounds as well as basics on the technologies used in the project can be found on the [project wiki](https://github.com/Tom-Bom-badil/samson_trovis_557x/wiki). The Wiki (and also the discussions section of the project repo) have grown over the last ~10 years, so you can find a lot of useful information there.
 
-## 👉 Reporting issues or asking questions
+## 👉 Issues, questions, feature or change requests: Discussions
 
-Please use the [discussions](https://github.com/Tom-Bom-badil/samson_trovis_557x/discussions) on GitHub.
+If you come across any issues, run into trouble during wiring or installation, or have suggestions on how to improve the integration: Please use the [discussions](https://github.com/Tom-Bom-badil/samson_trovis_557x/discussions) on GitHub.
+
+## 👉 Contributions welcome!
+
+Pull requests, improvements and feedback in general are always appreciated! Please check the [dev docs](https://github.com/Tom-Bom-badil/samson_trovis_557x/wiki/Contributions-workflow) on the Wiki for more details and developer documentation.
 
 ## 👉 Related projects
 
@@ -81,3 +84,9 @@ Please use the [discussions](https://github.com/Tom-Bom-badil/samson_trovis_557x
   a backend neutral library that contains the Trovis data model and read/write logic,
 - [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection) -
   a backend-neutral Modbus API that is used internally by the integration.
+
+<br/><br/>
+
+<p align="center">
+  <strong><em>♥️ Thank you for using this integration, and for your feedback! ♥️</em></strong>
+</p>
