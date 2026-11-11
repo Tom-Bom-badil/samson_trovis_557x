@@ -40,6 +40,7 @@ from .const import (
     CONF_EXCLUDED_REGISTERS,
     CONF_FRAMER,
     CONF_HOST,
+    CONF_HEAT_METER_INDICES,
     CONF_MODEL,
     CONF_PARITY,
     CONF_PORT,
@@ -401,6 +402,10 @@ def _sub_device(
     if component == "buffer_tank":
         return _rk_sub_device(coordinator, 1)
 
+    if component in {"wmz1", "wmz2", "wmz3"}:
+        index = int(component[-1])
+        return component, f"WMZ{index} – Heat meter {index}", component
+
     if component.startswith("rk") and component[2:].isdigit():
         index = int(component[2:])
         if 1 <= index <= 4:
@@ -672,6 +677,7 @@ async def async_setup_entry(
         unit_id = int(settings[CONF_UNIT_ID])
         model = int(settings[CONF_MODEL])
         detected_sensors = tuple(settings[CONF_DETECTED_SENSORS])
+        heat_meter_indices = tuple(settings.get(CONF_HEAT_METER_INDICES, ()))
         excluded_registers = parse_address_list(
             str(settings.get(CONF_EXCLUDED_REGISTERS, "") or "")
         )
@@ -695,6 +701,7 @@ async def async_setup_entry(
             unit,
             model=model,
             detected_sensors=detected_sensors,
+            heat_meter_indices=heat_meter_indices,
             excluded_registers=excluded_registers,
             excluded_coils=excluded_coils,
         )

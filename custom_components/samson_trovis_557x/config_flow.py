@@ -37,6 +37,7 @@ from .const import (
     CONF_DEVICE,
     CONF_FRAMER,
     CONF_HOST,
+    CONF_HEAT_METER_INDICES,
     CONF_MODEL,
     CONF_PARITY,
     CONF_PORT,
@@ -497,9 +498,14 @@ class TrovisConfigFlow(ConfigFlow, domain=DOMAIN):
             }
         )
 
+        # Preserve the hidden, HA-switch-controlled WMZ selection when a
+        # connection is reconfigured. Do not expose it in the config flow.
+        heat_meter_indices = (
+            entry.options.get(CONF_HEAT_METER_INDICES, ()) if model == 5578 else ()
+        )
         return self.async_update_reload_and_abort(
             entry,
             title=name,
             data=data,
-            options={},
+            options={CONF_HEAT_METER_INDICES: list(heat_meter_indices)},
         )

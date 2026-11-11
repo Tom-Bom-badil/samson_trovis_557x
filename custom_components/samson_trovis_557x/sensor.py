@@ -8,6 +8,7 @@ the same shared components and never own exclusive datapoints.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import time
 from enum import IntEnum
 from typing import Literal
 
@@ -48,6 +49,7 @@ SensorValueKind = Literal[
     "number",
     "enum",
     "month_day",
+    "clock_time",
     "heating_curves",
     "heating_operating_mode",
     "operating_mode_code",
@@ -585,6 +587,109 @@ _RK4: tuple[TrovisSensorDescription, ...] = (
     ),
 )
 
+
+def _heat_meter_sensor_descriptions(index: int) -> tuple[TrovisSensorDescription, ...]:
+    """Identical read-only entity layout for each enabled WMZ1..WMZ3."""
+    component = f"wmz{index}"
+
+    def measurement(
+        field: str,
+        label: str,
+        *,
+        state_class: SensorStateClass | None = SensorStateClass.MEASUREMENT,
+        device_class: SensorDeviceClass | None = None,
+        enabled: bool = True,
+        entity_category: EntityCategory | None = None,
+    ) -> TrovisSensorDescription:
+        return _number_sensor(
+            component,
+            field,
+            f"WMZ{index} – {label}",
+            key=f"{component}_{field}",
+            state_class=state_class,
+            device_class=device_class,
+            enabled=enabled,
+            entity_category=entity_category,
+        )
+
+    result: list[TrovisSensorDescription] = [
+        measurement(
+            "energy",
+            "Energy",
+            state_class=SensorStateClass.TOTAL_INCREASING,
+            device_class=SensorDeviceClass.ENERGY,
+        ),
+        measurement(
+            "volume",
+            "Volume",
+            state_class=SensorStateClass.TOTAL_INCREASING,
+        ),
+        measurement("power", "Power", device_class=SensorDeviceClass.POWER),
+        measurement("flow_rate", "Flow rate"),
+        measurement(
+            "operating_time",
+            "Operating time",
+            state_class=None,
+            entity_category=EntityCategory.DIAGNOSTIC,
+        ),
+        measurement(
+            "status",
+            "Status",
+            state_class=None,
+            entity_category=EntityCategory.DIAGNOSTIC,
+        ),
+        measurement(
+            "error_status",
+            "Error status",
+            state_class=None,
+            entity_category=EntityCategory.DIAGNOSTIC,
+        ),
+        measurement(
+            "manufacturer_id",
+            "Manufacturer ID",
+            state_class=None,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            enabled=False,
+        ),
+    ]
+    for field, label in (
+        ("flow_rate_unit", "Flow rate source unit"),
+        ("volume_unit", "Volume source unit"),
+        ("power_unit", "Power source unit"),
+        ("energy_unit", "Energy source unit"),
+    ):
+        result.append(
+            _enum_sensor(
+                component,
+                field,
+                f"WMZ{index} – {label}",
+                key=f"{component}_{field}",
+                enabled=False,
+            )
+        )
+    result.extend(
+        (
+            TrovisSensorDescription(
+                key=f"{component}_volume_read_date",
+                name=f"WMZ{index} – Volume read date",
+                component=component,
+                field="volume_read_date",
+                value_kind="month_day",
+                entity_category=EntityCategory.DIAGNOSTIC,
+            ),
+            TrovisSensorDescription(
+                key=f"{component}_volume_read_time",
+                name=f"WMZ{index} – Volume read time",
+                component=component,
+                field="volume_read_time",
+                value_kind="clock_time",
+                entity_category=EntityCategory.DIAGNOSTIC,
+            ),
+        )
+    )
+    return tuple(result)
+
+
 _BUFFER_TANK: tuple[TrovisSensorDescription, ...] = (
     _enum_sensor(
         "buffer_tank",
@@ -662,6 +767,8 @@ async def async_setup_entry(
         descriptions.extend(_BUFFER_TANK)
     if coordinator.device.has_solar:
         descriptions.extend(_SOLAR)
+    for index in coordinator.device.heat_meter_indices:
+        descriptions.extend(_heat_meter_sensor_descriptions(index))
     statistics_manager = PhysicalSensorStatisticsManager(hass)
     entities: list[SensorEntity] = [
         TrovisSensor(
@@ -859,6 +966,10 @@ class TrovisSensor(TrovisEntity, SensorEntity):
             if not isinstance(value, MonthDay):
                 return None
             return f"{value.month:02d}-{value.day:02d}"
+        if self.entity_description.value_kind == "clock_time":
+            if not isinstance(value, time):
+                return None
+            return value.isoformat(timespec="minutes")
         if self.entity_description.value_kind == "enum":
             try:
                 return self._key_by_value.get(int(value))

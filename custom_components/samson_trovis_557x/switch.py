@@ -19,6 +19,7 @@ from . import (
     require_boolean_metadata,
     rk1_to_rk3_indices,
 )
+from .const import CONF_HEAT_METER_INDICES
 from .coordinator import TrovisConfigEntry, TrovisCoordinator
 
 _LOGGER = logging.getLogger(__name__)
@@ -261,6 +262,10 @@ async def async_setup_entry(
     coordinator = entry.runtime_data
 
     entities: list[SwitchEntity] = [TrovisWriteAccessSwitch(coordinator)]
+    if coordinator.device.model == 5578:
+        entities.extend(
+            TrovisHeatMeterEnableSwitch(coordinator, index) for index in (1, 2, 3)
+        )
     descriptions = list(_CONTROLLER)
 
     for index in rk1_to_rk3_indices(coordinator):
@@ -319,6 +324,61 @@ class TrovisWriteAccessSwitch(TrovisEntity, SwitchEntity):
             )
 
         self.coordinator.async_set_updated_data(self.coordinator.device)
+
+
+class TrovisHeatMeterEnableSwitch(TrovisEntity, SwitchEntity):
+    """Local HA enable switch for one optional heat meter; no TROVIS writes."""
+
+    _attr_icon = "mdi:gauge"
+    _attr_entity_category = EntityCategory.CONFIG
+
+    def __init__(self, coordinator: TrovisCoordinator, index: int) -> None:
+        super().__init__(
+            coordinator,
+            f"wmz{index}_enabled",
+            "controller",
+            "switch",
+        )
+        self._index = index
+        self._attr_name = f"Enable heat meter {index}"
+
+    @property
+    def available(self) -> bool:
+        """The local switch must remain usable after a failed Modbus poll."""
+        return True
+
+    @property
+    def is_on(self) -> bool:
+        """Return the persisted HA-side selection, not a controller state."""
+        return self._index in self.coordinator.config_entry.options.get(
+            CONF_HEAT_METER_INDICES, ()
+        )
+
+    async def _set_enabled(self, enabled: bool) -> None:
+        entry = self.coordinator.config_entry
+        selected = set(entry.options.get(CONF_HEAT_METER_INDICES, ()))
+        if enabled:
+            selected.add(self._index)
+        else:
+            selected.discard(self._index)
+        if selected == set(entry.options.get(CONF_HEAT_METER_INDICES, ())):
+            return
+
+        hass = self.coordinator.hass
+        hass.config_entries.async_update_entry(
+            entry,
+            options={
+                **entry.options,
+                CONF_HEAT_METER_INDICES: sorted(selected),
+            },
+        )
+        await hass.config_entries.async_reload(entry.entry_id)
+
+    async def async_turn_on(self, **kwargs: object) -> None:
+        await self._set_enabled(True)
+
+    async def async_turn_off(self, **kwargs: object) -> None:
+        await self._set_enabled(False)
 
 
 class TrovisSwitch(TrovisEntity, SwitchEntity):
