@@ -49,7 +49,7 @@ class TrovisDomesticHotWaterEntity(TrovisEntity, WaterHeaterEntity):
     """Domestic hot water as a water heater."""
 
     _attr_name = None
-    _attr_temperature_unit = UnitOfTemperature.CELSIUS
+    _attr_native_temperature_unit = UnitOfTemperature.CELSIUS
     _attr_supported_features = (
         WaterHeaterEntityFeature.TARGET_TEMPERATURE
         | WaterHeaterEntityFeature.OPERATION_MODE
@@ -84,7 +84,7 @@ class TrovisDomesticHotWaterEntity(TrovisEntity, WaterHeaterEntity):
         self._attr_min_temp = temperature_metadata.min_value
         self._attr_max_temp = temperature_metadata.max_value
         self._attr_target_temperature_step = temperature_metadata.step
-        self._attr_temperature_unit = (
+        self._attr_native_temperature_unit = (
             ha_unit_from_number(temperature_metadata) or UnitOfTemperature.CELSIUS
         )
 
@@ -93,11 +93,11 @@ class TrovisDomesticHotWaterEntity(TrovisEntity, WaterHeaterEntity):
         return self._subsystem  # type: ignore[return-value]
 
     @property
-    def current_temperature(self) -> float | None:
+    def native_current_temperature(self) -> float | None:
         return self.coordinator.data.sensors.sf1
 
     @property
-    def target_temperature(self) -> float | None:
+    def native_target_temperature(self) -> float | None:
         return self._domestic_hot_water.setpoint_active
 
     @property
