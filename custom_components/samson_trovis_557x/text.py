@@ -13,7 +13,12 @@ from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from . import TrovisEntity
 from .const import CONF_EXCLUDED_COILS, CONF_EXCLUDED_REGISTERS
 from .coordinator import TrovisConfigEntry, TrovisCoordinator
-from .read_exclusions import ADDRESS_LIST_PATTERN, normalize_address_list
+from .exclusion_state import CONF_AUTO_EXCLUSIONS_FIRMWARE, option_parts, with_manual
+from .read_exclusions import (
+    ADDRESS_LIST_PATTERN,
+    normalize_address_list,
+    parse_address_list,
+)
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -60,7 +65,7 @@ async def async_setup_entry(
 
 
 class TrovisReadExclusionText(TrovisEntity, TextEntity):
-    """Home Assistant-local Modbus read-exclusion text entity."""
+    """Manual input as state; automatically confirmed exclusions as attributes."""
 
     entity_description: TrovisReadExclusionTextDescription
 
@@ -77,46 +82,61 @@ class TrovisReadExclusionText(TrovisEntity, TextEntity):
             translation_key=description.key,
         )
         self.entity_description = description
-        self._value = normalize_address_list(
-            str(
-                coordinator.config_entry.options.get(
-                    description.option_key,
-                    "",
-                )
-                or ""
-            )
+        self._value, _ = option_parts(
+            coordinator.config_entry.options.get(description.option_key)
         )
 
     @property
     def available(self) -> bool:
-        """Keep read exclusions editable while controller polling fails."""
+        """Keep manual exclusions editable even if controller polling fails."""
         return True
 
     @property
     def native_value(self) -> str:
-        """Return the configured exclusion list."""
+        """Return exclusively the manually entered list."""
         return self._value
 
+    @property
+    def extra_state_attributes(self) -> dict[str, object]:
+        """Present automatic exclusions without storing them as HA state."""
+        _, automatic = option_parts(
+            self.coordinator.config_entry.options.get(
+                self.entity_description.option_key
+            )
+        )
+        reference = self.coordinator.config_entry.options.get(
+            CONF_AUTO_EXCLUSIONS_FIRMWARE
+        )
+        firmware_label = (
+            f"{reference // 100}.{reference % 100:02d}"
+            if isinstance(reference, int) and not isinstance(reference, bool)
+            else None
+        )
+        return {
+            "auto_excluded": automatic,
+            "auto_count": len(parse_address_list(automatic)),
+            "auto_firmware": firmware_label,
+        }
+
     async def async_set_value(self, value: str) -> None:
-        """Store a normalized exclusion list and reload the config entry."""
+        """Update the manual portion only and reload the config entry."""
         try:
             normalized = normalize_address_list(value)
         except ValueError as err:
             raise HomeAssistantError(str(err)) from err
 
-        entry = self.coordinator.config_entry
-        options = dict(entry.options)
-
-        if normalized:
-            options[self.entity_description.option_key] = normalized
-        else:
-            options.pop(self.entity_description.option_key, None)
-
         if normalized == self._value:
             return
-
+        entry = self.coordinator.config_entry
+        try:
+            options = with_manual(
+                entry.options,
+                self.entity_description.option_key,
+                normalized,
+            )
+        except ValueError as err:
+            raise HomeAssistantError(str(err)) from err
         self._value = normalized
         self.async_write_ha_state()
-
         if self.hass.config_entries.async_update_entry(entry, options=options):
             self.hass.config_entries.async_schedule_reload(entry.entry_id)

@@ -35,9 +35,10 @@ from .const import (
     CONF_CONNECTION_TYPE,
     CONF_DETECTED_SENSORS,
     CONF_DEVICE,
+    CONF_FIRMWARE,
     CONF_FRAMER,
-    CONF_HOST,
     CONF_HEAT_METER_INDICES,
+    CONF_HOST,
     CONF_MODEL,
     CONF_PARITY,
     CONF_PORT,
@@ -274,7 +275,7 @@ def _format_connection(data: dict[str, Any]) -> str:
 async def _async_probe(
     hass: HomeAssistant,
     data: dict[str, Any],
-) -> tuple[int, tuple[str, ...]] | None:
+) -> tuple[int, int, tuple[str, ...]] | None:
     """Probe a controller through a temporary Home Assistant Modbus unit."""
     try:
         params = create_modbus_params(data)
@@ -289,7 +290,7 @@ async def _async_probe(
     except (HomeAssistantError, ModbusError, OSError, ValueError):
         return None
 
-    return probe.model, probe.detected_sensors
+    return probe.model, probe.firmware, probe.detected_sensors
 
 
 class TrovisConfigFlow(ConfigFlow, domain=DOMAIN):
@@ -299,6 +300,7 @@ class TrovisConfigFlow(ConfigFlow, domain=DOMAIN):
 
     _pending_data: dict[str, Any] | None = None
     _detected_model: int | None = None
+    _detected_firmware: int | None = None
     _detected_sensors: tuple[str, ...] = ()
 
     async def async_step_user(
@@ -333,12 +335,13 @@ class TrovisConfigFlow(ConfigFlow, domain=DOMAIN):
     def _store_probe(
         self,
         data: dict[str, Any],
-        probe: tuple[int, tuple[str, ...]],
+        probe: tuple[int, int, tuple[str, ...]],
     ) -> None:
         """Store a successful probe for the following flow step."""
-        model, detected_sensors = probe
+        model, firmware, detected_sensors = probe
         self._pending_data = data
         self._detected_model = model
+        self._detected_firmware = firmware
         self._detected_sensors = detected_sensors
 
     async def async_step_device(
@@ -369,6 +372,7 @@ class TrovisConfigFlow(ConfigFlow, domain=DOMAIN):
                     )
                 ),
                 CONF_MODEL: self._detected_model,
+                CONF_FIRMWARE: self._detected_firmware,
                 CONF_DETECTED_SENSORS: list(self._detected_sensors),
             }
             return self.async_create_entry(
@@ -450,10 +454,10 @@ class TrovisConfigFlow(ConfigFlow, domain=DOMAIN):
         probe_data: dict[str, Any],
         name: str,
         access_code: int,
-        probe: tuple[int, tuple[str, ...]],
+        probe: tuple[int, int, tuple[str, ...]],
     ) -> ConfigFlowResult:
         """Apply a successful reconfiguration while retaining known sensors."""
-        model, detected_sensors = probe
+        model, firmware, detected_sensors = probe
         known_sensors = set(
             entry.data.get(
                 CONF_DETECTED_SENSORS,
@@ -494,6 +498,7 @@ class TrovisConfigFlow(ConfigFlow, domain=DOMAIN):
                 CONF_NAME: name,
                 CONF_ACCESS_CODE: access_code,
                 CONF_MODEL: model,
+                CONF_FIRMWARE: firmware,
                 CONF_DETECTED_SENSORS: sorted(known_sensors),
             }
         )
@@ -503,9 +508,23 @@ class TrovisConfigFlow(ConfigFlow, domain=DOMAIN):
         heat_meter_indices = (
             entry.options.get(CONF_HEAT_METER_INDICES, ()) if model == 5578 else ()
         )
+        # Reconfigure must not discard unrelated options (especially the
+        # two editable manual exclusion lists).  Auto learned addresses are
+        # invalidated when either the model or firmware has changed.
+        from .exclusion_state import (
+            invalidate_for_model_change,
+            invalidate_stale_automatic,
+        )
+
+        options = dict(entry.options)
+        if model != int(entry.data[CONF_MODEL]):
+            options = invalidate_for_model_change(options)
+        else:
+            options = invalidate_stale_automatic(options, firmware)
+        options[CONF_HEAT_METER_INDICES] = list(heat_meter_indices)
         return self.async_update_reload_and_abort(
             entry,
             title=name,
             data=data,
-            options={CONF_HEAT_METER_INDICES: list(heat_meter_indices)},
+            options=options,
         )

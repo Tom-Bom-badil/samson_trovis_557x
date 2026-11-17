@@ -719,7 +719,11 @@ def _description_supported(
 ) -> bool:
     """Return whether a sensor description applies to this device."""
     if description.component == "sensors":
-        if description.field not in coordinator.device.available_sensor_keys:
+        if (
+            description.field not in coordinator.device.available_sensor_keys
+            and description.field
+            not in coordinator.device.added_override_fields.get("sensors", frozenset())
+        ):
             return False
     if description.component in {"rk1", "rk2", "rk3"}:
         index = int(description.component[-1])
@@ -728,6 +732,15 @@ def _description_supported(
             and index not in coordinator.device.room_heating_circuit_indices
         ):
             return False
+
+    # Plain controller/info descriptions may still refer directly to a typed
+    # field.  Respect its effective firmware/exclusion availability; derived
+    # Python properties without a Modbus descriptor retain their old rules.
+    component = getattr(coordinator.device, description.component)
+    if description.field in type(
+        component
+    ).declared_fields and not component.is_field_readable(description.field):
+        return False
 
     if description.value_kind in (
         "plain",
@@ -738,6 +751,67 @@ def _description_supported(
         return True
     component = getattr(coordinator.device, description.component)
     return component_supports_datapoint(component, description.field)
+
+
+def _added_override_sensor_descriptions(
+    coordinator: TrovisCoordinator,
+) -> list[TrovisSensorDescription]:
+    """Expose explicitly defined new, documented read-only numeric/enum fields.
+
+    This is intentionally NOT an unrestricted metadata-to-entity conversion:
+    the library's firmware table must explicitly introduce the field, metadata
+    must include a human-readable description, and only non-writable number and
+    enum data points are supported.  New sensors start disabled by default;
+    no dynamic entities are created after setup.
+    """
+    device = coordinator.device
+    result: list[TrovisSensorDescription] = []
+    enabled_components = {
+        "info",
+        "controller",
+        "clock",
+        "functions",
+        "parameters",
+        "sensors",
+        *(f"rk{i}" for i in device.control_circuit_indices if i <= 3),
+        *(("rk4",) if device.has_rk4 else ()),
+        *(("buffer_tank",) if device.has_buffer_tank_circuit else ()),
+        *(("solar",) if device.has_solar else ()),
+        *(f"wmz{i}" for i in device.heat_meter_indices),
+    }
+    for component_name, fields in device.added_override_fields.items():
+        if component_name not in enabled_components:
+            continue
+        component = getattr(device, component_name)
+        for field in sorted(fields):
+            if not component.is_field_readable(field):
+                continue
+            metadata = component.metadata_for(field)
+            if metadata is None or not metadata.description or metadata.writable:
+                continue
+            key = f"{component_name}_{field}"
+            if metadata.value_kind == "number" and metadata.number is not None:
+                result.append(
+                    _number_sensor(
+                        component_name,
+                        field,
+                        metadata.description,
+                        key=key,
+                        enabled=False,
+                        state_class=None,
+                    )
+                )
+            elif metadata.value_kind == "enum" and metadata.enum is not None:
+                result.append(
+                    _enum_sensor(
+                        component_name,
+                        field,
+                        metadata.description,
+                        key=key,
+                        enabled=False,
+                    )
+                )
+    return result
 
 
 def _uses_physical_sensor_statistics(description: TrovisSensorDescription) -> bool:
@@ -769,6 +843,12 @@ async def async_setup_entry(
         descriptions.extend(_SOLAR)
     for index in coordinator.device.heat_meter_indices:
         descriptions.extend(_heat_meter_sensor_descriptions(index))
+    existing_keys = {description.key for description in descriptions}
+    descriptions.extend(
+        description
+        for description in _added_override_sensor_descriptions(coordinator)
+        if description.key not in existing_keys
+    )
     statistics_manager = PhysicalSensorStatisticsManager(hass)
     entities: list[SensorEntity] = [
         TrovisSensor(

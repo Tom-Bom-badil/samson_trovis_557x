@@ -458,6 +458,54 @@ def _description_supported(
     return True
 
 
+def _added_override_binary_descriptions(
+    coordinator: TrovisCoordinator,
+) -> list[TrovisBinaryDescription]:
+    """Expose only verified, explicitly added read-only boolean coil fields."""
+    device = coordinator.device
+    available = {
+        "info",
+        "controller",
+        "clock",
+        "functions",
+        "parameters",
+        "sensors",
+        *(f"rk{i}" for i in device.control_circuit_indices if i <= 3),
+        *(("rk4",) if device.has_rk4 else ()),
+        *(("buffer_tank",) if device.has_buffer_tank_circuit else ()),
+        *(("solar",) if device.has_solar else ()),
+        *(f"wmz{i}" for i in device.heat_meter_indices),
+    }
+    descriptions: list[TrovisBinaryDescription] = []
+    for component_name, names in device.added_override_fields.items():
+        if component_name not in available:
+            continue
+        component = getattr(device, component_name)
+        for field in sorted(names):
+            if not component.is_field_readable(field):
+                continue
+            metadata = component.metadata_for(field)
+            if (
+                metadata is None
+                or metadata.value_kind != "boolean"
+                or metadata.boolean is None
+                or metadata.writable
+                or not metadata.description
+            ):
+                continue
+            descriptions.append(
+                _binary(
+                    component_name,
+                    field,
+                    metadata.description,
+                    key=f"{component_name}_{field}",
+                    enabled=False,
+                    inverted=metadata.boolean.inverted,
+                )
+            )
+    return descriptions
+
+
 async def async_setup_entry(
     hass: HomeAssistant,
     entry: TrovisConfigEntry,
@@ -502,6 +550,12 @@ async def async_setup_entry(
             for field, key_suffix, name, device_class, enabled in _CIRCUIT_STATES
         )
 
+    existing_keys = {description.key for description in descriptions}
+    descriptions.extend(
+        description
+        for description in _added_override_binary_descriptions(coordinator)
+        if description.key not in existing_keys
+    )
     async_add_entities(
         TrovisBinarySensor(coordinator, description)
         for description in descriptions

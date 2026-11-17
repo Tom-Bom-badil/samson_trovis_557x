@@ -799,6 +799,11 @@
       "control_parameter_mode": {
         "name": "{component} Regelungsart 3-Punkt"
       }
+    },
+    "button": {
+      "clear_auto_exclusions": {
+        "name": "Automatisch ausgeschlossene Modbus-Adressen zurücksetzen"
+      }
     }
   },
   "services": {

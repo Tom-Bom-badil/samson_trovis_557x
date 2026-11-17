@@ -25,6 +25,7 @@ from homeassistant.helpers.entity import DeviceInfo, async_generate_entity_id
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from homeassistant.util import slugify
 from modbus_connection import (
+    ModbusError,
     ModbusSerialParams,
     ModbusTcpParams,
     ModbusTimeoutError,
@@ -38,9 +39,10 @@ from .const import (
     CONF_DEVICE,
     CONF_EXCLUDED_COILS,
     CONF_EXCLUDED_REGISTERS,
+    CONF_FIRMWARE,
     CONF_FRAMER,
-    CONF_HOST,
     CONF_HEAT_METER_INDICES,
+    CONF_HOST,
     CONF_MODEL,
     CONF_PARITY,
     CONF_PORT,
@@ -58,7 +60,7 @@ from .const import (
     FRAMER_RTU,
     FRAMER_SOCKET,
 )
-from .read_exclusions import parse_address_list
+from .exclusion_state import effective_addresses, invalidate_stale_automatic
 
 if TYPE_CHECKING:
     from trovis_modbus.metadata import (
@@ -170,6 +172,11 @@ def component_supports_datapoint(
     field: str,
 ) -> bool:
     """Return whether a component exposes metadata for a datapoint."""
+    # Metadata alone is insufficient: model ranges, per-device exclusions,
+    # and firmware ``None`` overrides can remove fields that remain declared.
+    readable = getattr(component, "is_field_readable", None)
+    if callable(readable) and not readable(field):
+        return False
     try:
         require_datapoint_metadata(component, field)
     except ValueError:
@@ -646,6 +653,7 @@ async def async_setup(
 
 PLATFORMS = [
     Platform.BINARY_SENSOR,
+    Platform.BUTTON,
     # Temporarily disabled; dedicated redesign pending - this is NOT a thermostat!
     # Platform.CLIMATE,
     Platform.DATE,
@@ -669,6 +677,12 @@ async def async_setup_entry(
 
     from .coordinator import TrovisCoordinator
 
+    if not hasattr(Trovis557x, "async_identify"):
+        raise ConfigEntryNotReady(
+            "Install the updated trovis-modbus library before starting "
+            "this version of the HA integration"
+        )
+
     settings = {
         **entry.data,
         **entry.options,
@@ -678,12 +692,6 @@ async def async_setup_entry(
         model = int(settings[CONF_MODEL])
         detected_sensors = tuple(settings[CONF_DETECTED_SENSORS])
         heat_meter_indices = tuple(settings.get(CONF_HEAT_METER_INDICES, ()))
-        excluded_registers = parse_address_list(
-            str(settings.get(CONF_EXCLUDED_REGISTERS, "") or "")
-        )
-        excluded_coils = parse_address_list(
-            str(settings.get(CONF_EXCLUDED_COILS, "") or "")
-        )
         params = create_modbus_params(settings)
         unit = with_read_retries(
             async_get_unit(hass, entry, params, unit_id),
@@ -696,6 +704,31 @@ async def async_setup_entry(
     except HomeAssistantError as err:
         raise ConfigEntryNotReady(str(err)) from err
 
+    # A mandatory two-register identity read precedes ALL polling-plan
+    # creation.  The HA integration does not interpret firmware address maps;
+    # the Library alone selects applicable field overrides.
+    try:
+        identity = await Trovis557x.async_identify(unit)
+    except (ModbusError, OSError, ValueError) as err:
+        raise ConfigEntryNotReady(
+            f"Cannot read mandatory TROVIS model/firmware identity: {err}"
+        ) from err
+    if identity.model != model:
+        raise ConfigEntryNotReady(
+            f"Configured TROVIS {model}, controller reports TROVIS "
+            f"{identity.model}; use Reconfigure to update this device"
+        )
+    try:
+        options = invalidate_stale_automatic(entry.options, identity.firmware)
+        excluded_registers = effective_addresses(
+            options, CONF_EXCLUDED_REGISTERS, identity.firmware
+        )
+        excluded_coils = effective_addresses(
+            options, CONF_EXCLUDED_COILS, identity.firmware
+        )
+    except (TypeError, ValueError) as err:
+        raise ConfigEntryNotReady(f"Invalid TROVIS exclusion settings: {err}") from err
+
     try:
         device = Trovis557x(
             unit,
@@ -704,9 +737,19 @@ async def async_setup_entry(
             heat_meter_indices=heat_meter_indices,
             excluded_registers=excluded_registers,
             excluded_coils=excluded_coils,
+            firmware_reference=identity.firmware,
         )
     except ValueError as err:
         raise ConfigEntryNotReady(str(err)) from err
+
+    # A firmware update invalidates only the old auto-learned exclusions.
+    # Existing manual exclusions and WMZ selection survive unchanged.
+    if options != dict(entry.options):
+        hass.config_entries.async_update_entry(entry, options=options)
+    if entry.data.get(CONF_FIRMWARE) != identity.firmware:
+        hass.config_entries.async_update_entry(
+            entry, data={**entry.data, CONF_FIRMWARE: identity.firmware}
+        )
 
     coordinator = TrovisCoordinator(
         hass,

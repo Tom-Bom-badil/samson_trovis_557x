@@ -799,6 +799,11 @@
       "control_parameter_mode": {
         "name": "{component} 3-point control mode"
       }
+    },
+    "button": {
+      "clear_auto_exclusions": {
+        "name": "Reset automatically excluded Modbus addresses"
+      }
     }
   },
   "services": {
