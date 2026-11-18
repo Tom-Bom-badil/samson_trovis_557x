@@ -509,11 +509,12 @@ class TrovisEntity(CoordinatorEntity["TrovisCoordinator"]):
         if not self.coordinator.device.writing_enabled:
             raise HomeAssistantError("Please enable writing for changes!")
         try:
-            verified = await self._subsystem.async_write_datapoint(
-                field,
-                value,
-                access_code=self.coordinator.access_code,
-            )
+            async with self.coordinator.async_modbus_write_guard():
+                verified = await self._subsystem.async_write_datapoint(
+                    field,
+                    value,
+                    access_code=self.coordinator.access_code,
+                )
         except (
             TrovisWriteAccessDisabledError,
             TrovisWriteAccessError,
@@ -549,10 +550,11 @@ class TrovisEntity(CoordinatorEntity["TrovisCoordinator"]):
         )
 
         try:
-            await self._subsystem.async_set_operating_mode(
-                value,
-                access_code=self.coordinator.access_code,
-            )
+            async with self.coordinator.async_modbus_write_guard():
+                await self._subsystem.async_set_operating_mode(
+                    value,
+                    access_code=self.coordinator.access_code,
+                )
         except (
             TrovisWriteAccessDisabledError,
             TrovisWriteAccessError,
@@ -574,9 +576,10 @@ class TrovisEntity(CoordinatorEntity["TrovisCoordinator"]):
         )
 
         try:
-            await self._subsystem.async_release_operating_mode_control(
-                access_code=self.coordinator.access_code,
-            )
+            async with self.coordinator.async_modbus_write_guard():
+                await self._subsystem.async_release_operating_mode_control(
+                    access_code=self.coordinator.access_code,
+                )
         except (
             TrovisWriteAccessDisabledError,
             TrovisWriteAccessError,
@@ -798,6 +801,7 @@ async def async_unload_entry(
     entry: ConfigEntry[TrovisCoordinator],
 ) -> bool:
     """Unload a Trovis 557x config entry."""
+    await entry.runtime_data.async_stop_scan_for_unload()
     return await hass.config_entries.async_unload_platforms(
         entry,
         PLATFORMS,

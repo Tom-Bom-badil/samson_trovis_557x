@@ -97,6 +97,9 @@
   },
   "entity": {
     "sensor": {
+      "datapoint_scan": {
+        "name": "ZZ - Sniffer Status"
+      },
       "system_code": {
         "name": "System code number"
       },
@@ -801,6 +804,9 @@
       }
     },
     "button": {
+      "datapoint_scan": {
+        "name": "ZZ - Sniffer Start / Stop (takes time!)"
+      },
       "clear_auto_exclusions": {
         "name": "Reset automatically excluded Modbus addresses"
       }

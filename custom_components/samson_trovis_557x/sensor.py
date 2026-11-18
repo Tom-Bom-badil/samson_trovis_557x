@@ -18,7 +18,7 @@ from homeassistant.components.sensor import (
     SensorEntityDescription,
     SensorStateClass,
 )
-from homeassistant.const import EntityCategory
+from homeassistant.const import MATCH_ALL, EntityCategory
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from trovis_modbus import (
@@ -869,6 +869,7 @@ async def async_setup_entry(
     )
     if coordinator.device.has_rk4:
         entities.append(TrovisDomesticHotWaterSimulationSensor(coordinator))
+    entities.append(TrovisModbusAddressScanSensor(coordinator))
     async_add_entities(entities)
     entry.async_on_unload(statistics_manager.stop)
     statistics_manager.start()
@@ -1077,3 +1078,49 @@ class TrovisSensor(TrovisEntity, SensorEntity):
             return None
 
         return {"month": value.month, "day": value.day}
+
+
+class TrovisModbusAddressScanSensor(TrovisEntity, SensorEntity):
+    """Root-controller diagnostics; report is excluded from recorder attributes."""
+
+    _attr_entity_category = EntityCategory.DIAGNOSTIC
+    _attr_icon = "mdi:database-search"
+    _unrecorded_attributes = frozenset({MATCH_ALL})
+
+    def __init__(self, coordinator: TrovisCoordinator) -> None:
+        super().__init__(
+            coordinator,
+            "datapoint_scan",
+            "controller",
+            "sensor",
+            translation_key="datapoint_scan",
+        )
+
+    @property
+    def available(self) -> bool:
+        """Keep progress/report available independently of normal poll health."""
+        return True
+
+    @property
+    def native_value(self) -> str:
+        """Report phase progress directly in the 255-character entity state."""
+        return self.coordinator.scan_status
+
+    @property
+    def extra_state_attributes(self) -> dict[str, object]:
+        """Expose copyable report without recording it in HA history."""
+        attributes: dict[str, object] = {
+            "read_operations": self.coordinator.scan_requests,
+        }
+        if self.coordinator.scan_timestamp is not None:
+            attributes["last_scan"] = self.coordinator.scan_timestamp
+        if self.coordinator.scan_report is not None:
+            attributes["scan_report"] = self.coordinator.scan_report
+        return attributes
+
+    async def async_added_to_hass(self) -> None:
+        """Listen only to scan updates; do not refresh all device entities."""
+        await super().async_added_to_hass()
+        self.async_on_remove(
+            self.coordinator.register_scan_listener(self.async_write_ha_state)
+        )

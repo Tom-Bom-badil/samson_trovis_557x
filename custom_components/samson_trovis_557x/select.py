@@ -376,7 +376,8 @@ class TrovisPumpControlSelect(TrovisEntity, SelectEntity):
 
         setter = getattr(self._subsystem, self.entity_description.setter_method)
         try:
-            await setter(requested, access_code=self.coordinator.access_code)
+            async with self.coordinator.async_modbus_write_guard():
+                await setter(requested, access_code=self.coordinator.access_code)
         except (
             TrovisWriteAccessDisabledError,
             TrovisWriteAccessError,

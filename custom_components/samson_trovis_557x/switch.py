@@ -304,9 +304,10 @@ class TrovisWriteAccessSwitch(TrovisEntity, SwitchEntity):
     async def async_turn_on(self, **kwargs: object) -> None:
         """Enable TROVIS writing."""
         try:
-            await self.coordinator.device.async_enable_writing(
-                access_code=self.coordinator.access_code,
-            )
+            async with self.coordinator.async_modbus_write_guard():
+                await self.coordinator.device.async_enable_writing(
+                    access_code=self.coordinator.access_code,
+                )
         except TrovisWriteAccessError as err:
             raise HomeAssistantError(str(err)) from err
 
@@ -315,7 +316,8 @@ class TrovisWriteAccessSwitch(TrovisEntity, SwitchEntity):
     async def async_turn_off(self, **kwargs: object) -> None:
         """Disable TROVIS writing."""
         try:
-            await self.coordinator.device.async_disable_writing()
+            async with self.coordinator.async_modbus_write_guard():
+                await self.coordinator.device.async_disable_writing()
         except TrovisWriteAccessError as err:
             _LOGGER.debug(
                 "Controller rejected resetting TROVIS write access; "
