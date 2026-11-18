@@ -11,7 +11,6 @@ from . import TrovisEntity
 from .coordinator import TrovisConfigEntry, TrovisCoordinator
 from .exclusion_state import clear_automatic
 
-
 _START_STOP_SCAN = ButtonEntityDescription(
     key="datapoint_scan",
     name="ZZ - Sniffer Start / Stop (takes time!)",

@@ -47,8 +47,7 @@ def test_translations_are_complete() -> None:
     for value in (strings, german):
         assert value["entity"]["button"]["datapoint_scan"]["name"]
         assert (
-            value["entity"]["sensor"]["datapoint_scan"]["name"]
-            == "ZZ - Sniffer Status"
+            value["entity"]["sensor"]["datapoint_scan"]["name"] == "ZZ - Sniffer Status"
         )
     assert strings["entity"]["button"]["datapoint_scan"]["name"] == (
         "ZZ - Sniffer Start / Stop (takes time!)"

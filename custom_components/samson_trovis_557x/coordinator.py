@@ -128,8 +128,8 @@ class TrovisCoordinator(DataUpdateCoordinator[Trovis557x]):
         async with self._modbus_lock:
             if self._scan_active:
                 raise HomeAssistantError(
-                "TROVIS datapoint scan is running; writing is paused"
-            )
+                    "TROVIS datapoint scan is running; writing is paused"
+                )
             yield
 
     def async_toggle_scan(self) -> None:
@@ -317,9 +317,7 @@ class TrovisCoordinator(DataUpdateCoordinator[Trovis557x]):
             return
         entry = self.config_entry
         key = (
-            CONF_EXCLUDED_REGISTERS
-            if block.space == "holding"
-            else CONF_EXCLUDED_COILS
+            CONF_EXCLUDED_REGISTERS if block.space == "holding" else CONF_EXCLUDED_COILS
         )
         try:
             confirmed = await async_confirm_illegal_addresses(self.device._unit, block)
